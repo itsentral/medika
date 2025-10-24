@@ -69,7 +69,7 @@ thead input {
 			<?php endif; ?>
 
 			<?php if($ENABLE_DELETE) : ?>
-				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_layanan2="<?=$record->id_category1?>"><i class="fa fa-trash"></i>
+				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_layanan2="<?=$record->id_grouplayananlaboratorium?>"><i class="fa fa-trash"></i>
 				</a>
 			<?php endif; ?>
 			</td>
