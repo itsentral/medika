@@ -97,9 +97,6 @@ class Layanan_2 extends Admin_Controller
         $this->auth->restrict($this->addPermission);
 		$session = $this->session->userdata('app_session');
 		$post = $this->input->post();
-		print_r($post);
-		exit;
-		
 		$code = $this->Layanan_2_model->generate_id();
 		$this->db->trans_begin();
 		
