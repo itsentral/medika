@@ -36,7 +36,7 @@ class Layanan extends Admin_Controller
         $this->template->render('index');
     }
 
-  	public function editLayanan($id){
+  	public function editKategori($id){
         $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
         $this->template->page_icon('fa fa-edit');
@@ -46,11 +46,11 @@ class Layanan extends Admin_Controller
         ];
         $this->template->set('results', $data);
         $this->template->title('Layanan');
-        $this->template->render('edit_layanan');
+        $this->template->render('edit_kategori');
 
     }
 
-    public function viewLayanan(){
+    public function viewKategori(){
         $this->auth->restrict($this->viewPermission);
         $id 	= $this->input->post('id');
         $cust 	= $this->Layanan_model->getById($id);
@@ -58,7 +58,7 @@ class Layanan extends Admin_Controller
         $this->template->render('view_layanan');
     }
 
-    public function saveEditLayanan(){
+    public function saveEditKategori(){
       // $this->auth->restrict($this->editPermission);
       $post = $this->input->post();
       $this->db->trans_begin();
@@ -70,7 +70,7 @@ class Layanan extends Admin_Controller
         'modified_by'	=> $this->auth->user_id()
       ];
 
-      $this->db->where('id_type',$post['id_layanan'])->update("ms_Pendaftaran",$data);
+      $this->db->where('id_type',$post['id_layanan'])->update("rs_kategorilab",$data);
 
       if($this->db->trans_status() === FALSE){
         $this->db->trans_rollback();
@@ -84,16 +84,16 @@ class Layanan extends Admin_Controller
           'pesan'		=>'Success Save Item. Thanks ...',
           'status'	=> 1
         );
-        history("Update layanan type : ".$post['id_layanan']." / ".$post['nm_layanan']);
+       
       }
       echo json_encode($status);
     }
 
 	public function addKategori()  {
-        $this->template->render('add_layanan');
+        $this->template->render('add_kategori');
     }
 
-	public function deleteLayanan(){
+	public function deleteKategori(){
 		$this->auth->restrict($this->deletePermission);
 		$id = $this->input->post('id');
 		$data = [
@@ -102,7 +102,7 @@ class Layanan extends Admin_Controller
 		];
 
 		$this->db->trans_begin();
-		$this->db->where('id_type',$id)->update("ms_Pendaftaran",$data);
+		$this->db->where('id_type',$id)->update("rs_kategorilab",$data);
 
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
@@ -116,14 +116,14 @@ class Layanan extends Admin_Controller
 			  'pesan'		=>'Success Save Item. Thanks ...',
 			  'status'	=> 1
 			);
-      history("Delete layanan type : ".$id);
+      
 		}
 
   		echo json_encode($status);
 	}
-	public function saveNewlayanan()
+	public function saveNewkategori()
     {
-        $this->auth->restrict($this->addPermission);
+    $this->auth->restrict($this->addPermission);
 		$post = $this->input->post();
 		$code = $this->Layanan_model->generate_id();
 		$this->db->trans_begin();
@@ -136,7 +136,7 @@ class Layanan extends Admin_Controller
 			'deleted'			=> '0'
 		];
 
-		$insert = $this->db->insert("ms_Pendaftaran",$data);
+		$insert = $this->db->insert("rs_kategorilab",$data);
 
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
@@ -150,7 +150,7 @@ class Layanan extends Admin_Controller
 			  'pesan'		=>'Success Save Item. Thanks ...',
 			  'status'	=> 1
 			);
-      history("Insert layanan type : ".$code." / ".$post['nm_layanan']);
+     
 		}
 
   		echo json_encode($status);
