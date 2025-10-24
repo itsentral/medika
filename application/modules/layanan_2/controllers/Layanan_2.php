@@ -84,11 +84,47 @@ class Layanan_2 extends Admin_Controller
 		$this->template->page_icon('fa fa-pencil');
 		$inventory_1 = $this->Layanan_2_model->get_data('rs_kategorilab');
 		$data = [
-			'inventory_1' => $inventory_1
+			'layanan_1' => $inventory_1
 		];
         $this->template->set('results', $data);
         $this->template->title('Add Layanan');
-        $this->template->render('add_inventory_2');
+        $this->template->render('add_layanan_2');
+
+    }
+
+		public function saveNewinventoryold()
+    {
+        $this->auth->restrict($this->addPermission);
+		$post = $this->input->post();
+		$code = $this->Layanan_2_model->generate_id();
+		$this->db->trans_begin();
+		$data = [
+			'id_category1'	 	=> $code,
+			'id_type'		    => $post['inventory_1'],
+			'nama'		        => $post['nm_inventory'],
+			'aktif'				=> 'aktif',
+			'created_on'		=> date('Y-m-d H:i:s'),
+			'created_by'		=> $this->auth->user_id(),
+			'deleted'			=> '0'
+		];
+		
+		$insert = $this->db->insert("rs_grouplayananlaboratorium",$data);
+		
+		if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			$status	= array(
+			  'pesan'		=>'Gagal Save Item. Thanks ...',
+			  'status'	=> 0
+			);
+		} else {
+			$this->db->trans_commit();
+			$status	= array(
+			  'pesan'		=>'Success Save Item. invenThanks ...',
+			  'status'	=> 1
+			);			
+		}
+		
+  		echo json_encode($status);
 
     }
 
@@ -285,40 +321,6 @@ class Layanan_2 extends Admin_Controller
   		echo json_encode($status);
 
     }
-	public function saveNewinventoryold()
-    {
-        $this->auth->restrict($this->addPermission);
-		$post = $this->input->post();
-		$code = $this->Layanan_2_model->generate_id();
-		$this->db->trans_begin();
-		$data = [
-			'id_category1'	 	=> $code,
-			'id_type'		    => $post['inventory_1'],
-			'nama'		        => $post['nm_inventory'],
-			'aktif'				=> 'aktif',
-			'created_on'		=> date('Y-m-d H:i:s'),
-			'created_by'		=> $this->auth->user_id(),
-			'deleted'			=> '0'
-		];
-		
-		$insert = $this->db->insert("rs_grouplayananlaboratorium",$data);
-		
-		if($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
-			$status	= array(
-			  'pesan'		=>'Gagal Save Item. Thanks ...',
-			  'status'	=> 0
-			);
-		} else {
-			$this->db->trans_commit();
-			$status	= array(
-			  'pesan'		=>'Success Save Item. invenThanks ...',
-			  'status'	=> 1
-			);			
-		}
-		
-  		echo json_encode($status);
 
-    }
 	
 }
