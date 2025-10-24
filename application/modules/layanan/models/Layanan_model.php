@@ -69,7 +69,7 @@ class Layanan_model extends BF_Model
       $query = $this->db->query("SELECT MAX(id_kategori) as max_id FROM rs_kategorilab");
       $row = $query->row_array();
 
-      echo"$query";
+      print_r($row);
       exit;
       $bln = date('m');
       $thn = date('y');
