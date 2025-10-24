@@ -27,6 +27,7 @@ thead input {
 		<thead>
 		<tr>
 			<th width="5">#</th>
+			<th>Kode Kategori</th>
 			<th>Nama Kategori</th>
 			<th>Status</th>
 			<?php if($ENABLE_MANAGE) : ?>
@@ -41,6 +42,7 @@ thead input {
 			$numb=0; foreach($results AS $record){ $numb++; ?>
 		<tr>
 		    <td><?= $numb; ?></td>
+			<td><?= $record->id_kategori ?></td>
 			<td><?= strtoupper($record->nama_kategori) ?></td>
 
 			<td>
@@ -98,7 +100,7 @@ thead input {
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Kategori Layanan</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'Layanan/editKategori Layanan/'+id,
+			url:siteurl+'layanan/editKategori/'+id,
 			success:function(data){
 				$("#dialog-popup").modal();
 				$("#ModalView").html(data);

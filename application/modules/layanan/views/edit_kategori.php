@@ -1,8 +1,8 @@
 <?php
-    $ENABLE_ADD     = has_permission('Kategori_1.Add');
-    $ENABLE_MANAGE  = has_permission('Kategori_1.Manage');
-    $ENABLE_VIEW    = has_permission('Kategori_1.View');
-    $ENABLE_DELETE  = has_permission('Kategori_1.Delete');
+    $ENABLE_ADD     = has_permission('Kategori.Add');
+    $ENABLE_MANAGE  = has_permission('Kategori.Manage');
+    $ENABLE_VIEW    = has_permission('Kategori.View');
+    $ENABLE_DELETE  = has_permission('Kategori.Delete');
 
 foreach ($results['inven'] as $inven){
 }
@@ -18,13 +18,13 @@ thead input {
 <div class="box box-primary">	<!-- /.box-header -->
 	<div class="box-body"><br>
 		<form id="data_form" autocomplete="off"> 
-			<input type="hidden" name="id_inventory" id="id_inventory" value='<?= $inven->id_type ?>'>
+			<input type="hidden" name="id_kategori" id="id_kategori" value='<?= $inven->id_type ?>'>
 				<div class="form-group row">
 					<div class="col-md-3">
 						<label for="">Nama Type</label>
 					</div>
 					<div class="col-md-9">
-						<input type="text" class="form-control" id="nm_inventory" required name="nm_inventory" placeholder="Nama Type" value="<?= $inven->nama ?>">
+						<input type="text" class="form-control" id="nm_kategori" required name="nm_kategori" placeholder="Nama Type" value="<?= $inven->nama ?>">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -80,7 +80,7 @@ thead input {
 	$(document).on('submit', '#data_form', function(e){
 		e.preventDefault()
 		var data = $('#data_form').serialize();
-		var id = $('#id_inventory').val();
+		var id = $('#id_kategori').val();
 		// alert(id);
 		swal({
 		  title: "Anda Yakin?",
@@ -102,7 +102,7 @@ thead input {
 				  if(result.status == '1'){
 					 swal({
 						  title: "Sukses",
-						  text : "Data inventory berhasil disimpan.",
+						  text : "Data kategori berhasil disimpan.",
 						  type : "success"
 						},
 						function (){
