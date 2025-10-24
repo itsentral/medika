@@ -53,12 +53,20 @@ thead input {
 			<td style="padding-left:20px">
 
 			<?php if($ENABLE_MANAGE) : ?>
+<<<<<<< HEAD:application/modules/layanan/views/index.php
 				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-edit"></i>
+=======
+				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_inventory1="<?=$record->id_kategori?>"><i class="fa fa-edit"></i>
+>>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
 				</a>
 			<?php endif; ?>
 
 			<?php if($ENABLE_DELETE) : ?>
+<<<<<<< HEAD:application/modules/layanan/views/index.php
 				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-trash"></i>
+=======
+				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_inventory1="<?=$record->id_kategori?>"><i class="fa fa-trash"></i>
+>>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
 				</a>
 			<?php endif; ?>
 			</td>
@@ -78,7 +86,11 @@ thead input {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+<<<<<<< HEAD:application/modules/layanan/views/index.php
         <h4 class="modal-title" id="myModalLabel"><span class="fa fa-users"></span>&nbsp;Data Kategori Layanan</h4>
+=======
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-users"></span>&nbsp;Kategori</h4>
+>>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
       </div>
       <div class="modal-body" id="ModalView">
 		...
@@ -94,8 +106,13 @@ thead input {
 <script type="text/javascript">
 
 	$(document).on('click', '.edit', function(e){
+<<<<<<< HEAD:application/modules/layanan/views/index.php
 		var id = $(this).data('id_Kategori');
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Kategori Layanan</b>");
+=======
+		var id = $(this).data('id_inventory1');
+		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Kategori</b>");
+>>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
 		$.ajax({
 			type:'POST',
 			url:siteurl+'Layanan/editKategori Layanan/'+id,
@@ -110,7 +127,11 @@ thead input {
 	$(document).on('click', '.view', function(){
 		var id = $(this).data('id_Kategori');
 		// alert(id);
+<<<<<<< HEAD:application/modules/layanan/views/index.php
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Kategori Layanan</b>");
+=======
+		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Kategori</b>");
+>>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
 		$.ajax({
 			type:'POST',
 			url:siteurl+'Layanan/viewKategori Layanan/'+id,
@@ -123,7 +144,11 @@ thead input {
 		})
 	});
 		$(document).on('click', '.add', function(){
+<<<<<<< HEAD:application/modules/layanan/views/index.php
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Kategori Layanan</b>");
+=======
+		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Kategori</b>");
+>>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
 		$.ajax({
 			type:'POST',
 			url:siteurl+'Layanan/addKategori Layanan',

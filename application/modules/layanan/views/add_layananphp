@@ -17,7 +17,7 @@ thead input {
 		<form id="data_form" autocomplete="off">
       <div class="form-group row">
         <div class="col-md-3">
-          <label for="">Nama Type</label>
+          <label for="">Nama Kategori</label>
         </div>
         <div class="col-md-9">
           <input type="text" class="form-control" id="nm_inventory" required name="nm_inventory" placeholder="Nama Type">

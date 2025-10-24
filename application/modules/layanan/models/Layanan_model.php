@@ -13,8 +13,13 @@ class Layanan_model extends BF_Model
     /**
      * @var string  User Table Name
      */
+<<<<<<< HEAD:application/modules/layanan/models/Layanan_model.php
     protected $table_name = 'rs_kategorilab'; 
     protected $key        = 'id_kategori'; 
+=======
+    protected $table_name = 'rs_kategorilab';
+    protected $key        = 'id_kategori';
+>>>>>>> 4babc84 (update):application/modules/inventory_1/models/Inventory_1_model.php
 
     /**
      * @var string Field name to use for the created time column in the DB table
