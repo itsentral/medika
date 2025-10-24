@@ -58,7 +58,7 @@ class Layanan_2 extends Admin_Controller
 		];
         $this->template->set('results', $data);
 		$this->template->title('Layanan');
-        $this->template->render('edit_inventory');
+        $this->template->render('edit_layanan');
 		
 	}
 	public function viewLayanan(){
@@ -73,7 +73,7 @@ class Layanan_2 extends Admin_Controller
 			'lvl1' => $lvl1
 		];
         $this->template->set('results', $data);
-		$this->template->render('view_inventory');
+		$this->template->render('view_layanan');
 	}
 	
 	
@@ -82,9 +82,9 @@ class Layanan_2 extends Admin_Controller
 				$this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-pencil');
-		$inventory_1 = $this->Layanan_2_model->get_data('rs_kategorilab');
+		$layanan_1 = $this->Layanan_2_model->get_data('rs_kategorilab');
 		$data = [
-			'layanan_1' => $inventory_1
+			'layanan_1' => $layanan_1
 		];
         $this->template->set('results', $data);
         $this->template->title('Add Layanan');
@@ -92,23 +92,50 @@ class Layanan_2 extends Admin_Controller
 
     }
 
-		public function saveNewinventoryold()
+	public function saveNewlayanan()
     {
         $this->auth->restrict($this->addPermission);
-		$post = $this->input->post();
+		$session = $this->session->userdata('app_session');
+		$post = $_POST['hd1']['1']['produk'];
 		$code = $this->Layanan_2_model->generate_id();
 		$this->db->trans_begin();
-		$data = [
-			'id_category1'	 	=> $code,
-			'id_type'		    => $post['inventory_1'],
-			'nama'		        => $post['nm_inventory'],
-			'aktif'				=> 'aktif',
-			'created_on'		=> date('Y-m-d H:i:s'),
-			'created_by'		=> $this->auth->user_id(),
-			'deleted'			=> '0'
-		];
 		
-		$insert = $this->db->insert("rs_grouplayananlaboratorium",$data);
+		$numb1 =0;
+		foreach($_POST['hd1'] as $h1){
+		$numb1++;	
+		        
+                $header1 =  array(
+							'id_grouplayananlaboratorium'	 	        => $code,
+							'nama_kategori'		    					=> $h1[layanan_1],
+							'nama_grouplayananlaboratorium'		        => $h1[nm_layanan],
+							'created_on'		=> date('Y-m-d H:i:s'),
+							'created_by'		=> $this->auth->user_id(),
+							'deleted'			=> '0' 
+                            );
+            //Add Data
+              $this->db->insert('rs_grouplayananlaboratorium',$header1);
+			
+		    }			
+		if(empty($_POST['data1'])){
+		}else{
+		$numb2 =0;
+		foreach($_POST['data1'] as $d1){
+		$numb2++;	
+		
+		      $produk = $_POST['hd1']['1']['produk'];
+		       	       
+              $data1 =  array(
+			                    'id_category1'=>$code, 
+								'name_compotition'=>$d1[name_compotition],
+								'deleted' =>'0',
+							    'created_on' => date('Y-m-d H:i:s'),
+								'created_by' => $session['id_user'], 
+                            );
+            //Add Data
+              $this->db->insert('ms_compotition',$data1);
+			
+		    }		
+		}	
 		
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
@@ -187,70 +214,8 @@ class Layanan_2 extends Admin_Controller
 		
   		echo json_encode($status);
 	}
-		public function saveNewinventory()
-    {
-        $this->auth->restrict($this->addPermission);
-		$session = $this->session->userdata('app_session');
-		$post = $_POST['hd1']['1']['produk'];
-		$code = $this->Layanan_2_model->generate_id();
-		$this->db->trans_begin();
-		
-		$numb1 =0;
-		foreach($_POST['hd1'] as $h1){
-		$numb1++;	
-		        
-                $header1 =  array(
-							'id_category1'	 	=> $code,
-							'id_type'		    => $h1[inventory_1],
-							'nama'		        => $h1[nm_inventory],
-							'aktif'				=> 'aktif',
-							'created_on'		=> date('Y-m-d H:i:s'),
-							'created_by'		=> $this->auth->user_id(),
-							'deleted'			=> '0' 
-                            );
-            //Add Data
-              $this->db->insert('rs_grouplayananlaboratorium',$header1);
-			
-		    }			
-		if(empty($_POST['data1'])){
-		}else{
-		$numb2 =0;
-		foreach($_POST['data1'] as $d1){
-		$numb2++;	
-		
-		      $produk = $_POST['hd1']['1']['produk'];
-		       	       
-              $data1 =  array(
-			                    'id_category1'=>$code, 
-								'name_compotition'=>$d1[name_compotition],
-								'deleted' =>'0',
-							    'created_on' => date('Y-m-d H:i:s'),
-								'created_by' => $session['id_user'], 
-                            );
-            //Add Data
-              $this->db->insert('ms_compotition',$data1);
-			
-		    }		
-		}	
-		
-		if($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
-			$status	= array(
-			  'pesan'		=>'Gagal Save Item. Thanks ...',
-			  'status'	=> 0
-			);
-		} else {
-			$this->db->trans_commit();
-			$status	= array(
-			  'pesan'		=>'Success Save Item. invenThanks ...',
-			  'status'	=> 1
-			);			
-		}
-		
-  		echo json_encode($status);
-
-    }
-	public function saveEditinventory()
+	
+	public function saveEditlayanan()
     {
         $this->auth->restrict($this->addPermission);
 		$session = $this->session->userdata('app_session');
@@ -259,10 +224,10 @@ class Layanan_2 extends Admin_Controller
 		$numb1 =0;
 		foreach($_POST['hd1'] as $h1){
 		$numb1++;	
-		        $produk = $_POST['hd1']['1']['id_inventory'];
+		        $produk = $_POST['hd1']['1']['id_layanan'];
                 $header1 =  array(
-							'id_type'		    => $h1[inventory_1],
-							'nama'		        => $h1[nm_inventory],
+							'id_type'		    => $h1[layanan_1],
+							'nama'		        => $h1[nm_layanan],
 							'modified_on'		=> date('Y-m-d H:i:s'),
 							'modified_by'		=> $this->auth->user_id(),
 							'deleted'			=> '0' 
@@ -276,7 +241,7 @@ class Layanan_2 extends Admin_Controller
 		foreach($_POST['data1'] as $d1){
 		$numb2++;	
 		
-		      $code = $_POST['hd1']['1']['id_inventory'];    
+		      $code = $_POST['hd1']['1']['id_layanan'];    
               $data1 =  array(
 			                    'id_category1'=>$code, 
 								'name_compotition'=>$d1[name_compotition],

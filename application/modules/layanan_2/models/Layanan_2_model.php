@@ -69,10 +69,11 @@ class Layanan_2_model extends BF_Model
       $query = $this->db->query("SELECT MAX(id_grouplayananlaboratorium) as max_id FROM rs_grouplayananlaboratorium");
       $row = $query->row();
       $thn = date('y');
+      $bln = date('m');
       $max_id = $row->max_id;
-      $max_id1 =(int) substr($max_id,3,5);
+      $max_id1 =(int) substr($max_id,6,3);
       $counter = $max_id1 +1;
-      $idcust = "I".$thn.str_pad($counter, 5, "0", STR_PAD_LEFT);
+      $idcust = "TD".$thn.$bln.str_pad($counter, 3, "0", STR_PAD_LEFT);
       return $idcust;
 	}
 
