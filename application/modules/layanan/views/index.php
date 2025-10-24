@@ -53,20 +53,12 @@ thead input {
 			<td style="padding-left:20px">
 
 			<?php if($ENABLE_MANAGE) : ?>
-<<<<<<< HEAD:application/modules/layanan/views/index.php
 				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-edit"></i>
-=======
-				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_inventory1="<?=$record->id_kategori?>"><i class="fa fa-edit"></i>
->>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
 				</a>
 			<?php endif; ?>
 
 			<?php if($ENABLE_DELETE) : ?>
-<<<<<<< HEAD:application/modules/layanan/views/index.php
 				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-trash"></i>
-=======
-				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_inventory1="<?=$record->id_kategori?>"><i class="fa fa-trash"></i>
->>>>>>> 4babc84 (update):application/modules/inventory_1/views/index.php
 				</a>
 			<?php endif; ?>
 			</td>
