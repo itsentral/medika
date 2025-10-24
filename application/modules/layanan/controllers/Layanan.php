@@ -32,7 +32,7 @@ class Layanan extends Admin_Controller
     		$deleted = '0';
          $data = $this->Layanan_model->get_data('rs_kategorilab','deleted',$deleted);
         $this->template->set('results', $data);
-        $this->template->title('Inventory');
+        $this->template->title('Layanan');
         $this->template->render('index');
     }
 
