@@ -103,12 +103,12 @@ class Layanan extends Admin_Controller
       $this->db->trans_begin();
 
       $data = [
-        'nama_kategori'		    => $post['nm_layanan'],
+        'nama_kategori'		    => $post['nm_kategori'],
         'modified_on'	=> date('Y-m-d H:i:s'),
         'modified_by'	=> $this->auth->user_id()
       ];
 
-      $this->db->where('id_kategori',$post['id_layanan'])->update("rs_kategorilab",$data);
+      $this->db->where('id_kategori',$post['id_kategori'])->update("rs_kategorilab",$data);
 
       if($this->db->trans_status() === FALSE){
         $this->db->trans_rollback();

@@ -27,30 +27,7 @@ thead input {
 						<input type="text" class="form-control" id="nm_kategori" required name="nm_kategori" placeholder="Nama Type" value="<?= $inven->nama_kategori ?>">
 					</div>
 				</div>
-				<div class="form-group row">
-					<div class="col-md-3">
-						<label for="">Status</label>
-					</div>
-					<div class="col-md-4">
-						<?php if ($inven->deleted == '0'){?>
-						<label>
-						<input type="radio" class="radio-control" id="" name="status" value="aktif" checked required> Aktif
-						</label>
-						&nbsp &nbsp &nbsp
-						<label>
-						<input type="radio" class="radio-control" id="" name="status" value="nonaktif" required> Non Aktif
-						</label>
-						<?php } else { ?>
-						<label>
-						<input type="radio" class="radio-control" id="" name="status" value="aktif" required> Aktif
-						</label>
-						&nbsp &nbsp &nbsp
-						<label>
-						<input type="radio" class="radio-control" id="" name="status" value="nonaktif" checked required> Non Aktif
-						</label>
-						<?php } ?>
-					</div>
-				</div>
+				
 				<div class="form-group row">
 					<div class="col-md-3"></div>
 					<div class="col-md-9">
