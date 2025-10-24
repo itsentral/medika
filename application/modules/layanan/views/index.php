@@ -55,12 +55,12 @@ thead input {
 			<td style="padding-left:20px">
 
 			<?php if($ENABLE_MANAGE) : ?>
-				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-edit"></i>
+				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_kategori="<?=$record->id_kategori?>"><i class="fa fa-edit"></i>
 				</a>
 			<?php endif; ?>
 
 			<?php if($ENABLE_DELETE) : ?>
-				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-trash"></i>
+				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_kategori="<?=$record->id_kategori?>"><i class="fa fa-trash"></i>
 				</a>
 			<?php endif; ?>
 			</td>
@@ -96,7 +96,7 @@ thead input {
 <script type="text/javascript">
 
 	$(document).on('click', '.edit', function(e){
-		var id = $(this).data('id_Kategori');
+		var id = $(this).data('id_kategori');
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Kategori Layanan</b>");
 		$.ajax({
 			type:'POST',
@@ -110,7 +110,7 @@ thead input {
 	});
 
 	$(document).on('click', '.view', function(){
-		var id = $(this).data('id_Kategori');
+		var id = $(this).data('id_kategori');
 		// alert(id);
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Kategori Layanan</b>");
 		$.ajax({
