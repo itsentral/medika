@@ -12,7 +12,7 @@
 									    <div class="col-md-6">
 									    <select id="layanan_1" name="layanan_1" class="form-control select" required>
 											<option value="">-- layanan --</option>
-											<?php foreach ($results['layanan_1'] as $layanan_1){ 
+											<?php foreach ($results['layanan_1'] as $layanan_1){  
 											?>
 											<option value="<?= $layanan_1->nama_kategori?>"><?= ucfirst(strtolower($layanan_1->nama_kategori))?></option>
 											<?php } ?>
