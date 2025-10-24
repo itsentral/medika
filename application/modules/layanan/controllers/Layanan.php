@@ -36,6 +36,45 @@ class Layanan extends Admin_Controller
         $this->template->render('index');
     }
 
+    public function addKategori()  {
+        $this->template->render('add_kategori');
+    }
+
+    public function saveNewkategori()
+    {
+    $this->auth->restrict($this->addPermission);
+		$post = $this->input->post();
+		$code = $this->Layanan_model->generate_id();
+		$this->db->trans_begin();
+		$data = [
+			'id_type'		=> $code,
+			'nama'		=> $post['nm_kategori'],
+			'created_on'		=> date('Y-m-d H:i:s'),
+			'created_by'		=> $this->auth->user_id(),
+			'deleted'			=> '0'
+		];
+
+		$insert = $this->db->insert("rs_kategorilab",$data);
+
+		if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			$status	= array(
+			  'pesan'		=>'Gagal Save Item. Thanks ...',
+			  'status'	=> 0
+			);
+		} else {
+			$this->db->trans_commit();
+			$status	= array(
+			  'pesan'		=>'Success Save Item. Thanks ...',
+			  'status'	=> 1
+			);
+     
+		}
+
+  		echo json_encode($status);
+
+    }
+
   	public function editKategori($id){
         $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
@@ -89,9 +128,7 @@ class Layanan extends Admin_Controller
       echo json_encode($status);
     }
 
-	public function addKategori()  {
-        $this->template->render('add_kategori');
-    }
+	
 
 	public function deleteKategori(){
 		$this->auth->restrict($this->deletePermission);
@@ -121,40 +158,6 @@ class Layanan extends Admin_Controller
 
   		echo json_encode($status);
 	}
-	public function saveNewkategori()
-    {
-    $this->auth->restrict($this->addPermission);
-		$post = $this->input->post();
-		$code = $this->Layanan_model->generate_id();
-		$this->db->trans_begin();
-		$data = [
-			'id_type'		=> $code,
-			'nama'		=> $post['nm_layanan'],
-			'aktif'				=> 'aktif',
-			'created_on'		=> date('Y-m-d H:i:s'),
-			'created_by'		=> $this->auth->user_id(),
-			'deleted'			=> '0'
-		];
-
-		$insert = $this->db->insert("rs_kategorilab",$data);
-
-		if($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
-			$status	= array(
-			  'pesan'		=>'Gagal Save Item. Thanks ...',
-			  'status'	=> 0
-			);
-		} else {
-			$this->db->trans_commit();
-			$status	= array(
-			  'pesan'		=>'Success Save Item. Thanks ...',
-			  'status'	=> 1
-			);
-     
-		}
-
-  		echo json_encode($status);
-
-    }
+	
 
 }

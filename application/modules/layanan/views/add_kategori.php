@@ -20,7 +20,7 @@ thead input {
           <label for="">Nama Kategori</label>
         </div>
         <div class="col-md-9">
-          <input type="text" class="form-control" id="nm_inventory" required name="nm_inventory" placeholder="Nama Kategori">
+          <input type="text" class="form-control" id="nm_kategori" required name="nm_kategori" placeholder="Nama Kategori">
         </div>
       </div>
       <div class="form-group row">
