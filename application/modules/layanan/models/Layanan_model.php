@@ -67,8 +67,6 @@ class Layanan_model extends BF_Model
 	
     function generate_id($kode='') {
       $query = $this->db->query("SELECT * FROM rs_kategorilabx");
-      $row = $query->row-array();
-
       print_r($query);
       exit;
       $bln = date('m');
