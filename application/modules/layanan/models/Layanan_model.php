@@ -69,7 +69,7 @@ class Layanan_model extends BF_Model
       $query = $this->db->query("SELECT * FROM rs_kategorilabx");
       $row = $query->row-array();
 
-      print_r($row);
+      print_r($query);
       exit;
       $bln = date('m');
       $thn = date('y');
