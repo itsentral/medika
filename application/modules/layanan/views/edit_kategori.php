@@ -1,8 +1,8 @@
 <?php
-    $ENABLE_ADD     = has_permission('Inventory_1.Add');
-    $ENABLE_MANAGE  = has_permission('Inventory_1.Manage');
-    $ENABLE_VIEW    = has_permission('Inventory_1.View');
-    $ENABLE_DELETE  = has_permission('Inventory_1.Delete');
+    $ENABLE_ADD     = has_permission('Kategori_1.Add');
+    $ENABLE_MANAGE  = has_permission('Kategori_1.Manage');
+    $ENABLE_VIEW    = has_permission('Kategori_1.View');
+    $ENABLE_DELETE  = has_permission('Kategori_1.Delete');
 
 foreach ($results['inven'] as $inven){
 }
@@ -84,7 +84,7 @@ thead input {
 		// alert(id);
 		swal({
 		  title: "Anda Yakin?",
-		  text: "Data akan Inventory di simpan.",
+		  text: "Data akan Kategori di simpan.",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonClass: "btn-info",
@@ -95,7 +95,7 @@ thead input {
 		function(){
 		  $.ajax({
 			  type:'POST',
-			  url:siteurl+'inventory_1/saveEditInventory',
+			  url:siteurl+'layanan/saveEditKategori',
 			  dataType : "json",
 			  data:data,
 			  success:function(result){
