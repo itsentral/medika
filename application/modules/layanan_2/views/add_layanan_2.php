@@ -82,55 +82,7 @@
 	var active_controller	= '<?php echo($this->uri->segment(1)); ?>';
 	
 	$(document).ready(function(){
-		 var data_pay	        = <?php echo json_encode($results['supplier']);?>;	
-		 
-				  ///INPUT PERKIRAAN KIRIM
-			
-			
-			var max_fields2      = 10; //maximum input boxes allowed
-			var wrapper2         = $(".input_fields_wrap2"); //Fields wrapper
-			var add_button2      = $(".add_field_button2"); //Add button ID
-
-			//console.log(persen);
-
-			var x2 = 1; //initlal text box count
-			$(add_button2).click(function(e){ //on add input button click
-			  e.preventDefault();
-			  if(x2 < max_fields2){ //max input box allowed
-				x2++; //text box increment
-				
-				$(wrapper2).append('<div class="row">'+
-				'<div class="col-xs-1">'+x2+'</div>'+
-				'<div class="col-xs-3">'+
-				'<div class="input-group">'+
-				'<input type="text" name="hd'+x2+'[produk]"  class="form-control input-sm" value="">'+
-				'</div>'+
-				'<div class="input-group">'+
-				'<input type="text" name="hd'+x2+'[costcenter]"  class="form-control input-sm" value="">'+
-				'</div>'+
-				'<div class="input-group">'+
-				'<input type="text" name="hd'+x2+'[mesin]"  class="form-control input-sm" value="">'+
-				'</div>'+
-				'<div class="input-group">'+
-				'<input type="text" name="hd'+x2+'[mold_tools]"  class="form-control input-sm" value="">'+
-				'</div>'+
-				'</div>'+
-				'<a href="#" class="remove_field2">Remove</a>'+
-				'</div>'); //add input box
-				$('#datepickerxxr'+x2).datepicker({
-				  format: 'dd-mm-yyyy',
-				  autoclose: true
-				});
-			  }
-			});
-
-			$(wrapper2).on("click",".remove_field2", function(e){ //user click on remove text
-			  e.preventDefault(); $(this).parent('div').remove(); x2--;
-			})
-			
-
-
-		$('#add-payment').click(function(){
+		 $('#add-payment').click(function(){
 			var jumlah	=$('#list_payment').find('tr').length;
 			if(jumlah==0 || jumlah==null){
 				var ada		= 0;
