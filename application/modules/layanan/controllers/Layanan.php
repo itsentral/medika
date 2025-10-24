@@ -57,19 +57,33 @@ class Layanan extends Admin_Controller
 		$insert = $this->db->insert("rs_kategorilab",$data);
 
 		if($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
+		$this->db->trans_rollback();
 			$status	= array(
 			  'pesan'		=>'Gagal Save Item. Thanks ...',
 			  'status'	=> 0
 			);
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = 'NewData';
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+              $keterangan     = "GAGAL, tambah data kategori layanan ".$code.", atas Nama : ".$post['nm_kategori'];	
+              $status1         = 0;	
+			  
 		} else {
-			$this->db->trans_commit();
+			$this->db->trans_commit(); 
 			$status	= array(
 			  'pesan'		=>'Success Save Item. Thanks ...',
 			  'status'	=> 1
-			);
-     
+			);	
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = 'NewData';
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+			  $keterangan     = "SUKSES, tambah data kategori layanan ".$code.", atas Nama : ".$post['nm_kategori'];
+              $status1         = 1;			  
 		}
+        //Save Log
+        simpan_aktifitas($nm_hak_akses, $kode_universal, $keterangan, $jumlah, $sql, $status1);
 
   		echo json_encode($status);
 
@@ -101,7 +115,7 @@ class Layanan extends Admin_Controller
       // $this->auth->restrict($this->editPermission);
       $post = $this->input->post();
       $this->db->trans_begin();
-
+      $id = $post['id_kategori'];
       $data = [
         'nama_kategori'		    => $post['nm_kategori'],
         'modified_on'	=> date('Y-m-d H:i:s'),
@@ -111,19 +125,33 @@ class Layanan extends Admin_Controller
       $this->db->where('id_kategori',$post['id_kategori'])->update("rs_kategorilab",$data);
 
       if($this->db->trans_status() === FALSE){
-        $this->db->trans_rollback();
-        $status	= array(
-          'pesan'		=>'Gagal Save Item. Thanks ...',
-          'status'	=> 0
-        );
-      } else {
-        $this->db->trans_commit();
-        $status	= array(
-          'pesan'		=>'Success Save Item. Thanks ...',
-          'status'	=> 1
-        );
-       
-      }
+       $this->db->trans_rollback();
+			$status	= array(
+			  'pesan'		=>'Gagal Save Item. Thanks ...',
+			  'status'	=> 0
+			);
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = 'NewData';
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+              $keterangan     = "GAGAL, edit data kategori layanan ".$id.", atas Nama : ".$post['nm_kategori'];	
+              $status1         = 0;	
+			  
+		} else {
+			$this->db->trans_commit();
+			$status	= array(
+			  'pesan'		=>'Success Save Item. Thanks ...',
+			  'status'	=> 1
+			);	
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = 'NewData';
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+			  $keterangan     = "SUKSES, edit data kategori layanan ".$id.", atas Nama : ".$post['nm_kategori'];
+              $status1         = 1;			  
+		}
+        //Save Log
+        simpan_aktifitas($nm_hak_akses, $kode_universal, $keterangan, $jumlah, $sql, $status1);
       echo json_encode($status);
     }
 
@@ -141,19 +169,33 @@ class Layanan extends Admin_Controller
 		$this->db->where('id_kategori',$id)->update("rs_kategorilab",$data);
 
 		if($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
+			 $this->db->trans_rollback();
 			$status	= array(
 			  'pesan'		=>'Gagal Save Item. Thanks ...',
 			  'status'	=> 0
 			);
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = 'NewData';
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+              $keterangan     = "GAGAL, deleted data kategori layanan ".$id.";	
+              $status1         = 0;	
+			  
 		} else {
 			$this->db->trans_commit();
 			$status	= array(
 			  'pesan'		=>'Success Save Item. Thanks ...',
 			  'status'	=> 1
-			);
-      
+			);	
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = 'NewData';
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+			  $keterangan     = "SUKSES, deleted data kategori layanan ".$id.";
+              $status1         = 1;			  
 		}
+        //Save Log
+      simpan_aktifitas($nm_hak_akses, $kode_universal, $keterangan, $jumlah, $sql, $status1);
 
   		echo json_encode($status);
 	}
