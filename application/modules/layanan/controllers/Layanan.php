@@ -178,7 +178,7 @@ class Layanan extends Admin_Controller
 			  $kode_universal = 'NewData';
 			  $jumlah         = 1;
 			  $sql            = $this->db->last_query();
-              $keterangan     = "GAGAL, deleted data kategori layanan ".$id.";	
+              $keterangan     = "GAGAL, deleted data kategori layanan ".$id;	
               $status1         = 0;	
 			  
 		} else {
@@ -191,7 +191,7 @@ class Layanan extends Admin_Controller
 			  $kode_universal = 'NewData';
 			  $jumlah         = 1;
 			  $sql            = $this->db->last_query();
-			  $keterangan     = "SUKSES, deleted data kategori layanan ".$id.";
+			  $keterangan     = "SUKSES, deleted data kategori layanan ".$id;
               $status1         = 1;			  
 		}
         //Save Log
