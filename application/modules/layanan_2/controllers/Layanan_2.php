@@ -96,18 +96,18 @@ class Layanan_2 extends Admin_Controller
     {
         $this->auth->restrict($this->addPermission);
 		$session = $this->session->userdata('app_session');
-		$post = $_POST['hd1']['1']['layanan_1'];
+		$post = $this->input->post();
 		$code = $this->Layanan_2_model->generate_id();
 		$this->db->trans_begin();
 		
 		$numb1 =0;
-		foreach($_POST['hd1'] as $h1){
+		
 		$numb1++;	
 		        
                 $header1 =  array(
 							'id_grouplayananlaboratorium'	 	        => $code,
-							'nama_kategori'		    					=> $h1[layanan_1],
-							'nama_grouplayananlaboratorium'		        => $h1[nm_layanan],
+							'nama_kategori'		    					=> $post['layanan_1'],
+							'nama_grouplayananlaboratorium'		        => $post['nm_layanan'],
 							'created_on'		=> date('Y-m-d H:i:s'),
 							'created_by'		=> $this->auth->user_id(),
 							'deleted'			=> '0' 
@@ -115,7 +115,7 @@ class Layanan_2 extends Admin_Controller
             //Add Data
               $this->db->insert('rs_grouplayananlaboratorium',$header1);
 			
-		    }			
+		    			
 		if(empty($_POST['data1'])){
 		}else{
 		$numb2 =0;

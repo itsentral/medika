@@ -10,7 +10,7 @@
 									    <label for="customer">Kategori Layanan</label>
 									    </div>
 									    <div class="col-md-6">
-									    <select id="layanan_1" name="hd1[1][layanan_1]" class="form-control select" required>
+									    <select id="layanan_1" name="layanan_1" class="form-control select" required>
 											<option value="">-- layanan --</option>
 											<?php foreach ($results['layanan_1'] as $layanan_1){ 
 											?>
@@ -24,7 +24,7 @@
 									    <label for="customer">Nama Layanan</label>
 									    </div>
 									    <div class="col-md-6">
-											<input type="text" class="form-control" id="" required name="hd1[1][nm_layanan]" placeholder="Nama Layanan">
+											<input type="text" class="form-control" id="" required name="nm_layanan" placeholder="Nama Layanan">
 									    </div>
 										</div>
 										
