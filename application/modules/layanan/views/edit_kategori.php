@@ -18,13 +18,13 @@ thead input {
 <div class="box box-primary">	<!-- /.box-header -->
 	<div class="box-body"><br>
 		<form id="data_form" autocomplete="off"> 
-			<input type="hidden" name="id_kategori" id="id_kategori" value='<?= $inven->id_type ?>'>
+			<input type="hidden" name="id_kategori" id="id_kategori" value='<?= $inven->id_kategori ?>'>
 				<div class="form-group row">
 					<div class="col-md-3">
-						<label for="">Nama Type</label>
+						<label for="">Nama Kategori</label>
 					</div>
 					<div class="col-md-9">
-						<input type="text" class="form-control" id="nm_kategori" required name="nm_kategori" placeholder="Nama Type" value="<?= $inven->nama ?>">
+						<input type="text" class="form-control" id="nm_kategori" required name="nm_kategori" placeholder="Nama Type" value="<?= $inven->nama_kategori ?>">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -32,7 +32,7 @@ thead input {
 						<label for="">Status</label>
 					</div>
 					<div class="col-md-4">
-						<?php if ($inven->aktif == 'aktif'){?>
+						<?php if ($inven->deleted == '0'){?>
 						<label>
 						<input type="radio" class="radio-control" id="" name="status" value="aktif" checked required> Aktif
 						</label>
