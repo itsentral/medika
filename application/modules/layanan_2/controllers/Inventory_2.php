@@ -11,7 +11,7 @@ if (!defined('BASEPATH')) {
  * This is controller for Master Supplier
  */
 
-class Inventory_2 extends Admin_Controller
+class Layanan_2 extends Admin_Controller
 {
     //Permission
     protected $viewPermission 	= 'Level_2.View';
@@ -23,8 +23,8 @@ class Inventory_2 extends Admin_Controller
     {
         parent::__construct();
 
-        $this->load->library(array('Mpdf', 'upload', 'Image_lib'));
-        $this->load->model(array('Inventory_2/Inventory_2_model',
+        $this->load->library(array('upload', 'Image_lib'));
+        $this->load->model(array('Layanan_2/Layanan_2_model',
                                  'Aktifitas/aktifitas_model',
                                 ));
         $this->template->title('Manage Data Supplier');
@@ -39,34 +39,34 @@ class Inventory_2 extends Admin_Controller
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-users');
 		$deleted = '0';
-        $data = $this->Inventory_2_model->get_data_category1();
+        $data = $this->Layanan_2_model->get_data_category1();
         $this->template->set('results', $data);
-        $this->template->title('Inventory');
+        $this->template->title('Layanan');
         $this->template->render('index');
     }
-	public function editInventory($id){
+	public function editLayanan($id){
 		$this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-edit');
-		$inven = $this->db->get_where('ms_inventory_category1',array('id_category1' => $id))->result();
-		$komposisi = $this->Inventory_2_model->getKomposisi($id);
-		$lvl1 = $this->Inventory_2_model->get_data('ms_inventory_type');
+		$inven = $this->db->get_where('rs_grouplayananlaboratorium',array('id_category1' => $id))->result();
+		$komposisi = $this->Layanan_2_model->getKomposisi($id);
+		$lvl1 = $this->Layanan_2_model->get_data('rs_kategorilab');
 		$data = [
 			'inven' => $inven,
 			'komposisi' => $komposisi,
 			'lvl1' => $lvl1
 		];
         $this->template->set('results', $data);
-		$this->template->title('Inventory');
+		$this->template->title('Layanan');
         $this->template->render('edit_inventory');
 		
 	}
-	public function viewInventory(){
+	public function viewLayanan(){
 		$this->auth->restrict($this->viewPermission);
 		$id 	= $this->input->post('id');
-		$inven = $this->db->get_where('ms_inventory_category1',array('id_category1' => $id))->result();
-		$komposisi = $this->Inventory_2_model->getKomposisi($id);
-		$lvl1 = $this->Inventory_2_model->get_data('ms_inventory_type');
+		$inven = $this->db->get_where('rs_grouplayananlaboratorium',array('id_category1' => $id))->result();
+		$komposisi = $this->Layanan_2_model->getKomposisi($id);
+		$lvl1 = $this->Layanan_2_model->get_data('rs_kategorilab');
 		$data = [
 			'inven' => $inven,
 			'komposisi' => $komposisi,
@@ -77,17 +77,17 @@ class Inventory_2 extends Admin_Controller
 	}
 	
 	
-	public function addInventory()
+	public function addLayanan()
     {
 				$this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-pencil');
-		$inventory_1 = $this->Inventory_2_model->get_data('ms_inventory_type');
+		$inventory_1 = $this->Layanan_2_model->get_data('rs_kategorilab');
 		$data = [
 			'inventory_1' => $inventory_1
 		];
         $this->template->set('results', $data);
-        $this->template->title('Add Inventory');
+        $this->template->title('Add Layanan');
         $this->template->render('add_inventory_2');
 
     }
@@ -122,7 +122,7 @@ class Inventory_2 extends Admin_Controller
   		echo json_encode($status);
 	}
 
-	public function deleteInventory(){
+	public function deleteLayanan(){
 		$this->auth->restrict($this->deletePermission);
 		$id = $this->input->post('id');
 		// print_r($id);
@@ -133,7 +133,7 @@ class Inventory_2 extends Admin_Controller
 		];
 		
 		$this->db->trans_begin();
-		$this->db->where('id_category1',$id)->update("ms_inventory_category1",$data);
+		$this->db->where('id_category1',$id)->update("rs_grouplayananlaboratorium",$data);
 		
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
@@ -156,7 +156,7 @@ class Inventory_2 extends Admin_Controller
         $this->auth->restrict($this->addPermission);
 		$session = $this->session->userdata('app_session');
 		$post = $_POST['hd1']['1']['produk'];
-		$code = $this->Inventory_2_model->generate_id();
+		$code = $this->Layanan_2_model->generate_id();
 		$this->db->trans_begin();
 		
 		$numb1 =0;
@@ -173,7 +173,7 @@ class Inventory_2 extends Admin_Controller
 							'deleted'			=> '0' 
                             );
             //Add Data
-              $this->db->insert('ms_inventory_category1',$header1);
+              $this->db->insert('rs_grouplayananlaboratorium',$header1);
 			
 		    }			
 		if(empty($_POST['data1'])){
@@ -232,7 +232,7 @@ class Inventory_2 extends Admin_Controller
 							'deleted'			=> '0' 
                             );
             //Add Data
-			 $this->db->where('id_category1',$produk)->update("ms_inventory_category1",$header1);
+			 $this->db->where('id_category1',$produk)->update("rs_grouplayananlaboratorium",$header1);
 		    }	
 		if(empty($_POST['data1'])){
 		}else{
@@ -289,7 +289,7 @@ class Inventory_2 extends Admin_Controller
     {
         $this->auth->restrict($this->addPermission);
 		$post = $this->input->post();
-		$code = $this->Inventory_2_model->generate_id();
+		$code = $this->Layanan_2_model->generate_id();
 		$this->db->trans_begin();
 		$data = [
 			'id_category1'	 	=> $code,
@@ -301,7 +301,7 @@ class Inventory_2 extends Admin_Controller
 			'deleted'			=> '0'
 		];
 		
-		$insert = $this->db->insert("ms_inventory_category1",$data);
+		$insert = $this->db->insert("rs_grouplayananlaboratorium",$data);
 		
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();

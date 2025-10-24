@@ -1,8 +1,8 @@
 <?php
-    $ENABLE_ADD     = has_permission('Level_2.Add');
-    $ENABLE_MANAGE  = has_permission('Level_2.Manage');
-    $ENABLE_VIEW    = has_permission('Level_2.View');
-    $ENABLE_DELETE  = has_permission('Level_2.Delete');
+    $ENABLE_ADD     = has_permission('Pendaftaran.Add');
+    $ENABLE_MANAGE  = has_permission('Pendaftaran.Manage');
+    $ENABLE_VIEW    = has_permission('Pendaftaran.View');
+    $ENABLE_DELETE  = has_permission('Pendaftaran.Delete');
 foreach ($results['inven'] as $inven){
 }	
 ?>
@@ -15,28 +15,28 @@ foreach ($results['inven'] as $inven){
 										<div class="row">
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Inventory Type</label>
+									    <label for="customer">Kategori Layanan</label>
 									    </div>
 									    <div class="col-md-6">
 										<select id="inventory_1" name="hd1[1][inventory_1]" class="form-control select" required>
-						<option value="">-- Inventory --</option>
+						<option value="">-- Layanan --</option>
 						<?php foreach ($results['lvl1'] as $lvl1){
-						$select = $inven->id_type == $lvl1->id_type ? 'selected' : '';
+						$select = $inven->id_kategori == $lvl1->id_kategori ? 'selected' : '';
 						?>
-						<option value="<?= $lvl1->id_type?>" <?= $select ?>><?= $lvl1->nama?></option>
+						<option value="<?= $lvl1->id_kategori?>" <?= $select ?>><?= $lvl1->nama_kategori?></option>
 						<?php } ?>
 					  </select>
 									    </div>
 										</div>
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Inventory Name</label>
+									    <label for="customer">Nama Layanan</label>
 									    </div>
 										 <div class="col-md-6" hidden>
-											<input type="text" class="form-control" id="" required name="hd1[1][id_inventory]" value="<?= $inven->id_category1 ?>" placeholder="Nama Inventory">
+											<input type="text" class="form-control" id="" required name="hd1[1][id_inventory]" value="<?= $inven->id_category1 ?>" placeholder="Nama Layanan">
 									    </div>
 									    <div class="col-md-6">
-											<input type="text" class="form-control" id="" required name="hd1[1][nm_inventory]" value="<?= $inven->nama ?>" placeholder="Nama Inventory">
+											<input type="text" class="form-control" id="" required name="hd1[1][nm_inventory]" value="<?= $inven->nama ?>" placeholder="Nama Layanan">
 									    </div>
 										</div>
 										
@@ -192,7 +192,7 @@ foreach ($results['inven'] as $inven){
 		// alert(id);
 		swal({
 		  title: "Anda Yakin?",
-		  text: "Data Inventory akan di hapus.",
+		  text: "Data Layanan akan di hapus.",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonClass: "btn-info",
@@ -208,7 +208,7 @@ foreach ($results['inven'] as $inven){
 			  data:{'id':id},
 			  success:function(result){
 				  if(result.status == '1'){
-					  swal("Sukses", "Data Inventory berhasil dihapus", "success");
+					  swal("Sukses", "Data Layanan berhasil dihapus", "success");
 					return false;
 				  } else {
 					swal({

@@ -7,24 +7,24 @@
 										<div class="row">
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Inventory Type</label>
+									    <label for="customer">Kategori Layanan</label>
 									    </div>
 									    <div class="col-md-6">
-									    <select id="inventory_1" name="hd1[1][inventory_1]" class="form-control select" required>
-											<option value="">-- inventory --</option>
-											<?php foreach ($results['inventory_1'] as $inventory_1){ 
+									    <select id="layanan_1" name="hd1[1][layanan_1]" class="form-control select" required>
+											<option value="">-- layanan --</option>
+											<?php foreach ($results['layanan_1'] as $layanan_1){ 
 											?>
-											<option value="<?= $inventory_1->id_type?>"><?= ucfirst(strtolower($inventory_1->nama))?></option>
+											<option value="<?= $layanan_1->id_kategori?>"><?= ucfirst(strtolower($layanan_1->nama))?></option>
 											<?php } ?>
 										  </select>
 									    </div>
 										</div>
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Inventory Name</label>
+									    <label for="customer">Nama Layanan</label>
 									    </div>
 									    <div class="col-md-6">
-											<input type="text" class="form-control" id="" required name="hd1[1][nm_inventory]" placeholder="Nama Inventory">
+											<input type="text" class="form-control" id="" required name="hd1[1][nm_layanan]" placeholder="Nama Layanan">
 									    </div>
 										</div>
 										
@@ -159,7 +159,7 @@
 			e.preventDefault();
 			var deskripsi	= $('#deskripsi').val();
 			var image	= $('#image').val();
-			var idtype	= $('#inventory_1').val();
+			var idtype	= $('#layanan_1').val();
 			
 			var data, xhr;
 			swal({
@@ -176,7 +176,7 @@
 				function(isConfirm) {
 				  if (isConfirm) {
 						var formData 	=new FormData($('#data-form')[0]);
-						var baseurl=siteurl+'inventory_2/saveNewinventory';
+						var baseurl=siteurl+'layanan_2/saveNewlayanan';
 						$.ajax({
 							url			: baseurl,
 							type		: "POST",

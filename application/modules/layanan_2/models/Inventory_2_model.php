@@ -7,14 +7,14 @@
  * This is model class for table "Customer"
  */
 
-class Inventory_2_model extends BF_Model
+class Layanan_2_model extends BF_Model
 {
 
     /**
      * @var string  User Table Name
      */
-    protected $table_name = 'ms_inventory_category1';
-    protected $key        = 'id';
+    protected $table_name = 'rs_grouplayananlaboratorium';
+    protected $key        = 'id_grouplayananlaboratorium';
 
     /**
      * @var string Field name to use for the created time column in the DB table
@@ -66,10 +66,10 @@ class Inventory_2_model extends BF_Model
 	
 	
     function generate_id($kode='') {
-      $query = $this->db->query("SELECT MAX(id_category1) as max_id FROM ms_inventory_category1");
-      $row = $query->row_array();
+      $query = $this->db->query("SELECT MAX(id_grouplayananlaboratorium) as max_id FROM rs_grouplayananlaboratorium");
+      $row = $query->row();
       $thn = date('y');
-      $max_id = $row['max_id'];
+      $max_id = $row->max_id;
       $max_id1 =(int) substr($max_id,3,5);
       $counter = $max_id1 +1;
       $idcust = "I".$thn.str_pad($counter, 5, "0", STR_PAD_LEFT);
@@ -89,7 +89,7 @@ class Inventory_2_model extends BF_Model
 	
 	public function get_data_category1(){
 		$this->db->select('a.*, b.nama as nama_type');
-		$this->db->from('ms_inventory_category1 a');
+		$this->db->from('rs_grouplayananlaboratorium a');
 		$this->db->join('ms_inventory_type b','b.id_type=a.id_type');
 		$this->db->where('a.deleted','0');
 		$query = $this->db->get();		
@@ -106,7 +106,7 @@ class Inventory_2_model extends BF_Model
 	
     function getById($id)
     {
-       return $this->db->get_where('ms_inventory_category1',array('id_category1' => $id))->row_array();
+       return $this->db->get_where('rs_grouplayananlaboratorium',array('id_category1' => $id))->row_array();
     }
 
    
