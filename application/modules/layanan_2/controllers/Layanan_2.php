@@ -96,7 +96,7 @@ class Layanan_2 extends Admin_Controller
     {
         $this->auth->restrict($this->addPermission);
 		$session = $this->session->userdata('app_session');
-		$post = $_POST['hd1']['1']['produk'];
+		$post = $_POST['hd1']['1']['layanan_1'];
 		$code = $this->Layanan_2_model->generate_id();
 		$this->db->trans_begin();
 		
