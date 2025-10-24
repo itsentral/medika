@@ -66,8 +66,8 @@ class Layanan_model extends BF_Model
 	
 	
     function generate_id($kode='') {
-      $query = $this->db->query("SELECT MAX(id_kategori) as max_id FROM rs_kategorilabx");
-      $row = $query->row();
+      $query = $this->db->query("SELECT * FROM rs_kategorilabx");
+      $row = $query->row-array();
 
       print_r($row);
       exit;
