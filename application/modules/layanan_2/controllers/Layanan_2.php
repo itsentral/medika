@@ -14,10 +14,10 @@ if (!defined('BASEPATH')) {
 class Layanan_2 extends Admin_Controller
 {
     //Permission
-    protected $viewPermission 	= 'Level_2.View';
-    protected $addPermission  	= 'Level_2.Add';
-    protected $managePermission = 'Level_2.Manage';
-    protected $deletePermission = 'Level_2.Delete';
+    protected $viewPermission 	= 'Pendaftaran.View';
+    protected $addPermission  	= 'Pendaftaran.Add';
+    protected $managePermission = 'Pendaftaran.Manage';
+    protected $deletePermission = 'Pendaftaran.Delete';
 
     public function __construct()
     {
