@@ -16,13 +16,8 @@ class Layanan extends Admin_Controller
         parent::__construct();
 
         // $this->load->library(array( 'upload', 'Image_lib'));
-<<<<<<< HEAD:application/modules/layanan/controllers/Layanan.php
         $this->load->model(array('Layanan/Layanan_model',
 		                              'Aktifitas/aktifitas_model',
-=======
-        $this->load->model(array('Inventory_1/Inventory_1_model',
-                                 'Aktifitas/aktifitas_model',
->>>>>>> 4babc84 (update):application/modules/inventory_1/controllers/Inventory_1.php
                                 ));
         $this->template->title('Manage Data Supplier');
         $this->template->page_icon('fa fa-building-o');
@@ -35,15 +30,9 @@ class Layanan extends Admin_Controller
         $session = $this->session->userdata('app_session');
     		$this->template->page_icon('fa fa-users');
     		$deleted = '0';
-<<<<<<< HEAD:application/modules/layanan/controllers/Layanan.php
          $data = $this->Layanan_model->get_data('rs_kategorilab','deleted',$deleted);
         $this->template->set('results', $data);
         $this->template->title('Layanan');
-=======
-        $data = $this->Inventory_1_model->get_data('rs_kategorilab','deleted',$deleted);
-        $this->template->set('results', $data);
-        $this->template->title('Kategori Pemeriksaan');
->>>>>>> 4babc84 (update):application/modules/inventory_1/controllers/Inventory_1.php
         $this->template->render('index');
     }
 
@@ -51,11 +40,7 @@ class Layanan extends Admin_Controller
         $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
         $this->template->page_icon('fa fa-edit');
-<<<<<<< HEAD:application/modules/layanan/controllers/Layanan.php
         $inven = $this->db->get_where('ms_Pendaftaran',array('id_type' => $id))->result();
-=======
-        $inven = $this->db->get_where('rs_kategorilab',array('id_type' => $id))->result();
->>>>>>> 4babc84 (update):application/modules/inventory_1/controllers/Inventory_1.php
         $data = [
           'inven' => $inven
         ];
@@ -85,11 +70,7 @@ class Layanan extends Admin_Controller
         'modified_by'	=> $this->auth->user_id()
       ];
 
-<<<<<<< HEAD:application/modules/layanan/controllers/Layanan.php
       $this->db->where('id_type',$post['id_inventory'])->update("ms_Pendaftaran",$data);
-=======
-      $this->db->where('id_type',$post['id_inventory'])->update("rs_kategorilab",$data);
->>>>>>> 4babc84 (update):application/modules/inventory_1/controllers/Inventory_1.php
 
       if($this->db->trans_status() === FALSE){
         $this->db->trans_rollback();
