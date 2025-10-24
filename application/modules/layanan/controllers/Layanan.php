@@ -89,7 +89,7 @@ class Layanan extends Admin_Controller
       echo json_encode($status);
     }
 
-	public function addLayanan()  {
+	public function addKategori()  {
         $this->template->render('add_layanan');
     }
 
