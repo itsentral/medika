@@ -88,7 +88,7 @@ class Layanan_2_model extends BF_Model
 	
 	
 	public function get_data_category1(){
-		$this->db->select('a.*, b.nama as nama_type');
+		$this->db->select('a.*, b.nama_kategori');
 		$this->db->from('rs_grouplayananlaboratorium a');
 		$this->db->join('rs_kategorilab b','b.nama_kategori=a.nama_kategori');
 		$this->db->where('a.deleted','0');
