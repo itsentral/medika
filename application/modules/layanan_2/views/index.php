@@ -30,8 +30,8 @@ thead input {
 		<tr>
 			<th width="5">#</th>
 			<th width="13%">Id Layanan</th>
-			<th>Nama Layanan</th>
 			<th>Nama Kategori</th>
+			<th>Nama Layanan</th>			
 			<th>Status</th>
 			<?php if($ENABLE_MANAGE) : ?>
 			<th width="13%">Action</th>
@@ -59,12 +59,12 @@ thead input {
 			</td>
 			<td style="padding-left:20px">
 			<?php if($ENABLE_VIEW) : ?>
-				<a class="btn btn-primary btn-sm view" href="javascript:void(0)" title="View" data-id_layanan2="<?=$record->id_category1?>"><i class="fa fa-eye"></i>
+				<a class="btn btn-primary btn-sm view" href="javascript:void(0)" title="View" data-id_layanan2="<?=$record->id_grouplayananlaboratorium?>"><i class="fa fa-eye"></i>
 				</a>
 			<?php endif; ?>
 
 			<?php if($ENABLE_MANAGE) : ?>
-				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_layanan2="<?=$record->id_category1?>"><i class="fa fa-edit"></i>
+				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_layanan2="<?=$record->id_grouplayananlaboratorium?>"><i class="fa fa-edit"></i>
 				</a>
 			<?php endif; ?>
 
