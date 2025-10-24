@@ -14,7 +14,7 @@ class Layanan_model extends BF_Model
      * @var string  User Table Name
      */
     protected $table_name = 'rs_kategorilab'; 
-    protected $key        = 'id_kategori';
+    protected $key        = 'id_kategori'; 
 
     /**
      * @var string Field name to use for the created time column in the DB table
