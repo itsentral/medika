@@ -7,13 +7,13 @@
  * This is model class for table "Customer"
  */
 
-class Inventory_1_model extends BF_Model
+class Layanan_model extends BF_Model
 {
 
     /**
      * @var string  User Table Name
      */
-    protected $table_name = 'ms_inventory_type';
+    protected $table_name = 'rs_kategorilab'; 
     protected $key        = 'id';
 
     /**

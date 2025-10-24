@@ -1,8 +1,8 @@
 <?php
-    $ENABLE_ADD     = has_permission('Inventory_Type.Add');
-    $ENABLE_MANAGE  = has_permission('Inventory_Type.Manage');
-    $ENABLE_VIEW    = has_permission('Inventory_Type.View');
-    $ENABLE_DELETE  = has_permission('Inventory_Type.Delete');
+    $ENABLE_ADD     = has_permission('Pendaftaran.Add');
+    $ENABLE_MANAGE  = has_permission('Pendaftaran.Manage');
+    $ENABLE_VIEW    = has_permission('Pendaftaran.View');
+    $ENABLE_DELETE  = has_permission('Pendaftaran.Delete');
 ?>
 <style type="text/css">
 thead input {
@@ -27,7 +27,7 @@ thead input {
 		<thead>
 		<tr>
 			<th width="5">#</th>
-			<th>Nama Type</th>
+			<th>Nama Kategori</th>
 			<th>Status</th>
 			<?php if($ENABLE_MANAGE) : ?>
 			<th width="13%">Action</th>
@@ -41,10 +41,10 @@ thead input {
 			$numb=0; foreach($results AS $record){ $numb++; ?>
 		<tr>
 		    <td><?= $numb; ?></td>
-			<td><?= strtoupper($record->nama) ?></td>
+			<td><?= strtoupper($record->nama_kategori) ?></td>
 
 			<td>
-				<?php if($record->aktif == 'aktif'){ ?>
+				<?php if($record->deleted == '0'){ ?>
 					<label class="label label-success">Aktif</label>
 				<?php }else{ ?>
 					<label class="label label-danger">Non Aktif</label>
@@ -53,12 +53,12 @@ thead input {
 			<td style="padding-left:20px">
 
 			<?php if($ENABLE_MANAGE) : ?>
-				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_inventory1="<?=$record->id_type?>"><i class="fa fa-edit"></i>
+				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-edit"></i>
 				</a>
 			<?php endif; ?>
 
 			<?php if($ENABLE_DELETE) : ?>
-				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_inventory1="<?=$record->id_type?>"><i class="fa fa-trash"></i>
+				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_Kategori="<?=$record->id_kategori?>"><i class="fa fa-trash"></i>
 				</a>
 			<?php endif; ?>
 			</td>
@@ -78,7 +78,7 @@ thead input {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-users"></span>&nbsp;Data Inventory</h4>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-users"></span>&nbsp;Data Kategori Layanan</h4>
       </div>
       <div class="modal-body" id="ModalView">
 		...
@@ -94,11 +94,11 @@ thead input {
 <script type="text/javascript">
 
 	$(document).on('click', '.edit', function(e){
-		var id = $(this).data('id_inventory1');
-		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Inventory</b>");
+		var id = $(this).data('id_Kategori');
+		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Kategori Layanan</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'inventory_1/editInventory/'+id,
+			url:siteurl+'Layanan/editKategori Layanan/'+id,
 			success:function(data){
 				$("#dialog-popup").modal();
 				$("#ModalView").html(data);
@@ -108,12 +108,12 @@ thead input {
 	});
 
 	$(document).on('click', '.view', function(){
-		var id = $(this).data('id_inventory1');
+		var id = $(this).data('id_Kategori');
 		// alert(id);
-		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Inventory</b>");
+		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Kategori Layanan</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'inventory_1/viewInventory/'+id,
+			url:siteurl+'Layanan/viewKategori Layanan/'+id,
 			data:{'id':id},
 			success:function(data){
 				$("#dialog-popup").modal();
@@ -123,10 +123,10 @@ thead input {
 		})
 	});
 		$(document).on('click', '.add', function(){
-		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Inventory</b>");
+		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Kategori Layanan</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'inventory_1/addInventory',
+			url:siteurl+'Layanan/addKategori Layanan',
 			success:function(data){
 				$("#dialog-popup").modal();
 				$("#ModalView").html(data);
@@ -139,11 +139,11 @@ thead input {
 	// DELETE DATA
 	$(document).on('click', '.delete', function(e){
 		e.preventDefault()
-		var id = $(this).data('id_inventory1');
+		var id = $(this).data('id_Kategori');
 		// alert(id);
 		swal({
 		  title: "Anda Yakin?",
-		  text: "Data Inventory akan di hapus.",
+		  text: "Data Kategori Layanan akan di hapus.",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonClass: "btn-info",
@@ -154,14 +154,14 @@ thead input {
 		function(){
 		  $.ajax({
 			  type:'POST',
-			  url:siteurl+'inventory_1/deleteInventory',
+			  url:siteurl+'Kategori Layanan_1/deleteKategori Layanan',
 			  dataType : "json",
 			  data:{'id':id},
 			  success:function(result){
 				  if(result.status == '1'){
 					 swal({
 						  title: "Sukses",
-						  text : "Data Inventory berhasil dihapus.",
+						  text : "Data Kategori Layanan berhasil dihapus.",
 						  type : "success"
 						},
 						function (){

@@ -3,22 +3,21 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class Inventory_1 extends Admin_Controller
+class Layanan extends Admin_Controller
 {
     //Permission
-    protected $viewPermission 	= 'Inventory_Type.View';
-    protected $addPermission  	= 'Inventory_Type.Add';
-    protected $managePermission = 'Inventory_Type.Manage';
-    protected $deletePermission = 'Inventory_Type.Delete';
+    protected $viewPermission 	= 'Pendaftaran.View';
+    protected $addPermission  	= 'Pendaftaran.Add';
+    protected $managePermission = 'Pendaftaran.Manage';
+    protected $deletePermission = 'Pendaftaran.Delete';
 
     public function __construct()
     {
         parent::__construct();
 
         // $this->load->library(array( 'upload', 'Image_lib'));
-        $this->load->model(array('Inventory_1/Inventory_1_model',
-		                             'Crud/Crud_model',
-                                 'Aktifitas/aktifitas_model',
+        $this->load->model(array('Layanan/Layanan_model',
+		                              'Aktifitas/aktifitas_model',
                                 ));
         $this->template->title('Manage Data Supplier');
         $this->template->page_icon('fa fa-building-o');
@@ -31,8 +30,7 @@ class Inventory_1 extends Admin_Controller
         $session = $this->session->userdata('app_session');
     		$this->template->page_icon('fa fa-users');
     		$deleted = '0';
-        $data = $this->Inventory_1_model->get_data('ms_inventory_type','deleted',$deleted);
-        history("View index inventory type");
+         $data = $this->Layanan_model->get_data('rs_kategorilab','deleted',$deleted);
         $this->template->set('results', $data);
         $this->template->title('Inventory');
         $this->template->render('index');
@@ -42,7 +40,7 @@ class Inventory_1 extends Admin_Controller
         $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
         $this->template->page_icon('fa fa-edit');
-        $inven = $this->db->get_where('ms_inventory_type',array('id_type' => $id))->result();
+        $inven = $this->db->get_where('ms_Pendaftaran',array('id_type' => $id))->result();
         $data = [
           'inven' => $inven
         ];
@@ -55,7 +53,7 @@ class Inventory_1 extends Admin_Controller
     public function viewInventory(){
         $this->auth->restrict($this->viewPermission);
         $id 	= $this->input->post('id');
-        $cust 	= $this->Inventory_1_model->getById($id);
+        $cust 	= $this->Layanan_model->getById($id);
         $this->template->set('result', $cust);
         $this->template->render('view_inventory');
     }
@@ -72,7 +70,7 @@ class Inventory_1 extends Admin_Controller
         'modified_by'	=> $this->auth->user_id()
       ];
 
-      $this->db->where('id_type',$post['id_inventory'])->update("ms_inventory_type",$data);
+      $this->db->where('id_type',$post['id_inventory'])->update("ms_Pendaftaran",$data);
 
       if($this->db->trans_status() === FALSE){
         $this->db->trans_rollback();
@@ -104,7 +102,7 @@ class Inventory_1 extends Admin_Controller
 		];
 
 		$this->db->trans_begin();
-		$this->db->where('id_type',$id)->update("ms_inventory_type",$data);
+		$this->db->where('id_type',$id)->update("ms_Pendaftaran",$data);
 
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
@@ -127,7 +125,7 @@ class Inventory_1 extends Admin_Controller
     {
         $this->auth->restrict($this->addPermission);
 		$post = $this->input->post();
-		$code = $this->Inventory_1_model->generate_id();
+		$code = $this->Layanan_model->generate_id();
 		$this->db->trans_begin();
 		$data = [
 			'id_type'		=> $code,
@@ -138,7 +136,7 @@ class Inventory_1 extends Admin_Controller
 			'deleted'			=> '0'
 		];
 
-		$insert = $this->db->insert("ms_inventory_type",$data);
+		$insert = $this->db->insert("ms_Pendaftaran",$data);
 
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
