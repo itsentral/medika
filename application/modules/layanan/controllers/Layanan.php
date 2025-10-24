@@ -47,8 +47,8 @@ class Layanan extends Admin_Controller
 		$code = $this->Layanan_model->generate_id();
 		$this->db->trans_begin();
 		$data = [
-			'id_type'		=> $code,
-			'nama'		=> $post['nm_kategori'],
+			'id_kategori'		=> $code,
+			'nama_kategori'		=> $post['nm_kategori'],
 			'created_on'		=> date('Y-m-d H:i:s'),
 			'created_by'		=> $this->auth->user_id(),
 			'deleted'			=> '0'
