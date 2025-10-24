@@ -141,7 +141,7 @@ thead input {
 	// DELETE DATA
 	$(document).on('click', '.delete', function(e){
 		e.preventDefault()
-		var id = $(this).data('id_Kategori');
+		var id = $(this).data('id_kategori');
 		// alert(id);
 		swal({
 		  title: "Anda Yakin?",
@@ -156,7 +156,7 @@ thead input {
 		function(){
 		  $.ajax({
 			  type:'POST',
-			  url:siteurl+'Kategori Layanan_1/deleteKategori Layanan',
+			  url:siteurl+'layanan/deleteKategori',
 			  dataType : "json",
 			  data:{'id':id},
 			  success:function(result){

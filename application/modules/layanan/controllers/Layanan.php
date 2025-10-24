@@ -138,7 +138,7 @@ class Layanan extends Admin_Controller
 		];
 
 		$this->db->trans_begin();
-		$this->db->where('id_type',$id)->update("rs_kategorilab",$data);
+		$this->db->where('id_kategori',$id)->update("rs_kategorilab",$data);
 
 		if($this->db->trans_status() === FALSE){
 			$this->db->trans_rollback();
