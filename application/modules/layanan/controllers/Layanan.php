@@ -36,7 +36,7 @@ class Layanan extends Admin_Controller
         $this->template->render('index');
     }
 
-  	public function editInventory($id){
+  	public function editLayanan($id){
         $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
         $this->template->page_icon('fa fa-edit');
@@ -45,32 +45,32 @@ class Layanan extends Admin_Controller
           'inven' => $inven
         ];
         $this->template->set('results', $data);
-        $this->template->title('Inventory');
-        $this->template->render('edit_inventory');
+        $this->template->title('Layanan');
+        $this->template->render('edit_layanan');
 
     }
 
-    public function viewInventory(){
+    public function viewLayanan(){
         $this->auth->restrict($this->viewPermission);
         $id 	= $this->input->post('id');
         $cust 	= $this->Layanan_model->getById($id);
         $this->template->set('result', $cust);
-        $this->template->render('view_inventory');
+        $this->template->render('view_layanan');
     }
 
-    public function saveEditInventory(){
+    public function saveEditLayanan(){
       // $this->auth->restrict($this->editPermission);
       $post = $this->input->post();
       $this->db->trans_begin();
 
       $data = [
-        'nama'		    => $post['nm_inventory'],
+        'nama'		    => $post['nm_layanan'],
         'aktif'				=> $post['status'],
         'modified_on'	=> date('Y-m-d H:i:s'),
         'modified_by'	=> $this->auth->user_id()
       ];
 
-      $this->db->where('id_type',$post['id_inventory'])->update("ms_Pendaftaran",$data);
+      $this->db->where('id_type',$post['id_layanan'])->update("ms_Pendaftaran",$data);
 
       if($this->db->trans_status() === FALSE){
         $this->db->trans_rollback();
@@ -84,16 +84,16 @@ class Layanan extends Admin_Controller
           'pesan'		=>'Success Save Item. Thanks ...',
           'status'	=> 1
         );
-        history("Update inventory type : ".$post['id_inventory']." / ".$post['nm_inventory']);
+        history("Update layanan type : ".$post['id_layanan']." / ".$post['nm_layanan']);
       }
       echo json_encode($status);
     }
 
-	public function addInventory()  {
-        $this->template->render('add_inventory');
+	public function addLayanan()  {
+        $this->template->render('add_layanan');
     }
 
-	public function deleteInventory(){
+	public function deleteLayanan(){
 		$this->auth->restrict($this->deletePermission);
 		$id = $this->input->post('id');
 		$data = [
@@ -116,12 +116,12 @@ class Layanan extends Admin_Controller
 			  'pesan'		=>'Success Save Item. Thanks ...',
 			  'status'	=> 1
 			);
-      history("Delete inventory type : ".$id);
+      history("Delete layanan type : ".$id);
 		}
 
   		echo json_encode($status);
 	}
-	public function saveNewinventory()
+	public function saveNewlayanan()
     {
         $this->auth->restrict($this->addPermission);
 		$post = $this->input->post();
@@ -129,7 +129,7 @@ class Layanan extends Admin_Controller
 		$this->db->trans_begin();
 		$data = [
 			'id_type'		=> $code,
-			'nama'		=> $post['nm_inventory'],
+			'nama'		=> $post['nm_layanan'],
 			'aktif'				=> 'aktif',
 			'created_on'		=> date('Y-m-d H:i:s'),
 			'created_by'		=> $this->auth->user_id(),
@@ -150,7 +150,7 @@ class Layanan extends Admin_Controller
 			  'pesan'		=>'Success Save Item. Thanks ...',
 			  'status'	=> 1
 			);
-      history("Insert inventory type : ".$code." / ".$post['nm_inventory']);
+      history("Insert layanan type : ".$code." / ".$post['nm_layanan']);
 		}
 
   		echo json_encode($status);

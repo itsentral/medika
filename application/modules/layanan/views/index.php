@@ -126,7 +126,7 @@ thead input {
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Kategori Layanan</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'Layanan/addKategori Layanan',
+			url:siteurl+'Layanan/addKategori',
 			success:function(data){
 				$("#dialog-popup").modal();
 				$("#ModalView").html(data);
