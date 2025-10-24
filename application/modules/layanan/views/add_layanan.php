@@ -20,7 +20,7 @@ thead input {
           <label for="">Nama Kategori</label>
         </div>
         <div class="col-md-9">
-          <input type="text" class="form-control" id="nm_inventory" required name="nm_inventory" placeholder="Nama Type">
+          <input type="text" class="form-control" id="nm_inventory" required name="nm_inventory" placeholder="Nama Kategori">
         </div>
       </div>
       <div class="form-group row">
@@ -50,7 +50,7 @@ thead input {
 
 		swal({
 		  title: "Anda Yakin?",
-		  text: "Data Inventory akan di simpan.",
+		  text: "Data Kategori akan di simpan.",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonClass: "btn-info",
@@ -61,14 +61,14 @@ thead input {
 		function(){
 		  $.ajax({
 			  type:'POST',
-			  url:siteurl+'inventory_1/saveNewinventory',
+			  url:siteurl+'layanan/saveNewkategori',
 			  dataType : "json",
 			  data:data,
 			  success:function(result){
 				  if(result.status == '1'){
 					 swal({
 						  title: "Sukses",
-						  text : "Data Inventory berhasil disimpan.",
+						  text : "Data Kategori berhasil disimpan.",
 						  type : "success"
 						},
 						function (){
