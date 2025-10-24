@@ -66,13 +66,14 @@ class Layanan_model extends BF_Model
 	
 	
     function generate_id($kode='') {
-      $query = $this->db->query("SELECT MAX(id_type) as max_id FROM ms_inventory_type");
+      $query = $this->db->query("SELECT MAX(id_kategori) as max_id FROM rs_kategorilab");
       $row = $query->row_array();
+      $bln = date('m');
       $thn = date('y');
       $max_id = $row['max_id'];
-      $max_id1 =(int) substr($max_id,3,5);
+      $max_id1 =(int) substr($max_id,6,3);
       $counter = $max_id1 +1;
-      $idcust = "I".$thn.str_pad($counter, 5, "0", STR_PAD_LEFT);
+      $idcust = "KL".$thn.$bln.str_pad($counter, 3, "0", STR_PAD_LEFT);
       return $idcust;
 	}
 
