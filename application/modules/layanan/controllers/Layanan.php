@@ -79,7 +79,7 @@ class Layanan extends Admin_Controller
         $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
         $this->template->page_icon('fa fa-edit');
-        $inven = $this->db->get_where('ms_Pendaftaran',array('id_type' => $id))->result();
+        $inven = $this->db->get_where('rs_kategorilab',array('id_kategori' => $id))->result();
         $data = [
           'inven' => $inven
         ];
@@ -103,13 +103,12 @@ class Layanan extends Admin_Controller
       $this->db->trans_begin();
 
       $data = [
-        'nama'		    => $post['nm_layanan'],
-        'aktif'				=> $post['status'],
+        'nama_kategori'		    => $post['nm_layanan'],
         'modified_on'	=> date('Y-m-d H:i:s'),
         'modified_by'	=> $this->auth->user_id()
       ];
 
-      $this->db->where('id_type',$post['id_layanan'])->update("rs_kategorilab",$data);
+      $this->db->where('id_kategori',$post['id_layanan'])->update("rs_kategorilab",$data);
 
       if($this->db->trans_status() === FALSE){
         $this->db->trans_rollback();
