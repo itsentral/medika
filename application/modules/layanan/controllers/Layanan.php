@@ -199,6 +199,11 @@ class Layanan extends Admin_Controller
 
   		echo json_encode($status);
 	}
+
+  /*--------------------------------LAYANAN----------------------------------------------*/
+
+  
+
 	
 
 }
