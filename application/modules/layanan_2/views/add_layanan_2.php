@@ -14,7 +14,7 @@
 											<option value="">-- layanan --</option>
 											<?php foreach ($results['layanan_1'] as $layanan_1){ 
 											?>
-											<option value="<?= $layanan_1->id_kategori?>"><?= ucfirst(strtolower($layanan_1->nama))?></option>
+											<option value="<?= $layanan_1->id_kategori?>"><?= ucfirst(strtolower($layanan_1->nama_kategori))?></option>
 											<?php } ?>
 										  </select>
 									    </div>
