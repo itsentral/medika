@@ -42,7 +42,8 @@
 									<table class='table table-bordered table-striped'>
 										<thead>
 											<tr class='bg-blue'>
-												<td align='center'><b>Name Compotition</b></td>	
+												<td align='center'><b>Nilai Rujukan Bawah</b></td>
+												<td align='center'><b>Nilai Rujukan Atas</b></td>	
 												<td align='center'><b>Action</b></td>
 											</tr>
 											
@@ -94,7 +95,10 @@
 			}
 			Template	='<tr id="tr_'+loop+'">';
 			Template	+='<td align="left">';
-					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][name_compotition]" id="data1_'+loop+'_name_compotition" label="FALSE" div="FALSE">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][bawah]" id="data1_'+loop+'_bawah" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+			Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][atas]" id="data1_'+loop+'_atas" label="FALSE" div="FALSE">';
 			Template	+='</td>';
 			Template	+='<td align="center"><button type="button" class="btn btn-sm btn-danger" title="Hapus Data" data-role="qtip" onClick="return DelItem('+loop+');"><i class="fa fa-trash-o"></i></button></td>';
 			Template	+='</tr>';
