@@ -219,7 +219,7 @@ thead input {
 			"iDisplayLength": 10,
 			"aLengthMenu": [[1, 10, 20, 50, 100, 150], [1, 10, 20, 50, 100, 150]],
 			"ajax":{
-				url : base_url + active_controller+'/server_side_inv',
+				url : base_url + active_controller+'server_side_inv',
 				type: "post",
 				data: function(d){
 					d.no_so = no_so,
