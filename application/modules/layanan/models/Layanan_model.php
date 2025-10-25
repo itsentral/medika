@@ -183,10 +183,12 @@ class Layanan_model extends BF_Model
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
 		$sql = "SELECT a.*
-	         FROM rs_kategorilab a";
-		// $v = $this->db->query($sql)->result_array();
-        // print_r($v);
-        // exit;
+	         FROM rs_kategorilab a
+		 WHERE 1=1 AND a.kdcab=$cab
+				AND (
+				a.id_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
+				OR a.nama_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
+	        )";
 
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
