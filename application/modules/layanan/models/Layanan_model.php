@@ -132,7 +132,7 @@ class Layanan_model extends BF_Model
 
 			$jenis_daftar = $row['deleted'];
 
-			 if ($jenis_daftar ==0)			  {
+			 if ($jenis_daftar == 0)			  {
 			      $via = 'Aktif';
 			  }else{
 				  $via = 'Non Aktif';
@@ -184,9 +184,9 @@ class Layanan_model extends BF_Model
 		$cab     = $session['kdcab'];
 		$sql = "SELECT a.id_kategori, a.nama_kategori
 	         FROM rs_kategorilab a";
-		// $v = $this->db->query($sql)->result_array();
-        // print_r($v);
-        // exit;
+		$v = $this->db->query($sql)->result_array();
+        print_r($v);
+        exit;
 
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
