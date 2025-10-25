@@ -36,6 +36,11 @@ class Layanan extends Admin_Controller
         $this->template->render('index2');
     }
 
+	public function server_side_inv()
+	{
+		$this->Layanan_model->get_data_json_inv();
+	}
+
     public function addKategori()  {
         $this->template->render('add_kategori');
     }
