@@ -213,7 +213,7 @@ class Layanan_2_model extends BF_Model
 			   b.nama_kategori
 	         FROM rs_parameter as a 
 			   inner join rs_kategorilab as b ON a.nama_kategori=b.nama_kategori 
-			   WHERE 1=1 AND a.kdcab=$cab
+			   WHERE 1=1
 				AND (
 				a.nama_layananlaboratorium LIKE '%" . $this->db->escape_like_str($like_value) . "%'
 				OR a.mesin LIKE '%" . $this->db->escape_like_str($like_value) . "%'
