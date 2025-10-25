@@ -65,6 +65,12 @@ thead input {
 
 <!-- page script -->
 <script type="text/javascript">
+    $(document).ready(function() {
+	 $("#search").focus();	 
+	    var no_so = '';
+		var customer = '';
+		DataTables(no_so, customer);
+	});
 
 	$(document).on('click', '.edit', function(e){
 		var id = $(this).data('id_kategori');
