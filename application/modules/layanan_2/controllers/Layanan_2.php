@@ -39,10 +39,10 @@ class Layanan_2 extends Admin_Controller
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-users');
 		$deleted = '0';
-        $data = $this->Layanan_2_model->get_data_category1();
-        $this->template->set('results', $data);
+        // $data = $this->Layanan_2_model->get_data_category1();
+        // $this->template->set('results', $data);
         $this->template->title('Layanan');
-        $this->template->render('index');
+        $this->template->render('index2');
     }
 
 

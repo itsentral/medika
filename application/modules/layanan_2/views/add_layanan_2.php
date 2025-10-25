@@ -21,7 +21,7 @@
 										</div>
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Nama Layanan</label>
+									    <label for="customer">Nama Parameter</label>
 									    </div>
 									    <div class="col-md-6">
 											<input type="text" class="form-control" id="" required name="nm_layanan" placeholder="Nama Layanan">
