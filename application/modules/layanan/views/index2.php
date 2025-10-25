@@ -101,7 +101,8 @@ thead input {
 			}
 		})
 	});
-		$(document).on('click', '.add', function(){
+		
+    $(document).on('click', '.add', function(){
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Kategori Layanan</b>");
 		$.ajax({
 			type:'POST',
@@ -163,9 +164,9 @@ thead input {
 					})
 			  }
 		  })
-		});
+		}
 
-	}
+	});
 
 
 
