@@ -3923,3 +3923,18 @@ ERROR - 2025-10-25 15:52:31 --> Severity: 8192 --> Array and string offset acces
 ERROR - 2025-10-25 15:52:31 --> Severity: 8192 --> Array and string offset access syntax with curly braces is deprecated D:\LOCAL_SERVER\medika\application\libraries\mpdf\classes\grad.php 705
 ERROR - 2025-10-25 15:52:31 --> Severity: 8192 --> Array and string offset access syntax with curly braces is deprecated D:\LOCAL_SERVER\medika\application\libraries\mpdf\classes\grad.php 706
 ERROR - 2025-10-25 15:52:31 --> Severity: 8192 --> Array and string offset access syntax with curly braces is deprecated D:\LOCAL_SERVER\medika\application\libraries\mpdf\classes\grad.php 706
+ERROR - 2025-10-25 15:11:11 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:11:11 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:11:11 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:11:11 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:11:12 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:36 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:36 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:36 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:36 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:36 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:40 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:40 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:40 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:40 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 15:13:40 --> 404 Page Not Found: /index
