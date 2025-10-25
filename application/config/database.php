@@ -76,9 +76,9 @@ $query_builder = true;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'db',
-	'username' => 'root',
-	'password' => 'root',
+	'hostname' => 'localhost',
+	'username' => 'medika',
+	'password' => 'Medika@2025**',
 	'database' => 'medika_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
