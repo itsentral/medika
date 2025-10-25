@@ -184,7 +184,9 @@ class Layanan_model extends BF_Model
 		$cab     = $session['kdcab'];
 		$sql = "SELECT a.id_kategori, a.nama_kategori
 	         FROM rs_kategorilab a";
-		echo $this->db->query($sql)->row(); 
+		$v = $this->db->query($sql)->result_array();
+        
+        print_r($v);
         exit;
 
 		$data['totalData'] = $this->db->query($sql)->num_rows();
