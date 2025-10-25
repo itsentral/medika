@@ -19,6 +19,8 @@ class Dashboard extends Admin_Controller {
 
 	public function index()
 	{
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
 		$this->template->title('Dashboard');
 		//$data = $this->dashboard_model->monitor_eoq();
 		/*

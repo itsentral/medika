@@ -14,7 +14,6 @@ class Auth
         $this->ci->lang->load('users/users');
 		$this->ci->load->model(array('users/users_model',
                                     'users/user_groups_model'));
-
 		$this->user = $this->ci->session->userdata('app_session'); 
 	}
 

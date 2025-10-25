@@ -1,0 +1,45 @@
+.text-navy,
+.text-navy a {
+  color: #00439a !important
+}
+
+.text-navy a:hover,
+.text-navy:hover {
+  color: #00357b !important
+}
+
+.wd-100 {
+  width: 100px;
+}
+
+.wd-150 {
+  width: 150px;
+}
+
+.wd-200 {
+  width: 200px;
+}
+
+.wd-250 {
+  width: 250px;
+}
+
+.wd-300 {
+  width: 300px;
+}
+
+.wd-350 {
+  width: 350px;
+}
+
+.wd-400 {
+  width: 400px;
+}
+
+.card.hover {
+  transition: all .2s
+}
+
+.card.hover:hover {
+  transform: scale(1.05);
+}

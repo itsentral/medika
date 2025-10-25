@@ -8,11 +8,12 @@ class Menu_generator
 	protected $user_id;
 	protected $is_admin;
 
-	public function __construct(){
-		$this->ci =& get_instance();
+	public function __construct()
+	{
+		$this->ci = &get_instance();
 
 		$this->x = $this->ci->db->dbprefix;
-		$this->uri = '/'.$this->ci->uri->uri_string().'/';
+		$this->uri = '/' . $this->ci->uri->uri_string() . '/';
 
 		$this->ci->load->helper('app');
 		//$this->ci->load->model('menus/users_model');
@@ -21,39 +22,34 @@ class Menu_generator
 		$this->is_admin = $this->ci->auth->is_admin();
 	}
 
-	public function build_menus_OLD($type=1)
+	public function build_menus($type = 1)
 	{
 		$auth = $this->get_auth_permission($this->user_id);
-		if(!$auth)
-		{
+		if (!$auth) {
 			$auth = array(NULL);
 		}
 
-		if($type==1)
-		{
+		if ($type == 1) {
 			$menu = $this->ci->db->select("t1.*")
-							->from("{$this->x}menus as t1")
-							->join("{$this->x}menus as t2","t1.id = t2.parent_id","left")
-							//->join("{$this->x}menus as t3","t2.id = t3.parent_id","left")
-							->where("t1.parent_id",0)
-							->where("t1.group_menu",$type)
-							->where("t1.status",1)
-							->group_by("t1.id")
-							->order_by("t1.order","ASC")
-							->get()
-							->result();
+				->from("{$this->x}menus as t1")
+				->join("{$this->x}menus as t2", "t1.id = t2.parent_id", "left")
+				//->join("{$this->x}menus as t3","t2.id = t3.parent_id","left")
+				->where("t1.parent_id", 0)
+				->where("t1.group_menu", $type)
+				->where("t1.status", 1)
+				->group_by("t1.id")
+				->order_by("t1.order", "ASC")
+				->get()
+				->result();
 
-			$html = "<ul class='sidebar-menu'>
-							<li class='header'></li>
-	                        <li class='".check_class('dashboard', TRUE)."'>
-	                            <a href='".site_url()."'>
-	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
+			$html = "<ul class='nav nav-primary'>
+	                        <li class='nav-item " . check_class('dashboard', TRUE) . "'>
+	                            <a href='" . site_url() . "'>
+	                                <i class='fa fa-store-alt me-1'></i><p>Dashboard</p>
 	                            </a>
-	                        </li>"
-			;
+	                        </li>";
 
-			if(is_array($menu) && count($menu))
-			{
+			if (is_array($menu) && count($menu)) {
 				foreach ($menu as $rw) {
 					$id 		= $rw->id;
 					$title 		= $rw->title;
@@ -61,295 +57,61 @@ class Menu_generator
 					$icon 		= $rw->icon;
 					$target 	= $rw->target;
 					$submenu = $this->ci->db->select("t1.*")
-					->from("{$this->x}menus as t1")
-					->where("t1.parent_id",$id)
-					->where("t1.group_menu",$type)
-					->where("t1.status",1);
-					if(!$this->is_admin)
-					{
+						->from("{$this->x}menus as t1")
+						->where("t1.parent_id", $id)
+						->where("t1.group_menu", $type)
+						->where("t1.status", 1);
+					if (!$this->is_admin) {
 						$submenu = $submenu->where_in("t1.permission_id", $auth);
 					}
 					$submenu = $submenu->group_by("t1.id")
-					->group_by("t1.id")
-					->order_by("t1.order","ASC")
-					->get()
-					->result();
-					//Jump to end_for point
-					if(count($submenu) == 0)
-					{
-						if($link !="#")
-						{
-							if(!in_array($rw->permission_id, $auth) && $this->is_admin == FALSE)
-							{
-								goto end_for;
-							}
-							$active = "";
-							if(strpos($this->uri, '/'.$link.'/')!==FALSE)
-							{
-								$active = "active";
-							}
-							$html .= "<li class='{$active}'><a href='".($link == '#' ? '#' : site_url($link))."' ".($target == '_blank' ? "target='_blank'" : "").">
-							<h6><i class='{$icon}'></i> &nbsp;&nbsp;&nbsp;<span>".ucwords($title)."</h6></span></a></li>";
-						}
-						goto end_for;
-					}
-
-					$active = "";
-					foreach ($submenu as $sub) {
-						if(strpos($this->uri, '/'.$sub->link.'/')!==FALSE)
-						{
-							$active = "active";
-							break;
-						}
-					}
-					$html .= "
-            			  <li class='treeview {$active}'>
-                      <a href='#'>
-                        <i class='".$icon."'></i>
-                        <span>".ucwords($title)."</span>
-                        <span class='pull-right-container'>
-						            	<i class='fa fa-angle-left pull-right'></i>
-						          	</span>
-                      </a>
-                      <ul class='treeview-menu'>"
-					;
-
-					//Make Sub Menu
-					foreach ($submenu as $sub) {
-						$subid 		= $sub->id;
-						$subtitle 	= $sub->title;
-						$sublink 	= $sub->link;
-						$subicon 	= $sub->icon;
-						$subtarget 	= $sub->target;
-						$subtarget = "";
-						if($subtarget == '_blank')
-						{
-							$subtarget = "target='_blank'";
-						}
-
-						$submenusub = $this->ci->db->select("t1.*")
-						->from("{$this->x}menus as t1")
-						->where("t1.parent_id",$subid)
-						->where("t1.group_menu",$type)
-						->where("t1.status",1);
-						if(!$this->is_admin)
-						{
-							$submenusub = $submenusub->where_in("t1.permission_id", $auth);
-						}
-						$submenusub = $submenusub->group_by("t1.id")
 						->group_by("t1.id")
-						->order_by("t1.order","ASC")
+						->order_by("t1.order", "ASC")
 						->get()
 						->result();
-						//Jump to end_for point
-						if(count($submenusub) == 0)
-						{
-							if($sublink !="#")
-							{
-								if(!in_array($rw->permission_id, $auth) && $this->is_admin == FALSE)
-								{
-									goto end_for_sub;
-								}
-								$active = "";
-								if(strpos($this->uri, '/'.$sublink.'/')!==FALSE)
-								{
-									$active = "active";
-								}
-								$html .= "
-								<li class='".$active."'> 
-									<a href='".($sublink == '#' ? '#' : site_url($sublink))."'"." ".$subtarget.">
-										<h6><i class='".$subicon."'></i>&nbsp;&nbsp;&nbsp;".ucwords($subtitle)."</h6>
-									</a> 
-								</li>";
-							}
-							goto end_for_sub;
-						}
-						$active = "";
-						foreach ($submenusub as $subsub) {
-							if(strpos($this->uri, '/'.$subsub->link.'/')!==FALSE)
-							{
-								$active = "active";
-								break;
-							}
-						}
-						$html .= "
-	            			  <li class='treeview {$active}'>
-	                      <a href='#'>
-	                        <h6><i class='".$subicon."'></i>&nbsp;&nbsp;&nbsp;".ucwords($subtitle)."</h6>
-	                        <span class='pull-right-container'>
-							            	<i class='fa fa-angle-left pull-right'></i>
-							          	</span>
-	                      </a>
-	                      <ul class='treeview-menu'>"
-						;
-						//Make Sub Menu
-						foreach ($submenusub as $subsub) {
-							$subidsub 		= $subsub->id;
-							$subtitlesub 	= $subsub->title;
-							$sublinksub 	= $subsub->link;
-							$subiconsub 	= $subsub->icon;
-							$subtargetsub 	= $subsub->target;
-							$subtargetsub = "";
-							if($subtargetsub == '_blank')
-							{
-								$subtargetsub = "target='_blank'";
-							}
-							//Check current link
-							if(strpos($this->uri, '/'.$sublinksub.'/')!==FALSE)
-							{
-								$active = "active";
-							}
-							else
-							{
-								$active="";
-							}
-							$html .= "
-							<li class='".$active."'>
-								<a href='".($sublinksub == '#' ? '#' : site_url($sublinksub))."'"." ".$subtargetsub.">
-									<h6><i class='".$subiconsub."'></i>&nbsp;&nbsp;&nbsp;".ucwords($subtitlesub)."</h6>
-								</a>
-							</li>";
-						}
-
-						/*$html .="
-							</ul>
-						</li>";*/
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-						$html .="
-							</ul>
-						</li>";
-
-						//Check current link
-						/*if(strpos($this->uri, '/'.$sublink.'/')!==FALSE)
-						{
-							$active = "active";
-						}
-						else
-						{
-							$active="";
-						}
-						$html .= "
-						<li class='".$active."'>
-							<a href='".($sublink == '#' ? '#' : site_url($sublink))."'"." ".$subtarget.">
-								<i class='".$subicon."'></i>".ucwords($subtitle)."
-							</a>
-						</li>";*/
-						end_for_sub:
-					}
-					$html .="
-						</ul>
-					</li>";
-
-					//Jump Point
-					end_for:
-						//END FOREACH MENU
-					}
-					$html .="
-					</ul>";
-/*=================================================================================================================
-===================================================================================================================
-===================================================================================================================
-*/
-			}
-		}else{
-			//other menu
-		}
-
-		return $html;
-	}
-
-	public function build_menus($type=1)
-	{
-		$auth = $this->get_auth_permission($this->user_id);
-		if(!$auth)
-		{
-			$auth = array(NULL);
-		}
-
-		if($type==1)
-		{
-			$menu = $this->ci->db->select("t1.*")
-							->from("{$this->x}menus as t1")
-							->join("{$this->x}menus as t2","t1.id = t2.parent_id","left")
-							//->join("{$this->x}menus as t3","t2.id = t3.parent_id","left")
-							->where("t1.parent_id",0)
-							->where("t1.group_menu",$type)
-							->where("t1.status",1)
-							->group_by("t1.id")
-							->order_by("t1.order","ASC")
-							->get()
-							->result();
-
-			$html = "<ul class='sidebar-menu'>
-							<li class='header'></li>
-	                        <li class='".check_class('dashboard', TRUE)."'>
-	                            <a href='".site_url()."'>
-	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
-	                            </a>
-	                        </li>"
-			;
-
-			if(is_array($menu) && count($menu))
-			{
-				foreach ($menu as $rw) {
-					$id 		= $rw->id;
-					$title 		= $rw->title;
-					$link 		= $rw->link;
-					$icon 		= $rw->icon;
-					$target 	= $rw->target;
-					$submenu = $this->ci->db->select("t1.*")
-					->from("{$this->x}menus as t1")
-					->where("t1.parent_id",$id)
-					->where("t1.group_menu",$type)
-					->where("t1.status",1);
-					if(!$this->is_admin)
-					{
-						$submenu = $submenu->where_in("t1.permission_id", $auth);
-					}
-					$submenu = $submenu->group_by("t1.id")
-					->group_by("t1.id")
-					->order_by("t1.order","ASC")
-					->get()
-					->result();
 					//Jump to end_for point
-					if(count($submenu) == 0)
-					{
-						if($link !="#")
-						{
-							if(!in_array($rw->permission_id, $auth) && $this->is_admin == FALSE)
-							{
+					if (count($submenu) == 0) {
+						if ($link != "#") {
+							if (!in_array($rw->permission_id, $auth) && $this->is_admin == FALSE) {
 								goto end_for;
 							}
 							$active = "";
-							if(strpos($this->uri, '/'.$link.'/')!==FALSE)
-							{
+							if (strpos($this->uri, '/' . $link . '/') !== FALSE) {
 								$active = "active";
 							}
-							$html .= "<li class='{$active}'><a href='".($link == '#' ? '#' : site_url($link))."' ".($target == '_blank' ? "target='_blank'" : "").">
-							<h6><i class='{$icon}'></i> &nbsp;&nbsp;&nbsp;<span>".ucwords($title)."</h6>
-							</span></a></li>";
+							$html .= "<li class='nav-item {$active}'>
+							<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
+							<i class='" . ($icon ? $icon : "") . " me-1'></i><p>" . ucwords($title) . "</p></a>
+							</li>";
 						}
 						goto end_for;
 					}
+					if($link == '-'){
+						$html .= '<li class="nav-section">
+										<span class="sidebar-mini-icon">
+											<i class="fa fa-ellipsis-h"></i>
+										</span>
+										<h4 class="text-section">'.$title.'</h4>
+									</li>';
+					}
+
 					$active = "";
 					foreach ($submenu as $sub) {
-						if(strpos($this->uri, '/'.$sub->link.'/')!==FALSE)
-						{
-							$active = "active";
+						if (strpos($this->uri, '/' . $sub->link . '/') !== FALSE) {
+							$active = "active submenu";
 							break;
 						}
 					}
+
 					$html .= "
-            			  <li class='treeview {$active}'>
-                      <a href='#'>
-                        <i class='".$icon."'></i>
-                        <span>".ucwords($title)."</span>
-                        <span class='pull-right-container'>
-						            	<i class='fa fa-angle-left pull-right'></i>
-						          	</span>
-                      </a>
-                      <ul class='treeview-menu'>"
-					;
+            			  <li class='nav-item {$active}'>
+							<a href='#" . $title . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
+								<i class='" . $icon . " me-1'></i>
+								<p>" . ucwords($title) . "</p>
+								<span class='caret'></span>
+							</a>
+                      		<div class='collapse' id='" . $title . "'>
+							<ul class='nav nav-collapse mb-0'>";
 
 					//Make Sub Menu
 					foreach ($submenu as $sub) {
@@ -359,86 +121,68 @@ class Menu_generator
 						$subicon 	= $sub->icon;
 						$subtarget 	= $sub->target;
 						$subtarget = "";
-						if($subtarget == '_blank')
-						{
+						if ($subtarget == '_blank') {
 							$subtarget = "target='_blank'";
 						}
 
-
 						//Check current link
-						if(strpos($this->uri, '/'.$sublink.'/')!==FALSE)
-						{
+						if (strpos($this->uri, '/' . $sublink . '/') !== FALSE) {
 							$active = "active";
-						}
-						else
-						{
-							$active="";
+						} else {
+							$active = "";
 						}
 						$html .= "
-						<li class='".$active."'>
-							<a href='".($sublink == '#' ? '#' : site_url($sublink))."'"." ".$subtarget.">
-							<h6><i class='".$subicon."'></i>&nbsp;&nbsp;&nbsp;".ucwords($subtitle)."</h6>
+						<li class='" . $active . "'>
+							<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
+								<span class='sub-item'>" . ucwords($subtitle) . "</span>
 							</a>
 						</li>";
 					}
-					$html .="
+					$html .= "
 						</ul>
+						</div>
 					</li>";
-
-					//Jump Point
 					end_for:
-						//END FOREACH MENU
-					}
-					$html .="
-					</ul>";
-/*=================================================================================================================
-===================================================================================================================
-===================================================================================================================
-*/
+				}
+				$html .= "</ul>";
 			}
-		}else{
-			//other menu
 		}
 
 		return $html;
 	}
 
 	protected function get_auth_permission($user_id = 0)
-    {
-        $role_permissions = $this->ci->users_model->select("permissions.id_permission")
-                                            ->join("user_groups","users.id_user = user_groups.id_user")
-                                            ->join("group_permissions","user_groups.id_group = group_permissions.id_group")
-                                            ->join("permissions","group_permissions.id_permission = permissions.id_permission")
-                                            ->where("users.id_user", $user_id)
-                                            ->find_all();
+	{
+		$role_permissions = $this->ci->users_model->select("permissions.id_permission")
+			->join("user_groups", "users.id_user = user_groups.id_user")
+			->join("group_permissions", "user_groups.id_group = group_permissions.id_group")
+			->join("permissions", "group_permissions.id_permission = permissions.id_permission")
+			->where("users.id_user", $user_id)
+			->find_all();
 
-        $user_permissions = $this->ci->users_model->select("permissions.id_permission")
-                                            ->join("user_permissions","users.id_user = user_permissions.id_user")
-                                            ->join("permissions","user_permissions.id_permission = permissions.id_permission")
-                                            ->where("users.id_user", $user_id)
-                                            ->find_all();
+		$user_permissions = $this->ci->users_model->select("permissions.id_permission")
+			->join("user_permissions", "users.id_user = user_permissions.id_user")
+			->join("permissions", "user_permissions.id_permission = permissions.id_permission")
+			->where("users.id_user", $user_id)
+			->find_all();
 
-        $merge = array();
-        if($role_permissions)
-        {
-            foreach ($role_permissions as $key => $rp) {
-                if(!in_array($rp->id_permission, $merge))
-                {
-                    $merge[] = $rp->id_permission;
-                }
-            }
-        }
+		$merge = array();
+		if ($role_permissions) {
+			foreach ($role_permissions as $key => $rp) {
+				if (!in_array($rp->id_permission, $merge)) {
+					$merge[] = $rp->id_permission;
+				}
+			}
+		}
 
-        if($user_permissions)
-        {
-            foreach ($user_permissions as $key => $up) {
-                if(!in_array($up->id_permission, $merge))
-                {
-                    $merge[] = $up->id_permission;
-                }
-            }
-        }
+		if ($user_permissions) {
+			foreach ($user_permissions as $key => $up) {
+				if (!in_array($up->id_permission, $merge)) {
+					$merge[] = $up->id_permission;
+				}
+			}
+		}
 
-        return $merge;
-    }
+		return $merge;
+	}
 }
