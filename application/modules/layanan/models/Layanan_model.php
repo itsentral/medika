@@ -183,7 +183,7 @@ class Layanan_model extends BF_Model
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
 		$sql = "SELECT a.*
-	         FROM rs_kategorilab as a 
+	         FROM rs_pasien as a 
 			
 	        )";
 		//echo $this->db->query($sql)->row(); exit;
