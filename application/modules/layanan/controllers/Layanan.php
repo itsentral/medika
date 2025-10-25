@@ -30,10 +30,10 @@ class Layanan extends Admin_Controller
         $session = $this->session->userdata('app_session');
     		$this->template->page_icon('fa fa-users');
     		$deleted = '0';
-         $data = $this->Layanan_model->get_data('rs_kategorilab','deleted',$deleted);
-        $this->template->set('results', $data);
+         //$data = $this->Layanan_model->get_data('rs_kategorilab','deleted',$deleted);
+       // $this->template->set('results', $data);
         $this->template->title('Layanan');
-        $this->template->render('index');
+        $this->template->render('index2');
     }
 
     public function addKategori()  {

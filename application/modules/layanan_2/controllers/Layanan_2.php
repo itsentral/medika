@@ -44,6 +44,25 @@ class Layanan_2 extends Admin_Controller
         $this->template->title('Layanan');
         $this->template->render('index');
     }
+
+
+	public function index2()
+    {
+        $this->auth->restrict($this->viewPermission);
+        $session = $this->session->userdata('app_session');
+		$this->template->page_icon('fa fa-users');
+		$deleted = '0';
+        $data = $this->Layanan_2_model->get_data_category1();
+        $this->template->set('results', $data);
+        $this->template->title('Layanan');
+        $this->template->render('index2');
+		
+    }
+	public function server_side_inv()
+	{
+		$this->Layanan_2_model->get_data_json_inv();
+	}
+	
 	public function editLayanan($id){
 		$this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');

@@ -92,6 +92,130 @@ class Layanan_model extends BF_Model
        return $this->db->get_where('ms_inventory_type',array('id_type' => $id))->row_array();
     }
 
+
+    //SERVER SIDE
+	public function get_data_json_inv()
+	{
+        $ENABLE_ADD     = has_permission('Pendaftaran.Add');
+		$ENABLE_MANAGE  = has_permission('Pendaftaran.Manage');
+		$ENABLE_VIEW    = has_permission('Pendaftaran.View');
+		$ENABLE_DELETE  = has_permission('Pendaftaran.Delete');
+		
+		$requestData	= $_REQUEST;
+		$fetch			= $this->query_data_inv(
+			$requestData['search']['value'],
+			$requestData['order'][0]['column'],
+			$requestData['order'][0]['dir'],
+			$requestData['start'],
+			$requestData['length']
+		);
+		$totalData		= $fetch['totalData'];
+		$totalFiltered	= $fetch['totalFiltered'];
+		$query			= $fetch['query'];
+
+		$data	= array();
+		$urut1  = 1;
+		$urut2  = 0;
+		foreach ($query->result_array() as $row) {
+			$total_data     = $totalData;
+			$start_dari     = $requestData['start'];
+			$asc_desc       = $requestData['order'][0]['dir'];
+			if ($asc_desc == 'asc') {
+				$nomor = $urut1 + $start_dari;
+			}
+			if ($asc_desc == 'desc') {
+				$nomor = ($total_data - $start_dari) - $urut2;
+			}
+
+			$mixedStr = $row['no_ipp'];
+			$searchStr = 'NP';
+			$searchStr2 = 'OT';
+
+			if (strpos($mixedStr, $searchStr)) {
+				$class = 'print1';
+			} else if (strpos($mixedStr, $searchStr2)) {
+				$class = 'print2';
+			} else {
+				$class = 'print';
+			}
+
+			$edit = 'edit';
+
+			$jenis_daftar = $row['deleted'];
+
+			 if ($jenis_daftar ==0)			  {
+			      $via = 'Aktif';
+			  }else{
+				  $via = 'Non Aktif';
+			  }
+
+			$nestedData 	= array();
+			$nestedData[]	= "<div align='center'>" . $nomor . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['kode_kategori'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['nama_kategori'] . "</div>";
+            $nestedData[]	= "<div align='left'>" . $via . "</div>";
+			$priX	= "";
+			$updX	= "";
+			$ApprvX	= "";
+			$Edit	= "";
+			$Print	= "";
+			$Hist	= "";
+			$ApprvX2Edit = "";
+
+			if ($ENABLE_MANAGE) {
+				//$Terima	= "<button class='btn btn-sm btn-success edit' title='Create Penerimaan' data-inv='" . $row['no_invoice'] . "'><i class='fa fa-list'></i></button>";
+			$Terima	=  "<a class='btn btn-success btn-xs edit' href='javascript:void(0)' title='Edit' data-id_kategori='" . $row['id_kategori'] . "'><i class='fa fa-edit'></i>
+				</a>";
+
+            $Hapus	=  "<a class='btn btn-success btn-xs delete' href='javascript:void(0)' title='Hapus' data-id_kategori='" . $row['id_kategori'] . "'><i class='fa fa-trash'></i>
+				</a>";
+			
+			}
+			$nestedData[]	= "<div align='center'>
+									" . $Terima.$Hapus."
+									</div>";
+			$data[] = $nestedData;
+			$urut1++;
+			$urut2++;
+		}
+
+		$json_data = array(
+			"draw"            	=> intval($requestData['draw']),
+			"recordsTotal"    	=> intval($totalData),
+			"recordsFiltered" 	=> intval($totalFiltered),
+			"data"            	=> $data
+		);
+
+		echo json_encode($json_data);
+	}
+
+	public function query_data_inv($like_value = NULL, $column_order = NULL, $column_dir = NULL, $limit_start = NULL, $limit_length = NULL)
+	{
+        $session = $this->session->userdata('app_session');  
+		$cab     = $session['kdcab'];
+		$sql = "SELECT a.*
+	         FROM rs_kategorilab as a 
+			 WHERE 1=1 AND a.kdcab='$cab'
+				AND (
+				a.id_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
+				OR a.nama_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
+	        )";
+		//echo $this->db->query($sql)->row(); exit;
+
+		$data['totalData'] = $this->db->query($sql)->num_rows();
+		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
+		$columns_order_by = array(
+			0 => 'nomor',
+			1 => 'id_kategori',
+			2 => 'nama_kategori'
+		);
+
+		$sql .= " ORDER BY a.id_kategori ASC, " . $columns_order_by[$column_order] . " " . $column_dir . " ";
+		$sql .= " LIMIT " . $limit_start . " ," . $limit_length . " ";
+		$data['query'] = $this->db->query($sql);
+		return $data;
+	}
+
    
 
 }
