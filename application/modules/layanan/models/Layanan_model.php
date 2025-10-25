@@ -183,10 +183,10 @@ class Layanan_model extends BF_Model
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
 		$sql = "SELECT a.id_kategori, a.nama_kategori
-	         FROM rs_kategorilab as a 
+	         FROM rs_kategorilab a
 			
 	        )";
-		//echo $this->db->query($sql)->row(); exit;
+		echo $this->db->query($sql)->row(); exit;
 
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
