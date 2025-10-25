@@ -188,7 +188,7 @@ class Layanan_model extends BF_Model
 				a.id_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
 				OR a.nama_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
 	        )";
-		echo $this->db->query($sql)->result(); exit;
+		echo $this->db->query($sql); exit;
 
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
