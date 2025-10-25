@@ -148,5 +148,15 @@
                 </a>
             </div>
         </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="card card-custom">
+                <a href="<?= base_url('asset') ?>" target="_self" class="card-link">
+                    <div class="card-icon">
+                        <img src="<?= base_url('assets/images/hasil uji.png') ?>" alt="Consumable" class="card-img" style="height: 310px; width: 320px">
+                    </div>
+                    <p class="card-title"></p>
+                </a>
+            </div>
+        </div>
     </div>
 </main>

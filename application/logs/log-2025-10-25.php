@@ -739,3 +739,156 @@ ERROR - 2025-10-25 13:41:40 --> $config['composer_autoload'] is set to TRUE but 
 ERROR - 2025-10-25 13:41:40 --> 404 Page Not Found: /index
 ERROR - 2025-10-25 13:42:38 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
 ERROR - 2025-10-25 13:42:39 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:14:53 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:14:53 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:14:53 --> Severity: Notice --> Undefined variable: nama_program /var/www/html/application/modules/users/views/login_animate.php 6
+ERROR - 2025-10-25 14:14:54 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:14:54 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 14:15:06 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:15:06 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:15:12 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:15:12 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:15:18 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:15:18 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:17:05 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:17:05 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:17:05 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 14:18:26 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:18:26 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:23:29 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:23:30 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:23:31 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 14:23:38 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 15:50:23 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 15:50:25 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 15:56:42 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 15:56:42 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 15:56:42 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:33:28 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:33:28 --> Severity: error --> Exception: Call to undefined function history() /var/www/html/application/modules/asset/controllers/Asset.php 41
+ERROR - 2025-10-25 16:33:28 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:33:28 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:33:47 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:33:47 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:33:47 --> Query error: Table 'medika_db.asset_nilai' doesn't exist - Invalid query: SELECT
+				SUM(a.nilai_asset) AS total_aset,
+				SUM(a.`value`) AS total_susut,
+				SUM(b.sisa_nilai) AS total_sisa
+			FROM
+				asset a LEFT JOIN asset_nilai b ON a.kd_asset = b.kd_asset
+			WHERE 1=1
+				AND a.deleted = 'N'
+				
+				
+				AND (
+				a.nm_asset LIKE '%%'
+				OR a.category LIKE '%%'
+	        )
+ERROR - 2025-10-25 16:33:47 --> Severity: error --> Exception: Call to a member function result_array() on bool /var/www/html/application/modules/asset/models/Asset_model.php 211
+ERROR - 2025-10-25 16:33:47 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:33:47 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:35:13 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:35:13 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:35:17 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:35:17 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:35:17 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:35:17 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:35:17 --> Query error: Table 'medika_db.asset_nilai' doesn't exist - Invalid query: SELECT
+				SUM(a.nilai_asset) AS total_aset,
+				SUM(a.`value`) AS total_susut,
+				SUM(b.sisa_nilai) AS total_sisa
+			FROM
+				asset a LEFT JOIN asset_nilai b ON a.kd_asset = b.kd_asset
+			WHERE 1=1
+				AND a.deleted = 'N'
+				
+				
+				AND (
+				a.nm_asset LIKE '%%'
+				OR a.category LIKE '%%'
+	        )
+ERROR - 2025-10-25 16:35:17 --> Severity: error --> Exception: Call to a member function result_array() on bool /var/www/html/application/modules/asset/models/Asset_model.php 211
+ERROR - 2025-10-25 16:36:36 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:36:37 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:36:37 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:36:37 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:36:37 --> Query error: The user specified as a definer ('alief'@'%') does not exist - Invalid query: SELECT
+				SUM(a.nilai_asset) AS total_aset,
+				SUM(a.`value`) AS total_susut,
+				SUM(b.sisa_nilai) AS total_sisa
+			FROM
+				asset a LEFT JOIN asset_nilai b ON a.kd_asset = b.kd_asset
+			WHERE 1=1
+				AND a.deleted = 'N'
+				
+				
+				AND (
+				a.nm_asset LIKE '%%'
+				OR a.category LIKE '%%'
+	        )
+ERROR - 2025-10-25 16:36:37 --> Severity: error --> Exception: Call to a member function result_array() on bool /var/www/html/application/modules/asset/models/Asset_model.php 211
+ERROR - 2025-10-25 16:38:49 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:38:49 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:38:49 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:38:55 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:00 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:00 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:39:30 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:30 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:30 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:39:30 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:34 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:39 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:39 --> Query error: Table 'medika_db.department' doesn't exist - Invalid query: SELECT *
+FROM `department`
+WHERE `status` = 'Y'
+ERROR - 2025-10-25 16:39:39 --> Severity: error --> Exception: Call to a member function result_array() on bool /var/www/html/application/modules/asset/models/Asset_model.php 18
+ERROR - 2025-10-25 16:39:45 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:45 --> Query error: Table 'medika_db.department' doesn't exist - Invalid query: SELECT *
+FROM `department`
+WHERE `status` = 'Y'
+ERROR - 2025-10-25 16:39:45 --> Severity: error --> Exception: Call to a member function result_array() on bool /var/www/html/application/modules/asset/models/Asset_model.php 18
+ERROR - 2025-10-25 16:39:48 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:39:48 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:40:58 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:40:58 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:40:58 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:40:59 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:41:04 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:41:04 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:41:04 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:41:04 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:41:06 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:41:06 --> Query error: Table 'medika_db.department' doesn't exist - Invalid query: SELECT *
+FROM `department`
+WHERE `status` = 'Y'
+ERROR - 2025-10-25 16:41:06 --> Severity: error --> Exception: Call to a member function result_array() on bool /var/www/html/application/modules/asset/models/Asset_model.php 18
+ERROR - 2025-10-25 16:42:08 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:08 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:08 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:42:08 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:09 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:09 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:42:10 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:13 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:20 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:20 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:20 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:42:21 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:43 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:49 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:53 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:42:53 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:42:58 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:43:37 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:43:48 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:43:48 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:43:48 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:43:54 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:43:54 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:43:54 --> 404 Page Not Found: /index
+ERROR - 2025-10-25 16:43:57 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:43:57 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:44:00 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:44:04 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-25 16:44:05 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
