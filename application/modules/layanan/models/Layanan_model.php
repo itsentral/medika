@@ -127,18 +127,6 @@ class Layanan_model extends BF_Model
 				$nomor = ($total_data - $start_dari) - $urut2;
 			}
 
-			$mixedStr = $row['no_ipp'];
-			$searchStr = 'NP';
-			$searchStr2 = 'OT';
-
-			if (strpos($mixedStr, $searchStr)) {
-				$class = 'print1';
-			} else if (strpos($mixedStr, $searchStr2)) {
-				$class = 'print2';
-			} else {
-				$class = 'print';
-			}
-
 			$edit = 'edit';
 
 			$jenis_daftar = $row['deleted'];
@@ -151,7 +139,7 @@ class Layanan_model extends BF_Model
 
 			$nestedData 	= array();
 			$nestedData[]	= "<div align='center'>" . $nomor . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['kode_kategori'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['id_kategori'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_kategori'] . "</div>";
             $nestedData[]	= "<div align='left'>" . $via . "</div>";
 			$priX	= "";
