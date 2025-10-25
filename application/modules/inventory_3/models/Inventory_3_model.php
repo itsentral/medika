@@ -7,13 +7,12 @@
  * This is model class for table "Customer"
  */
 
-class Inventory_1_model extends BF_Model
+class Inventory_3_model extends BF_Model
 {
-
     /**
      * @var string  User Table Name
      */
-    protected $table_name = 'ms_inventory_type';
+    protected $table_name = 'ms_inventory_category2';
     protected $key        = 'id';
 
     /**
@@ -66,7 +65,7 @@ class Inventory_1_model extends BF_Model
 	
 	
     function generate_id($kode='') {
-      $query = $this->db->query("SELECT MAX(id_type) as max_id FROM ms_inventory_type");
+      $query = $this->db->query("SELECT MAX(id_category2) as max_id FROM ms_inventory_category2");
       $row = $query->row_array();
       $thn = date('y');
       $max_id = $row['max_id'];
@@ -75,6 +74,24 @@ class Inventory_1_model extends BF_Model
       $idcust = "I".$thn.str_pad($counter, 5, "0", STR_PAD_LEFT);
       return $idcust;
 	}
+	
+	function level_2($inventory_1)
+    {
+        $this->db->where('id_type', $inventory_1);
+		$this->db->where('deleted', "0");
+        $this->db->order_by('id_category1', 'ASC');
+        return $this->db->from('ms_inventory_category1')
+            ->get()
+            ->result();
+    }
+    function level_3($id_inventory2)
+    {
+        $this->db->where('id_category1', $id_inventory2);
+        $this->db->order_by('id_category2', 'ASC');
+        return $this->db->from('ms_inventory_category2')
+            ->get()
+            ->result();
+    }
 
  	public function get_data($table,$where_field='',$where_value=''){
 		if($where_field !='' && $where_value!=''){
@@ -88,9 +105,19 @@ class Inventory_1_model extends BF_Model
 	
     function getById($id)
     {
-       return $this->db->get_where('ms_inventory_type',array('id_type' => $id))->row_array();
+       return $this->db->get_where('ms_inventory_category1',array('id_category1' => $id))->row_array();
     }
+	
+	public function get_data_category2(){
+		$this->db->select('a.*, b.nama as nama_type, c.nama as nama_category1');
+		$this->db->from('ms_inventory_category2 a');
+		$this->db->join('ms_inventory_type b','b.id_type=a.id_type');
+		$this->db->join('ms_inventory_category1 c','c.id_category1 =a.id_category1');
+		$this->db->where('a.deleted',0);
+		$query = $this->db->get();		
+		return $query->result();
+	}
 
-   
+    
 
 }

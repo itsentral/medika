@@ -1,8 +1,8 @@
 <?php
-    $ENABLE_ADD     = has_permission('Inventory_1.Add');
-    $ENABLE_MANAGE  = has_permission('Inventory_1.Manage');
-    $ENABLE_VIEW    = has_permission('Inventory_1.View');
-    $ENABLE_DELETE  = has_permission('Inventory_1.Delete');
+    $ENABLE_ADD     = has_permission('Inventory_2.Add');
+    $ENABLE_MANAGE  = has_permission('Inventory_2.Manage');
+    $ENABLE_VIEW    = has_permission('Inventory_2.View');
+    $ENABLE_DELETE  = has_permission('Inventory_2.Delete');
 ?>
 <style type="text/css">
 thead input {
@@ -12,26 +12,44 @@ thead input {
 <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables/dataTables.bootstrap.css')?>">
 <link rel="stylesheet" href="<?= base_url('assets/plugins/sweetalert/dist/sweetalert.css')?>">
 
-<div class="box box-primary">
-	<div class="box-body">
-		<form id="data_form" autocomplete="off">
-      <div class="form-group row">
-        <div class="col-md-3">
-          <label for="">Nama Type</label>
+          <div class="box box-primary">
+            <div class="box-body">
+			
+			<form id="data_form">
+				<div class="form-group row">
+					<div class="col-md-2">
+					 <label for="inventory_1" class="col-sm-3 control-label">Inventory Type</label>
+					</div>
+					<div class="col-md-6">
+					  <select id="inventory_1" name="inventory_1" class="form-control select" required>
+						<option value="">-- inventory --</option>
+						<?php foreach ($results['inventory_1'] as $inventory_1){ 
+						?>
+						<option value="<?= $inventory_1->id_type?>"><?= ucfirst(strtolower($inventory_1->nama))?></option>
+						<?php } ?>
+					  </select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group row">
+							<div class="col-md-2">
+							  <label for="">Inventory Name</label>
+							</div>
+							 <div class="col-md-6">
+							  <input type="text" class="form-control" id="" required name="nm_inventory" placeholder="Nama Inventory">
+							</div>
+						</div>						
+						<div class="form-group row">
+							<div class="col-md-3">
+			<button type="submit" class="btn btn-primary" name="save" id="save"><i class="fa fa-save"></i> Save</button>
+			</div>
+						</div>
+					</div>
+				</div>
+				
+			</form>
         </div>
-        <div class="col-md-9">
-          <input type="text" class="form-control" id="nm_inventory" required name="nm_inventory" placeholder="Nama Type">
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-md-3"></div>
-        <div class="col-md-9">
-          <button type="submit" class="btn btn-primary" name="save" id="save"><i class="fa fa-save"></i> Save</button>
-        </div>
-      </div>
-		</form>
-	</div>
-</div>
 
 <!-- Modal Bidus-->
 <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js')?>"></script>
@@ -61,7 +79,7 @@ thead input {
 		function(){
 		  $.ajax({
 			  type:'POST',
-			  url:siteurl+'inventory_1/saveNewinventory',
+			  url:siteurl+'inventory_2/saveNewinventory',
 			  dataType : "json",
 			  data:data,
 			  success:function(result){
@@ -80,7 +98,7 @@ thead input {
 					  text  : "Data error. Gagal insert data",
 					  type  : "error"
 					})
-
+					
 				  }
 			  },
 			  error : function(){
@@ -92,11 +110,11 @@ thead input {
 			  }
 		  })
 		});
-
+		
 	})
-
+   
   });
 
-
+  
 
 </script>

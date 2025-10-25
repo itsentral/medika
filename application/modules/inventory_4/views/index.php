@@ -1,8 +1,9 @@
 <?php
-    $ENABLE_ADD     = has_permission('Inventory_Type.Add');
-    $ENABLE_MANAGE  = has_permission('Inventory_Type.Manage');
-    $ENABLE_VIEW    = has_permission('Inventory_Type.View');
-    $ENABLE_DELETE  = has_permission('Inventory_Type.Delete');
+    $ENABLE_ADD     = has_permission('Level_4.Add');
+    $ENABLE_MANAGE  = has_permission('Level_4.Manage');
+    $ENABLE_VIEW    = has_permission('Level_4.View');
+    $ENABLE_DELETE  = has_permission('Level_4.Delete');
+	
 ?>
 <style type="text/css">
 thead input {
@@ -14,21 +15,23 @@ thead input {
 
 <div class="box">
 	<div class="box-header">
-			<?php if($ENABLE_VIEW) : ?>
+		<!--	<?php if($ENABLE_ADD) : ?>
 				<a class="btn btn-success btn-sm add" href="javascript:void(0)" title="Add"><i class="fa fa-plus">&nbsp;</i>Add</a>
 			<?php endif; ?>
-
+		-->
 		<span class="pull-right">
 		</span>
 	</div>
+	<!-- /.box-header -->
 	<!-- /.box-header -->
 	<div class="box-body">
 		<table id="example1" class="table table-bordered table-striped">
 		<thead>
 		<tr>
 			<th width="5">#</th>
-			<th>Nama Type</th>
-			<th>Status</th>
+			<th width="13%" hidden>Id Bentuk</th>
+			<th>Bentuk Material</th>
+
 			<?php if($ENABLE_MANAGE) : ?>
 			<th width="13%">Action</th>
 			<?php endif; ?>
@@ -38,27 +41,15 @@ thead input {
 		<tbody>
 		<?php if(empty($results)){
 		}else{
+			
 			$numb=0; foreach($results AS $record){ $numb++; ?>
 		<tr>
 		    <td><?= $numb; ?></td>
-			<td><?= strtoupper($record->nama) ?></td>
-
-			<td>
-				<?php if($record->aktif == 'aktif'){ ?>
-					<label class="label label-success">Aktif</label>
-				<?php }else{ ?>
-					<label class="label label-danger">Non Aktif</label>
-				<?php } ?>
-			</td>
+			<td hidden><?= $record->id_bentuk?></td>
+			<td><?= $record->nm_bentuk ?></td>
 			<td style="padding-left:20px">
-
-			<?php if($ENABLE_MANAGE) : ?>
-				<a class="btn btn-success btn-sm edit" href="javascript:void(0)" title="Edit" data-id_inventory1="<?=$record->id_type?>"><i class="fa fa-edit"></i>
-				</a>
-			<?php endif; ?>
-
-			<?php if($ENABLE_DELETE) : ?>
-				<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_inventory1="<?=$record->id_type?>"><i class="fa fa-trash"></i>
+			<?php if($ENABLE_VIEW) : ?>
+				<a class="btn btn-primary btn-sm" href="<?= base_url('/inventory_4/detail/'.$record->id_bentuk) ?>" title="Detail" data-no_inquiry="<?=$record->no_inquiry?>"><i class="fa fa-table"></i>
 				</a>
 			<?php endif; ?>
 			</td>
@@ -72,6 +63,24 @@ thead input {
 </div>
 
 <!-- awal untuk modal dialog -->
+<!-- Modal -->
+<div class="modal modal-primary" id="dialog-rekap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-file-pdf-o"></span>&nbsp;Rekap Data Customer</h4>
+      </div>
+      <div class="modal-body" id="MyModalBody">
+		...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+        <span class="glyphicon glyphicon-remove"></span>  Close</button>
+        </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal modal-default fade" id="dialog-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -83,6 +92,11 @@ thead input {
       <div class="modal-body" id="ModalView">
 		...
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+        <span class="glyphicon glyphicon-remove"></span>  Close</button>
+        </div>
+    </div>
   </div>
 </div>
 
@@ -94,31 +108,31 @@ thead input {
 <script type="text/javascript">
 
 	$(document).on('click', '.edit', function(e){
-		var id = $(this).data('id_inventory1');
+		var id = $(this).data('id_bentuk');
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Inventory</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'inventory_1/editInventory/'+id,
+			url:siteurl+'master_bentuk/editBentuk/'+id,
 			success:function(data){
 				$("#dialog-popup").modal();
 				$("#ModalView").html(data);
-
+				
 			}
 		})
 	});
-
+	
 	$(document).on('click', '.view', function(){
-		var id = $(this).data('id_inventory1');
+		var id = $(this).data('id_bentuk');
 		// alert(id);
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Inventory</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'inventory_1/viewInventory/'+id,
+			url:siteurl+'master_bentuk/viewBentuk/'+id,
 			data:{'id':id},
 			success:function(data){
 				$("#dialog-popup").modal();
 				$("#ModalView").html(data);
-
+				
 			}
 		})
 	});
@@ -126,20 +140,20 @@ thead input {
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Inventory</b>");
 		$.ajax({
 			type:'POST',
-			url:siteurl+'inventory_1/addInventory',
+			url:siteurl+'inventory_4/addInventory',
 			success:function(data){
 				$("#dialog-popup").modal();
 				$("#ModalView").html(data);
-
+				
 			}
 		})
 	});
-
-
+	
+	
 	// DELETE DATA
 	$(document).on('click', '.delete', function(e){
 		e.preventDefault()
-		var id = $(this).data('id_inventory1');
+		var id = $(this).data('id_bentuk');
 		// alert(id);
 		swal({
 		  title: "Anda Yakin?",
@@ -154,7 +168,7 @@ thead input {
 		function(){
 		  $.ajax({
 			  type:'POST',
-			  url:siteurl+'inventory_1/deleteInventory',
+			  url:siteurl+'master_bentuk/deleteBentuk',
 			  dataType : "json",
 			  data:{'id':id},
 			  success:function(result){
@@ -173,7 +187,7 @@ thead input {
 					  text  : "Data error. Gagal hapus data",
 					  type  : "error"
 					})
-
+					
 				  }
 			  },
 			  error : function(){
@@ -185,7 +199,7 @@ thead input {
 			  }
 		  })
 		});
-
+		
 	})
 
   	$(function() {
@@ -220,8 +234,8 @@ thead input {
 	    } );
     	$("#form-area").hide();
   	});
-
-
+	
+	
 	//Delete
 
 	function PreviewPdf(id)
