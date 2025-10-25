@@ -183,7 +183,7 @@ class Layanan_model extends BF_Model
 		$cab     = $session['kdcab'];
 		$sql = "SELECT a.*
 	         FROM rs_kategorilab as a 
-			 WHERE 1=1 AND a.kdcab='$cab'
+			 WHERE 1=1 AND a.kdcab=$cab
 				AND (
 				a.id_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
 				OR a.nama_kategori LIKE '%" . $this->db->escape_like_str($like_value) . "%'
