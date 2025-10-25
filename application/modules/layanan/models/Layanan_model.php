@@ -185,7 +185,7 @@ class Layanan_model extends BF_Model
 	         FROM rs_kategorilab as a 
 			 
 	        )";
-		echo $this->db->query($sql); exit;
+		echo $this->db->query($sql)->result_array; exit;
 
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
