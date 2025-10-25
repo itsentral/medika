@@ -79,8 +79,9 @@ class Layanan_2 extends Admin_Controller
 	
 	public function addLayanan()
     {
-				$this->auth->restrict($this->viewPermission);
-        $session = $this->session->userdata('app_session');
+		$this->auth->restrict($this->viewPermission);
+       	$session = $this->session->userdata('app_session');  
+		$cab     = $session['kdcab'];
 		$this->template->page_icon('fa fa-pencil');
 		$layanan_1 = $this->Layanan_2_model->get_data('rs_kategorilab');
 		$data = [
@@ -95,7 +96,8 @@ class Layanan_2 extends Admin_Controller
 	public function saveNewlayanan()
     {
         $this->auth->restrict($this->addPermission);
-		$session = $this->session->userdata('app_session');
+		$session = $this->session->userdata('app_session');  
+		$cab     = $session['kdcab'];
 		$post = $this->input->post();
 		$code = $this->Layanan_2_model->generate_id();
 		$this->db->trans_begin();
@@ -110,13 +112,14 @@ class Layanan_2 extends Admin_Controller
 							'nama_grouplayananlaboratorium'		        => $post['nm_layanan'],
 							'created_on'		=> date('Y-m-d H:i:s'),
 							'created_by'		=> $this->auth->user_id(),
-							'deleted'			=> '0' 
+							'deleted'			=> '0',
+							'kdcab'		        => $session['kdcab']
                             );
             //Add Data
               $this->db->insert('rs_grouplayananlaboratorium',$header1);
 			
 		    			
-		if(empty($_POST['data1'])){
+		/*if(empty($_POST['data1'])){
 		}else{
 		$numb2 =0;
 		foreach($_POST['data1'] as $d1){
@@ -134,22 +137,40 @@ class Layanan_2 extends Admin_Controller
             //Add Data
               $this->db->insert('ms_compotition',$data1);
 			
-		    }		
-		}	
+		    }*/		
+			
 		
-		if($this->db->trans_status() === FALSE){
-			$this->db->trans_rollback();
+		if($this->db->trans_status() === FALSE)
+		{
+		$this->db->trans_rollback();
 			$status	= array(
 			  'pesan'		=>'Gagal Save Item. Thanks ...',
 			  'status'	=> 0
 			);
-		} else {
-			$this->db->trans_commit();
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = $cab;
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+              $keterangan     = "GAGAL, tambah data layanan ".$code.", atas Nama : ".$post['nm_layanan'];	
+              $status1         = 0;	
+			  
+		} 
+		else 
+		{
+			$this->db->trans_commit(); 
 			$status	= array(
-			  'pesan'		=>'Success Save Item. invenThanks ...',
+			  'pesan'		=>'Success Save Item. Thanks ...',
 			  'status'	=> 1
-			);			
+			);	
+			  $nm_hak_akses   = $this->addPermission;
+			  $kode_universal = $cab;
+			  $jumlah         = 1;
+			  $sql            = $this->db->last_query();
+			  $keterangan     = "SUKSES, tambah data layanan ".$code.", atas Nama : ".$post['nm_layanan'];
+              $status1         = 1;			  
 		}
+        //Save Log
+        simpan_aktifitas($nm_hak_akses, $kode_universal, $keterangan, $jumlah, $sql, $status1);
 		
   		echo json_encode($status);
 

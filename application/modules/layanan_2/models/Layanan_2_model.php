@@ -71,9 +71,9 @@ class Layanan_2_model extends BF_Model
       $thn = date('y');
       $bln = date('m');
       $max_id = $row->max_id;
-      $max_id1 =(int) substr($max_id,6,3);
+      $max_id1 =(int) substr($max_id,6,4);
       $counter = $max_id1 +1;
-      $idcust = "TD".$thn.$bln.str_pad($counter, 3, "0", STR_PAD_LEFT);
+      $idcust = "TD".$thn.$bln.str_pad($counter, 4, "0", STR_PAD_LEFT);
       return $idcust;
 	}
 

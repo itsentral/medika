@@ -43,6 +43,8 @@ class Layanan extends Admin_Controller
     public function saveNewkategori()
     {
     $this->auth->restrict($this->addPermission);
+	    $session = $this->session->userdata('app_session');  
+		$cab     = $session['kdcab'];
 		$post = $this->input->post();
 		$code = $this->Layanan_model->generate_id();
 		$this->db->trans_begin();
@@ -51,7 +53,8 @@ class Layanan extends Admin_Controller
 			'nama_kategori'		=> $post['nm_kategori'],
 			'created_on'		=> date('Y-m-d H:i:s'),
 			'created_by'		=> $this->auth->user_id(),
-			'deleted'			=> '0'
+			'deleted'			=> '0',
+			'kdcab'		        => $session['kdcab']
 		];
 
 		$insert = $this->db->insert("rs_kategorilab",$data);
@@ -63,7 +66,7 @@ class Layanan extends Admin_Controller
 			  'status'	=> 0
 			);
 			  $nm_hak_akses   = $this->addPermission;
-			  $kode_universal = 'NewData';
+			  $kode_universal = $cab;
 			  $jumlah         = 1;
 			  $sql            = $this->db->last_query();
               $keterangan     = "GAGAL, tambah data kategori layanan ".$code.", atas Nama : ".$post['nm_kategori'];	
@@ -76,7 +79,7 @@ class Layanan extends Admin_Controller
 			  'status'	=> 1
 			);	
 			  $nm_hak_akses   = $this->addPermission;
-			  $kode_universal = 'NewData';
+			  $kode_universal = $cab;
 			  $jumlah         = 1;
 			  $sql            = $this->db->last_query();
 			  $keterangan     = "SUKSES, tambah data kategori layanan ".$code.", atas Nama : ".$post['nm_kategori'];
@@ -113,6 +116,8 @@ class Layanan extends Admin_Controller
 
     public function saveEditKategori(){
       // $this->auth->restrict($this->editPermission);
+	  $session = $this->session->userdata('app_session');  
+	  $cab     = $session['kdcab'];
       $post = $this->input->post();
       $this->db->trans_begin();
       $id = $post['id_kategori'];
@@ -131,7 +136,7 @@ class Layanan extends Admin_Controller
 			  'status'	=> 0
 			);
 			  $nm_hak_akses   = $this->addPermission;
-			  $kode_universal = 'NewData';
+			  $kode_universal = $cab;
 			  $jumlah         = 1;
 			  $sql            = $this->db->last_query();
               $keterangan     = "GAGAL, edit data kategori layanan ".$id.", atas Nama : ".$post['nm_kategori'];	
@@ -144,7 +149,7 @@ class Layanan extends Admin_Controller
 			  'status'	=> 1
 			);	
 			  $nm_hak_akses   = $this->addPermission;
-			  $kode_universal = 'NewData';
+			  $kode_universal = $cab;
 			  $jumlah         = 1;
 			  $sql            = $this->db->last_query();
 			  $keterangan     = "SUKSES, edit data kategori layanan ".$id.", atas Nama : ".$post['nm_kategori'];
@@ -159,6 +164,8 @@ class Layanan extends Admin_Controller
 
 	public function deleteKategori(){
 		$this->auth->restrict($this->deletePermission);
+		$session = $this->session->userdata('app_session');  
+	  	$cab     = $session['kdcab'];
 		$id = $this->input->post('id');
 		$data = [
 			'deleted' 		=> '1',
@@ -175,7 +182,7 @@ class Layanan extends Admin_Controller
 			  'status'	=> 0
 			);
 			  $nm_hak_akses   = $this->addPermission;
-			  $kode_universal = 'NewData';
+			  $kode_universal = $cab;
 			  $jumlah         = 1;
 			  $sql            = $this->db->last_query();
               $keterangan     = "GAGAL, deleted data kategori layanan ".$id;	
