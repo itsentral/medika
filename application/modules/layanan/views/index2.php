@@ -163,9 +163,9 @@ thead input {
 					  type  : "error"
 					})
 			  }
-		  })
-		}
-
+		  });
+		
+         });
 	});
 
 
