@@ -181,10 +181,11 @@ class Layanan_model extends BF_Model
 	{
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
-		$sql = "SELECT a.*
-	         FROM rs_kategorilab as a 
-			 
-	        )";
+		$sql = "SELECT a.tgl_registrasi, a.noreg, a.medrec, a.umur_th, a.umur_bln, a.id_departemen, 
+			   a.id_dokter AS nama_dokter , a.no_urut, a.id_customer, a.tgl_entry,a.via,
+			   b.nama_pasien, b.status_pasien, 
+	           c.nama_departemen, e.nama_customer
+	         FROM rs_hdtransaksirj as a)";
 		echo $this->db->query($sql)->result_array; exit;
 
 		$data['totalData'] = $this->db->query($sql)->num_rows();
