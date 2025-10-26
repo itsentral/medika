@@ -27,12 +27,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 67a3a55 (update template baru)
+=======
+>>>>>>> b9b9644 (update gitignore dan config)
 $root = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://");
 =======
 $root = ((isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == "https") ? "https://" : "http://");
 >>>>>>> 5dca622 (update template baru)
+=======
+$root = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://");
+>>>>>>> 0b51752 (update gitignore dan config)
 $root .= $_SERVER['HTTP_HOST'];
 =======
 $root = "https://" . $_SERVER['HTTP_HOST'];
