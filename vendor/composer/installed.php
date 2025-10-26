@@ -3,7 +3,11 @@
         'name' => 'codeigniter/framework',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => 'e8c26aaca23580555881df2f64d6f371ac0be337',
+=======
+        'reference' => '871d4c610c36b5710ba31f378fcc0078e0dd9439',
+>>>>>>> 203f907 (Update 25-10-2025)
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +17,11 @@
         'codeigniter/framework' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => 'e8c26aaca23580555881df2f64d6f371ac0be337',
+=======
+            'reference' => '871d4c610c36b5710ba31f378fcc0078e0dd9439',
+>>>>>>> 203f907 (Update 25-10-2025)
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -29,14 +37,21 @@
             'dev_requirement' => true,
         ),
         'mpdf/mpdf' => array(
+<<<<<<< HEAD
             'pretty_version' => 'v8.2.6',
             'version' => '8.2.6.0',
             'reference' => 'dd30e3b01061cf8dfe65e7041ab4cc46d8ebdd44',
+=======
+            'pretty_version' => 'v6.1.3',
+            'version' => '6.1.3.0',
+            'reference' => '7f138bf7508eac895ac2c13d2509b056ac7e7e97',
+>>>>>>> 203f907 (Update 25-10-2025)
             'type' => 'library',
             'install_path' => __DIR__ . '/../mpdf/mpdf',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'mpdf/psr-http-message-shim' => array(
             'pretty_version' => 'v2.0.1',
             'version' => '2.0.1.0',
@@ -88,13 +103,27 @@
             'reference' => 'f16e1d5863e37f8d8c2a01719f5b34baa2b714d3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/log',
+=======
+        'phpoffice/phpexcel' => array(
+            'pretty_version' => '1.8.2',
+            'version' => '1.8.2.0',
+            'reference' => '1441011fb7ecdd8cc689878f54f8b58a6805f870',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpoffice/phpexcel',
+>>>>>>> 203f907 (Update 25-10-2025)
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'setasign/fpdi' => array(
+<<<<<<< HEAD
             'pretty_version' => 'v2.6.4',
             'version' => '2.6.4.0',
             'reference' => '4b53852fde2734ec6a07e458a085db627c60eada',
+=======
+            'pretty_version' => '1.6.2',
+            'version' => '1.6.2.0',
+            'reference' => 'a6ad58897a6d97cc2d2cd2adaeda343b25a368ea',
+>>>>>>> 203f907 (Update 25-10-2025)
             'type' => 'library',
             'install_path' => __DIR__ . '/../setasign/fpdi',
             'aliases' => array(),

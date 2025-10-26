@@ -22,7 +22,11 @@ class Menu_generator
 		$this->is_admin = $this->ci->auth->is_admin();
 	}
 
+<<<<<<< HEAD
 	public function build_menus($type = 1)
+=======
+	public function build_menus_OLD($type = 1)
+>>>>>>> 203f907 (Update 25-10-2025)
 	{
 		$auth = $this->get_auth_permission($this->user_id);
 		if (!$auth) {
@@ -42,10 +46,18 @@ class Menu_generator
 				->get()
 				->result();
 
+<<<<<<< HEAD
 			$html = "<ul class='nav nav-primary'>
 	                        <li class='nav-item " . check_class('dashboard', TRUE) . "'>
 	                            <a href='" . site_url() . "'>
 	                                <i class='fa fa-store-alt me-1'></i><p>Dashboard</p>
+=======
+			$html = "<ul class='sidebar-menu'>
+							<li class='header'></li>
+	                        <li class='" . check_class('dashboard', TRUE) . "'>
+	                            <a href='" . site_url() . "'>
+	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
+>>>>>>> 203f907 (Update 25-10-2025)
 	                            </a>
 	                        </li>";
 
@@ -69,6 +81,8 @@ class Menu_generator
 						->order_by("t1.order", "ASC")
 						->get()
 						->result();
+<<<<<<< HEAD
+=======
 					//Jump to end_for point
 					if (count($submenu) == 0) {
 						if ($link != "#") {
@@ -79,10 +93,231 @@ class Menu_generator
 							if (strpos($this->uri, '/' . $link . '/') !== FALSE) {
 								$active = "active";
 							}
+							$html .= "<li class='{$active}'><a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
+							<h6><i class='{$icon}'></i> &nbsp;&nbsp;&nbsp;<span>" . ucwords($title) . "</h6></span></a></li>";
+						}
+						goto end_for;
+					}
+
+					$active = "";
+					foreach ($submenu as $sub) {
+						if (strpos($this->uri, '/' . $sub->link . '/') !== FALSE) {
+							$active = "active";
+							break;
+						}
+					}
+					$html .= "
+            			  <li class='treeview {$active}'>
+                      <a href='#'>
+                        <i class='" . $icon . "'></i>
+                        <span>" . ucwords($title) . "</span>
+                        <span class='pull-right-container'>
+						            	<i class='fa fa-angle-left pull-right'></i>
+						          	</span>
+                      </a>
+                      <ul class='treeview-menu'>";
+
+					//Make Sub Menu
+					foreach ($submenu as $sub) {
+						$subid 		= $sub->id;
+						$subtitle 	= $sub->title;
+						$sublink 	= $sub->link;
+						$subicon 	= $sub->icon;
+						$subtarget 	= $sub->target;
+						$subtarget = "";
+						if ($subtarget == '_blank') {
+							$subtarget = "target='_blank'";
+						}
+
+						$submenusub = $this->ci->db->select("t1.*")
+							->from("{$this->x}menus as t1")
+							->where("t1.parent_id", $subid)
+							->where("t1.group_menu", $type)
+							->where("t1.status", 1);
+						if (!$this->is_admin) {
+							$submenusub = $submenusub->where_in("t1.permission_id", $auth);
+						}
+						$submenusub = $submenusub->group_by("t1.id")
+							->group_by("t1.id")
+							->order_by("t1.order", "ASC")
+							->get()
+							->result();
+						//Jump to end_for point
+						if (count($submenusub) == 0) {
+							if ($sublink != "#") {
+								if (!in_array($rw->permission_id, $auth) && $this->is_admin == FALSE) {
+									goto end_for_sub;
+								}
+								$active = "";
+								if (strpos($this->uri, '/' . $sublink . '/') !== FALSE) {
+									$active = "active";
+								}
+								$html .= "
+								<li class='" . $active . "'> 
+									<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
+										<h6><i class='" . $subicon . "'></i>&nbsp;&nbsp;&nbsp;" . ucwords($subtitle) . "</h6>
+									</a> 
+								</li>";
+							}
+							goto end_for_sub;
+						}
+						$active = "";
+						foreach ($submenusub as $subsub) {
+							if (strpos($this->uri, '/' . $subsub->link . '/') !== FALSE) {
+								$active = "active";
+								break;
+							}
+						}
+						$html .= "
+	            			  <li class='treeview {$active}'>
+	                      <a href='#'>
+	                        <h6><i class='" . $subicon . "'></i>&nbsp;&nbsp;&nbsp;" . ucwords($subtitle) . "</h6>
+	                        <span class='pull-right-container'>
+							            	<i class='fa fa-angle-left pull-right'></i>
+							          	</span>
+	                      </a>
+	                      <ul class='treeview-menu'>";
+						//Make Sub Menu
+						foreach ($submenusub as $subsub) {
+							$subidsub 		= $subsub->id;
+							$subtitlesub 	= $subsub->title;
+							$sublinksub 	= $subsub->link;
+							$subiconsub 	= $subsub->icon;
+							$subtargetsub 	= $subsub->target;
+							$subtargetsub = "";
+							if ($subtargetsub == '_blank') {
+								$subtargetsub = "target='_blank'";
+							}
+							//Check current link
+							if (strpos($this->uri, '/' . $sublinksub . '/') !== FALSE) {
+								$active = "active";
+							} else {
+								$active = "";
+							}
+							$html .= "
+							<li class='" . $active . "'>
+								<a href='" . ($sublinksub == '#' ? '#' : site_url($sublinksub)) . "'" . " " . $subtargetsub . ">
+									<h6><i class='" . $subiconsub . "'></i>&nbsp;&nbsp;&nbsp;" . ucwords($subtitlesub) . "</h6>
+								</a>
+							</li>";
+						}
+
+						/*$html .="
+							</ul>
+						</li>";*/
+						//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+						$html .= "
+							</ul>
+						</li>";
+
+						//Check current link
+						/*if(strpos($this->uri, '/'.$sublink.'/')!==FALSE)
+						{
+							$active = "active";
+						}
+						else
+						{
+							$active="";
+						}
+						$html .= "
+						<li class='".$active."'>
+							<a href='".($sublink == '#' ? '#' : site_url($sublink))."'"." ".$subtarget.">
+								<i class='".$subicon."'></i>".ucwords($subtitle)."
+							</a>
+						</li>";*/
+						end_for_sub:
+					}
+					$html .= "
+						</ul>
+					</li>";
+
+					//Jump Point
+					end_for:
+					//END FOREACH MENU
+				}
+				$html .= "
+					</ul>";
+				/*=================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+			}
+		} else {
+			//other menu
+		}
+
+		return $html;
+	}
+
+	public function build_menus($type = 1)
+	{
+		$auth = $this->get_auth_permission($this->user_id);
+		if (!$auth) {
+			$auth = array(NULL);
+		}
+
+		if ($type == 1) {
+			$menu = $this->ci->db->select("t1.*")
+				->from("{$this->x}menus as t1")
+				->join("{$this->x}menus as t2", "t1.id = t2.parent_id", "left")
+				//->join("{$this->x}menus as t3","t2.id = t3.parent_id","left")
+				->where("t1.parent_id", 0)
+				->where("t1.group_menu", $type)
+				->where("t1.status", 1)
+				->group_by("t1.id")
+				->order_by("t1.order", "ASC")
+				->get()
+				->result();
+
+			$html = "<ul class='sidebar-menu'>
+							<li class='header'></li>
+	                        <li class='" . check_class('dashboard', TRUE) . "'>
+	                            <a href='" . site_url() . "'>
+	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
+	                            </a>
+	                        </li>";
+
+			if (is_array($menu) && count($menu)) {
+				foreach ($menu as $rw) {
+					$id 		= $rw->id;
+					$title 		= $rw->title;
+					$link 		= $rw->link;
+					$icon 		= $rw->icon;
+					$target 	= $rw->target;
+					$submenu = $this->ci->db->select("t1.*")
+						->from("{$this->x}menus as t1")
+						->where("t1.parent_id", $id)
+						->where("t1.group_menu", $type)
+						->where("t1.status", 1);
+					if (!$this->is_admin) {
+						$submenu = $submenu->where_in("t1.permission_id", $auth);
+					}
+					$submenu = $submenu->group_by("t1.id")
+						->group_by("t1.id")
+						->order_by("t1.order", "ASC")
+						->get()
+						->result();
+>>>>>>> 203f907 (Update 25-10-2025)
+					//Jump to end_for point
+					if (count($submenu) == 0) {
+						if ($link != "#") {
+							if (!in_array($rw->permission_id, $auth) && $this->is_admin == FALSE) {
+								goto end_for;
+							}
+							$active = "";
+							if (strpos($this->uri, '/' . $link . '/') !== FALSE) {
+								$active = "active";
+							}
+<<<<<<< HEAD
 							$html .= "<li class='nav-item {$active}'>
 							<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
 							<i class='" . ($icon ? $icon : "") . " me-1'></i><p>" . ucwords($title) . "</p></a>
 							</li>";
+=======
+							$html .= "<li class='{$active}'><a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
+							<h6><i class='{$icon}'></i> &nbsp;&nbsp;&nbsp;<span>" . ucwords($title) . "</h6>
+							</span></a></li>";
+>>>>>>> 203f907 (Update 25-10-2025)
 						}
 						goto end_for;
 					}
@@ -98,12 +333,17 @@ class Menu_generator
 					$active = "";
 					foreach ($submenu as $sub) {
 						if (strpos($this->uri, '/' . $sub->link . '/') !== FALSE) {
+<<<<<<< HEAD
 							$active = "active submenu";
+=======
+							$active = "active";
+>>>>>>> 203f907 (Update 25-10-2025)
 							break;
 						}
 					}
 
 					$html .= "
+<<<<<<< HEAD
             			  <li class='nav-item {$active}'>
 							<a href='#" . $title . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
 								<i class='" . $icon . " me-1'></i>
@@ -112,6 +352,17 @@ class Menu_generator
 							</a>
                       		<div class='collapse' id='" . $title . "'>
 							<ul class='nav nav-collapse mb-0'>";
+=======
+            			  <li class='treeview {$active}'>
+                      <a href='#'>
+                        <i class='" . $icon . "'></i>
+                        <span>" . ucwords($title) . "</span>
+                        <span class='pull-right-container'>
+						            	<i class='fa fa-angle-left pull-right'></i>
+						          	</span>
+                      </a>
+                      <ul class='treeview-menu'>";
+>>>>>>> 203f907 (Update 25-10-2025)
 
 					//Make Sub Menu
 					foreach ($submenu as $sub) {
@@ -134,7 +385,11 @@ class Menu_generator
 						$html .= "
 						<li class='" . $active . "'>
 							<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
+<<<<<<< HEAD
 								<span class='sub-item'>" . ucwords($subtitle) . "</span>
+=======
+							<h6><i class='" . $subicon . "'></i>&nbsp;&nbsp;&nbsp;" . ucwords($subtitle) . "</h6>
+>>>>>>> 203f907 (Update 25-10-2025)
 							</a>
 						</li>";
 					}
@@ -143,9 +398,23 @@ class Menu_generator
 						</div>
 					</li>";
 					end_for:
+<<<<<<< HEAD
 				}
 				$html .= "</ul>";
 			}
+=======
+					//END FOREACH MENU
+				}
+				$html .= "
+					</ul>";
+				/*=================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+			}
+		} else {
+			//other menu
+>>>>>>> 203f907 (Update 25-10-2025)
 		}
 
 		return $html;
