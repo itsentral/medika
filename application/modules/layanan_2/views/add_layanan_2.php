@@ -11,10 +11,10 @@
 									    </div>
 									    <div class="col-md-6">
 									    <select id="layanan_1" name="layanan_1" class="form-control select" required>
-											<option value="">-- layanan --</option>
+											<option value="">-- Pilih Kategori --</option>
 											<?php foreach ($results['layanan_1'] as $layanan_1){  
 											?>
-											<option value="<?= $layanan_1->nama_kategori?>"><?= ucfirst(strtolower($layanan_1->nama_kategori))?></option>
+											<option value="<?= $layanan_1->id_kategori?>"><?= ucfirst(strtolower($layanan_1->nama_kategori))?></option>
 											<?php } ?>
 										  </select>
 									    </div>
@@ -27,7 +27,22 @@
 											<input type="text" class="form-control" id="" required name="nm_layanan" placeholder="Nama Layanan">
 									    </div>
 										</div>
-										
+										<div class="form-group row">
+										<div class="col-md-4">
+									    <label for="customer">Nama Tabung</label>
+									    </div>
+									    <div class="col-md-6">
+											<input type="text" class="form-control" id="" required name="tabung" placeholder="Nama Tabung">
+									    </div>
+										</div>
+										<div class="form-group row">
+										<div class="col-md-4">
+									    <label for="customer">Nama Mesin</label>
+									    </div>
+									    <div class="col-md-6">
+											<input type="text" class="form-control" id="" required name="mesin" placeholder="Nama Mesin">
+									    </div>
+										</div>
 										<div class="col-xs-2">
 										&nbsp;
 										</div>
@@ -42,8 +57,14 @@
 									<table class='table table-bordered table-striped'>
 										<thead>
 											<tr class='bg-blue'>
-												<td align='center'><b>Nilai Rujukan Bawah</b></td>
-												<td align='center'><b>Nilai Rujukan Atas</b></td>	
+												<td align='center'><b>Jenis Kelamin</b></td>
+												<td align='center'><b>Umur dari</b></td>
+												<td align='center'><b>Umur sampai</b></td>	
+												<td align='center'><b>Nilai Bawah Normal</b></td>
+												<td align='center'><b>Nilai Atas Normal</b></td>
+												<td align='center'><b>Nilai Bawah Kritis</b></td>
+												<td align='center'><b>Nilai Atas Kritis</b></td>
+												<td align='center'><b>Satuan</b></td>		
 												<td align='center'><b>Action</b></td>
 											</tr>
 											
@@ -95,10 +116,29 @@
 			}
 			Template	='<tr id="tr_'+loop+'">';
 			Template	+='<td align="left">';
-					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][bawah]" id="data1_'+loop+'_bawah" label="FALSE" div="FALSE">';
+					Template	+='<select name="data1['+loop+'][jk]" id="data1_'+loop+'_jk" class="form-control select"><option value="L">Laki-Laki</option><option value="P">Perempuan</option>';
 			Template	+='</td>';
 			Template	+='<td align="left">';
-					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][atas]" id="data1_'+loop+'_atas" label="FALSE" div="FALSE">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][umurbawah]" id="data1_'+loop+'_umurbawah" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][umuratas]" id="data1_'+loop+'_umuratas" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][normalbawah]" id="data1_'+loop+'_normalbawah" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][normalatas]" id="data1_'+loop+'_normalatas" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][kritisbawah]" id="data1_'+loop+'_kritisbawah" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][kritisatas]" id="data1_'+loop+'_kritisatas" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][satuan]" id="data1_'+loop+'_satuan label="FALSE" div="FALSE">';
 			Template	+='</td>';
 			Template	+='<td align="center"><button type="button" class="btn btn-sm btn-danger" title="Hapus Data" data-role="qtip" onClick="return DelItem('+loop+');"><i class="fa fa-trash-o"></i></button></td>';
 			Template	+='</tr>';

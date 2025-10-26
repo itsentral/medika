@@ -31,8 +31,7 @@ thead input {
 			<th>Nama Kategori</th>	
             <th>Nama Parameter</th>
             <th>Tabung</th>	
-            <th>Mesin</th>		
-			<th>Status</th>
+            <th>Mesin</th>	
 			<?php if($ENABLE_MANAGE) : ?>
 			<th width="13%">Action</th>
 			<?php endif; ?>

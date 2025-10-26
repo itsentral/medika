@@ -27,6 +27,8 @@ class Layanan_2 extends Admin_Controller
         $this->load->model(array('Layanan_2/Layanan_2_model',
                                  'Aktifitas/aktifitas_model',
                                 ));
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
         $this->template->title('Manage Data Supplier');
         $this->template->page_icon('fa fa-building-o');
 
@@ -38,6 +40,8 @@ class Layanan_2 extends Admin_Controller
        $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-users');
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
 		$deleted = '0';
         // $data = $this->Layanan_2_model->get_data_category1();
         // $this->template->set('results', $data);
@@ -126,38 +130,47 @@ class Layanan_2 extends Admin_Controller
 		$numb1++;	
 		        
                 $header1 =  array(
-							'id_grouplayananlaboratorium'	 	        => $code,
-							'nama_kategori'		    					=> $post['layanan_1'],
-							'nama_grouplayananlaboratorium'		        => $post['nm_layanan'],
+							'id_parameter'	 	            => $code,
+							'id_kategori'		    		=> $post['layanan_1'],
+							'nama_parameter'		        => $post['nm_layanan'],
+							'tabung'		                => $post['tabung'],
+							'mesin'		                    => $post['mesin'],
 							'created_on'		=> date('Y-m-d H:i:s'),
 							'created_by'		=> $this->auth->user_id(),
 							'deleted'			=> '0',
 							'kdcab'		        => $session['kdcab']
                             );
             //Add Data
-              $this->db->insert('rs_grouplayananlaboratorium',$header1);
+              $this->db->insert('rs_parameter',$header1);
 			
 		    			
-		/*if(empty($_POST['data1'])){
+		if(empty($_POST['data1'])){
 		}else{
-		$numb2 =0;
-		foreach($_POST['data1'] as $d1){
-		$numb2++;	
-		
-		      $produk = $_POST['hd1']['1']['produk'];
-		       	       
-              $data1 =  array(
-			                    'id_category1'=>$code, 
-								'name_compotition'=>$d1[name_compotition],
-								'deleted' =>'0',
-							    'created_on' => date('Y-m-d H:i:s'),
-								'created_by' => $session['id_user'], 
-                            );
-            //Add Data
-              $this->db->insert('ms_compotition',$data1);
-			
-		    }*/		
-			
+			$numb2 =0;
+			foreach($_POST['data1'] as $d1){
+			$numb2++;	
+						
+				$data1 =  array(
+									'id_parameter'=>$code, 
+									'dari'=>$d1['umurbawah'],
+									'sampai' =>$d1['umuratas'],
+									'batas_bawah_kritis'=>$d1['normalbawah'],
+									'batas_atas_kritis'=>$d1['normalatas'],
+									'batas_bawah_normal' =>$d1['kritisbawah'],
+									'batas_atas_normal' =>$d1['kritisatas'],
+									'satuan' =>$d1['satuan'],
+									'jenis_kelamin' =>$d1['jk'],
+									'kdcab'		        => $session['kdcab'],
+									'created_on' => date('Y-m-d H:i:s'),
+									'created_by' => $session['id_user'], 
+								);
+
+				//Add Data
+				$this->db->insert('rs_nilairujukan',$data1);
+				
+					
+			}
+		}	
 		
 		if($this->db->trans_status() === FALSE)
 		{
