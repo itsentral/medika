@@ -88,26 +88,109 @@
 			</div>
 		</div>
 		<br>
-		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:18px;'>Utilisasi</p>
+		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Utilisasi</p>
 		<br><br>
 		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Utilitas per hari <span class='text-red'>*</span></b></label>
+			<label class='label-control col-sm-2'><b>Utilitas perhari <span class='text-red'>*</span></b></label>
 			<div class='col-sm-4'>
-				<input type="text" id="utilitas_perhari" name="utilitas_perhari" class="form-control input-md" autocomplete="off" placeholder="Lokasi" >
+				<input type="text" id="utilitas_perhari" name="utilitas_perhari" class="form-control input-md moneyFormat"  autocomplete="off" placeholder="Utilitas perhari" >
 			</div>
 			<label class='label-control col-sm-2'><b>Utiltas Tahunan</b></label>
 			<div class='col-sm-4'>
-				<input type="text" id="utilitas_tahunan" name="utilitas_tahunan" class="form-control input-md" autocomplete="off" placeholder="Lokasi" >
+				<input type="text" id="utilitas_tahunan" name="utilitas_tahunan" class="form-control input-md moneyFormat" autocomplete="off" placeholder="Utiltas Tahunan" >
 
 			</div>
 		</div>
 		<div class='form-group row'>
 			<label class='label-control col-sm-2'><b>Target utilisasi</b></label>
 			<div class='col-sm-4'>
-				<input type="text" id="target_utilitas" name="target_utilitas" class="form-control input-md" autocomplete="off" placeholder="Lokasi" >
-
+				<input type="text" id="target_utilitas" name="target_utilitas" class="form-control input-md moneyFormat" autocomplete="off" placeholder="Lokasi" >
+				
 			</div>
 		</div>
+		<br>
+		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Perawatan</p>
+			<br><br>
+		<h5><b>Jadwal Perawatan</b></h5>
+		 <button onclick="addPerawatan('')" type="button" id=""  class="btn btn-primary">
+			<i class="fa fa-plus"></i> Perawatan
+        </button>
+		 <div id="form-kirim-sample" style="margin-top:20px;max-height:300px; overflow-x:auto; overflow-y:auto;">
+				<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
+				<thead>
+					<tr>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Tahun</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Tanggal</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Jenis Perawatan</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Biaya</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Action</th>
+					</tr>
+				</thead>
+				<tbody id="perawatan_list">
+					
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Total Biaya</td>
+						<td id="total_biaya" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+							<input name="total_biaya_perawatan" value="" id="total_biaya_perawatan" class="form-control input total_biaya_perawatan moneyFormat" type="text" readonly>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div> 
+		<br>
+		<h5><b>Jadwal Rekalibrasi</b></h5>
+		 <button onclick="addKalibrasi('')" type="button" id=""  class="btn btn-primary">
+			<i class="fa fa-plus"></i> Kalibrasi
+        </button>
+		<div id="form-kirim-sample" style="margin-top:20px;max-height:300px; overflow-x:auto; overflow-y:auto;">
+			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
+				<thead>
+				<tr>
+					<th style="position:sticky; top:0; background:#fff; z-index:3;">Tahun</th>
+					<th style="position:sticky; top:0; background:#fff; z-index:3;">Tanggal</th>
+					<th style="position:sticky; top:0; background:#fff; z-index:3;">Jenis Kalibrasi</th>
+					<th style="position:sticky; top:0; background:#fff; z-index:3;">Biaya</th>
+					<th style="position:sticky; top:0; background:#fff; z-index:3;">Action</th>
+				</tr>
+				</thead>
+				<tbody id="kalibrasi_list">
+					
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Total Biaya</td>
+						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+							<input name="total_biaya_kalibrasi" value="" id="total_biaya_kalibrasi" class="form-control input total_biaya_kalibrasi moneyFormat" type="text" readonly>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class='form-group row'>
+			<div class='col-sm-4'>
+				<label class='label-control'><h5><b>Disposal Value</b></h5></label>
+				<div class="input-group">
+					<input type="text" id="disposal_value_percent" class="form-control input-md " autocomplete="off" placeholder="Value %" style="max-width:80px;">
+					<span class="input-group-addon" style="min-width:40px;">%</span>
+					<input type="text" id="disposal_value" name="disposal_value" class="form-control input-md moneyFormat" autocomplete="off" placeholder="" readonly>
+				</div>
+			</div>
+		</div>    
+ 		<br>
+		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Cost Per Test</p>
+		<br> <br> 
+		<div class='form-group row'>
+			<div class='col-sm-4'>
+				<div class="input-group">
+					<input type="text" id="cost_per_test" class="form-control input-md " autocomplete="off" placeholder="Value %" style="max-width:80px;">
+				</div>
+			</div>
+		</div>
+		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Consumable</p>
+		<br> <br> 
+		<br> <br> <br> 
 		<?php
 		echo form_button(array('type' => 'button', 'class' => 'btn btn-md btn-primary', 'value' => 'save', 'content' => 'Save', 'id' => 'simpan-bro', 'style' => 'width:100px; float:right;')) . ' ';
 		?>
@@ -295,6 +378,16 @@
 			},
 			function(isConfirm) {
 				if (isConfirm) {
+					setTimeout(function() {
+						$('.moneyFormat').each(function() {
+							// Get the current value
+							var value = $(this).val();
+							// Remove commas
+							value = value.replace(/,/g, '');
+							// Update the input field
+							$(this).val(value);
+						});	
+					}, 100);
 					// loading_spinner();
 					var formData = new FormData($('#form_proses_bro')[0]);
 					var baseurl = siteurl + 'asset/saved';
@@ -364,14 +457,142 @@
 				}
 			});
 	});
-
+	//target_utilitas
 	$(document).on('keyup change', '#utilitas_perhari, #utilitas_tahunan, #depresiasi', function() {
-		console.log('test');
 		var perhari = parseFloat($('#utilitas_perhari').val().replace(/,/g, '')) || 0;
 		var tahunan = parseFloat($('#utilitas_tahunan').val().replace(/,/g, '')) || 0;
 		var depresiasi = parseFloat($('#depresiasi').val().replace(/,/g, '')) || 0;
 		var result = perhari * tahunan * depresiasi;
 		$('#target_utilitas').val(result.toLocaleString('en-US'));
 	});
+
+	//disposal_value
+	$(document).on('keyup change', '#disposal_value_percent, #nilai_asset', function() {
+		var disposal_value_percent = parseFloat($('#disposal_value_percent').val().replace(/,/g, '')) || 0;
+		var nilai_asset = parseFloat($('#nilai_asset').val().replace(/,/g, '')) || 0;
+		var result = disposal_value_percent * (nilai_asset/100);
+		$('#disposal_value').val(result.toLocaleString('en-US'));
+	});
+
+	//cost_per_test
+	$(document).on('keyup change', '#disposal_value_percent, #nilai_asset,#utilitas_perhari, #utilitas_tahunan, #depresiasi,.biaya_perawatan,.biaya_kalibrasi', function() {
+			$('.moneyFormat').each(function() {
+				var nilai_asset = parseFloat($('#nilai_asset').val().replace(/,/g, '')) || 0;
+				let total_biaya_perawatan = 0;
+				$('.biaya_perawatan').each(function() {
+					let val = $(this).val().replace(/,/g, '');
+					let num = parseFloat(val) || 0;
+					total_biaya_perawatan += num;
+				});
+				let total_biaya_kalibrasi = 0;
+				$('.biaya_kalibrasi').each(function() {
+					let val1 = $(this).val().replace(/,/g, '');
+					let num1 = parseFloat(val1) || 0;
+					total_biaya_kalibrasi += num1;
+				});
+				console.log(total_biaya_kalibrasi);
+				var disposal_value = parseFloat($('#disposal_value').val().replace(/,/g, '')) || 0;
+				var depresiasi = parseFloat($('#depresiasi').val().replace(/,/g, '')) || 0;
+				var target_utilitas = parseFloat($('#target_utilitas').val().replace(/,/g, '')) || 0;
+				var result = (nilai_asset+total_biaya_perawatan+total_biaya_kalibrasi-disposal_value)/(depresiasi *target_utilitas);
+				$('#cost_per_test').val(result.toLocaleString('en-US'));
+			});	
+		
+	});
+
+	 let counter_perawatan=0;
+	
+	function addPerawatan(){
+        // console.log('add sampling');
+		const newInputHtml = `
+        	 <tr id="perawatan${counter_perawatan}">
+				<td>
+					<select name="perawatan[${counter_perawatan}][year]" class="form-control input">
+						<?php
+							$currentYear = date('Y');
+							for ($year = $currentYear; $year >= 2016; $year--) {
+								echo "<option value='{$year}'>{$year}</option>";
+							}
+						?>
+					</select>
+				<td>
+					<input name="perawatan[${counter_perawatan}][date]" type="date" value="" class="form-control input">
+				</td>
+				<td>
+              		<input name="perawatan[${counter_perawatan}][maintenance_type]" value="" class="form-control input" type="text">
+				</td>
+                <td><input name="perawatan[${counter_perawatan}][cost]" value="" class="form-control input biaya_perawatan moneyFormat" type="text"></td>
+                <td>
+                    <button onclick="deletePerawatan(${counter_perawatan})" class="btn btn-danger"  type="button"><i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        `;
+        $('#perawatan_list').append(newInputHtml);
+        counter_perawatan++;
+	}
+	$(document).on('keyup change', '.biaya_perawatan', function() {
+		let total = 0;
+		$('.biaya_perawatan').each(function() {
+			let val = $(this).val().replace(/,/g, '');
+			let num = parseFloat(val) || 0;
+			total += num;
+		});
+		$('.total_biaya_perawatan').val(total.toLocaleString('en-US'));
+	});
+
+
+
+
+	function deletePerawatan(key=''){
+		// console.log(key);
+       $(`#perawatan${key}`).remove();
+	}
+
+
+    let counter_kalibrasi=0;
+	function addKalibrasi(){
+        // console.log('add sampling');
+		const newInputHtml = `
+        	 <tr id="perawatan${counter_kalibrasi}">
+				<td>
+					<select name="kalibrasi[${counter_kalibrasi}][year]" class="form-control input">
+						<?php
+							$currentYear = date('Y');
+							for ($year = $currentYear; $year >= 2016; $year--) {
+								echo "<option value='{$year}'>{$year}</option>";
+							}
+						?>
+					</select>
+				<td>
+					<input name="kalibrasi${counter_kalibrasi}][date]" type="date" value="" class="form-control input">
+				</td>
+				<td>
+              		<input name="kalibrasi[${counter_kalibrasi}][calibration_type]" value="" class="form-control input" type="text">
+				</td>
+                <td><input name="kalibrasi[${counter_kalibrasi}][cost]" value="" class="form-control input biaya_kalibrasi moneyFormat" type="text"></td>
+                <td>
+                    <button onclick="deleteKalibrasi(${counter_kalibrasi})" class="btn btn-danger"  type="button"><i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        `;
+        $('#kalibrasi_list').append(newInputHtml);
+        counter_kalibrasi++;
+	}
+
+	
+	$(document).on('keyup change', '.biaya_kalibrasi', function() {
+		let total = 0;
+		$('.biaya_kalibrasi').each(function() {
+			let val = $(this).val().replace(/,/g, '');
+			let num = parseFloat(val) || 0;
+			total += num;
+		});
+		$('.total_biaya_kalibrasi').val(total.toLocaleString('en-US'));
+	});
+
+	function deleteKalibrasi(key=''){
+		// console.log(key);
+       $(`#perawatan${key}`).remove();
+	}
 
 </script>

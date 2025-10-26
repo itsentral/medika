@@ -290,7 +290,7 @@ class Asset extends Admin_Controller
 
 		$Arr_Kembali	= array();
 		$data			= $this->input->post();
-
+		// return var_dump($data);
 		$session 		= $this->session->userdata('app_session');
 		$nmCategory		= $this->Asset_model->getWhere('asset_category', 'id', $data['category']);
 
@@ -337,6 +337,13 @@ class Asset extends Admin_Controller
 			$detailData[$lopp]['qty'] 			= $data['qty'];
 			$detailData[$lopp]['asset_ke'] 		= $no;
 			$detailData[$lopp]['depresiasi'] 	= $data['depresiasi'];
+			$detailData[$lopp]['utilitas_perhari'] 	= $data['utilitas_perhari'];
+			$detailData[$lopp]['utilitas_tahunan'] 	= $data['utilitas_tahunan'];
+			$detailData[$lopp]['target_utilitas'] 	= $data['target_utilitas'];
+			$detailData[$lopp]['total_biaya_perawatan'] 	= $data['total_biaya_perawatan'];
+			$detailData[$lopp]['total_biaya_kalibrasi'] 	= $data['total_biaya_kalibrasi'];
+			$detailData[$lopp]['cost_per_test'] 	= $data['total_biaya_kalibrasi'];
+			$detailData[$lopp]['total_biaya_kalibrasi'] 	= $data['total_biaya_kalibrasi'];
 			$detailData[$lopp]['value'] 		= str_replace(',', '', $data['value']);
 			$detailData[$lopp]['kdcab'] 		= $session['kdcab'];
 			$detailData[$lopp]['outlet'] 	= $data['outlet'];
@@ -369,15 +376,55 @@ class Asset extends Admin_Controller
 				$detailDataDash[$lopp2]['nilai_susut'] 	= str_replace(',', '', $data['value']);
 				$detailDataDash[$lopp2]['kdcab'] 		= $session['kdcab'];
 			}
-		}
+			// return var_dump($data['perawatan']["tahun"][1]);
 
+			// $asset_maintenance = array();
+			// foreach ($data['perawatan']["tahun"] as $key => $value) {
+			// 	$asset_maintenance[] = array(
+			// 		'kd_asset'  => $kode_assets . $Nomor,
+			// 		'tahun'       => $data['perawatan']['tahun'][$key],
+			// 		'tanggal'     => $data['perawatan']['tanggal'][$key],
+			// 		//  0  => $data['perawatan']['keterangan'][$key],
+			// 		'biaya'       => $data['perawatan']['biaya'][$key]
+			// 	);
+			// }
+			$kd_asset = $kode_assets . $Nomor;
+			$asset_maintenance = array();
+			foreach ($data['perawatan'] as $item) {
+				$asset_maintenance[] = array(
+					'kd_asset' => $kd_asset,
+					'year' => $item['year'],
+					'date' => $item['date'],
+					'maintenance_type' => $item['maintenance_type'],
+					'cost' => $item['cost']
+				);
+			}
+
+			$asset_calibration = array();
+			foreach ($data['kalibrasi'] as $item) {
+				$asset_calibration[] = array(
+					'kd_asset' => $kd_asset,
+					'year' => $item['year'],
+					'date' => $item['date'],
+					'calibration_type' => $item['calibration_type'],
+					'cost' => $item['cost']
+				);
+			}
+		
+		}
+		// return var_dump($data['kalibrasi']);
 		// print_r($detailData);
 		// print_r($detailDataDash);
 		// exit;
 
+		
+
 		$this->db->trans_start();
 		$this->db->insert_batch('asset', $detailData);
 		$this->db->insert_batch('asset_generate', $detailDataDash);
+		$this->db->insert_batch('asset_maintenance', $asset_maintenance);
+		$this->db->insert_batch('asset_calibration', $asset_calibration);
+
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() === FALSE) {

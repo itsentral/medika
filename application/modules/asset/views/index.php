@@ -275,4 +275,37 @@ thead input {
 		return s.join(dec);
 	}
 
+
+	 //Format money
+	$(document).on('input', '.moneyFormat', function () {
+		var el = this;
+		var val = el.value || '';
+		var caret = el.selectionStart;
+		// count numeric characters before caret to restore caret later
+		var digitsBefore = (val.slice(0, caret).match(/\d/g) || []).length;
+
+		// keep only digits and the first dot (decimal separator)
+		var cleaned = val.replace(/[^0-9.]/g, '');
+		var parts = cleaned.split('.');
+		var intPart = parts[0] || '';
+		var decPart = parts.slice(1).join(''); // join any extra parts if multiple dots entered
+
+		// format integer part with thousand separators (comma)
+		var formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+		// assemble final value (include decimal part if present)
+		var newVal = decPart.length ? formattedInt + '.' + decPart : formattedInt;
+		el.value = newVal;
+
+		// restore caret position based on digit count
+		var pos = 0, digits = 0;
+		for (; pos < newVal.length; pos++) {
+			if (/\d/.test(newVal.charAt(pos))) digits++;
+			if (digits >= digitsBefore) { pos++; break; }
+		}
+		if (digitsBefore === 0) pos = 0;
+		if (pos > newVal.length) pos = newVal.length;
+		el.setSelectionRange(pos, pos);
+	});
+
 </script>
