@@ -27,8 +27,7 @@ class Layanan_2 extends Admin_Controller
         $this->load->model(array('Layanan_2/Layanan_2_model',
                                  'Aktifitas/aktifitas_model',
                                 ));
-		$this->template->set_theme('medika');
-		$this->template->set_layout('index');
+		
         $this->template->title('Manage Data Supplier');
         $this->template->page_icon('fa fa-building-o');
 
@@ -37,11 +36,11 @@ class Layanan_2 extends Admin_Controller
 
     public function index()
     {
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
        $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-users');
-		$this->template->set_theme('medika');
-		$this->template->set_layout('index');
 		$deleted = '0';
         // $data = $this->Layanan_2_model->get_data_category1();
         // $this->template->set('results', $data);
@@ -71,13 +70,19 @@ class Layanan_2 extends Admin_Controller
 		$this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-edit');
-		$inven = $this->db->get_where('rs_grouplayananlaboratorium',array('id_category1' => $id))->result();
-		$komposisi = $this->Layanan_2_model->getKomposisi($id);
+		$inven = $this->db->get_where('rs_parameter',array('id_parameter' => $id))->result();
+		$komposisi = $this->Layanan_2_model->getNilairujukan($id);
 		$lvl1 = $this->Layanan_2_model->get_data('rs_kategorilab');
+		$tabung = $this->Layanan_2_model->get_data('accessories');
+		$mesin  = $this->Layanan_2_model->get_data('asset');
+
+
 		$data = [
 			'inven' => $inven,
 			'komposisi' => $komposisi,
-			'lvl1' => $lvl1
+			'lvl1' => $lvl1,
+			'tabung' => $tabung,
+			'mesin' => $mesin,
 		];
         $this->template->set('results', $data);
 		$this->template->title('Layanan');
@@ -107,8 +112,13 @@ class Layanan_2 extends Admin_Controller
 		$cab     = $session['kdcab'];
 		$this->template->page_icon('fa fa-pencil');
 		$layanan_1 = $this->Layanan_2_model->get_data('rs_kategorilab');
+		$tabung = $this->Layanan_2_model->get_data('accessories');
+		$mesin  = $this->Layanan_2_model->get_data('asset');
 		$data = [
-			'layanan_1' => $layanan_1
+			'layanan_1' => $layanan_1,
+			'tabung' => $tabung,
+			'mesin' => $mesin,
+
 		];
         $this->template->set('results', $data);
         $this->template->title('Add Layanan');

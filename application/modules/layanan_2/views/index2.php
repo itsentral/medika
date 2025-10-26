@@ -14,12 +14,14 @@ thead input {
 
 <div class="box">
 	<div class="box-header">
-			<?php if($ENABLE_VIEW) : ?>
-				<a class="btn btn-success btn-sm add" href="javascript:void(0)" title="Add"><i class="fa fa-plus">&nbsp;</i>Add</a>
-			<?php endif; ?>
+			<?php if($ENABLE_ADD) : ?>
+				 <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success add" data-bs-toggle="modal" data-bs-target="#dialog-popup"><i class="fa fa-plus">&nbsp;</i>Add
+                </button>
+        
+        <?php endif; ?>
 
-		<span class="pull-right">
-		</span>
+       
 	</div>
 	<!-- /.box-header -->
 	<div class="box-body">
@@ -46,7 +48,27 @@ thead input {
 </div>
 
 
-<!-- awal untuk modal dialog -->
+
+<!-- Modal -->
+<div class="modal fade" id="dialog-popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="head_title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="ModalView">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="simpan-com">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- awal untuk modal dialog
 
 <div class="modal modal-default fade" id="dialog-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -59,7 +81,7 @@ thead input {
 		...
       </div>
   </div>
-</div>
+</div> -->
 
 <!-- DataTables -->
 <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js')?>"></script>
@@ -103,7 +125,7 @@ thead input {
 			}
 		})
 	});
-		$(document).on('click', '.add', function(){
+	$(document).on('click', '.add', function(){
 		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Layanan</b>");
 		$.ajax({
 			type:'POST',
@@ -115,6 +137,72 @@ thead input {
 			}
 		})
 	});
+
+  $('#simpan-com').click(function(e){
+    e.preventDefault();
+
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to process again this data!",
+        icon: "warning",
+        buttons: {
+            cancel: {
+                text: "No, cancel process!",
+                value: null,
+                visible: true,
+                className: "btn-danger",
+                closeModal: true,
+            },
+            confirm: {
+                text: "Yes, Process it!",
+                value: true,
+                visible: true,
+                className: "btn-success",
+                closeModal: true
+            }
+        },
+        dangerMode: true,
+    })
+    .then((isConfirm) => {
+        if (isConfirm) {
+            var formData = new FormData($('#data-form')[0]);
+            var baseurl = siteurl + 'layanan_2/saveNewlayanan';
+
+            $.ajax({
+                url: baseurl,
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.status == 1) {
+                        swal({
+                            title: "Save Success!",
+                            text: data.pesan,
+                            icon: "success",
+                            button: false,
+                            timer: 3000
+                        });
+                        setTimeout(function(){
+                            window.location.href = base_url + active_controller;
+                        }, 3000);
+                    } else {
+                        swal("Save Failed!", data.pesan, "warning");
+                    }
+                },
+                error: function() {
+                    swal("Error!", "An error occurred during process. Please try again.", "error");
+                }
+            });
+        } else {
+            swal("Cancelled", "Data can be processed again :)", "error");
+        }
+    });
+});
+
+
 	
 	
 	// DELETE DATA
@@ -234,6 +322,9 @@ thead input {
 				}
 			}
 		});
+        
 	}
+
+    
 	
 </script>
