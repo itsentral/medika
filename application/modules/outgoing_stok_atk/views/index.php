@@ -61,7 +61,7 @@ $ENABLE_DELETE  = has_permission('Outgoing_Stok_ATK.Delete');
 			</div>
 			<div class="tab-pane" id="request" role="tabpanel" aria-labelledby="request-tab"><br> -->
 			<table id="example2" class="table table-bordered table-striped" width='100%'>
-				<thead>
+				<thead class="bg-blue">
 					<tr>
 						<th class='text-center'>#</th>
 						<th class='text-center'>No Trans</th>
