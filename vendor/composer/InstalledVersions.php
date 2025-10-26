@@ -28,6 +28,7 @@ class InstalledVersions
 {
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
      * @var string|null if set (by reflection by Composer), this should be set to the path where this class is being copied to
      * @internal
@@ -36,12 +37,15 @@ class InstalledVersions
 
     /**
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
      * @var mixed[]|null
      * @psalm-var array{root: array{name: string, pretty_version: string, version: string, reference: string|null, type: string, install_path: string, aliases: string[], dev: bool}, versions: array<string, array{pretty_version?: string, version?: string, reference?: string|null, type?: string, install_path?: string, aliases?: string[], dev_requirement: bool, replaced?: string[], provided?: string[]}>}|array{}|null
      */
     private static $installed;
 
     /**
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
      * @var bool
@@ -50,6 +54,8 @@ class InstalledVersions
 
     /**
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
      * @var bool|null
      */
     private static $canGetVendors;
@@ -327,6 +333,7 @@ class InstalledVersions
         self::$installed = $data;
         self::$installedByVendor = array();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
         // when using reload, we disable the duplicate protection to ensure that self::$installed data is
@@ -347,6 +354,8 @@ class InstalledVersions
 
         return self::$selfDir;
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
     }
 
     /**
@@ -361,6 +370,7 @@ class InstalledVersions
 
         $installed = array();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         if (self::$canGetVendors) {
             foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
@@ -372,17 +382,26 @@ class InstalledVersions
             foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
                 $vendorDir = strtr($vendorDir, '\\', '/');
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+
+        if (self::$canGetVendors) {
+            foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
+>>>>>>> 67a3a55 (update template baru)
                 if (isset(self::$installedByVendor[$vendorDir])) {
                     $installed[] = self::$installedByVendor[$vendorDir];
                 } elseif (is_file($vendorDir.'/composer/installed.php')) {
                     /** @var array{root: array{name: string, pretty_version: string, version: string, reference: string|null, type: string, install_path: string, aliases: string[], dev: bool}, versions: array<string, array{pretty_version?: string, version?: string, reference?: string|null, type?: string, install_path?: string, aliases?: string[], dev_requirement: bool, replaced?: string[], provided?: string[]}>} $required */
                     $required = require $vendorDir.'/composer/installed.php';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
                     $installed[] = self::$installedByVendor[$vendorDir] = $required;
                     if (null === self::$installed && strtr($vendorDir.'/composer', '\\', '/') === strtr(__DIR__, '\\', '/')) {
                         self::$installed = $installed[count($installed) - 1];
                     }
                 }
+<<<<<<< HEAD
 =======
                     self::$installedByVendor[$vendorDir] = $required;
                     $installed[] = $required;
@@ -395,6 +414,8 @@ class InstalledVersions
                     $copiedLocalDir = true;
                 }
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
             }
         }
 
@@ -411,10 +432,14 @@ class InstalledVersions
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (self::$installed !== array()) {
 =======
         if (self::$installed !== array() && !$copiedLocalDir) {
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+        if (self::$installed !== array()) {
+>>>>>>> 67a3a55 (update template baru)
             $installed[] = self::$installed;
         }
 

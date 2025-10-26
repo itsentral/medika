@@ -7,6 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
     'setasign\\Fpdi\\' => array($vendorDir . '/setasign/fpdi/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
@@ -14,6 +17,9 @@ return array(
     'Mpdf\\PsrHttpMessageShim\\' => array($vendorDir . '/mpdf/psr-http-message-shim/src'),
     'Mpdf\\' => array($vendorDir . '/mpdf/mpdf/src'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
+<<<<<<< HEAD
 =======
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 );

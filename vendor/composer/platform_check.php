@@ -5,12 +5,17 @@
 $issues = array();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 if (!(PHP_VERSION_ID >= 80000)) {
     $issues[] = 'Your Composer dependencies require a PHP version ">= 8.0.0". You are running ' . PHP_VERSION . '.';
 =======
 if (!(PHP_VERSION_ID >= 50400)) {
     $issues[] = 'Your Composer dependencies require a PHP version ">= 5.4.0". You are running ' . PHP_VERSION . '.';
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+if (!(PHP_VERSION_ID >= 80000)) {
+    $issues[] = 'Your Composer dependencies require a PHP version ">= 8.0.0". You are running ' . PHP_VERSION . '.';
+>>>>>>> 67a3a55 (update template baru)
 }
 
 if ($issues) {
@@ -25,6 +30,7 @@ if ($issues) {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     trigger_error(
         'Composer detected issues in your platform: ' . implode(' ', $issues),
         E_USER_ERROR
@@ -32,5 +38,10 @@ if ($issues) {
     throw new \RuntimeException(
         'Composer detected issues in your platform: ' . implode(' ', $issues)
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+    trigger_error(
+        'Composer detected issues in your platform: ' . implode(' ', $issues),
+        E_USER_ERROR
+>>>>>>> 67a3a55 (update template baru)
     );
 }

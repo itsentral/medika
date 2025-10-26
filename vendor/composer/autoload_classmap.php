@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
 <<<<<<< HEAD
+<<<<<<< HEAD
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 =======
     'CGIF' => $vendorDir . '/mpdf/mpdf/classes/gif.php',
@@ -43,4 +44,7 @@ return array(
     'tocontents' => $vendorDir . '/mpdf/mpdf/classes/tocontents.php',
     'wmf' => $vendorDir . '/mpdf/mpdf/classes/wmf.php',
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+>>>>>>> 67a3a55 (update template baru)
 );

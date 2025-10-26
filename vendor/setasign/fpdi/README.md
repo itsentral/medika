@@ -2,6 +2,9 @@ FPDI - Free PDF Document Importer
 =================================
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
 [![Latest Stable Version](https://poser.pugx.org/setasign/fpdi/v/stable.svg)](https://packagist.org/packages/setasign/fpdi)
 [![Total Downloads](https://poser.pugx.org/setasign/fpdi/downloads.svg)](https://packagist.org/packages/setasign/fpdi)
 [![License](https://poser.pugx.org/setasign/fpdi/license.svg)](https://packagist.org/packages/setasign/fpdi)
@@ -20,6 +23,7 @@ FPDI can also be used as an extension for [TCPDF](https://github.com/tecnickcom/
 Because FPDI can be used with FPDF, TCPDF or tFPDF we haven't added a fixed dependency in the main
 composer.json file. You need to add the dependency to the PDF generation library of your choice
 yourself.
+<<<<<<< HEAD
 =======
 [![Latest Stable Version](https://poser.pugx.org/setasign/fpdi/v/stable.svg)](https://packagist.org/packages/setasign/fpdi) [![Total Downloads](https://poser.pugx.org/setasign/fpdi/downloads.svg)](https://packagist.org/packages/setasign/fpdi) [![Latest Unstable Version](https://poser.pugx.org/setasign/fpdi/v/unstable.svg)](https://packagist.org/packages/setasign/fpdi) [![License](https://poser.pugx.org/setasign/fpdi/license.svg)](https://packagist.org/packages/setasign/fpdi)
 
@@ -76,6 +80,8 @@ For TCPDF use [this](https://github.com/Setasign/FPDI-TCPDF):
 
 To support both FPDF and TCPDF its up to you to load the preferred package before the classes of FPDI are loaded. By default FPDI will extend FPDF. If the TCPDF class exists, a new FPDF class will be created which will extend TCPDF while FPDI will extend this.
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 
 To use FPDI with FPDF include following in your composer.json file:
 
@@ -83,25 +89,35 @@ To use FPDI with FPDF include following in your composer.json file:
 {
     "require": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "setasign/fpdf": "1.8.*",
         "setasign/fpdi": "^2.5"
 =======
         "setasign/fpdf": "1.8",
         "setasign/fpdi": "1.6.2"
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+        "setasign/fpdf": "1.8.*",
+        "setasign/fpdi": "^2.5"
+>>>>>>> 67a3a55 (update template baru)
     }
 }
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 If you want to use TCPDF, you have to update your composer.json to:
 =======
 If you are using TCPDF, your have to update your composer.json respectively to:
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+If you want to use TCPDF, you have to update your composer.json to:
+>>>>>>> 67a3a55 (update template baru)
 
 ```json
 {
     "require": {
+<<<<<<< HEAD
 <<<<<<< HEAD
         "tecnickcom/tcpdf": "6.6.*",
         "setasign/fpdi": "^2.5"
@@ -109,11 +125,18 @@ If you are using TCPDF, your have to update your composer.json respectively to:
         "tecnickcom/tcpdf": "6.2.13",
         "setasign/fpdi": "1.6.2"
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+        "tecnickcom/tcpdf": "6.6.*",
+        "setasign/fpdi": "^2.5"
+>>>>>>> 67a3a55 (update template baru)
     }
 }
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
 If you want to use tFPDF, you have to update your composer.json to:
 
 ```json
@@ -200,6 +223,7 @@ $pdf->Output();
 ```
 
 A full end-user documentation and API reference is available [here](https://manuals.setasign.com/fpdi-manual/).
+<<<<<<< HEAD
 =======
 Additionally you have to trigger composers autoloader for the TCPDF class before you are initiating FPDI:
 
@@ -209,3 +233,5 @@ $pdf = new FPDI();
 ```
 
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)

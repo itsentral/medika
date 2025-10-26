@@ -1,7 +1,12 @@
 *
 !.gitignore
 <<<<<<< HEAD
+<<<<<<< HEAD
 !ttfontdata/
 !ttfontdata/.gitkeep
 =======
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+!ttfontdata/
+!ttfontdata/.gitkeep
+>>>>>>> 67a3a55 (update template baru)

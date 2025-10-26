@@ -15,19 +15,29 @@ if (PHP_VERSION_ID < 50600) {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
     trigger_error(
         $err,
         E_USER_ERROR
     );
+<<<<<<< HEAD
 =======
     throw new RuntimeException($err);
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 }
 
 require_once __DIR__ . '/composer/autoload_real.php';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 return ComposerAutoloaderInit56f2886683031a465699716059c613db::getLoader();
 =======
 return ComposerAutoloaderInitd4780eed6f1017cca0fd757ef859d825::getLoader();
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+return ComposerAutoloaderInit56f2886683031a465699716059c613db::getLoader();
+>>>>>>> 67a3a55 (update template baru)

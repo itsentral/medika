@@ -8,7 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'org\\bovigo\\vfs' => array($vendorDir . '/mikey179/vfsstream/src/main/php'),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 );

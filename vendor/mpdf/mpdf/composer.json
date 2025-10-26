@@ -1,5 +1,8 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
 	"name": "mpdf/mpdf",
 	"type": "library",
 	"description": "PHP library generating PDF files from UTF-8 encoded HTML",
@@ -72,6 +75,7 @@
 	"config": {
 		"sort-packages": true
 	}
+<<<<<<< HEAD
 =======
 
 	"name": "mpdf/mpdf",
@@ -124,4 +128,6 @@
 	}
 
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 }

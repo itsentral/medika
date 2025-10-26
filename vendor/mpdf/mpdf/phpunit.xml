@@ -2,6 +2,9 @@
 	bootstrap="tests/bootstrap.php"
 	colors="true"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
 	backupGlobals="false"
 	beStrictAboutTestsThatDoNotTestAnything="false">
 
@@ -20,6 +23,7 @@
 			<text outputFile="php://stdout" showOnlySummary="true"/>
 		</report>
 	</coverage>
+<<<<<<< HEAD
 =======
 	backupGlobals="false">
 
@@ -36,5 +40,7 @@
 		</whitelist>
 	</filter>
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 
 </phpunit>

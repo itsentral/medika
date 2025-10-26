@@ -5,6 +5,9 @@
 namespace Composer\Autoload;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
 class ComposerStaticInit56f2886683031a465699716059c613db
 {
     public static $files = array (
@@ -65,10 +68,13 @@ class ComposerStaticInit56f2886683031a465699716059c613db
         ),
     );
 
+<<<<<<< HEAD
 =======
 class ComposerStaticInitd4780eed6f1017cca0fd757ef859d825
 {
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
     public static $prefixesPsr0 = array (
         'o' => 
         array (
@@ -78,10 +84,14 @@ class ComposerStaticInitd4780eed6f1017cca0fd757ef859d825
             ),
         ),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+<<<<<<< HEAD
 =======
         'P' => 
         array (
@@ -127,20 +137,28 @@ class ComposerStaticInitd4780eed6f1017cca0fd757ef859d825
         'tocontents' => __DIR__ . '/..' . '/mpdf/mpdf/classes/tocontents.php',
         'wmf' => __DIR__ . '/..' . '/mpdf/mpdf/classes/wmf.php',
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
             $loader->prefixLengthsPsr4 = ComposerStaticInit56f2886683031a465699716059c613db::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit56f2886683031a465699716059c613db::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit56f2886683031a465699716059c613db::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit56f2886683031a465699716059c613db::$classMap;
+<<<<<<< HEAD
 =======
             $loader->prefixesPsr0 = ComposerStaticInitd4780eed6f1017cca0fd757ef859d825::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitd4780eed6f1017cca0fd757ef859d825::$classMap;
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 
         }, null, ClassLoader::class);
     }

@@ -10,11 +10,14 @@ class Auth
         $this->ci->load->library('session');
         $this->ci->lang->load('users/users');
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$this->ci->load->model(array('users/users_model',
                                     'users/user_groups_model'));
 		$this->user = $this->ci->session->userdata('app_session'); 
 	}
 =======
+=======
+>>>>>>> 67a3a55 (update template baru)
         $this->ci->load->model(array(
             'users/users_model',
             'users/user_groups_model'
@@ -22,7 +25,16 @@ class Auth
 
         $this->user = $this->ci->session->userdata('app_session');
     }
+<<<<<<< HEAD
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+=======
+		$this->ci->load->model(array('users/users_model',
+                                    'users/user_groups_model'));
+		$this->user = $this->ci->session->userdata('app_session'); 
+	}
+>>>>>>> 5dca622 (update template baru)
+>>>>>>> 67a3a55 (update template baru)
 
     public function is_login()
     {

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 67a3a55 (update template baru)
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
@@ -8,6 +11,7 @@
  of this license document, but changing it is not allowed.
 
                             Preamble
+<<<<<<< HEAD
 =======
 		    GNU GENERAL PUBLIC LICENSE
 		       Version 2, June 1991
@@ -19,6 +23,8 @@
 
 			    Preamble
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+>>>>>>> 67a3a55 (update template baru)
 
   The licenses for most software are designed to take away your
 freedom to share and change it.  By contrast, the GNU General Public
@@ -28,10 +34,14 @@ General Public License applies to most of the Free Software
 Foundation's software and to any other program whose authors commit to
 using it.  (Some other Free Software Foundation software is covered by
 <<<<<<< HEAD
+<<<<<<< HEAD
 the GNU Lesser General Public License instead.)  You can apply it to
 =======
 the GNU Library General Public License instead.)  You can apply it to
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+the GNU Lesser General Public License instead.)  You can apply it to
+>>>>>>> 67a3a55 (update template baru)
 your programs, too.
 
   When we speak of free software, we are referring to freedom, not
@@ -72,12 +82,17 @@ patent must be licensed for everyone's free use or not licensed at all.
   The precise terms and conditions for copying, distribution and
 modification follow.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                     GNU GENERAL PUBLIC LICENSE
 =======
 
 		    GNU GENERAL PUBLIC LICENSE
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+
+                    GNU GENERAL PUBLIC LICENSE
+>>>>>>> 67a3a55 (update template baru)
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. This License applies to any program or other work which contains
@@ -132,10 +147,14 @@ above, provided that you also meet all of these conditions:
     does not normally print such an announcement, your work based on
     the Program is not required to print an announcement.)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+
+>>>>>>> 67a3a55 (update template baru)
 These requirements apply to the modified work as a whole.  If
 identifiable sections of that work are not derived from the Program,
 and can be reasonably considered independent and separate works in
@@ -194,10 +213,14 @@ access to copy the source code from the same place counts as
 distribution of the source code, even though third parties are not
 compelled to copy the source along with the object code.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+
+>>>>>>> 67a3a55 (update template baru)
   4. You may not copy, modify, sublicense, or distribute the Program
 except as expressly provided under this License.  Any attempt
 otherwise to copy, modify, sublicense or distribute the Program is
@@ -255,10 +278,14 @@ impose that choice.
 This section is intended to make thoroughly clear what is believed to
 be a consequence of the rest of this License.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+
+>>>>>>> 67a3a55 (update template baru)
   8. If the distribution and/or use of the Program is restricted in
 certain countries either by patents or by copyrighted interfaces, the
 original copyright holder who places the Program under this License
@@ -289,10 +316,14 @@ of preserving the free status of all derivatives of our free software and
 of promoting the sharing and reuse of software generally.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                             NO WARRANTY
 =======
 			    NO WARRANTY
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+                            NO WARRANTY
+>>>>>>> 67a3a55 (update template baru)
 
   11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
 FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
@@ -314,6 +345,7 @@ YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
 PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGES.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
                      END OF TERMS AND CONDITIONS
 =======
@@ -379,3 +411,6 @@ consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+                     END OF TERMS AND CONDITIONS
+>>>>>>> 67a3a55 (update template baru)
