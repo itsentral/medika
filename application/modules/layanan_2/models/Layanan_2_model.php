@@ -96,10 +96,10 @@ class Layanan_2_model extends BF_Model
 		$query = $this->db->get();		
 		return $query->result();
 	}
-	public function getKomposisi($id){
-		$search = "deleted='0' and id_category1='$id'";
+	public function getNilairujukan($id){
+		$search = "deleted='0' and id_parameter='$id'";
 		$this->db->select('*');
-		$this->db->from('ms_compotition');
+		$this->db->from('rs_nilairujukan');
 		$this->db->where($search);
 		$query = $this->db->get();		
 		return $query->result();
@@ -161,8 +161,8 @@ class Layanan_2_model extends BF_Model
 			$nestedData[]	= "<div align='left'>" . $row['id_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_kategori'] . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['tabung'] . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['mesin'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['stock_name'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['nm_asset'] . "</div>";
 			$priX	= "";
 			$updX	= "";
 			$ApprvX	= "";
@@ -173,7 +173,7 @@ class Layanan_2_model extends BF_Model
 
 			if ($ENABLE_MANAGE) {
 				//$Terima	= "<button class='btn btn-sm btn-success edit' title='Create Penerimaan' data-inv='" . $row['no_invoice'] . "'><i class='fa fa-list'></i></button>";
-			$Terima	=  "<a class='btn btn-success btn-xs edit' href='javascript:void(0)' title='Transaksi Laboratorium' data-noreg='" . $row['id_parameter'] . "'><i class='fa fa-edit'></i>
+			$Terima	=  "<a class='btn btn-success btn-xs edit' data-bs-toggle='modal' data-bs-target='#dialog-popup' href='javascript:void(0)' title='Edit' data-id_layanan2='" . $row['id_parameter'] . "'><i class='fa fa-edit'></i>
 				</a>";
 			
 			}
@@ -199,9 +199,11 @@ class Layanan_2_model extends BF_Model
 	{
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
-		$sql = "SELECT a.*, b.nama_kategori
+		$sql = "SELECT a.*, b.nama_kategori,c.stock_name,d.nm_asset
 	         FROM rs_parameter a 
              JOIN rs_kategorilab b ON a.id_kategori  = b.id_kategori
+             JOIN accessories c ON a.tabung  = c.id
+             JOIN asset d ON a.mesin  = d.id
 			   WHERE 1=1 AND a.kdcab=$cab
                AND (
 				a.nama_parameter LIKE '%" . $this->db->escape_like_str($like_value) . "%'

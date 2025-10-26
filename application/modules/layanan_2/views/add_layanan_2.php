@@ -7,7 +7,7 @@
 										<div class="row">
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Kategori Layanan</label>
+									    <label for="customer">Kategori Uji</label>
 									    </div>
 									    <div class="col-md-6">
 									    <select id="layanan_1" name="layanan_1" class="form-control select" required>
@@ -32,7 +32,13 @@
 									    <label for="customer">Nama Tabung</label>
 									    </div>
 									    <div class="col-md-6">
-											<input type="text" class="form-control" id="" required name="tabung" placeholder="Nama Tabung">
+											<select id="tabung" name="tabung" class="form-control select" required>
+											<option value="">-- Pilih Tabung --</option>
+											<?php foreach ($results['tabung'] as $tabung){  
+											?>
+											<option value="<?= $tabung->id?>"><?= ucfirst(strtolower($tabung->stock_name))?></option>
+											<?php } ?>
+										  </select>
 									    </div>
 										</div>
 										<div class="form-group row">
@@ -40,8 +46,13 @@
 									    <label for="customer">Nama Mesin</label>
 									    </div>
 									    <div class="col-md-6">
-											<input type="text" class="form-control" id="" required name="mesin" placeholder="Nama Mesin">
-									    </div>
+											<select id="mesin" name="mesin" class="form-control select" required>
+											<option value="">-- Pilih Mesin --</option>
+											<?php foreach ($results['mesin'] as $mesin){  
+											?>
+											<option value="<?= $mesin->id?>"><?= ucfirst(strtolower($mesin->nm_asset))?></option>
+											<?php } ?>
+										  </select>   </div>
 										</div>
 										<div class="col-xs-2">
 										&nbsp;
@@ -80,13 +91,6 @@
 						</div>
 					  </div>
 				  </div> 
-				  
-				  
-				 	<hr>
-					<center>
-					<!--<button type="submit" class="btn btn-primary btn-sm add_field_button2" name="save"><i class="fa fa-plus"></i>Add Main Produk</button>
-					--><button type="submit" class="btn btn-success btn-sm" name="save" id="simpan-com"><i class="fa fa-save"></i>Simpan</button>
-					</center>
 					
 				  </form>
 				  
@@ -143,101 +147,9 @@
 			Template	+='<td align="center"><button type="button" class="btn btn-sm btn-danger" title="Hapus Data" data-role="qtip" onClick="return DelItem('+loop+');"><i class="fa fa-trash-o"></i></button></td>';
 			Template	+='</tr>';
 			$('#list_payment').append(Template);
-			$('input[data-role="tglbayar"]').datepicker({
-				format: 'dd-mm-yyyy',
-				autoclose: true			
-			});
+			
 			});
 			
-			
-			
-	$('#simpan-com').click(function(e){
-			e.preventDefault();
-			var deskripsi	= $('#deskripsi').val();
-			var image	= $('#image').val();
-			var idtype	= $('#layanan_1').val();
-			
-			var data, xhr;
-			swal({
-				  title: "Are you sure?",
-				  text: "You will not be able to process again this data!",
-				  type: "warning",
-				  showCancelButton: true,
-				  confirmButtonClass: "btn-danger",
-				  confirmButtonText: "Yes, Process it!",
-				  cancelButtonText: "No, cancel process!",
-				  closeOnConfirm: true,
-				  closeOnCancel: false
-				},
-				function(isConfirm) {
-				  if (isConfirm) {
-						var formData 	=new FormData($('#data-form')[0]);
-						var baseurl=siteurl+'layanan_2/saveNewlayanan';
-						$.ajax({
-							url			: baseurl,
-							type		: "POST",
-							data		: formData,
-							cache		: false,
-							dataType	: 'json',
-							processData	: false, 
-							contentType	: false,				
-							success		: function(data){								
-								if(data.status == 1){											
-									swal({
-										  title	: "Save Success!",
-										  text	: data.pesan,
-										  type	: "success",
-										  timer	: 7000,
-										  showCancelButton	: false,
-										  showConfirmButton	: false,
-										  allowOutsideClick	: false
-										});
-									window.location.href = base_url + active_controller;
-								}else{
-									
-									if(data.status == 2){
-										swal({
-										  title	: "Save Failed!",
-										  text	: data.pesan,
-										  type	: "warning",
-										  timer	: 7000,
-										  showCancelButton	: false,
-										  showConfirmButton	: false,
-										  allowOutsideClick	: false
-										});
-									}else{
-										swal({
-										  title	: "Save Failed!",
-										  text	: data.pesan,
-										  type	: "warning",
-										  timer	: 7000,
-										  showCancelButton	: false,
-										  showConfirmButton	: false,
-										  allowOutsideClick	: false
-										});
-									}
-									
-								}
-							},
-							error: function() {
-								
-								swal({
-								  title				: "Error Message !",
-								  text				: 'An Error Occured During Process. Please try again..',						
-								  type				: "warning",								  
-								  timer				: 7000,
-								  showCancelButton	: false,
-								  showConfirmButton	: false,
-								  allowOutsideClick	: false
-								});
-							}
-						});
-				  } else {
-					swal("Cancelled", "Data can be process again :)", "error");
-					return false;
-				  }
-			});
-		});
 		
 });
 

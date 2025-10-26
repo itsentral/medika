@@ -5,6 +5,8 @@
     $ENABLE_DELETE  = has_permission('Pendaftaran.Delete');
 foreach ($results['inven'] as $inven){
 }	
+
+
 ?>
  <div class="box box-primary">
     <div class="box-body">
@@ -15,31 +17,59 @@ foreach ($results['inven'] as $inven){
 										<div class="row">
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Kategori Layanan</label>
+									    <label for="customer">Kategori Uji</label>
 									    </div>
 									    <div class="col-md-6">
 										<select id="inventory_1" name="hd1[1][inventory_1]" class="form-control select" required>
-						<option value="">-- Layanan --</option>
-						<?php foreach ($results['lvl1'] as $lvl1){
-						$select = $inven->id_kategori == $lvl1->id_kategori ? 'selected' : '';
-						?>
-						<option value="<?= $lvl1->id_kategori?>" <?= $select ?>><?= $lvl1->nama_kategori?></option>
-						<?php } ?>
-					  </select>
+											<option value="">-- Layanan --</option>
+											<?php foreach ($results['lvl1'] as $lvl1){
+											$select = $inven->id_kategori = $lvl1->id_kategori ? 'selected' : '';
+											?>
+											<option value="<?= $lvl1->id_kategori?>" <?= $select ?>><?= $lvl1->nama_kategori?></option>
+											<?php } ?>
+										</select>
+									    </div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-4">
+												<label for="customer">Nama Parameter</label>
+											</div>
+											<div class="col-md-6" hidden>
+												<input type="text" class="form-control" id="" required name="hd1[1][id_inventory]" value="<?= $inven->id_parameter ?>" placeholder="Nama Layanan">
+											</div>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="" required name="hd1[1][nm_inventory]" value="<?= $inven->nama_parameter ?>" placeholder="Nama Layanan">
+											</div>
+										</div>
+										<div class="form-group row">
+										<div class="col-md-4">
+									    <label for="customer">Nama Tabung</label>
+									    </div>
+									    <div class="col-md-6">
+											<select id="tabung" name="tabung" class="form-control select" required>
+											<option value="">-- Pilih Tabung --</option>
+											<?php foreach ($results['tabung'] as $tabung){  
+												$select = $inven->tabung == $tabung->id ? 'selected' : '';
+											?>
+											<option value="<?= $tabung->id?>"<?= $select ?>><?= ucfirst(strtolower($tabung->stock_name))?></option>
+											<?php } ?>
+										  </select>
 									    </div>
 										</div>
 										<div class="form-group row">
 										<div class="col-md-4">
-									    <label for="customer">Nama Layanan</label>
-									    </div>
-										 <div class="col-md-6" hidden>
-											<input type="text" class="form-control" id="" required name="hd1[1][id_inventory]" value="<?= $inven->id_category1 ?>" placeholder="Nama Layanan">
+									    <label for="customer">Nama Mesin</label>
 									    </div>
 									    <div class="col-md-6">
-											<input type="text" class="form-control" id="" required name="hd1[1][nm_inventory]" value="<?= $inven->nama ?>" placeholder="Nama Layanan">
-									    </div>
+											<select id="mesin" name="mesin" class="form-control select" required>
+											<option value="">-- Pilih Mesin --</option>
+											<?php foreach ($results['mesin'] as $mesin){ 
+												$select = $inven->mesin == $mesin->id ? 'selected' : '';
+											?>
+											<option value="<?= $mesin->id?>"<?= $select ?>><?= ucfirst(strtolower($mesin->nm_asset))?></option>
+											<?php } ?>
+										  </select>   </div>
 										</div>
-										
 										<div class="col-xs-2">
 										&nbsp;
 										</div>
@@ -55,25 +85,53 @@ foreach ($results['inven'] as $inven){
 										<thead>
 											<tr class='bg-blue'>
 												<td align='center' hidden><b>Id Compotition</b></td>	
-												<td align='center'><b>Name Compotition</b></td>	
-												<td align='center'><b>Action</b></td>	
+												<td align='center'><b>Jenis Kelamin</b></td>
+												<td align='center'><b>Umur dari</b></td>
+												<td align='center'><b>Umur sampai</b></td>	
+												<td align='center'><b>Nilai Bawah Normal</b></td>
+												<td align='center'><b>Nilai Atas Normal</b></td>
+												<td align='center'><b>Nilai Bawah Kritis</b></td>
+												<td align='center'><b>Nilai Atas Kritis</b></td>
+												<td align='center'><b>Satuan</b></td>		
+												<td align='center'><b>Action</b></td>
 											</tr>
 											
 										</thead>
 										<tbody id='old_payment'>
 											<?php
 											$numb=0;
-											foreach ($results['komposisi'] as $komposisi){
+											foreach ($results['komposisi'] as $rujukan){
 											$numb++; ?>
 											<tr id="tr_'<?= $numb ?>'">
 												<td align="left" hidden>
-					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][id_compotition]" value="<?= $komposisi->id_compotition ?>" id="data1_'<?= $numb ?>'_id_compotition" label="FALSE" div="FALSE">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][id_compotition]" value="<?= $rujukan->id ?>" id="data1_'<?= $numb ?>'_id_compotition" label="FALSE" div="FALSE">
 												</td>
 												<td align="left">
-					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][name_compotition]" value="<?= $komposisi->name_compotition ?>"  id="data1_'<?= $numb ?>'_name_compotition" label="FALSE" div="FALSE">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][jk]" value="<?= $rujukan->jenis_kelamin ?>"  id="data1_'<?= $numb ?>'_jk" label="FALSE" div="FALSE">
+												</td>
+												<td align="left">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][umurbawah]" value="<?= $rujukan->dari ?>"  id="data1_'<?= $numb ?>'_umurbawah" label="FALSE" div="FALSE">
+												</td>
+												<td align="left">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][umuratas]" value="<?= $rujukan->sampai ?>"  id="data1_'<?= $numb ?>'_umuratas" label="FALSE" div="FALSE">
+												</td>
+												<td align="left">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][normalbawah]" value="<?= $rujukan->batas_bawah_normal ?>"  id="data1_'<?= $numb ?>'_normalbawah" label="FALSE" div="FALSE">
+												</td>
+												<td align="left">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][normalatas]" value="<?= $rujukan->batas_atas_normal ?>"  id="data1_'<?= $numb ?>'_normalatas" label="FALSE" div="FALSE">
+												</td>
+												<td align="left">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][kritisbawah]" value="<?= $rujukan->batas_bawah_kritis ?>"  id="data1_'<?= $numb ?>'_kritisbawah" label="FALSE" div="FALSE">
+												</td>
+												<td align="left">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][kritisatas]" value="<?= $rujukan->batas_atas_kritis ?>"  id="data1_'<?= $numb ?>'_kritisatas" label="FALSE" div="FALSE">
+												</td>
+												<td align="left">
+					<input type="text" class="form-control input-sm" name="data2['<?= $numb ?>'][satuan]" value="<?= $rujukan->satuan ?>"  id="data1_'<?= $numb ?>'_satuan" label="FALSE" div="FALSE">
 												</td>
 												<td align="center">
-					<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_compotition="<?=$komposisi->id_compotition?>"><i class="fa fa-trash"></i>
+					<a class="btn btn-danger btn-sm delete" href="javascript:void(0)" title="Delete" data-id_compotition="<?=$rujukan->id?>"><i class="fa fa-trash"></i>
 				</a>
 												</td>
 											</tr>
