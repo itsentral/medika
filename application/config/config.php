@@ -25,14 +25,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 //$config['base_url'] = 'http://localhost/labgit/dms';
 <<<<<<< HEAD
+<<<<<<< HEAD
 $root = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://");
 $root .= $_SERVER['HTTP_HOST'];
 =======
 $root = "https://" . $_SERVER['HTTP_HOST'];
 >>>>>>> 203f907 (Update 25-10-2025)
+=======
+$root = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://");
+$root .= $_SERVER['HTTP_HOST'];
+>>>>>>> 83725fd (update form server)
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
-// $config['base_url'] = $root;
-$config['base_url'] = 'http://localhost:8080';
+$config['base_url'] = $root;
 
 
 //$config['base_url'] = 'http://localhost/importa/importa_release/';
