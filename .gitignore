@@ -18,4 +18,12 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+<<<<<<< HEAD
 assets/*
+=======
+assets/*
+<<<<<<< HEAD
+>>>>>>> 83725fd (update form server)
+=======
+>>>>>>> 0b51752 (update gitignore dan config)
+>>>>>>> b9b9644 (update gitignore dan config)
