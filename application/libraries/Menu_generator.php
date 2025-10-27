@@ -255,14 +255,20 @@ class Menu_generator
 				->get()
 				->result();
 
-			$html = "<ul class='sidebar-menu'>
-							<li class='header'></li>
-	                        <li class='" . check_class('dashboard', TRUE) . "'>
+			$html = "<ul class='nav nav-primary'>
+	                        <li class='nav-item " . check_class('dashboard', TRUE) . "'>
 	                            <a href='" . site_url() . "'>
-	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
+	                                <i class='fa fa-store-alt'></i>
+									<p>Dashboard</p>
 	                            </a>
-	                        </li>";
-
+	                        </li>
+							<li class='nav-section'>
+								<span class='sidebar-mini-icon'>
+									<i class='fa fa-ellipsis-h'></i>
+								</span>
+								<h4 class='text-section'>Main Menu</h4>
+							</li>
+							";
 			if (is_array($menu) && count($menu)) {
 				foreach ($menu as $rw) {
 					$id 		= $rw->id;
@@ -294,34 +300,23 @@ class Menu_generator
 								$active = "active";
 							}
 							$html .= "<li class='nav-item {$active}'>
-							<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
-							<i class='" . ($icon ? $icon : "") . " me-1'></i><p>" . ucwords($title) . "</p></a>
-							</li>";
-$html .= "<li class='nav-item {$active}'>
-							<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
-							<i class='" . ($icon ? $icon : "") . " me-1'></i><p>" . ucwords($title) . "</p></a>
-							</li>";
-goto end_for;
+											<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
+												<i class='" . ($icon ? $icon : "") . " me-1'></i>
+												<p>" . ucwords($title) . "</p>
+											</a>
+										</li>";
+						}
+						goto end_for;
 					}
-					if($link == '-'){
-						$html .= '<li class="nav-section">
-										<span class="sidebar-mini-icon">
-											<i class="fa fa-ellipsis-h"></i>
-										</span>
-										<h4 class="text-section">'.$title.'</h4>
-									</li>';
-					}
-
 					$active = "";
 					foreach ($submenu as $sub) {
 						if (strpos($this->uri, '/' . $sub->link . '/') !== FALSE) {
-$active = "active submenu";
+							$active = "active";
 							break;
 						}
 					}
 
-					$html .= "
-<li class='nav-item {$active}'>
+					$html .= "<li class='nav-item {$active}'>
 							<a href='#" . $title . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
 								<i class='" . $icon . " me-1'></i>
 								<p>" . ucwords($title) . "</p>
@@ -348,23 +343,18 @@ $active = "active submenu";
 						} else {
 							$active = "";
 						}
-						$html .= "
-						<li class='" . $active . "'>
-							<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
-								<span class='sub-item'>" . ucwords($subtitle) . "</span>
-							</a>
-						</li>";
+						$html .= "<li class='nav-item " . $active . "'>
+										<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
+											<span class='sub-item'>" . ucwords($subtitle) . "</span>
+										</a>
+									</li>";
 					}
-					$html .= "
-						</ul>
-						</div>
-					</li>";
+					$html .= "</ul></div></li>";
 					end_for:
 				}
 				$html .= "</ul>";
 			}
-					//END FOREACH MENU
-				}
+			//END FOREACH MENU
 		}
 
 		return $html;
