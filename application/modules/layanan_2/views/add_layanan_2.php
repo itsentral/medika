@@ -33,6 +33,9 @@
 									    </div>
 									    <div class="col-md-6">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ce9b1cc (update)
 											<select id="tabung" name="tabung" class="form-control select" required>
 											<option value="">-- Pilih Tabung --</option>
 											<?php foreach ($results['tabung'] as $tabung){  
@@ -40,9 +43,12 @@
 											<option value="<?= $tabung->id?>"><?= ucfirst(strtolower($tabung->stock_name))?></option>
 											<?php } ?>
 										  </select>
+<<<<<<< HEAD
 =======
 											<input type="text" class="form-control" id="" required name="tabung" placeholder="Nama Tabung">
 >>>>>>> f10e5c2 (updatelayanan)
+=======
+>>>>>>> ce9b1cc (update)
 									    </div>
 										</div>
 										<div class="form-group row">
@@ -51,6 +57,9 @@
 									    </div>
 									    <div class="col-md-6">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ce9b1cc (update)
 											<select id="mesin" name="mesin" class="form-control select" required>
 											<option value="">-- Pilih Mesin --</option>
 											<?php foreach ($results['mesin'] as $mesin){  
@@ -58,10 +67,13 @@
 											<option value="<?= $mesin->id?>"><?= ucfirst(strtolower($mesin->nm_asset))?></option>
 											<?php } ?>
 										  </select>   </div>
+<<<<<<< HEAD
 =======
 											<input type="text" class="form-control" id="" required name="mesin" placeholder="Nama Mesin">
 									    </div>
 >>>>>>> f10e5c2 (updatelayanan)
+=======
+>>>>>>> ce9b1cc (update)
 										</div>
 										<div class="col-xs-2">
 										&nbsp;

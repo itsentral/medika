@@ -162,12 +162,17 @@ class Layanan_2_model extends BF_Model
 			$nestedData[]	= "<div align='left'>" . $row['nama_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_kategori'] . "</div>";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$nestedData[]	= "<div align='left'>" . $row['stock_name'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nm_asset'] . "</div>";
 =======
 			$nestedData[]	= "<div align='left'>" . $row['tabung'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['mesin'] . "</div>";
 >>>>>>> f10e5c2 (updatelayanan)
+=======
+			$nestedData[]	= "<div align='left'>" . $row['stock_name'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['nm_asset'] . "</div>";
+>>>>>>> ce9b1cc (update)
 			$priX	= "";
 			$updX	= "";
 			$ApprvX	= "";
@@ -179,10 +184,14 @@ class Layanan_2_model extends BF_Model
 			if ($ENABLE_MANAGE) {
 				//$Terima	= "<button class='btn btn-sm btn-success edit' title='Create Penerimaan' data-inv='" . $row['no_invoice'] . "'><i class='fa fa-list'></i></button>";
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$Terima	=  "<a class='btn btn-success btn-xs edit' data-bs-toggle='modal' data-bs-target='#dialog-popup' href='javascript:void(0)' title='Edit' data-id_layanan2='" . $row['id_parameter'] . "'><i class='fa fa-edit'></i>
 =======
 			$Terima	=  "<a class='btn btn-success btn-xs edit' href='javascript:void(0)' title='Transaksi Laboratorium' data-noreg='" . $row['id_parameter'] . "'><i class='fa fa-edit'></i>
 >>>>>>> f10e5c2 (updatelayanan)
+=======
+			$Terima	=  "<a class='btn btn-success btn-xs edit' data-bs-toggle='modal' data-bs-target='#dialog-popup' href='javascript:void(0)' title='Edit' data-id_layanan2='" . $row['id_parameter'] . "'><i class='fa fa-edit'></i>
+>>>>>>> ce9b1cc (update)
 				</a>";
 			
 			}
@@ -209,6 +218,7 @@ class Layanan_2_model extends BF_Model
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$sql = "SELECT a.*, b.nama_kategori,c.stock_name,d.nm_asset
 	         FROM rs_parameter a 
              JOIN rs_kategorilab b ON a.id_kategori  = b.id_kategori
@@ -219,6 +229,13 @@ class Layanan_2_model extends BF_Model
 	         FROM rs_parameter a 
              JOIN rs_kategorilab b ON a.id_kategori  = b.id_kategori
 >>>>>>> f10e5c2 (updatelayanan)
+=======
+		$sql = "SELECT a.*, b.nama_kategori,c.stock_name,d.nm_asset
+	         FROM rs_parameter a 
+             JOIN rs_kategorilab b ON a.id_kategori  = b.id_kategori
+             JOIN accessories c ON a.tabung  = c.id
+             JOIN asset d ON a.mesin  = d.id
+>>>>>>> ce9b1cc (update)
 			   WHERE 1=1 AND a.kdcab=$cab
                AND (
 				a.nama_parameter LIKE '%" . $this->db->escape_like_str($like_value) . "%'
