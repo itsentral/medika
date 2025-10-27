@@ -1,8 +1,21 @@
 <?php
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:application/modules/layanan/views/edit_layanan.php
+>>>>>>> d68cbd0 (update)
     $ENABLE_ADD     = has_permission('Kategori.Add');
     $ENABLE_MANAGE  = has_permission('Kategori.Manage');
     $ENABLE_VIEW    = has_permission('Kategori.View');
     $ENABLE_DELETE  = has_permission('Kategori.Delete');
+<<<<<<< HEAD
+=======
+========
+    $ENABLE_ADD     = has_permission('Kategori_1.Add');
+    $ENABLE_MANAGE  = has_permission('Kategori_1.Manage');
+    $ENABLE_VIEW    = has_permission('Kategori_1.View');
+    $ENABLE_DELETE  = has_permission('Kategori_1.Delete');
+>>>>>>>> d68cbd0 (update):application/modules/layanan/views/edit_kategori.php
+>>>>>>> d68cbd0 (update)
 
 foreach ($results['inven'] as $inven){
 }

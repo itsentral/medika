@@ -27,10 +27,7 @@
 							<label for="">Kategori</label>
 						</div>
 						<div class="col">
-							<select id="kategori" name="kategori" class="form-select" required>
-								<option value=""></option>
-
-							</select>
+							<select id="kategori" name="kategori" class="form-select" required></select>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -38,12 +35,7 @@
 							<label for="">Kelompok Pemeriksaan</label>
 						</div>
 						<div class="col">
-							<select id="kelompok_pemeriksaan" name="kelompok_pemeriksaan" class="form-select" required>
-								<option value=""></option>
-								<?php if ($kategori) foreach ($kategori as $kt): ?>
-									<option value="<?= $kt->id ?>"><?= ucfirst($kt->name) ?></option>
-								<?php endforeach; ?>
-							</select>
+							<select id="kelompok_pemeriksaan" name="kelompok_pemeriksaan" class="form-select" required></select>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -117,22 +109,15 @@
 					};
 				},
 				processResults: function(data) {
-					return {
-						results: data.map(function(item) {
-							return {
-								id: item.id,
-								text: item.nama
-							};
-						})
-					};
+					return data;
 				}
 			}
 		});
 
 		// Saat provinsi berubah, reset kota
 		$('#kategori').on('change', function() {
-			$('#kota').val(null).trigger('change'); // reset pilihan kota
-			$('#kota').prop('disabled', !$(this).val()); // disable kalau kosong
+			$('#kelompok_pemeriksaan').val(null).trigger('change'); // reset pilihan kota
+			$('#kelompok_pemeriksaan').prop('disabled', !$(this).val()); // disable kalau kosong
 		});
 
 	});
