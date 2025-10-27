@@ -144,7 +144,7 @@
 				Template	+='<td align="left">';
 					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][satuan]" id="data1_'+loop+'_satuan label="FALSE" div="FALSE">';
 			Template	+='</td>';
-			Template	+='<td align="center"><button type="button" class="btn btn-sm btn-danger" title="Hapus Data" data-role="qtip" onClick="return DelItem('+loop+');"><i class="fa fa-trash-o"></i></button></td>';
+			Template	+='<td align="center"><button type="button" class="btn btn-sm btn-danger" title="Hapus Data" data-role="qtip" onClick="return DelItem('+loop+');"><i class="fa fa-trash"></i></button></td>';
 			Template	+='</tr>';
 			$('#list_payment').append(Template);
 			
