@@ -86,24 +86,6 @@ class Asset_model extends BF_Model
 				$nomor = ($total_data - $start_dari) - $urut2;
 			}
 
-			$tgl_perolehan = $row['tgl_perolehan'];
-			$start = new DateTime(date('Y-m-d', strtotime('+' . ($row['depresiasi'] * 12) . ' months', strtotime($row['tgl_perolehan']))));
-			$end = new DateTime(); // today
-
-			$diff = $start->diff($end);
-
-			// Total month difference (year * 12 + months)
-			$month_difference = ($diff->y * 12) + $diff->m;
-			if ($end > $start) {
-				$month_difference = 0;
-			}
-
-			$pembagi = ($month_difference / ($row['depresiasi'] * 12));
-
-			$nilai_akumulasi = ($month_difference < 1) ? $row['nilai_asset'] : ($row['nilai_asset'] * $pembagi);
-
-			$nilai_buku = ($row['nilai_asset'] - $nilai_akumulasi);
-
 			$nestedData 	= array();
 			$nestedData[]	= "<div align='center'>" . $nomor . "</div>";
 			$nestedData[]	= "<div align='left'>" . strtoupper(strtolower($row['kd_asset'])) . "</div>";
@@ -112,8 +94,7 @@ class Asset_model extends BF_Model
 			$nestedData[]	= "<div align='center'>" . $row['depresiasi'] . " Tahun</div>";
 			$nestedData[]	= number_format($row['nilai_asset']);
 			$nestedData[]	= number_format($row['value']);
-			$nestedData[]	= number_format($nilai_akumulasi);
-			$nestedData[]	= number_format($nilai_buku);
+			$nestedData[]	= number_format($row['sisa_nilai']);
 
 			$update = "";
 			$delete = "";
@@ -132,13 +113,6 @@ class Asset_model extends BF_Model
 			$urut1++;
 			$urut2++;
 		}
-
-		// Hapus BOM dan clean output
-		if (ob_get_length()) ob_clean();
-
-		// Remove any existing BOM
-		echo ltrim(ob_get_clean(), "\xEF\xBB\xBF");
-		ob_start();
 
 		$json_data = array(
 			"draw"            	=> intval($requestData['draw']),
@@ -182,14 +156,12 @@ class Asset_model extends BF_Model
 				a.nm_category,
 				a.nilai_asset,
 				a.depresiasi,
-				a.tgl_perolehan,
 				a.`value`,
 				b.sisa_nilai,
 				a.lokasi_asset,
 				a.kdcab
 			FROM
-				asset a 
-				LEFT JOIN asset_nilai b ON a.kd_asset = b.kd_asset
+				asset a LEFT JOIN asset_nilai b ON a.kd_asset = b.kd_asset
 			WHERE 1=1
 				AND a.deleted = 'N'
 				AND (
@@ -279,18 +251,26 @@ class Asset_model extends BF_Model
 			$nestedData[]	= "<div align='center'>" . $nomor . "</div>";
 			$nestedData[]	= "<div align='left'>" . strtoupper(strtolower($row['nm_category'])) . "</div>";
 			$value = "Active";
-			$color = "bg-green";
+			$color = "bg-success";
 			if ($row['status'] == 'N') {
 				$value = "Not Active";
-				$color = "bg-red";
+				$color = "bg-danger";
 			}
-			$nestedData[]	= "<div align='center'><span class='badge " . $color . " '>" . $value . "</span></div>";
+			$nestedData[] = "
+				<div class='text-center'>
+					<span class='badge $color'>$value</span>
+				</div>
+			";
 
 			$last_create = (!empty($row['updated_by'])) ? $row['updated_by'] : $row['created_by'];
-			$nestedData[]	= "<div align='center'>" . strtolower($last_create) . "</div>";
+			$nestedData[] = "
+				<div class='text-center'>" . htmlspecialchars(strtolower($last_create)) . "</div>
+			";
 
 			$last_date = (!empty($row['updated_date'])) ? $row['updated_date'] : $row['created_date'];
-			$nestedData[]	= "<div align='center'>" . date('d-m-Y', strtotime($last_date)) . "</div>";
+			$nestedData[] = "
+				<div class='text-center'>" . date('d-m-Y', strtotime($last_date)) . "</div>
+			";
 
 			$detail		= "";
 			$edit		= "";
