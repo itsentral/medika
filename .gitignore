@@ -8,6 +8,7 @@ application/logs/*
 !*/cache/index.html
 !*/cache/.htaccess
 
+user_guide/
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
@@ -18,12 +19,4 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
-<<<<<<< HEAD
 assets/*
-=======
-assets/*
-<<<<<<< HEAD
->>>>>>> 83725fd (update form server)
-=======
->>>>>>> 0b51752 (update gitignore dan config)
->>>>>>> b9b9644 (update gitignore dan config)
