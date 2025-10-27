@@ -4,10 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Consumable extends Admin_Controller
 {
   //Permission
-  protected $viewPermission   = 'Master_Indirect.View';
-  protected $addPermission    = 'Master_Indirect.Add';
-  protected $managePermission = 'Master_Indirect.Manage';
-  protected $deletePermission = 'Master_Indirect.Delete';
+  protected $viewPermission   = 'Consumable.View';
+  protected $addPermission    = 'Consumable.Add';
+  protected $managePermission = 'Consumable.Manage';
+  protected $deletePermission = 'Consumable.Delete';
 
   protected $id_user;
   protected $datetime;
