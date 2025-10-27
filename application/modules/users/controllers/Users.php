@@ -46,10 +46,10 @@ class Users extends Front_Controller {
     	}
 
     	$this->template->set('idt', $identitas);
-        $this->template->set_theme('default');
+        $this->template->set_theme('medika');
         $this->template->set_layout('login');
         $this->template->title('Login');
-    	$this->template->render('login_animate');
+    	$this->template->render('login');
     }
 
     public function logout()

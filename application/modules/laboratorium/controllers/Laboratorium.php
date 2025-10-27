@@ -19,7 +19,9 @@ class Laboratorium extends Admin_Controller {
     {
         parent::__construct();
 
-        $this->load->library(array('Mpdf','upload','Image_lib'));
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
+        $this->load->library(array('upload','Image_lib'));
         $this->load->model(array('Laboratorium/Laboratorium_model',
                                  'Aktifitas/aktifitas_model'
                                 ));

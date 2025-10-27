@@ -18,8 +18,9 @@ class Pendaftaran extends Admin_Controller {
     public function __construct()
     {
         parent::__construct();
-
-        $this->load->library(array('Mpdf','upload','Image_lib','BarcodeGeneratorCI'));
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
+        $this->load->library(array('upload','Image_lib','BarcodeGeneratorCI'));
         $this->load->model(array('Pendaftaran/Pendaftaran_model',
                                  'Aktifitas/aktifitas_model'
                                 ));
@@ -337,7 +338,7 @@ class Pendaftaran extends Admin_Controller {
       {  
 	    $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
-	    $data = $this->Pendaftaran_model->GetPasien($this->uri->segment(3));
+	    $data = $this->db->get_where('rs_pasien')->result();
         $this->template->set('results', $data);
 		$this->template->set('search', $this->uri->segment(3));
         $this->template->title('Pendaftaran Laboratorium');
