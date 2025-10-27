@@ -27,16 +27,10 @@ class Layanan_2 extends Admin_Controller
         $this->load->model(array('Layanan_2/Layanan_2_model',
                                  'Aktifitas/aktifitas_model',
                                 ));
-<<<<<<< HEAD
-<<<<<<< HEAD
-		
-=======
+
 		$this->template->set_theme('medika');
 		$this->template->set_layout('index');
->>>>>>> f10e5c2 (updatelayanan)
-=======
-		
->>>>>>> ce9b1cc (update)
+
         $this->template->title('Manage Data Supplier');
         $this->template->page_icon('fa fa-building-o');
 
