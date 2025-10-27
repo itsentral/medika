@@ -15,7 +15,6 @@ class Consumable extends Admin_Controller
   public function __construct()
   {
     parent::__construct();
-
     // $this->load->library(array( 'upload', 'Image_lib'));
     $this->load->model(array(
       'Consumable/consumable_model'
@@ -27,6 +26,8 @@ class Consumable extends Admin_Controller
 
     $this->id_user  = $this->auth->user_id();
     $this->datetime = date('Y-m-d H:i:s');
+
+    $this->template->set_theme('medika');
   }
 
   public function index()
@@ -137,6 +138,7 @@ class Consumable extends Admin_Controller
         'category' => $category
       ];
 
+      $this->template->set_theme('medika');
       $this->template->set('results', $data);
       $this->template->title('Add Barang Stok');
       $this->template->page_icon('fa fa-edit');

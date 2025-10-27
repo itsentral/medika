@@ -172,7 +172,7 @@ if (!empty($id)) {
 				swal({
 					title: "Error Message!",
 					text: 'Category stok empty, select first ...',
-					type: "warning"
+					icon: "warning"
 				});
 				$('#save').prop('disabled', false);
 				return false;
@@ -181,79 +181,75 @@ if (!empty($id)) {
 				swal({
 					title: "Error Message!",
 					text: 'Stok name empty, select first ...',
-					type: "warning"
+					icon: "warning"
 				});
 				$('#save').prop('disabled', false);
 				return false;
 			}
 
 			swal({
-					title: "Are you sure?",
-					text: "You will not be able to process again this data!",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonClass: "btn-danger",
-					confirmButtonText: "Yes, Process it!",
-					cancelButtonText: "No, cancel process!",
-					closeOnConfirm: true,
-					closeOnCancel: false
-				},
-				function(isConfirm) {
-					if (isConfirm) {
-						var formData = new FormData($('#data-form')[0]);
-						var baseurl = siteurl + active_controller + '/add';
-						$.ajax({
-							url: baseurl,
-							type: "POST",
-							data: formData,
-							cache: false,
-							dataType: 'json',
-							processData: false,
-							contentType: false,
-							success: function(data) {
-								if (data.status == 1) {
-									swal({
-										title: "Save Success!",
-										text: data.pesan,
-										type: "success",
-										timer: 3000
-									});
-									window.location.href = base_url + active_controller;
-								} else {
-
-									if (data.status == 2) {
-										swal({
-											title: "Save Failed!",
-											text: data.pesan,
-											type: "warning",
-											timer: 3000
-										});
-									} else {
-										swal({
-											title: "Save Failed!",
-											text: data.pesan,
-											type: "warning",
-											timer: 3000
-										});
-									}
-
-								}
-							},
-							error: function() {
-
+				title: "Are you sure?",
+				text: "You will not be able to process again this data!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonClass: "btn-danger",
+				confirmButtonText: "Yes, Process it!",
+				cancelButtonText: "No, cancel process!",
+				closeOnConfirm: true,
+				closeOnCancel: false
+			}).then((next) => {
+				if (next) {
+					var formData = new FormData($('#data-form')[0]);
+					var baseurl = siteurl + active_controller + '/add';
+					$.ajax({
+						url: baseurl,
+						type: "POST",
+						data: formData,
+						cache: false,
+						dataType: 'json',
+						processData: false,
+						contentType: false,
+						success: function(data) {
+							if (data.status == 1) {
 								swal({
-									title: "Error Message !",
-									text: 'An Error Occured During Process. Please try again..',
-									type: "warning",
+									title: "Save Success!",
+									text: data.pesan,
+									type: "success",
 									timer: 3000
 								});
+								window.location.href = base_url + active_controller;
+							} else {
+
+								if (data.status == 2) {
+									swal({
+										title: "Save Failed!",
+										text: data.pesan,
+										type: "warning",
+										timer: 3000
+									});
+								} else {
+									swal({
+										title: "Save Failed!",
+										text: data.pesan,
+										type: "warning",
+										timer: 3000
+									});
+								}
+
 							}
-						});
-					} else {
-						swal("Cancelled", "Data can be process again :)", "error");
-						return false;
-					}
-				});
+						},
+						error: function() {
+
+							swal({
+								title: "Error Message !",
+								text: 'An Error Occured During Process. Please try again..',
+								type: "warning",
+								timer: 3000
+							});
+						}
+					});
+				}
+			});
 		});
 
 	});
