@@ -32,6 +32,7 @@
 									    <label for="customer">Nama Tabung</label>
 									    </div>
 									    <div class="col-md-6">
+<<<<<<< HEAD
 											<select id="tabung" name="tabung" class="form-control select" required>
 											<option value="">-- Pilih Tabung --</option>
 											<?php foreach ($results['tabung'] as $tabung){  
@@ -39,6 +40,9 @@
 											<option value="<?= $tabung->id?>"><?= ucfirst(strtolower($tabung->stock_name))?></option>
 											<?php } ?>
 										  </select>
+=======
+											<input type="text" class="form-control" id="" required name="tabung" placeholder="Nama Tabung">
+>>>>>>> f10e5c2 (updatelayanan)
 									    </div>
 										</div>
 										<div class="form-group row">
@@ -46,6 +50,7 @@
 									    <label for="customer">Nama Mesin</label>
 									    </div>
 									    <div class="col-md-6">
+<<<<<<< HEAD
 											<select id="mesin" name="mesin" class="form-control select" required>
 											<option value="">-- Pilih Mesin --</option>
 											<?php foreach ($results['mesin'] as $mesin){  
@@ -53,6 +58,10 @@
 											<option value="<?= $mesin->id?>"><?= ucfirst(strtolower($mesin->nm_asset))?></option>
 											<?php } ?>
 										  </select>   </div>
+=======
+											<input type="text" class="form-control" id="" required name="mesin" placeholder="Nama Mesin">
+									    </div>
+>>>>>>> f10e5c2 (updatelayanan)
 										</div>
 										<div class="col-xs-2">
 										&nbsp;
@@ -124,6 +133,28 @@
 			Template	+='</td>';
 			Template	+='<td align="left">';
 					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][umurbawah]" id="data1_'+loop+'_umurbawah" label="FALSE" div="FALSE">';
+<<<<<<< HEAD
+=======
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][umuratas]" id="data1_'+loop+'_umuratas" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][normalbawah]" id="data1_'+loop+'_normalbawah" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][normalatas]" id="data1_'+loop+'_normalatas" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][kritisbawah]" id="data1_'+loop+'_kritisbawah" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][kritisatas]" id="data1_'+loop+'_kritisatas" label="FALSE" div="FALSE">';
+			Template	+='</td>';
+			Template	+='</td>';
+				Template	+='<td align="left">';
+					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][satuan]" id="data1_'+loop+'_satuan label="FALSE" div="FALSE">';
+>>>>>>> f10e5c2 (updatelayanan)
 			Template	+='</td>';
 				Template	+='<td align="left">';
 					Template	+='<input type="text" class="form-control input-sm" name="data1['+loop+'][umuratas]" id="data1_'+loop+'_umuratas" label="FALSE" div="FALSE">';

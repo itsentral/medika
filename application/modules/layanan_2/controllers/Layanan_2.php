@@ -27,7 +27,12 @@ class Layanan_2 extends Admin_Controller
         $this->load->model(array('Layanan_2/Layanan_2_model',
                                  'Aktifitas/aktifitas_model',
                                 ));
+<<<<<<< HEAD
 		
+=======
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
+>>>>>>> f10e5c2 (updatelayanan)
         $this->template->title('Manage Data Supplier');
         $this->template->page_icon('fa fa-building-o');
 
@@ -41,6 +46,8 @@ class Layanan_2 extends Admin_Controller
        $this->auth->restrict($this->viewPermission);
         $session = $this->session->userdata('app_session');
 		$this->template->page_icon('fa fa-users');
+		$this->template->set_theme('medika');
+		$this->template->set_layout('index');
 		$deleted = '0';
         // $data = $this->Layanan_2_model->get_data_category1();
         // $this->template->set('results', $data);
