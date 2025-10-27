@@ -10,95 +10,102 @@ $costcenter	= $this->db->query($QUERY)->result_array();
 
 ?>
 
-<div class="card">
-	<div class="card-header">
-		<h5 class="card-title mb-0"></h5>
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title"></h3>
 	</div>
-	<div class="card-body">
-		<form id="form_proses_bro">
-			<div class="row mb-3">
-				<div class="col-sm-6">
-					<!-- <label><input id='chk' name='chk' type="checkbox" value="Y"> &nbsp;&nbsp;<span class="text-success">Ubah semua dengan kode yang sama</span></label> -->
-				</div>
+	<div class="box-body">
+		<div class='form-group row'>
+			<div class='col-sm-6'>             
+					<label><input id='chk' name='chk' type="checkbox" value="Y"> &nbsp;&nbsp;<span style='color:green;'>Ubah semua dengan kode yang sama</span></label>
 			</div>
-			<div class="row mb-3 align-items-center">
-				<label class="col-sm-2 col-form-label fw-bold">Nama Asset <span class="text-danger">*</span></label>
-				<div class="col-sm-4">
+		</div>
+		<div class='form-group row'>		 	 
+			<label class='label-control col-sm-2'><b>Nama Asset <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>             
 					<?php
-						echo form_input(array('id'=>'nm_asset','name'=>'nm_asset','class'=>'form-control','autocomplete'=>'off','placeholder'=>'Nama Asset','readonly'=>'readonly'), $dataD[0]['nm_asset']);
+						echo form_input(array('id'=>'nm_asset','name'=>'nm_asset','class'=>'form-control input-md','autocomplete'=>'off','placeholder'=>'Nama Asset','readonly'=>'readonly'), $dataD[0]['nm_asset']);
 						echo form_input(array('type'=>'hidden','id'=>'id','name'=>'id'), $dataD[0]['id']);
 						echo form_input(array('type'=>'hidden','id'=>'kd_asset','name'=>'kd_asset'), $dataD[0]['kd_asset']);
-						echo form_input(array('type'=>'hidden','id'=>'helpa','name'=>'helpa','value'=>'N'));
-					?>
-				</div>
-				<label class="col-sm-2 col-form-label fw-bold">Kategori <span class="text-danger">*</span></label>
-				<div class="col-sm-4">
-					<select name="category" id="category" class="form-select" readonly>
-						<?php
-							foreach($list_catg AS $val => $valx){
-								$selx = ($dataD[0]['category'] == $valx['id'])?'selected':'';
-								echo "<option value='".$valx['id']."' ".$selx.">".strtoupper($valx['nm_category'])."</option>";
-							}
-						?>
-					</select>
-				</div>
+						echo form_input(array('type'=>'hidden','id'=>'helpa','name'=>'helpa','value'=>'N'));						
+					?>		
 			</div>
-			<div class="row mb-3 align-items-center">
-				<label class="col-sm-2 col-form-label fw-bold">Outlet <span class="text-danger">*</span></label>
-				<div class="col-sm-4">
-					<select name="outlet" id="outlet" class="form-select chosen-select">
-						<option value="0">Pilih Outlet</option>
-						<?php
-						foreach ($list_dept as $val => $valx) {
-							$selected = ($valx['id'] == $dataD[0]['outlet'] )?'selected':'';
-							echo "<option value='" . $valx['id'] . "' " . $selected . ">" . strtoupper($valx['nama']) . "</option>";
+			<label class='label-control col-sm-2'><b>Kategori <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>  
+				<select name='category' id='category' class='form-control input-md chosen-select' disabled>
+					<?php
+						foreach($list_catg AS $val => $valx){
+							$selx = ($dataD[0]['category'] == $valx['id'])?'selected':'';
+							echo "<option value='".$valx['id']."' ".$selx.">".strtoupper($valx['nm_category'])."</option>";
 						}
-						?>
-					</select>
-				</div>
-				<label class="col-sm-2 col-form-label fw-bold">Merk <span class="text-danger">*</span></label>
-				<div class="col-sm-4">
-					<input type="text" id="merk" name="merk" value="<?=$dataD[0]['merk']?>" class="form-control" autocomplete="off" placeholder="Merk">
-				</div>
-			</div>
-			<div class="row mb-3 align-items-center">
-				<label class="col-sm-2 col-form-label fw-bold">Nilai Asset <span class="text-danger">*</span></label>
-				<div class="col-sm-4">
-					<?php
-						echo form_input(array('id'=>'nilai_asset','name'=>'nilai_asset','class'=>'form-control','autocomplete'=>'off','placeholder'=>'Nilai Asset','data-decimal'=>'.','data-thousand'=>'','data-precision'=>'0','data-allow-zero'=>false,'readonly'=>'readonly'), $dataD[0]['nilai_asset']);
 					?>
-				</div>
-				<label class="col-sm-2 col-form-label fw-bold">Jangka Waktu <span class="text-danger">*</span></label>
-				<div class="col-sm-4">
-					<select name="depresiasi" id="depresiasi" class="form-select" readonly>
-						<?php
-							for($a=1; $a <= 8; $a++ ){
-								$selx = ($dataD[0]['depresiasi'] == $a)?'selected':'';
-								echo "<option value='".$a."' ".$selx.">".$a." Tahun</option>";
-							}
-						?>
-					</select>
-				</div>
+				</select>	
 			</div>
-			<div class="row mb-3 align-items-center">
-				<label class="col-sm-2 col-form-label fw-bold">Lokasi <span class="text-danger">*</span></label>
-				<div class="col-sm-4">
-					<input type="text" id="qty" name="qty" class="d-none" value="1">
-					<input type="text" id="lokasi_asset" name="lokasi_asset" value="<?=$dataD[0]['lokasi_asset']?>" class="form-control" autocomplete="off" placeholder="Lokasi">
-				</div>
-				<label class="col-sm-2 col-form-label fw-bold">Dipresiasi Perbulan</label>
-				<div class="col-sm-4">
+		</div>
+		<div class='form-group row'>		 	 
+			<label class='label-control col-sm-2'><b>Outlet <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>
+				<select name='lokasi_asset' id='lokasi_asset' class='form-control input-md chosen-select'>
+					<option value='0'>Pilih Outlet</option>
 					<?php
-						echo form_input(array('id'=>'value','name'=>'value','class'=>'form-control','autocomplete'=>'off','placeholder'=>'Dipresiasi Perbulan', 'readonly'=>'readonly','data-decimal'=>'.','data-thousand'=>'','data-precision'=>'0','data-allow-zero'=>false), $dataD[0]['value']);
+					foreach ($list_dept as $val => $valx) {
+						$selected	= ($valx['id'] == $dataD[0]['lokasi_asset'] )?'selected':'';
+						echo "<option value='" . $valx['id'] . "' " . $selected . ">" . strtoupper($valx['nama']) . "</option>";
+					}
 					?>
-				</div>
+				</select>
 			</div>
-			<div class="d-flex justify-content-end">
-				<?php
-					echo form_button(array('type'=>'button','class'=>'btn btn-primary','value'=>'save','content'=>'Save','id'=>'simpan-bro','style'=>'width:100px;')).' ';
-				?>
+			<label class='label-control col-sm-2'><b>Cost Center  <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>
+				<select name='cost_center' id='cost_center' class='form-control input-md chosen-select'>
+					<option value="0">Select Costcenter</option>
+					<?php
+					foreach($costcenter AS $val => $valx){
+						$selx = ($dataD[0]['cost_center'] == $valx['id_costcenter'])?'selected':'';
+						echo "<option value='".$valx['id_costcenter']."' ".$selx.">".strtoupper($valx['nama_costcenter'])."</option>";
+					}
+					?>
+				</select>
 			</div>
-		</form>
+		</div>
+		<div class='form-group row'>		 	 
+			<label class='label-control col-sm-2'><b>Nilai Asset <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>             
+					<?php
+						echo form_input(array('id'=>'nilai_asset','name'=>'nilai_asset','class'=>'form-control input-md','autocomplete'=>'off','placeholder'=>'Nilai Asset','data-decimal'=>'.','data-thousand'=>'','data-precision'=>'0','data-allow-zero'=>false,'readonly'=>'readonly'), $dataD[0]['nilai_asset']);											
+					?>		
+			</div>
+			<label class='label-control col-sm-2'><b>Jangka Waktu <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>
+				<select name='depresiasi' id='depresiasi' class='form-control input-md' disabled>
+					<?php
+						for($a=1; $a <= 8; $a++ ){
+							$selx = ($dataD[0]['depresiasi'] == $a)?'selected':'';
+							echo "<option value='".$a."' ".$selx.">".$a." Tahun</option>";
+						}
+					?>
+				</select>	
+			</div>
+		</div>
+		<div class='form-group row'>
+			<label class='label-control col-sm-2'><b>Qty <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>            
+					<?php
+						echo form_input(array('id'=>'qty','name'=>'qty','class'=>'form-control input-md','autocomplete'=>'off','placeholder'=>'Qty Assets','data-decimal'=>'.','data-thousand'=>'','data-precision'=>'0','data-allow-zero'=>false,'readonly'=>'readonly'), $dataD[0]['qty']);											
+					?>		
+			</div>		 	 
+			<label class='label-control col-sm-2'><b>Dipresiasi Perbulan</b></label>
+			<div class='col-sm-4'>             
+					<?php
+						echo form_input(array('id'=>'value','name'=>'value','class'=>'form-control input-md','autocomplete'=>'off','placeholder'=>'Dipresiasi Perbulan', 'readonly'=>'readonly','data-decimal'=>'.','data-thousand'=>'','data-precision'=>'0','data-allow-zero'=>false), $dataD[0]['value']);											
+					?>		
+			</div>
+			
+		</div>
+	
+		<?php
+			echo form_button(array('type'=>'button','class'=>'btn btn-md btn-primary','value'=>'save','content'=>'Save','id'=>'simpan-bro','style'=>'width:100px; float:right;')).' ';
+		?>
 	</div>
 </div>
 <style>
@@ -106,15 +113,9 @@ $costcenter	= $this->db->query($QUERY)->result_array();
 </style>
 <script>
 	$(function() {
-		// Initialize Select2 for all select elements using the latest Select2 syntax
-		if ($.fn.select2) {
-			$('select').each(function() {
-				$(this).select2({
-					width: '100%',
-					dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
-				});
-			});
-		}
+		$('.chosen-select').select2({
+			width: '100%'
+		});
 		$('#nilai_asset').maskMoney();
         $('#qty').maskMoney();
 		// $('#value').autoNumeric('init');

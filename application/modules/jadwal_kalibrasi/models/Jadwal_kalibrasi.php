@@ -251,26 +251,18 @@ class Asset_model extends BF_Model
 			$nestedData[]	= "<div align='center'>" . $nomor . "</div>";
 			$nestedData[]	= "<div align='left'>" . strtoupper(strtolower($row['nm_category'])) . "</div>";
 			$value = "Active";
-			$color = "bg-success";
+			$color = "bg-green";
 			if ($row['status'] == 'N') {
 				$value = "Not Active";
-				$color = "bg-danger";
+				$color = "bg-red";
 			}
-			$nestedData[] = "
-				<div class='text-center'>
-					<span class='badge $color'>$value</span>
-				</div>
-			";
+			$nestedData[]	= "<div align='center'><span class='badge " . $color . " '>" . $value . "</span></div>";
 
 			$last_create = (!empty($row['updated_by'])) ? $row['updated_by'] : $row['created_by'];
-			$nestedData[] = "
-				<div class='text-center'>" . htmlspecialchars(strtolower($last_create)) . "</div>
-			";
+			$nestedData[]	= "<div align='center'>" . strtolower($last_create) . "</div>";
 
 			$last_date = (!empty($row['updated_date'])) ? $row['updated_date'] : $row['created_date'];
-			$nestedData[] = "
-				<div class='text-center'>" . date('d-m-Y', strtotime($last_date)) . "</div>
-			";
+			$nestedData[]	= "<div align='center'>" . date('d-m-Y', strtotime($last_date)) . "</div>";
 
 			$detail		= "";
 			$edit		= "";

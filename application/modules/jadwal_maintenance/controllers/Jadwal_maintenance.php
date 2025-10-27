@@ -2,7 +2,7 @@
 	exit('No direct script access allowed');
 }
 
-class Asset extends Admin_Controller
+class Jadwal_maintenance extends Admin_Controller
 {
 
 	protected $viewPermission = 'Assets.View';
@@ -26,25 +26,111 @@ class Asset extends Admin_Controller
 	public function index()
 	{
 		$this->auth->restrict($this->viewPermission);
+		$this->template->title('List Assets');
 		$cabang		= $this->db->query("SELECT * FROM cabang WHERE sts_aktif = 'aktif'")->result_array();
 		$dataArr = array(
 			'cabang' => $cabang,
 			'kategori' => $this->Asset_model->getList('asset_category')
 		);
-		$this->template->set_theme('medika');
-		$this->template->set_layout('index');
-		$this->template->title('List Assets');
 		$this->template->render('index', $dataArr);
 	}
 
 	public function type()
 	{
-		$this->template->set_theme('medika');
-		$this->template->set_layout('index');
-		$this->template->title('List Category Assets');
 		// $this->auth->restrict($this->viewPermission);
+		$this->template->title('List Category Assets');
 		// history("View index catgegory asset");
 		$this->template->render('category');
+	}
+
+
+	function list_kalibrator()
+	{
+			$status	= $this->input->post('status');
+			
+			$list = $this->Jadwal_maintenance_model->get_datatables($status);
+			$data = array();
+			$no = $_POST['start'];
+			foreach ($list as $item) {
+				$no++; 
+				$row = array();
+
+				$controller			= ucfirst(strtolower($this->uri->segment(1)));
+				$Arr_Akses			= getAcccesmenu($controller);
+				$row[] = $item->code;
+				$row[] = $item->name;
+				$tgl = (int)date('m', strtotime($item->actual_date));
+				$schre=$this->db->select('*')
+				->from('schedule_rekalibrasi_kalibrator')
+				->where('calibrator_id',$item->id)
+				->where('actual_date', null)
+				->get()
+				->row();
+				for ($x = 1; $x <= 12; $x++) {
+					if($tgl == $x){
+						$bg_plan = "green";
+						$bg_actual = "green";
+						$interval = $item->interval_rekalibrasi;
+						if(date('Y-m', strtotime($item->actual_date . ' +'.$interval.' year')) == date('Y-m')){
+							$bg_plan = "#DBCC23"; 
+						}elseif(date('Y-m', strtotime($item->actual_date . ' +'.$interval.' year')) < date('Y-m')){
+							$bg_plan = "red"; 
+						}	
+						if(date('Y', strtotime($item->actual_date . ' +'.$interval.' year')) <= date('Y')){
+							$bg_actual = "gray"; 
+						}
+
+						if($schre){
+							$bg_plan = "#76b5c5"; 
+							$bg_actual = "red"; 
+						}
+						$plan_date = (date('Y', strtotime($item->actual_date . ' +'.$interval.' year'))<= date('Y')) ? $item->actual_date :$item->plan_date;
+						$actual_date = (date('Y', strtotime($item->actual_date . ' +'.$interval.' year'))<= date('Y')) ? "" : $item->actual_date;
+						if($status == 'recal'){
+							$plan_date = $item->plan_date;
+							$actual_date = $item->actual_date;
+						}
+						
+						$template= '<div style="background:'.$bg_plan.';color:white;border-radius: 25px;width:100px">Plan :'.$plan_date.' </div> 
+							  	  <div style="background:'.$bg_actual.';color:white;border-radius: 25px;margin-top:10px">Actual :'.$actual_date.' </div>
+								';
+						if($interval == 0 || $interval == '-'){
+							$template= '<div style="background:purple;color:white;border-radius: 25px;width:100px">Consumable </div> 
+								';
+						}
+					
+						$row[] = $template;
+
+								
+					}else{
+						$row[] ='';
+					}
+					
+
+				}
+				if($schre){
+					$row[] = '
+						<button  onclick="detail_sch(`'.$item->schre_id.'`)" class="btn btn-sm btn-primary " style="border-radius:25%;margin-top:2px;"><i class="fa fa-eye"></i></button>
+				';
+				}else{
+					$row[] = '
+						<button  onclick="detail_sch(`'.$item->schre_id.'`)" class="btn btn-sm btn-primary " style="border-radius:25%;margin-top:2px;"><i class="fa fa-eye"></i></button>
+						&nbsp;&nbsp;<a href="'.site_url("schedule_rekalibrasi_kalibrator/quotation_rekalibrasi/").enkripsi_url($item->id).'/'.$item->schre_id.'" class="btn btn-sm btn-success" title="Proses Quotation" style="border-radius:25%;margin-top:2px;"><i class="fa fa-pencil"></i></a>
+					';
+				}
+               
+		
+				$data[] = $row;
+			}
+
+			$output = array(
+				"draw" => $_POST['draw'],
+				"recordsTotal" => $this->Jadwal_maintenance_model->count_all($status),
+				"recordsFiltered" => $this->Jadwal_maintenance_model->count_filtered($status),
+				"data" => $data,
+			);
+			
+			echo json_encode($output);	
 	}
 
 	public function data_side()
@@ -75,16 +161,7 @@ class Asset extends Admin_Controller
 	public function modal()
 	{
 		$dataArr = array(
-			'list_consumable' => $this->db
-			->select('accessories.*, accessories_category.nm_category,ms_satuan.category, ms_satuan.nama AS unit_name')
-			->from('accessories')
-			->join('accessories_category', 'accessories.id_category = accessories_category.id', 'left')
-			->join('ms_satuan', 'accessories.id_unit = ms_satuan.id', 'left')
-			->get()
-			->result_array(),
-
-			'outlet' => $this->db->get_where('cabang', ['deleted_by' => 0])->result_array(),
-			'list_param' => $this->db->get_where('rs_parameter', ['deleted_by' => NULL])->result_array(),
+			'list_dept' => $this->db->get_where('ms_department', ['deleted_by' => null])->result_array(),
 			'list_catg' => $this->Asset_model->getList('asset_category'),
 			'list_costcenter' => $this->db->get_where('warehouse', ['desc' => 'costcenter'])->result_array()
 		);
@@ -303,7 +380,7 @@ class Asset extends Admin_Controller
 
 		$Arr_Kembali	= array();
 		$data			= $this->input->post();
-		// return var_dump($data);
+
 		$session 		= $this->session->userdata('app_session');
 		$nmCategory		= $this->Asset_model->getWhere('asset_category', 'id', $data['category']);
 
@@ -350,20 +427,10 @@ class Asset extends Admin_Controller
 			$detailData[$lopp]['qty'] 			= $data['qty'];
 			$detailData[$lopp]['asset_ke'] 		= $no;
 			$detailData[$lopp]['depresiasi'] 	= $data['depresiasi'];
-			$detailData[$lopp]['utilitas_perhari'] 	= str_replace(',', '',$data['utilitas_perhari']);
-			$detailData[$lopp]['utilitas_tahunan'] 	= str_replace(',', '',$data['utilitas_tahunan']);
-			$detailData[$lopp]['target_utilitas'] 	= str_replace(',', '',$data['target_utilitas']);
-			$detailData[$lopp]['total_biaya_perawatan'] 	= str_replace(',', '',$data['total_biaya_perawatan']);
-			$detailData[$lopp]['total_biaya_kalibrasi'] 	= str_replace(',', '',$data['total_biaya_kalibrasi']);
-			$detailData[$lopp]['total_biaya_consumable'] 	= str_replace(',', '',$data['total_biaya_consumable']);
-			$detailData[$lopp]['cost_per_test'] 	= str_replace(',', '',$data['cost_per_test']);
-			$detailData[$lopp]['disposal_value'] 	= str_replace(',', '',$data['disposal_value']);
-			$detailData[$lopp]['total_biaya_apd'] 		= str_replace(',', '', $data['total_biaya_apd']);
 			$detailData[$lopp]['value'] 		= str_replace(',', '', $data['value']);
 			$detailData[$lopp]['kdcab'] 		= $session['kdcab'];
-			$detailData[$lopp]['outlet'] 	= $data['outlet'];
 			$detailData[$lopp]['lokasi_asset'] 	= $data['lokasi_asset'];
-			$detailData[$lopp]['merk'] 	= $data['merk'];
+			$detailData[$lopp]['cost_center'] 	= $data['cost_center'];
 			$detailData[$lopp]['created_by'] 	= $this->session->userdata['app_session']['username'];
 			$detailData[$lopp]['created_date'] 	= date('Y-m-d h:i:s');
 
@@ -391,90 +458,15 @@ class Asset extends Admin_Controller
 				$detailDataDash[$lopp2]['nilai_susut'] 	= str_replace(',', '', $data['value']);
 				$detailDataDash[$lopp2]['kdcab'] 		= $session['kdcab'];
 			}
-			// return var_dump($data['perawatan']["tahun"][1]);
-
-			// $asset_maintenance = array();
-			// foreach ($data['perawatan']["tahun"] as $key => $value) {
-			// 	$asset_maintenance[] = array(
-			// 		'kd_asset'  => $kode_assets . $Nomor,
-			// 		'tahun'       => $data['perawatan']['tahun'][$key],
-			// 		'tanggal'     => $data['perawatan']['tanggal'][$key],
-			// 		//  0  => $data['perawatan']['keterangan'][$key],
-			// 		'biaya'       => $data['perawatan']['biaya'][$key]
-			// 	);
-			// }
-			$kd_asset = $kode_assets . $Nomor;
-			$asset_maintenance = array();
-			foreach ($data['perawatan'] as $item) {
-				$asset_maintenance[] = array(
-					'kd_asset' => $kd_asset,
-					'year' => $item['year'],
-					'date' => $item['date'],
-					'maintenance_type' => $item['maintenance_type'],
-					'cost' => str_replace(',', '',$item['cost'])
-				);
-			}
-
-			$asset_calibration = array();
-			foreach ($data['kalibrasi'] as $item) {
-				$asset_calibration[] = array(
-					'kd_asset' => $kd_asset,
-					'year' => $item['year'],
-					'date' => $item['date'],
-					'calibration_type' => $item['calibration_type'],
-					'cost' => str_replace(',', '',$item['cost'])
-				);
-			}
-			
-			$asset_accessories = array();
-			foreach ($data['consumable'] as $item) {
-				$asset_accessories[] = array(
-					'kd_asset' => $kd_asset,
-					'accessories_id' => $item['accessories_id'],
-					'utility' => $item['utility'],
-					// 'package' => $item['package'],
-					'qty' => $item['qty'],
-					'type' => 'consumable',
-					'cost' => str_replace(',', '',$item['cost'])
-				);
-			}
-
-			$asset_accessories_apd = array();
-			foreach ($data['apd'] as $item) {
-				$asset_accessories_apd[] = array(
-					'kd_asset' => $kd_asset,
-					'accessories_id' => $item['accessories_id'],
-					'utility' => $item['utility'],
-					// 'package' => $item['package'],
-					'qty' => $item['qty'],
-					'type' =>'apd',
-					'cost' => str_replace(',', '',$item['cost'])
-				);
-			}
-
-			$asset_parameter = array();
-			foreach ($data['parameter'] as $item) {
-				$asset_parameter[] = array(
-					'kd_asset' => $kd_asset,
-					'parameter_id' => $item['parameter_id'],
-					'abbreviation' => $item['abbreviation'],
-					'tube' => $item['tube']
-				);
-			}
-		
 		}
 
-		
+		// print_r($detailData);
+		// print_r($detailDataDash);
+		// exit;
 
 		$this->db->trans_start();
 		$this->db->insert_batch('asset', $detailData);
 		$this->db->insert_batch('asset_generate', $detailDataDash);
-		$this->db->insert_batch('asset_maintenance', $asset_maintenance);
-		$this->db->insert_batch('asset_calibration', $asset_calibration);
-		$this->db->insert_batch('asset_accessories', $asset_accessories);
-		$this->db->insert_batch('asset_accessories', $asset_accessories_apd);
-		$this->db->insert_batch('asset_parameter', $asset_parameter);
-
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() === FALSE) {
@@ -489,6 +481,7 @@ class Asset extends Admin_Controller
 				'pesan'		=> 'Asset berhasil disimpan. Thanks ...',
 				'status'	=> 1
 			);
+			history("Insert asset " . $kode_assets);
 		}
 
 		echo json_encode($Arr_Data);
@@ -509,14 +502,79 @@ class Asset extends Admin_Controller
 	}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function edit()
 	{
 		$Arr_Kembali	= array();
 		$data			= $this->input->post();
 		$session 		= $this->session->userdata('app_session');
-		
-		// $helpx			= $data['helpa'];
-		$helpx			='Y';
+
+		$helpx			= $data['helpa'];
+
 		if ($helpx == 'Y') {
 			$nmCategory		= $this->Asset_model->getWhere('asset_category', 'id', $data['category']);
 
@@ -556,12 +614,12 @@ class Asset extends Admin_Controller
 				$detailData[$lopp]['depresiasi'] 	= $data['depresiasi'];
 				$detailData[$lopp]['value'] 		= str_replace(',', '', $data['value']);
 				$detailData[$lopp]['kdcab'] 		= $session['kdcab'];
-				$detailData[$lopp]['outlet'] 	= $data['outlet'];
 				$detailData[$lopp]['lokasi_asset'] 	= $data['lokasi_asset'];
-				$detailData[$lopp]['merk'] 	= $data['merk'];
+				$detailData[$lopp]['cost_center'] 	= $data['cost_center'];
 				$detailData[$lopp]['created_by'] 	= $this->session->userdata['app_session']['username'];
 				$detailData[$lopp]['created_date'] 	= date('Y-m-d h:i:s');
 			}
+
 			// print_r($detailData);
 
 			$Data_Del	= array(
@@ -572,9 +630,11 @@ class Asset extends Admin_Controller
 		} elseif ($helpx == 'N') {
 			$idx			= $data['id'];
 			$lokasi_asset	= $data['lokasi_asset'];
+			$cost_center	= $data['cost_center'];
 
 			$Data_Update	= array(
 				'lokasi_asset' 	=> $lokasi_asset,
+				'cost_center' 	=> $cost_center,
 				'modified_by' 	=> $this->session->userdata['app_session']['username'],
 				'modified_date' => date('Y-m-d h:i:s')
 			);
@@ -607,7 +667,7 @@ class Asset extends Admin_Controller
 				'pesan'		=> 'Asset berhasil disimpan. Thanks ...',
 				'status'	=> 1
 			);
-			// history("Update asset");
+			history("Update asset");
 		}
 
 		echo json_encode($Arr_Data);
@@ -671,7 +731,7 @@ class Asset extends Admin_Controller
 					'pesan'		=> $TandaI . ' data success. Thanks ...',
 					'status'	=> 1
 				);
-				// history($TandaI . ' Category Asset ' . $id . ' / ' . $nm_category);
+				history($TandaI . ' Category Asset ' . $id . ' / ' . $nm_category);
 			}
 
 			echo json_encode($Arr_Kembali);
@@ -724,7 +784,7 @@ class Asset extends Admin_Controller
 				'pesan'		=> 'Delete data success. Thanks ...',
 				'status'	=> 1
 			);
-			// history('Delete Category Asset Data : ' . $id);
+			history('Delete Category Asset Data : ' . $id);
 		}
 		echo json_encode($Arr_Data);
 	}
