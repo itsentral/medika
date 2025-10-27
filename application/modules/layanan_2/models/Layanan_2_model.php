@@ -161,8 +161,16 @@ class Layanan_2_model extends BF_Model
 			$nestedData[]	= "<div align='left'>" . $row['id_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_kategori'] . "</div>";
+<<<<<<< HEAD
 			$nestedData[]	= "<div align='left'>" . $row['tabung'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['mesin'] . "</div>";
+=======
+<<<<<<< HEAD
+=======
+			$nestedData[]	= "<div align='left'>" . $row['tabung'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['mesin'] . "</div>";
+>>>>>>> main
+>>>>>>> b526aa0 (reset head)
 			$nestedData[]	= "<div align='left'>" . $row['stock_name'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nm_asset'] . "</div>";
 			$priX	= "";
@@ -175,7 +183,14 @@ class Layanan_2_model extends BF_Model
 
 			if ($ENABLE_MANAGE) {
 				//$Terima	= "<button class='btn btn-sm btn-success edit' title='Create Penerimaan' data-inv='" . $row['no_invoice'] . "'><i class='fa fa-list'></i></button>";
+<<<<<<< HEAD
 	
+=======
+<<<<<<< HEAD
+=======
+	
+>>>>>>> main
+>>>>>>> b526aa0 (reset head)
 			$Terima	=  "<a class='btn btn-success btn-xs edit' data-bs-toggle='modal' data-bs-target='#dialog-popup' href='javascript:void(0)' title='Edit' data-id_layanan2='" . $row['id_parameter'] . "'><i class='fa fa-edit'></i>
 				</a>";
 			
@@ -202,6 +217,10 @@ class Layanan_2_model extends BF_Model
 	{
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 		$sql = "SELECT a.*, b.nama_kategori,c.stock_name,d.nm_asset
 	         FROM rs_parameter a 
              JOIN rs_kategorilab b ON a.id_kategori  = b.id_kategori
