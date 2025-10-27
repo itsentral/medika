@@ -15,6 +15,7 @@ class Paket_mcu extends Admin_Controller
 	protected $addPermission    = "Paket_mcu.Add";
 	protected $managePermission = "Paket_mcu.Manage";
 	protected $deletePermission = "Paket_mcu.Delete";
+	protected $kdcab;
 
 	public function __construct()
 	{
@@ -27,7 +28,7 @@ class Paket_mcu extends Admin_Controller
 			'Customer/Customer_model',
 			'Aktifitas/aktifitas_model'
 		));
-
+		$this->kdcab = $this->session->userdata('app_session')['kdcab'];
 		$this->template->title('Paket MCU');
 		$this->template->page_icon('fa fa-stetoscope');
 		date_default_timezone_set("Asia/Bangkok");
@@ -36,7 +37,7 @@ class Paket_mcu extends Admin_Controller
 	public function index()
 	{
 		$this->auth->restrict($this->viewPermission);
-		$data = $this->db->get_where('rs_paket_mcu', ['status' => '1'])->result();
+		$data = $this->db->get_where('rs_paket_mcu', ['status' => '1', 'kdcab' => $this->kdcab])->result();
 		$this->template->set('results', $data);
 		$this->template->title('Paket MCU');
 		$this->template->render('index');
@@ -46,7 +47,7 @@ class Paket_mcu extends Admin_Controller
 	{
 		$this->auth->restrict($this->viewPermission);
 		$data = [
-			'kategori' => $this->db->get_where('rs_kategori_pemeriksaan', ['status' => '1'])->result(),
+			'kategori' => $this->db->get_where('rs_kategorilab', ['kdcab' => $this->kdcab])->result(),
 		];
 
 		$this->template->set($data);
@@ -55,11 +56,11 @@ class Paket_mcu extends Admin_Controller
 
 	public function getKategori($data = null)
 	{
-		$data = $this->db->get_where('rs_kategori_pemeriksaan', ['status' => '1'])->result();
+		$data = $this->db->get_where('rs_kategorilab', ['kdcab' => $this->kdcab])->result();
 
 		$result = [];
 		foreach ($data as $row) {
-			$result[] = ['id' => $row->id, 'text' => $row->name];
+			$result[] = ['id' => $row->id_kategori, 'text' => $row->nama_kategori];
 		}
 
 		echo json_encode(['results' => $result]);
@@ -69,11 +70,11 @@ class Paket_mcu extends Admin_Controller
 	{
 		$kategori_id = $this->input->get('kategori_id');
 		$term = $this->input->get('q'); // pencarian optional
-		$data = $this->db->get_where('xrs_kelompok_pemeriksaan', ['kategori_id' => $kategori_id, 'nama_kelompok' => $term])->result();
+		$data = $this->db->like('nama_layananlaboratorium', $term)->get_where('rs_layananlaboratorium', ['id_kategorilab' => $kategori_id])->result();
 
 		$result = [];
 		foreach ($data as $row) {
-			$result[] = ['id' => $row->id, 'text' => $row->nama_kelompok];
+			$result[] = ['id' => $row->id_layananlaboratorium, 'text' => $row->nama_layananlaboratorium];
 		}
 
 		echo json_encode(['results' => $result]);
