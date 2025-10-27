@@ -42,19 +42,10 @@ class Menu_generator
 				->get()
 				->result();
 
-<<<<<<< HEAD
-			$html = "<ul class='sidebar-menu'>
-							<li class='header'></li>
-	                        <li class='" . check_class('dashboard', TRUE) . "'>
-	                            <a href='" . site_url() . "'>
-	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
-	                            </a>
-=======
 			$html = "<ul class='nav nav-primary'>
 	                        <li class='nav-item " . check_class('dashboard', TRUE) . "'>
 	                            <a href='" . site_url() . "'>
 	                                <i class='fa fa-store-alt me-1'></i><p>Dashboard</p></a>
->>>>>>> main
 	                        </li>";
 
 			if (is_array($menu) && count($menu)) {
@@ -77,10 +68,6 @@ class Menu_generator
 						->order_by("t1.order", "ASC")
 						->get()
 						->result();
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 					//Jump to end_for point
 					if (count($submenu) == 0) {
 						if ($link != "#") {
@@ -267,16 +254,6 @@ class Menu_generator
 				->get()
 				->result();
 
-<<<<<<< HEAD
-			$html = "<ul class='sidebar-menu'>
-							<li class='header'></li>
-	                        <li class='" . check_class('dashboard', TRUE) . "'>
-	                            <a href='" . site_url() . "'>
-	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
-	                            </a>
-	                        </li>";
-
-=======
 			$html = "<ul class='nav nav-primary'>
 	                        <li class='nav-item " . check_class('dashboard', TRUE) . "'>
 	                            <a href='" . site_url() . "'>
@@ -291,7 +268,6 @@ class Menu_generator
 								<h4 class='text-section'>Main Menu</h4>
 							</li>
 							";
->>>>>>> main
 			if (is_array($menu) && count($menu)) {
 				foreach ($menu as $rw) {
 					$id 		= $rw->id;
@@ -322,18 +298,12 @@ class Menu_generator
 							if (strpos($this->uri, '/' . $link . '/') !== FALSE) {
 								$active = "active";
 							}
-<<<<<<< HEAD
-							$html .= "<li class='{$active}'><a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
-							<h6><i class='{$icon}'></i> &nbsp;&nbsp;&nbsp;<span>" . ucwords($title) . "</h6>
-							</span></a></li>";
-=======
 							$html .= "<li class='nav-item {$active}'>
 											<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
 												<i class='" . ($icon ? $icon : "") . " me-1'></i>
 												<p>" . ucwords($title) . "</p>
 											</a>
 										</li>";
->>>>>>> main
 						}
 						goto end_for;
 					}
@@ -344,18 +314,6 @@ class Menu_generator
 							break;
 						}
 					}
-<<<<<<< HEAD
-					$html .= "
-            			  <li class='treeview {$active}'>
-                      <a href='#'>
-                        <i class='" . $icon . "'></i>
-                        <span>" . ucwords($title) . "</span>
-                        <span class='pull-right-container'>
-						            	<i class='fa fa-angle-left pull-right'></i>
-						          	</span>
-                      </a>
-                      <ul class='treeview-menu'>";
-=======
 
 					$html .= "<li class='nav-item {$active}'>
 							<a href='#" . $id . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
@@ -365,7 +323,6 @@ class Menu_generator
 							</a>
                       		<div class='collapse' id='" . $id . "'>
 							<ul class='nav nav-collapse mb-0'>";
->>>>>>> main
 
 					//Make Sub Menu
 					foreach ($submenu as $sub) {
@@ -385,32 +342,6 @@ class Menu_generator
 						} else {
 							$active = "";
 						}
-<<<<<<< HEAD
-						$html .= "
-						<li class='" . $active . "'>
-							<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
-							<h6><i class='" . $subicon . "'></i>&nbsp;&nbsp;&nbsp;" . ucwords($subtitle) . "</h6>
-							</a>
-						</li>";
-					}
-					$html .= "
-						</ul>
-					</li>";
-
-					//Jump Point
-					end_for:
-					//END FOREACH MENU
-				}
-				$html .= "
-					</ul>";
-				/*=================================================================================================================
-===================================================================================================================
-===================================================================================================================
-*/
-			}
-		} else {
-			//other menu
-=======
 						$html .= "<li class='nav-item " . $active . "'>
 										<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
 											<span class='sub-item'>" . ucwords($subtitle) . "</span>
@@ -423,7 +354,6 @@ class Menu_generator
 				$html .= "</ul>";
 			}
 			//END FOREACH MENU
->>>>>>> main
 		}
 
 		return $html;

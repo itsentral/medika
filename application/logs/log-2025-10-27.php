@@ -761,3 +761,68 @@ ERROR - 2025-10-27 10:59:40 --> $config['composer_autoload'] is set to TRUE but 
 ERROR - 2025-10-27 10:59:40 --> Severity: Notice --> Undefined index: supplier /var/www/html/application/modules/purchase_order/views/view.php 27
 ERROR - 2025-10-27 10:59:40 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/application/modules/purchase_order/views/view.php 27
 ERROR - 2025-10-27 10:59:46 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:16:51 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:16:51 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:16:56 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:16:56 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:16:56 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:16:56 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:16:56 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:16:56 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:16:57 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:16:57 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:01 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:01 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:01 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:01 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:02 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:02 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:02 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:02 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:02 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:02 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:28 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:28 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:28 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:28 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:28 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:28 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:28 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:28 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:28 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:29 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:29 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:43 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:43 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:43 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:43 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:43 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:43 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:43 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:43 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:44 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:44 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:44 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:54 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:55 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:55 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:55 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:55 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:55 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:55 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:56 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:56 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:56 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:56 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:57 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:57 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:57 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:57 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:57 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:57 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:57 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:57 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:17:57 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:17:57 --> 404 Page Not Found: /index
+ERROR - 2025-10-27 04:18:03 --> $config['composer_autoload'] is set to TRUE but D:\LOCAL_SERVER\medika\application\vendor/autoload.php was not found.
+ERROR - 2025-10-27 04:18:03 --> 404 Page Not Found: /index
