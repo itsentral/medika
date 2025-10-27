@@ -97,8 +97,10 @@ thead input {
 				<h5 class="modal-title" id="head_title"></h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="modal-body" id="view">
+			<div class="modal-body" style="max-height:590px; overflow-x:auto; overflow-y:auto;margin:0;" id="view">
 			</div>
+			<div style="padding:8px; border-top:1px solid #eee; text-align:right;width:100%;">
+      		</div>
 		</div>
 	</div>
 </div>

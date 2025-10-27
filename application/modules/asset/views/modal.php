@@ -29,9 +29,9 @@
 				<select name="outlet" id="outlet" class="form-select select2">
 					<option value="0">Pilih Outlet</option>
 					<?php
-					foreach ($list_dept as $val => $valx) {
+					foreach ($outlet as $val => $valx) {
 						$sexd = "";
-						echo "<option value='" . $valx['id'] . "' " . $sexd . ">" . strtoupper($valx['nama']) . "</option>";
+						echo "<option value='" . $valx['id'] . "' " . $sexd . ">" . strtoupper($valx['namacabang']) . "</option>";
 					}
 					?>
 				</select>
@@ -96,7 +96,7 @@
 		<div class="row mb-3">
 			<label class="col-sm-2 col-form-label fw-bold">Target utilisasi</label>
 			<div class="col-sm-4">
-				<input type="text" id="target_utilitas" name="target_utilitas" class="form-control moneyFormat" autocomplete="off" placeholder="Lokasi">
+				<input type="text" id="target_utilitas" name="target_utilitas" class="form-control moneyFormat" autocomplete="off" placeholder="Lokasi" readonly>
 			</div>
 		</div>
 		<br>
@@ -106,7 +106,7 @@
 		<button onclick="addPerawatan('')" type="button" class="btn btn-primary mb-2">
 			<i class="fa fa-plus"></i> Perawatan
 		</button>
-		<div id="form-kirim-sample" style="margin-top:20px;max-height:300px; overflow-x:auto; overflow-y:auto;">
+		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
 					<tr>
@@ -125,6 +125,8 @@
 						<td id="total_biaya" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
 							<input name="total_biaya_perawatan" value="" id="total_biaya_perawatan" class="form-control total_biaya_perawatan moneyFormat" type="text" readonly>
 						</td>
+						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+						</td>
 					</tr>
 				</tfoot>
 			</table>
@@ -134,7 +136,7 @@
 		<button onclick="addKalibrasi('')" type="button" class="btn btn-primary mb-2">
 			<i class="fa fa-plus"></i> Kalibrasi
 		</button>
-		<div id="form-kirim-sample" style="margin-top:20px;max-height:300px; overflow-x:auto; overflow-y:auto;">
+		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
 					<tr>
@@ -152,6 +154,8 @@
 						<td colspan="3" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Total Biaya</td>
 						<td style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
 							<input name="total_biaya_kalibrasi" value="" id="total_biaya_kalibrasi" class="form-control total_biaya_kalibrasi moneyFormat" type="text" readonly>
+						</td>
+						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
 						</td>
 					</tr>
 				</tfoot>
@@ -173,11 +177,115 @@
 		<div class="row mb-3">
 			<div class="col-sm-4">
 				<div class="input-group">
-					<input type="text" id="cost_per_test" name="cost_per_test" class="form-control" autocomplete="off" placeholder="Value %" style="max-width:80px;">
+					<input type="text" id="cost_per_test" name="cost_per_test" class="form-control" autocomplete="off" placeholder="Value" style="max-width:80px;" readonly>
 				</div>
 			</div>
 		</div>
+			<br>
 		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Consumable</p>
+		<br><br>
+		<label class="form-label"><h5><b>Consumable</b></h5></label>
+		<br><br>
+		<button onclick="addConsumable('')" type="button" class="btn btn-primary mb-2">
+			<i class="fa fa-plus"></i> Consumable
+		</button>
+		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
+			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
+				<thead>
+					<tr>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Nama Consumable</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Fungsi</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Unit / kemasan</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Perkiraan pemakaian per 1.000 sampel</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Satuan</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Biaya</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Action</th>
+					</tr>
+				</thead>
+				<tbody id="consumable_list">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Total Biaya</td>
+						<td style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+							<input name="total_biaya_consumable" value="" id="total_biaya_consumable" class="form-control  moneyFormat" type="text" readonly>
+						</td>
+						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="5" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Cost Consumable Per Sampel</td>
+						<td id="cost_consumable_per_sampel" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+
+						</td>
+						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<br>
+		<label class="form-label"><h5><b>Apd</b></h5></label>
+		<br><br>
+		<button onclick="addApd('')" type="button" class="btn btn-primary mb-2">
+			<i class="fa fa-plus"></i> Apd
+		</button>
+		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
+			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
+				<thead>
+					<tr>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Nama Consumable</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Fungsi</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Unit / kemasan</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Perkiraan pemakaian per hari</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Satuan</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Biaya</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Action</th>
+					</tr>
+				</thead>
+				<tbody id="apd_list">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Total Biaya</td>
+						<td style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+							<input name="total_biaya_apd" value="" id="total_biaya_apd" class="form-control  moneyFormat" type="text" readonly>
+						</td>
+						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="5" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Cost APD Per Sampel</td>
+						<td id="cost_apd_per_sampel" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+
+						</td>
+						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<br>
+		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Parameter</p>
+		<br><br>
+		<button onclick="addParameter('')" type="button" class="btn btn-primary mb-2">
+			<i class="fa fa-plus"></i> Parameter
+		</button>
+		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
+			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
+				<thead>
+					<tr>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Nama Parameter</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Singkatan</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Tabung</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Action</th>
+					</tr>
+				</thead>
+				<tbody id="parameter_list">
+				</tbody>
+
+			</table>
+		</div>
 		<br><br><br><br>
 		<?php
 		echo form_button(array('type' => 'button', 'class' => 'btn btn-primary', 'value' => 'save', 'content' => 'Save', 'id' => 'simpan-bro', 'style' => 'width:100px; float:right;')) . ' ';
@@ -195,13 +303,18 @@
 		width: 100% !important;
 	}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 	$(function() {
-		$('.chosen-select').select2({
-			minimumResultsForSearch: 0 // always show search box
-		});
+		// Initialize Select2 for all select elements using the latest Select2 syntax
+		if ($.fn.select2) {
+			$('select').each(function() {
+				$(this).select2({
+					width: '100%',
+					dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
+				});
+			});
+		}
 		$('#nilai_asset').maskMoney();
 		$('#qty').maskMoney();
 
@@ -250,177 +363,167 @@
 		var tanggal = $('#tanggal').val();
 
 		if (nm_asset == '' || nm_asset == null) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Nama asset masih kosong ...',
-				icon: "warning"
+				text: "Nama asset masih kosong ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
+
 		if (category == '' || category == null || category == 0) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Kategori asset belum dipilih ...',
-				icon: "warning"
+				text: "Kategori asset belum dipilih ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
+
 		if (lokasi_asset == '' || lokasi_asset == null || lokasi_asset == 0) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Lokasi asset belum diisi ...',
-				icon: "warning"
+				text: "Lokasi asset belum diisi ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
+
 		if (outlet == '' || outlet == null || outlet == 0) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Outlet asset belum dipilih ...',
-				icon: "warning"
+				text: "Outlet asset belum dipilih ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
+
 		if (depresiasi == '' || depresiasi == null || depresiasi == 0) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Jangka waktu asset belum dipilih ...',
-				icon: "warning"
+				text: "Jangka waktu asset belum dipilih ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
+
 		if (nilai_asset == '' || nilai_asset == null || nilai_asset == 0) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Nilai asset belum dipilih ...',
-				icon: "warning"
+				text: "Nilai asset belum dipilih ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
+
 		if (qty == '' || qty == null || qty == 0) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Qty asset belum dipilih ...',
-				icon: "warning"
+				text: "Qty asset belum dipilih ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
+
 		if (tanggal == '' || tanggal == null || tanggal == 0) {
-			Swal.fire({
+			swal({
 				title: "Error Message!",
-				text: 'Tanggal asset belum dipilih ...',
-				icon: "warning"
+				text: "Tanggal asset belum dipilih ...",
+				type: "warning"
 			});
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
-		Swal.fire({
+
+		swal({
 			title: "Error Message!",
-			text: 'STOP',
-			icon: "warning"
+			text: "STOP",
+			type: "warning"
 		});
+
 
 		// return false;
 
-		Swal.fire({
+		swal({
 			title: "Are you sure?",
 			text: "You will not be able to process again this data!",
 			icon: "warning",
-			showCancelButton: true,
-			confirmButtonText: "Yes, Process it!",
-			cancelButtonText: "No, cancel process!",
-			allowOutsideClick: false
-		}).then(function(result) {
-			if (result && result.isConfirmed) {
-				setTimeout(function() {
-					$('.moneyFormat').each(function() {
-						// Get the current value
-						var value = $(this).val();
-						// Remove commas
-						value = value.replace(/,/g, '');
-						// Update the input field
-						$(this).val(value);
-					});	
-				}, 100);
+			buttons: {
+				cancel: {
+				text: "No, cancel process!",
+				visible: true,
+				className: "btn btn-secondary",
+				closeModal: true,
+				},
+				confirm: {
+				text: "Yes, Process it!",
+				className: "btn btn-danger",
+				},
+			},
+			dangerMode: true,
+			})
+			.then((isConfirm) => {
+			if (isConfirm) {
 				// loading_spinner();
 				var formData = new FormData($('#form_proses_bro')[0]);
 				var baseurl = siteurl + 'asset/saved';
+
 				$.ajax({
-					url: baseurl,
-					type: "POST",
-					data: formData,
-					cache: false,
-					dataType: 'json',
-					processData: false,
-					contentType: false,
-					success: function(data) {
-						if (data.status == 1) {
-							Swal.fire({
-								title: "Save Success!",
-								text: data.pesan,
-								icon: "success",
-								timer: 7000
-							});
-							window.location.href = siteurl + 'asset';
-						} else {
-							if (data.status == 2) {
-								Swal.fire({
-									title: "Save Failed!",
-									text: data.pesan,
-									icon: "warning",
-									timer: 7000
-								});
-							} else if (data.status == 3) {
-								Swal.fire({
-									title: "Save Failed!",
-									text: data.pesan,
-									icon: "warning",
-									timer: 7000
-								});
-							} else {
-								Swal.fire({
-									title: "Save Failed!",
-									text: data.pesan,
-									icon: "warning",
-									timer: 7000,
-									showCancelButton: false,
-									showConfirmButton: false,
-									allowOutsideClick: false
-								});
-							}
-							$('#simpan-bro').prop('disabled', false);
-						}
-					},
-					error: function() {
-						Swal.fire({
-							title: "Error Message !",
-							text: 'An Error Occured During Process. Please try again..',
-							icon: "warning",
-							timer: 7000,
-							showCancelButton: false,
-							showConfirmButton: false,
-							allowOutsideClick: false
-						});
-						$('#simpan-bro').prop('disabled', false);
+				url: baseurl,
+				type: "POST",
+				data: formData,
+				cache: false,
+				dataType: 'json',
+				processData: false,
+				contentType: false,
+				success: function(data) {
+					if (data.status == 1) {
+					swal({
+						title: "Save Success!",
+						text: data.pesan,
+						icon: "success",
+						timer: 7000,
+						buttons: false
+					});
+					setTimeout(() => {
+						window.location.href = siteurl + 'asset';
+					}, 2000);
+					} else {
+					swal({
+						title: "Save Failed!",
+						text: data.pesan,
+						icon: "warning",
+						timer: 7000,
+						buttons: false
+					});
+					$('#simpan-bro').prop('disabled', false);
 					}
+				},
+				error: function() {
+					swal({
+					title: "Error Message!",
+					text: 'An Error Occurred During Process. Please try again..',
+					icon: "error",
+					timer: 7000,
+					buttons: false
+					});
+					$('#simpan-bro').prop('disabled', false);
+				}
 				});
 			} else {
-				Swal.fire({
-					title: "Cancelled",
-					text: "Data can be process again :)",
-					icon: "error"
-				});
+				swal("Cancelled", "Data can be processed again :)", "error");
 				$('#simpan-bro').prop('disabled', false);
 				return false;
 			}
-		});
+});
+
 	});
 	//target_utilitas
 	$(document).on('keyup change', '#utilitas_perhari, #utilitas_tahunan, #depresiasi', function() {
@@ -475,8 +578,10 @@
 					<select name="perawatan[${counter_perawatan}][year]" class="form-control input">
 						<?php
 							$currentYear = date('Y');
-							for ($year = $currentYear; $year >= 2016; $year--) {
-								echo "<option value='{$year}'>{$year}</option>";
+							$selectedYear = $currentYear;
+							for ($year = $currentYear + 6; $year >= 2016; $year--) {
+								$selected = ($year == $selectedYear) ? "selected" : "";
+								echo "<option value='{$year}' {$selected}>{$year}</option>";
 							}
 						?>
 					</select>
@@ -493,9 +598,21 @@
             </tr>
         `;
         $('#perawatan_list').append(newInputHtml);
+		
+		$('#perawatan_list tr:last select').each(function() {
+			$(this).select2({
+				width: '100%',
+				dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
+			});
+		});
         counter_perawatan++;
 	}
+
 	$(document).on('keyup change', '.biaya_perawatan', function() {
+		updateTotalBiayaPerawatan();
+	});
+
+	function updateTotalBiayaPerawatan() {
 		let total = 0;
 		$('.biaya_perawatan').each(function() {
 			let val = $(this).val().replace(/,/g, '');
@@ -503,14 +620,11 @@
 			total += num;
 		});
 		$('.total_biaya_perawatan').val(total.toLocaleString('en-US'));
-	});
-
-
-
+	}
 
 	function deletePerawatan(key=''){
-		// console.log(key);
-       $(`#perawatan${key}`).remove();
+		$(`#perawatan${key}`).remove();
+		updateTotalBiayaPerawatan();
 	}
 
 
@@ -518,13 +632,15 @@
 	function addKalibrasi(){
         // console.log('add sampling');
 		const newInputHtml = `
-        	 <tr id="perawatan${counter_kalibrasi}">
+			<tr id="perawatan${counter_kalibrasi}">
 				<td>
 					<select name="kalibrasi[${counter_kalibrasi}][year]" class="form-control input">
 						<?php
 							$currentYear = date('Y');
-							for ($year = $currentYear; $year >= 2016; $year--) {
-								echo "<option value='{$year}'>{$year}</option>";
+							$selectedYear = $currentYear;
+							for ($year = $currentYear + 6; $year >= 2016; $year--) {
+								$selected = ($year == $selectedYear) ? "selected" : "";
+								echo "<option value='{$year}' {$selected}>{$year}</option>";
 							}
 						?>
 					</select>
@@ -532,20 +648,31 @@
 					<input name="kalibrasi[${counter_kalibrasi}][date]" type="date" value="" class="form-control input">
 				</td>
 				<td>
-              		<input name="kalibrasi[${counter_kalibrasi}][calibration_type]" value="" class="form-control input" type="text">
+					<input name="kalibrasi[${counter_kalibrasi}][calibration_type]" value="" class="form-control input" type="text">
 				</td>
-                <td><input name="kalibrasi[${counter_kalibrasi}][cost]" value="" class="form-control input biaya_kalibrasi moneyFormat" type="text"></td>
-                <td>
-                    <button onclick="deleteKalibrasi(${counter_kalibrasi})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
-                </td>
-            </tr>
-        `;
-        $('#kalibrasi_list').append(newInputHtml);
-        counter_kalibrasi++;
+			   <td><input name="kalibrasi[${counter_kalibrasi}][cost]" value="" class="form-control input biaya_kalibrasi moneyFormat" type="text"></td>
+			   <td>
+				  <button onclick="deleteKalibrasi(${counter_kalibrasi})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
+			   </td>
+			</tr>
+		`;
+		$('#kalibrasi_list').append(newInputHtml);
+		// Re-initialize Select2 for any new select elements inside the added row
+		$('#kalibrasi_list tr:last select').each(function() {
+			$(this).select2({
+				width: '100%',
+				dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
+			});
+		});
+		counter_kalibrasi++;
+		
 	}
 
-	
 	$(document).on('keyup change', '.biaya_kalibrasi', function() {
+		updateTotalBiayaKalibrasi();
+	});
+
+	function updateTotalBiayaKalibrasi() {
 		let total = 0;
 		$('.biaya_kalibrasi').each(function() {
 			let val = $(this).val().replace(/,/g, '');
@@ -553,11 +680,202 @@
 			total += num;
 		});
 		$('.total_biaya_kalibrasi').val(total.toLocaleString('en-US'));
-	});
+	}
 
 	function deleteKalibrasi(key=''){
-		// console.log(key);
-       $(`#perawatan${key}`).remove();
+		$(`#perawatan${key}`).remove();
+		updateTotalBiayaKalibrasi();
 	}
+
+	//addConsumable
+	let counter_consumable=0;
+	function addConsumable(){
+
+		const newInputHtml = `
+			<tr id="consumable${counter_consumable}">
+				<td>
+					<select onchange="getConsumable(${counter_consumable})" name="consumable[${counter_consumable}][accessories_id]" id="consumable_accessories_id${counter_consumable}" class="form-select select2">
+						<option value="0">Pilih Consumable</option>
+						<?php
+						foreach ($list_consumable as $val => $valx) {
+							$selected = "";
+							echo "<option value='" . $valx['id'] . "' " . $selected . ">" . strtoupper($valx['stock_name']) . "</option>";
+						}
+						?>
+					</select>
+				<td>
+					<input name="consumable[${counter_consumable}][type]" type="text" value="consumable" class="form-control input d-none">
+					<input name="consumable[${counter_consumable}][utility]" type="text" value="" class="form-control input">
+				</td>
+				<td id="consumable_package${counter_consumable}">
+				</td>
+				<td><input name="consumable[${counter_consumable}][qty]" value="" class="form-control input" type="text"></td>
+				<td id="consumable_unit${counter_consumable}"></td>
+				<td><input name="consumable[${counter_consumable}][cost]" value="" class="form-control input biaya_consumable moneyFormat" type="text"></td>
+				<td>
+					<button onclick="deleteConsumable(${counter_consumable})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
+				</td>
+			</tr>
+		`;
+		$('#consumable_list').append(newInputHtml);
+		$('#consumable_list tr:last select').each(function() {
+			$(this).select2({
+				width: '100%',
+				dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
+			});
+		});
+		counter_consumable++;
+	}
+	function getConsumable(id){
+		const list_consumable = <?= json_encode($list_consumable) ?>;
+		let selectedId = $(`#consumable_accessories_id${id}`).val();
+		const result = list_consumable.find(item => item.id === selectedId);
+		console.log(result.unit_name);
+
+		$('#consumable_package'+id).html(`${result.category}(${result.unit_name})`)
+		$('#consumable_unit'+id).html(`${result.unit_name}`)
+		
+		
+	}
+
+	$(document).on('keyup change', '.biaya_consumable', function() {
+		updateTotalBiayaConsumable();
+	});
+
+	function updateTotalBiayaConsumable() {
+		let total = 0;
+		$('.biaya_consumable').each(function() {
+			let val = $(this).val().replace(/,/g, '');
+			let num = parseFloat(val) || 0;
+			total += num;
+		});
+		$('#total_biaya_consumable').val(total.toLocaleString('en-US'));
+		$('#cost_consumable_per_sampel').text((total/1000).toLocaleString('en-US'));
+
+		
+	}
+
+	function deleteConsumable(key=''){
+		$(`#consumable${key}`).remove();
+		updateTotalBiayaConsumable();
+	}
+
+
+	//addApd
+	let counter_apd=0;
+	function addApd(){
+
+		const newInputHtml = `
+			<tr id="apd${counter_apd}">
+				<td>
+					<select onchange="getApd(${counter_apd})" name="apd[${counter_apd}][accessories_id]" id="apd_accessories_id${counter_apd}" class="form-select select2">
+						<option value="0">Pilih Apd</option>
+						<?php
+						foreach ($list_consumable as $val => $valx) {
+							$selected = "";
+							echo "<option value='" . $valx['id'] . "' " . $selected . ">" . strtoupper($valx['stock_name']) . "</option>";
+						}
+						?>
+					</select>
+				<td>
+					<input name="apd[${counter_apd}][type]" type="text" value="apd" class="form-control input d-none">
+					<input name="apd[${counter_apd}][utility]" type="text" value="" class="form-control input">
+				</td>
+				<td id="apd_package${counter_apd}">
+				</td>
+				<td><input name="apd[${counter_apd}][qty]" value="" class="form-control input" type="text"></td>
+				<td id="apd_unit${counter_apd}"></td>
+				<td><input name="apd[${counter_apd}][cost]" value="" class="form-control input biaya_apd moneyFormat" type="text"></td>
+				<td>
+					<button onclick="deleteApd(${counter_apd})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
+				</td>
+			</tr>
+		`;
+		$('#apd_list').append(newInputHtml);
+		$('#apd_list tr:last select').each(function() {
+			$(this).select2({
+				width: '100%',
+				dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
+			});
+		});
+		counter_apd++;
+	}
+	function getApd(id){
+		const list_apd = <?= json_encode($list_consumable) ?>;
+		let selectedId = $(`#apd_accessories_id${id}`).val();
+		const result = list_apd.find(item => item.id === selectedId);
+		console.log(result.unit_name);
+
+		$('#apd_package'+id).html(`${result.category}(${result.unit_name})`)
+		$('#apd_unit'+id).html(`${result.unit_name}`)
+		
+		
+	}
+
+	$(document).on('keyup change', '.biaya_apd', function() {
+		updateTotalBiayaApd();
+	});
+
+	function updateTotalBiayaApd() {
+		let total = 0;
+		$('.biaya_apd').each(function() {
+			let val = $(this).val().replace(/,/g, '');
+			let num = parseFloat(val) || 0;
+			total += num;
+		});
+		let target_utilitas = $('#target_utilitas').val().replace(/,/g, '');
+		$('#total_biaya_apd').val(total.toLocaleString('en-US'));
+		$('#cost_apd_per_sampel').text((total/target_utilitas).toLocaleString('en-US'));
+
+	}
+
+	function deleteApd(key=''){
+		$(`#apd${key}`).remove();
+		updateTotalBiayaApd();
+	}
+
+
+	//addParameter
+	let counter_parameter=0;
+	function addParameter(){
+        // console.log('add sampling');
+		const newInputHtml = `
+			<tr id="parameter${counter_parameter}">
+				<td>
+					<select name="parameter[${counter_parameter}][parameter_id]" class="form-select select2">
+						<option value="0">Pilih Parameter</option>
+						<?php
+						foreach ($list_param as $val => $valx) {
+							$selected = "";
+							echo "<option value='" . $valx['id_parameter'] . "' " . $selected . ">" . strtoupper($valx['nama_parameter']) . "</option>";
+						}
+						?>
+					</select>
+				<td>
+					<input name="parameter[${counter_parameter}][abbreviation]" type="text" value="" class="form-control input">
+				</td>
+				<td>
+					<input name="parameter[${counter_parameter}][tube]" value="" class="form-control input" type="text">
+				</td>
+				<td>
+					<button onclick="deleteParameter(${counter_parameter})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
+				</td>
+			</tr>
+		`;
+		$('#parameter_list').append(newInputHtml);
+		// initialize select2 on the newly added select
+		// $(`#consumable${counter_consumable} .select2`).select2({
+		// 	minimumResultsForSearch: 0,
+		// 	width: '100%'
+		// });
+		counter_parameter++;
+	}
+
+
+	function deleteParameter(key=''){
+		// console.log(key);
+       $(`#parameter${key}`).remove();
+	}
+	
 
 </script>

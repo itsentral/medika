@@ -75,7 +75,16 @@ class Asset extends Admin_Controller
 	public function modal()
 	{
 		$dataArr = array(
-			'list_dept' => $this->db->get_where('ms_department', ['deleted_by' => null])->result_array(),
+			'list_consumable' => $this->db
+			->select('accessories.*, accessories_category.nm_category,ms_satuan.category, ms_satuan.nama AS unit_name')
+			->from('accessories')
+			->join('accessories_category', 'accessories.id_category = accessories_category.id', 'left')
+			->join('ms_satuan', 'accessories.id_unit = ms_satuan.id', 'left')
+			->get()
+			->result_array(),
+
+			'outlet' => $this->db->get_where('cabang', ['deleted_by' => 0])->result_array(),
+			'list_param' => $this->db->get_where('rs_parameter', ['deleted_by' => NULL])->result_array(),
 			'list_catg' => $this->Asset_model->getList('asset_category'),
 			'list_costcenter' => $this->db->get_where('warehouse', ['desc' => 'costcenter'])->result_array()
 		);
@@ -346,8 +355,10 @@ class Asset extends Admin_Controller
 			$detailData[$lopp]['target_utilitas'] 	= str_replace(',', '',$data['target_utilitas']);
 			$detailData[$lopp]['total_biaya_perawatan'] 	= str_replace(',', '',$data['total_biaya_perawatan']);
 			$detailData[$lopp]['total_biaya_kalibrasi'] 	= str_replace(',', '',$data['total_biaya_kalibrasi']);
+			$detailData[$lopp]['total_biaya_consumable'] 	= str_replace(',', '',$data['total_biaya_consumable']);
 			$detailData[$lopp]['cost_per_test'] 	= str_replace(',', '',$data['cost_per_test']);
 			$detailData[$lopp]['disposal_value'] 	= str_replace(',', '',$data['disposal_value']);
+			$detailData[$lopp]['total_biaya_apd'] 		= str_replace(',', '', $data['total_biaya_apd']);
 			$detailData[$lopp]['value'] 		= str_replace(',', '', $data['value']);
 			$detailData[$lopp]['kdcab'] 		= $session['kdcab'];
 			$detailData[$lopp]['outlet'] 	= $data['outlet'];
@@ -414,12 +425,44 @@ class Asset extends Admin_Controller
 					'cost' => str_replace(',', '',$item['cost'])
 				);
 			}
+			
+			$asset_accessories = array();
+			foreach ($data['consumable'] as $item) {
+				$asset_accessories[] = array(
+					'kd_asset' => $kd_asset,
+					'accessories_id' => $item['accessories_id'],
+					'utility' => $item['utility'],
+					// 'package' => $item['package'],
+					'qty' => $item['qty'],
+					'type' => 'consumable',
+					'cost' => str_replace(',', '',$item['cost'])
+				);
+			}
+
+			$asset_accessories_apd = array();
+			foreach ($data['apd'] as $item) {
+				$asset_accessories_apd[] = array(
+					'kd_asset' => $kd_asset,
+					'accessories_id' => $item['accessories_id'],
+					'utility' => $item['utility'],
+					// 'package' => $item['package'],
+					'qty' => $item['qty'],
+					'type' =>'apd',
+					'cost' => str_replace(',', '',$item['cost'])
+				);
+			}
+
+			$asset_parameter = array();
+			foreach ($data['parameter'] as $item) {
+				$asset_parameter[] = array(
+					'kd_asset' => $kd_asset,
+					'parameter_id' => $item['parameter_id'],
+					'abbreviation' => $item['abbreviation'],
+					'tube' => $item['tube']
+				);
+			}
 		
 		}
-		// return var_dump($data);
-		// print_r($detailData);
-		// print_r($detailDataDash);
-		// exit;
 
 		
 
@@ -428,6 +471,9 @@ class Asset extends Admin_Controller
 		$this->db->insert_batch('asset_generate', $detailDataDash);
 		$this->db->insert_batch('asset_maintenance', $asset_maintenance);
 		$this->db->insert_batch('asset_calibration', $asset_calibration);
+		$this->db->insert_batch('asset_accessories', $asset_accessories);
+		$this->db->insert_batch('asset_accessories', $asset_accessories_apd);
+		$this->db->insert_batch('asset_parameter', $asset_parameter);
 
 		$this->db->trans_complete();
 
@@ -461,71 +507,6 @@ class Asset extends Admin_Controller
 			'option' => $option
 		));
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	public function edit()
