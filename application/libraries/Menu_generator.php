@@ -317,12 +317,12 @@ class Menu_generator
 					}
 
 					$html .= "<li class='nav-item {$active}'>
-							<a href='#" . $title . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
+							<a href='#" . $id . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
 								<i class='" . $icon . " me-1'></i>
 								<p>" . ucwords($title) . "</p>
 								<span class='caret'></span>
 							</a>
-                      		<div class='collapse' id='" . $title . "'>
+                      		<div class='collapse' id='" . $id . "'>
 							<ul class='nav nav-collapse mb-0'>";
 
 					//Make Sub Menu
