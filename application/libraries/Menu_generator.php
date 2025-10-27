@@ -22,18 +22,7 @@ class Menu_generator
 		$this->is_admin = $this->ci->auth->is_admin();
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public function build_menus($type = 1)
-=======
 	public function build_menus_OLD($type = 1)
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-	public function build_menus_OLD($type = 1)
-=======
-	public function build_menus($type = 1)
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
 	{
 		$auth = $this->get_auth_permission($this->user_id);
 		if (!$auth) {
@@ -53,31 +42,10 @@ class Menu_generator
 				->get()
 				->result();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 			$html = "<ul class='nav nav-primary'>
 	                        <li class='nav-item " . check_class('dashboard', TRUE) . "'>
 	                            <a href='" . site_url() . "'>
-	                                <i class='fa fa-store-alt me-1'></i><p>Dashboard</p>
-=======
-=======
->>>>>>> 67a3a55 (update template baru)
-			$html = "<ul class='sidebar-menu'>
-							<li class='header'></li>
-	                        <li class='" . check_class('dashboard', TRUE) . "'>
-	                            <a href='" . site_url() . "'>
-	                                <i class='fa fa-dashboard'></i> <span>Dashboard</span>
-<<<<<<< HEAD
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-=======
-			$html = "<ul class='nav nav-primary'>
-	                        <li class='nav-item " . check_class('dashboard', TRUE) . "'>
-	                            <a href='" . site_url() . "'>
-	                                <i class='fa fa-store-alt me-1'></i><p>Dashboard</p>
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
-	                            </a>
+	                                <i class='fa fa-store-alt me-1'></i><p>Dashboard</p></a>
 	                        </li>";
 
 			if (is_array($menu) && count($menu)) {
@@ -100,11 +68,7 @@ class Menu_generator
 						->order_by("t1.order", "ASC")
 						->get()
 						->result();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 67a3a55 (update template baru)
+
 					//Jump to end_for point
 					if (count($submenu) == 0) {
 						if ($link != "#") {
@@ -319,12 +283,6 @@ class Menu_generator
 						->order_by("t1.order", "ASC")
 						->get()
 						->result();
-<<<<<<< HEAD
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-=======
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
 					//Jump to end_for point
 					if (count($submenu) == 0) {
 						if ($link != "#") {
@@ -335,30 +293,15 @@ class Menu_generator
 							if (strpos($this->uri, '/' . $link . '/') !== FALSE) {
 								$active = "active";
 							}
-<<<<<<< HEAD
-<<<<<<< HEAD
 							$html .= "<li class='nav-item {$active}'>
 							<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
 							<i class='" . ($icon ? $icon : "") . " me-1'></i><p>" . ucwords($title) . "</p></a>
 							</li>";
-=======
-							$html .= "<li class='{$active}'><a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
-							<h6><i class='{$icon}'></i> &nbsp;&nbsp;&nbsp;<span>" . ucwords($title) . "</h6>
-							</span></a></li>";
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-							$html .= "<li class='{$active}'><a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
-							<h6><i class='{$icon}'></i> &nbsp;&nbsp;&nbsp;<span>" . ucwords($title) . "</h6>
-							</span></a></li>";
-=======
-							$html .= "<li class='nav-item {$active}'>
+$html .= "<li class='nav-item {$active}'>
 							<a href='" . ($link == '#' ? '#' : site_url($link)) . "' " . ($target == '_blank' ? "target='_blank'" : "") . ">
 							<i class='" . ($icon ? $icon : "") . " me-1'></i><p>" . ucwords($title) . "</p></a>
 							</li>";
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
-						}
-						goto end_for;
+goto end_for;
 					}
 					if($link == '-'){
 						$html .= '<li class="nav-section">
@@ -372,26 +315,13 @@ class Menu_generator
 					$active = "";
 					foreach ($submenu as $sub) {
 						if (strpos($this->uri, '/' . $sub->link . '/') !== FALSE) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-							$active = "active submenu";
-=======
-							$active = "active";
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-							$active = "active";
-=======
-							$active = "active submenu";
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
+$active = "active submenu";
 							break;
 						}
 					}
 
 					$html .= "
-<<<<<<< HEAD
-<<<<<<< HEAD
-            			  <li class='nav-item {$active}'>
+<li class='nav-item {$active}'>
 							<a href='#" . $title . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
 								<i class='" . $icon . " me-1'></i>
 								<p>" . ucwords($title) . "</p>
@@ -399,32 +329,6 @@ class Menu_generator
 							</a>
                       		<div class='collapse' id='" . $title . "'>
 							<ul class='nav nav-collapse mb-0'>";
-=======
-=======
->>>>>>> 67a3a55 (update template baru)
-            			  <li class='treeview {$active}'>
-                      <a href='#'>
-                        <i class='" . $icon . "'></i>
-                        <span>" . ucwords($title) . "</span>
-                        <span class='pull-right-container'>
-						            	<i class='fa fa-angle-left pull-right'></i>
-						          	</span>
-                      </a>
-                      <ul class='treeview-menu'>";
-<<<<<<< HEAD
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-=======
-            			  <li class='nav-item {$active}'>
-							<a href='#" . $title . "' data-bs-toggle='collapse' class='collapsed' aria-expanded='false'>
-								<i class='" . $icon . " me-1'></i>
-								<p>" . ucwords($title) . "</p>
-								<span class='caret'></span>
-							</a>
-                      		<div class='collapse' id='" . $title . "'>
-							<ul class='nav nav-collapse mb-0'>";
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
 
 					//Make Sub Menu
 					foreach ($submenu as $sub) {
@@ -447,18 +351,7 @@ class Menu_generator
 						$html .= "
 						<li class='" . $active . "'>
 							<a href='" . ($sublink == '#' ? '#' : site_url($sublink)) . "'" . " " . $subtarget . ">
-<<<<<<< HEAD
-<<<<<<< HEAD
 								<span class='sub-item'>" . ucwords($subtitle) . "</span>
-=======
-							<h6><i class='" . $subicon . "'></i>&nbsp;&nbsp;&nbsp;" . ucwords($subtitle) . "</h6>
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-							<h6><i class='" . $subicon . "'></i>&nbsp;&nbsp;&nbsp;" . ucwords($subtitle) . "</h6>
-=======
-								<span class='sub-item'>" . ucwords($subtitle) . "</span>
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
 							</a>
 						</li>";
 					}
@@ -467,34 +360,11 @@ class Menu_generator
 						</div>
 					</li>";
 					end_for:
-<<<<<<< HEAD
-<<<<<<< HEAD
 				}
 				$html .= "</ul>";
 			}
-=======
-=======
->>>>>>> 67a3a55 (update template baru)
 					//END FOREACH MENU
 				}
-				$html .= "
-					</ul>";
-				/*=================================================================================================================
-===================================================================================================================
-===================================================================================================================
-*/
-			}
-		} else {
-			//other menu
-<<<<<<< HEAD
->>>>>>> 203f907 (Update 25-10-2025)
-=======
-=======
-				}
-				$html .= "</ul>";
-			}
->>>>>>> 5dca622 (update template baru)
->>>>>>> 67a3a55 (update template baru)
 		}
 
 		return $html;

@@ -24,29 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost/labgit/dms';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 67a3a55 (update template baru)
-=======
->>>>>>> b9b9644 (update gitignore dan config)
-$root = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://");
-=======
-$root = ((isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == "https") ? "https://" : "http://");
->>>>>>> 5dca622 (update template baru)
-=======
-$root = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://");
->>>>>>> 0b51752 (update gitignore dan config)
-$root .= $_SERVER['HTTP_HOST'];
-=======
-$root = "https://" . $_SERVER['HTTP_HOST'];
->>>>>>> 203f907 (Update 25-10-2025)
-=======
 $root = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://");
 $root .= $_SERVER['HTTP_HOST'];
->>>>>>> 83725fd (update form server)
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 $config['base_url'] = $root;
 
