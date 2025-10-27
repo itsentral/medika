@@ -102,18 +102,18 @@ $ENABLE_DELETE  = has_permission('Consumable.Delete');
 		$(document).on('click', '.delete', function(e) {
 			e.preventDefault()
 			var id = $(this).data('id');
-			// alert(id);
+
 			swal({
-					title: "Anda Yakin?",
-					text: "Data akan di hapus.",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonClass: "btn-info",
-					confirmButtonText: "Ya, Hapus!",
-					cancelButtonText: "Batal",
-					closeOnConfirm: false
-				},
-				function() {
+				title: "Anda Yakin?",
+				text: "Data akan di hapus.",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonClass: "btn-info",
+				confirmButtonText: "Ya, Hapus!",
+				cancelButtonText: "Batal",
+				closeOnConfirm: false
+			}).then((next) => {
+				if (next) {
 					$.ajax({
 						type: 'POST',
 						url: siteurl + active_controller + '/hapus',
@@ -148,7 +148,8 @@ $ENABLE_DELETE  = has_permission('Consumable.Delete');
 							})
 						}
 					})
-				});
+				}
+			});
 
 		})
 

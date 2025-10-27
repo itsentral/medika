@@ -66,7 +66,7 @@ class Layanan_2_model extends BF_Model
 	
 	
     function generate_id($kode='') {
-      $query = $this->db->query("SELECT MAX(id_layananlaboratorium) as max_id FROM rs_parameter");
+      $query = $this->db->query("SELECT MAX(id_parameter) as max_id FROM rs_parameter");
       $row = $query->row();
       $thn = date('y');
       $bln = date('m');
@@ -96,10 +96,10 @@ class Layanan_2_model extends BF_Model
 		$query = $this->db->get();		
 		return $query->result();
 	}
-	public function getKomposisi($id){
-		$search = "deleted='0' and id_category1='$id'";
+	public function getNilairujukan($id){
+		$search = "deleted='0' and id_parameter='$id'";
 		$this->db->select('*');
-		$this->db->from('ms_compotition');
+		$this->db->from('rs_nilairujukan');
 		$this->db->where($search);
 		$query = $this->db->get();		
 		return $query->result();
@@ -144,35 +144,27 @@ class Layanan_2_model extends BF_Model
 				$nomor = ($total_data - $start_dari) - $urut2;
 			}
 
-			$mixedStr = $row['no_ipp'];
-			$searchStr = 'NP';
-			$searchStr2 = 'OT';
-
-			if (strpos($mixedStr, $searchStr)) {
-				$class = 'print1';
-			} else if (strpos($mixedStr, $searchStr2)) {
-				$class = 'print2';
-			} else {
-				$class = 'print';
-			}
+		
 
 			$edit = 'edit';
 
 			$jenis_daftar = $row['deleted'];
 
 			 if ($jenis_daftar ==0)			  {
-			      $via = 'Datang';
+			      $via = 'Aktif';
 			  }else{
-				  $via = 'Via Telp';
+				  $via = 'Non';
 			  }
 
 			$nestedData 	= array();
 			$nestedData[]	= "<div align='center'>" . $nomor . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['id_layananlaboratorium'] . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['nama_layananlaboratorium'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['id_parameter'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['nama_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_kategori'] . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['Tabung'] . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['Mesin'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['tabung'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['mesin'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['stock_name'] . "</div>";
+			$nestedData[]	= "<div align='left'>" . $row['nm_asset'] . "</div>";
 			$priX	= "";
 			$updX	= "";
 			$ApprvX	= "";
@@ -183,7 +175,8 @@ class Layanan_2_model extends BF_Model
 
 			if ($ENABLE_MANAGE) {
 				//$Terima	= "<button class='btn btn-sm btn-success edit' title='Create Penerimaan' data-inv='" . $row['no_invoice'] . "'><i class='fa fa-list'></i></button>";
-			$Terima	=  "<a class='btn btn-success btn-xs edit' href='javascript:void(0)' title='Transaksi Laboratorium' data-noreg='" . $row['noreg'] . "'><i class='fa fa-edit'></i>
+	
+			$Terima	=  "<a class='btn btn-success btn-xs edit' data-bs-toggle='modal' data-bs-target='#dialog-popup' href='javascript:void(0)' title='Edit' data-id_layanan2='" . $row['id_parameter'] . "'><i class='fa fa-edit'></i>
 				</a>";
 			
 			}
@@ -209,13 +202,15 @@ class Layanan_2_model extends BF_Model
 	{
         $session = $this->session->userdata('app_session');  
 		$cab     = $session['kdcab'];
-		$sql = "SELECT a.*
-			   b.nama_kategori
-	         FROM rs_parameter as a 
-			   inner join rs_kategorilab as b ON a.nama_kategori=b.nama_kategori 
-			   WHERE 1=1
-				AND (
-				a.nama_layananlaboratorium LIKE '%" . $this->db->escape_like_str($like_value) . "%'
+
+		$sql = "SELECT a.*, b.nama_kategori,c.stock_name,d.nm_asset
+	         FROM rs_parameter a 
+             JOIN rs_kategorilab b ON a.id_kategori  = b.id_kategori
+             JOIN accessories c ON a.tabung  = c.id
+             JOIN asset d ON a.mesin  = d.id
+			   WHERE 1=1 AND a.kdcab=$cab
+               AND (
+				a.nama_parameter LIKE '%" . $this->db->escape_like_str($like_value) . "%'
 				OR a.mesin LIKE '%" . $this->db->escape_like_str($like_value) . "%'
 				OR a.tabung LIKE '%" . $this->db->escape_like_str($like_value) . "%'
 	        )";
@@ -225,11 +220,11 @@ class Layanan_2_model extends BF_Model
 		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
 		$columns_order_by = array(
 			0 => 'nomor',
-			1 => 'nama_layananlaboratorium',
+			1 => 'nama_parameter',
 			2 => 'mesin'
 		);
 
-		$sql .= " ORDER BY a.tgl_entry DESC, " . $columns_order_by[$column_order] . " " . $column_dir . " ";
+		$sql .= " ORDER BY a.id_parameter ASC, " . $columns_order_by[$column_order] . " " . $column_dir . " ";
 		$sql .= " LIMIT " . $limit_start . " ," . $limit_length . " ";
 		$data['query'] = $this->db->query($sql);
 		return $data;
