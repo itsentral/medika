@@ -11,29 +11,22 @@ thead input {
 </style>
 <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables/dataTables.bootstrap.css'); ?>">
 <form action="#" method="POST" id="form_proses_bro" enctype="multipart/form-data">
-	<div class="box">
-		<div class="box-header">
-			<div class="box-tool pull-right">
-
-			<?php if($ENABLE_ADD) : ?>
-					<button type='button' id='add' class="btn btn-success" title="Tambah Asset"><i class="fa fa-plus">&nbsp;</i>Tambah Asset</button>
-			<?php endif; ?>
-					<!--<button type='button' id='jurnal' class="btn btn-primary" title="Buat Jurnal"><i class="fa fa-plus">&nbsp;</i>Buat Jurnal</button>-->
-
-			</div>
-			<div class="box-tool pull-left">
-
-				<label>Pencarian : </label>
-				<!--<select id='kdcab' name='kdcab' class='form-control input-sm chosen-container' style='min-width:150px; float:left; margin-bottom: 5px;'>
-					<option value='0'>Semua Cabang</option>
+	<div class="card">
+		<div class="card-header d-flex justify-content-between align-items-center">
+			<div>
+				<label class="form-label mb-0 me-2">Pencarian:</label>
+				<!--
+				<select id="kdcab" name="kdcab" class="form-select form-select-sm d-inline-block" style="min-width:150px; margin-bottom: 5px;">
+					<option value="0">Semua Cabang</option>
 					<?php
-						foreach($cabang AS $val => $valx){
-							echo "<option value='".$valx['kdcab']."'>".strtoupper($valx['namacabang'])."</option>";
-						}
+						// foreach($cabang AS $val => $valx){
+						//     echo "<option value='".$valx['kdcab']."'>".strtoupper($valx['namacabang'])."</option>";
+						// }
 					?>
-				</select>-->
-				<select id='kategory' name='kategory' class='form-control input-sm chosen-select' style='min-width:150px; float:left; margin-bottom: 5px;'>
-					<option value='0'>Semua Kategori</option>
+				</select>
+				-->
+				<select id="kategory" name="kategory" class="form-select form-select-sm d-inline-block chosen-select" style="min-width:150px; margin-bottom: 5px;">
+					<option value="0">Semua Kategori</option>
 					<?php
 						foreach($kategori AS $val => $valx){
 							echo "<option value='".$valx['id']."'>".strtoupper($valx['nm_category'])."</option>";
@@ -41,73 +34,91 @@ thead input {
 					?>
 				</select>
 				<?php
-					echo form_input(array('type'=>'hidden','id'=>'tanggalx','name'=>'tanggalx','class'=>'form-control input-sm','autocomplete'=>'off','placeholder'=>'Tanggal', 'readonly'=>'readonly'));
+					echo form_input(array(
+						'type'=>'hidden',
+						'id'=>'tanggalx',
+						'name'=>'tanggalx',
+						'class'=>'form-control form-control-sm',
+						'autocomplete'=>'off',
+						'placeholder'=>'Tanggal',
+						'readonly'=>'readonly'
+					));
 				?>
-
+			</div>
+			<div>
+				<?php if($ENABLE_ADD) : ?>
+					<button type="button" id="add" class="btn btn-success btn-sm" title="Tambah Asset">
+						<i class="fa fa-plus"></i> Tambah Asset
+					</button>
+				<?php endif; ?>
+				<!--
+				<button type="button" id="jurnal" class="btn btn-primary btn-sm" title="Buat Jurnal">
+					<i class="fa fa-plus"></i> Buat Jurnal
+				</button>
+				-->
 			</div>
 		</div>
-		<!-- /.box-header -->
-		<div class="box-body">
-			<table id="example1" class="table table-bordered table-striped" width='100%'>
-				<thead>
-					<tr class='bg-blue' >
-						<th class="text-center">No</th>
-						<th class="text-center" width='140px'>Kode Asset</th>
-						<th class="text-center">Nama Asset</th>
-						<th class="text-center">Category</th>
-						<th class="text-center">Depresiasi</th>
-						<th class="text-center">Nilai&nbsp;Perolehan</th>
-						<th class="text-center">Penyusutan</th>
-						<th class="text-center">Nilai&nbsp;Asset</th>
-						<th class="text-center" class='no-sort'>#</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-				 <tfoot>
-					<tr>
-						<th colspan="5" style="text-align:center">TOTAL KESELURUHAN</th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-		<!-- /.box-body -->
-	</div>
-
- <!-- modal -->
-	<div class="modal fade" id="ModalView">
-		<div class="modal-dialog"  style='width:80%; '>
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="head_title"></h4>
-					</div>
-					<div class="modal-body" id="view">
-					</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table id="example1" class="table table-bordered table-striped w-100">
+					<thead>
+						<tr class="table-primary">
+							<th class="text-center">No</th>
+							<th class="text-center" style="width:140px;">Kode Asset</th>
+							<th class="text-center">Nama Asset</th>
+							<th class="text-center">Category</th>
+							<th class="text-center">Depresiasi</th>
+							<th class="text-center">Nilai&nbsp;Perolehan</th>
+							<th class="text-center">Penyusutan</th>
+							<th class="text-center">Nilai&nbsp;Asset</th>
+							<th class="text-center no-sort">#</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+					<tfoot>
+						<tr>
+							<th colspan="5" class="text-center">TOTAL KESELURUHAN</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</tfoot>
+				</table>
 			</div>
 		</div>
 	</div>
-	<!-- modal -->
 
-	<!-- modal alert -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content" style='margin-top: 150px;'>
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"><b>Pemberitahuan</b></h4>
-				</div>
-				<div class="modal-body">
-					<p id="error"></p>
-				</div>
+<!-- modal -->
+<div class="modal fade" id="ModalView" tabindex="-1" aria-labelledby="head_title" aria-hidden="true">
+	<div class="modal-dialog modal-xl" style="max-width:80%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="head_title"></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="view">
 			</div>
 		</div>
 	</div>
-	<!-- modal alert -->
+</div>
+<!-- modal -->
+
+<!-- modal alert -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="alertTitle" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="margin-top: 150px;">
+			<div class="modal-header">
+				<h5 class="modal-title" id="alertTitle"><b>Pemberitahuan</b></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p id="error"></p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal alert -->
 
 </form>
 <!-- DataTables -->
@@ -161,41 +172,52 @@ thead input {
 		// alert($(this).val());
 	});
 
-	$("#tanggalx").datepicker( {
-		format: 'mm-yyyy',
-		// dateFormat: 'dd, mm, yy',
-		viewMode: "months",
-		minViewMode: "months",
-		autoClose: true
-		// defaultDate: new Date()
-	});
+	// $("#tanggalx").datepicker( {
+	// 	format: 'mm-yyyy',
+	// 	// dateFormat: 'dd, mm, yy',
+	// 	viewMode: "months",
+	// 	minViewMode: "months",
+	// 	autoClose: true
+	// 	// defaultDate: new Date()
+	// });
 
 	$(document).on('click', '#add', function(e){
 		e.preventDefault();
 		$("#head_title").html("<b>TAMBAHKAN ASET BARU</b>");
-		$("#view").load(siteurl +'asset/modal');
-		$("#ModalView").modal();
+		$("#view").load(siteurl + 'asset/modal', function() {
+			var modal = new bootstrap.Modal(document.getElementById('ModalView'));
+			modal.show();
+		});
 	});
 
 	$(document).on('click', '#jurnal', function(e){
 		e.preventDefault();
 		$("#head_title").html("<b>TAMBAHKAN JURNAL BARU</b>");
-		$("#view").load(siteurl +'asset/modal_jurnal');
-		$("#ModalView").modal();
+		$("#view").load(siteurl +'asset/modal_jurnal', function() {
+			var modal = new bootstrap.Modal(document.getElementById('ModalView'));
+			modal.show();
+		});
 	});
 
 	$(document).on('click', '#edit', function(e){
 		e.preventDefault();
 		$("#head_title").html("<b>EDIT ASET</b>");
-		$("#view").load(siteurl +'asset/modal_edit/'+$(this).data('id')+'/'+$(this).data('group_akses'));
-		$("#ModalView").modal();
+		var id = $(this).data('id');
+		var group_akses = $(this).data('group_akses');
+		$("#view").load(siteurl +'asset/modal_edit/' + id + '/' + group_akses, function() {
+			var modal = new bootstrap.Modal(document.getElementById('ModalView'));
+			modal.show();
+		});
 	});
 
 	$(document).on('click', '#detail', function(e){
 		e.preventDefault();
 		$("#head_title").html("<b>DETAIL ASET</b>");
-		$("#view").load(siteurl +'asset/modal_view/'+$(this).data('id'));
-		$("#ModalView").modal();
+		var id = $(this).data('id');
+		$("#view").load(siteurl +'asset/modal_view/' + id, function() {
+			var modal = new bootstrap.Modal(document.getElementById('ModalView'));
+			modal.show();
+		});
 	});
 
 	function DataTables(kdcab = null, tgl = null, kategori = null){

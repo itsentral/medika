@@ -1,122 +1,113 @@
-<div class="box box-primary">
-	<div class="box-header">
-		<h3 class="box-title"></h3>
+<div class="card border-primary mb-3">
+	<div class="card-header  text-white">
+		<h5 class="card-title mb-0"></h5>
 	</div>
-	<div class="box-body">
-		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Nama Asset <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
+	<div class="card-body">
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label fw-bold">Nama Asset <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
 				<?php
-				echo form_input(array('id' => 'nm_asset', 'name' => 'nm_asset', 'class' => 'form-control input-md', 'autocomplete' => 'off', 'placeholder' => 'Nama Asset'));
+				echo form_input(array('id' => 'nm_asset', 'name' => 'nm_asset', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Nama Asset'));
 				?>
 			</div>
-			<label class='label-control col-sm-2'><b>Kategori <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
-				<select name='category' id='category' class='form-control input-md chosen-select'>
-					<option value='0'>Pilih Kategori</option>
+			<label class="col-sm-2 col-form-label fw-bold">Kategori <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
+				<select name="category" id="category" class="form-select select2">
+					<option value="0">Pilih Kategori</option>
 					<?php
 					foreach ($list_catg as $val => $valx) {
-						// $sexd	= ($valx['id'] == 2)?'selected':'';
-						$sexd	= "";
+						$sexd = "";
 						echo "<option value='" . $valx['id'] . "' " . $sexd . ">" . strtoupper($valx['nm_category']) . "</option>";
 					}
 					?>
 				</select>
 			</div>
 		</div>
-		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Outlet <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
-				<select name='outlet' id='outlet' class='form-control input-md chosen-select'>
-					<option value='0'>Pilih Outlet</option>
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label fw-bold">Outlet <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
+				<select name="outlet" id="outlet" class="form-select select2">
+					<option value="0">Pilih Outlet</option>
 					<?php
 					foreach ($list_dept as $val => $valx) {
-						// $sexd	= ($valx['nm_dept'] == 'UMUM')?'selected':'';
-						$sexd	= "";
+						$sexd = "";
 						echo "<option value='" . $valx['id'] . "' " . $sexd . ">" . strtoupper($valx['nama']) . "</option>";
 					}
 					?>
 				</select>
 			</div>
-			<label  class='label-control col-sm-2'><b>Merk <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4' >
-				<input type="text" id="merk" name="merk" class="form-control input-md" autocomplete="off" placeholder="Merk" >
+			<label class="col-sm-2 col-form-label fw-bold">Merk <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
+				<input type="text" id="merk" name="merk" class="form-control" autocomplete="off" placeholder="Merk">
 			</div>
 		</div>
-		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Nilai Asset <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label fw-bold">Nilai Asset <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
 				<?php
-				echo form_input(array('id' => 'nilai_asset', 'name' => 'nilai_asset', 'class' => 'form-control input-md', 'autocomplete' => 'off', 'placeholder' => 'Nilai Asset', 'data-decimal' => '.', 'data-thousand' => '', 'data-precision' => '0', 'data-allow-zero' => false));
+				echo form_input(array('id' => 'nilai_asset', 'name' => 'nilai_asset', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Nilai Asset', 'data-decimal' => '.', 'data-thousand' => '', 'data-precision' => '0', 'data-allow-zero' => false));
 				?>
 			</div>
-			<label class='label-control col-sm-2'><b>Jangka Waktu <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
-				<select name='depresiasi' id='depresiasi' class='form-control input-md chosen-select'>
-					<option value='0'>Pilih Jangka Waktu</option>
+			<label class="col-sm-2 col-form-label fw-bold">Jangka Waktu <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
+				<select name="depresiasi" id="depresiasi" class="form-select select2">
+					<option value="0">Pilih Jangka Waktu</option>
 					<?php
 					for ($a = 1; $a <= 16; $a++) {
-						// $sexd	= ($a == 4)?'selected':'';
-						$sexd	= "";
+						$sexd = "";
 						echo "<option value='" . $a . "' " . $sexd . ">" . $a . " Tahun</option>";
 					}
 					?>
 				</select>
 			</div>
 		</div>
-		<div class='form-group row'>
-
-			<label class='label-control col-sm-2'><b>Lokasi <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
-				<input type="text" id="qty" name="qty" class="hide" value="1" >
-				<input type="text" id="lokasi_asset" name="lokasi_asset" class="form-control input-md" autocomplete="off" placeholder="Lokasi" >
-
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label fw-bold">Lokasi <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
+				<input type="text" id="qty" name="qty" class="d-none" value="1">
+				<input type="text" id="lokasi_asset" name="lokasi_asset" class="form-control" autocomplete="off" placeholder="Lokasi">
 			</div>
-			<label class='label-control col-sm-2'><b>Dipresiasi Perbulan</b></label>
-			<div class='col-sm-4'>
+			<label class="col-sm-2 col-form-label fw-bold">Dipresiasi Perbulan</label>
+			<div class="col-sm-4">
 				<?php
-				echo form_input(array('id' => 'value', 'name' => 'value', 'class' => 'form-control input-md', 'autocomplete' => 'off', 'placeholder' => 'Dipresiasi Perbulan', 'readonly' => 'readonly', 'data-decimal' => '.', 'data-thousand' => '', 'data-precision' => '0', 'data-allow-zero' => false));
+				echo form_input(array('id' => 'value', 'name' => 'value', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Dipresiasi Perbulan', 'readonly' => 'readonly', 'data-decimal' => '.', 'data-thousand' => '', 'data-precision' => '0', 'data-allow-zero' => false));
 				?>
 			</div>
 		</div>
-		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Tanggal Perolehan <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
-				<?php
-				echo form_input(array('id' => 'tanggal', 'name' => 'tanggal', 'class' => 'form-control input-md', 'autocomplete' => 'off', 'placeholder' => 'Tanggal', 'readonly' => 'readonly'));
-				?>
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label fw-bold">Tanggal Perolehan <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
+				<input type="date" id="tanggal" name="tanggal" class="form-control" autocomplete="off" placeholder="Tanggal">
 			</div>
 		</div>
 		<br>
 		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Utilisasi</p>
 		<br><br>
-		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Utilitas perhari <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
-				<input type="text" id="utilitas_perhari" name="utilitas_perhari" class="form-control input-md moneyFormat"  autocomplete="off" placeholder="Utilitas perhari" >
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label fw-bold">Utilitas perhari <span class="text-danger">*</span></label>
+			<div class="col-sm-4">
+				<input type="text" id="utilitas_perhari" name="utilitas_perhari" class="form-control moneyFormat" autocomplete="off" placeholder="Utilitas perhari">
 			</div>
-			<label class='label-control col-sm-2'><b>Utiltas Tahunan</b></label>
-			<div class='col-sm-4'>
-				<input type="text" id="utilitas_tahunan" name="utilitas_tahunan" class="form-control input-md moneyFormat" autocomplete="off" placeholder="Utiltas Tahunan" >
-
+			<label class="col-sm-2 col-form-label fw-bold">Utiltas Tahunan</label>
+			<div class="col-sm-4">
+				<input type="text" id="utilitas_tahunan" name="utilitas_tahunan" class="form-control moneyFormat" autocomplete="off" placeholder="Utiltas Tahunan">
 			</div>
 		</div>
-		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Target utilisasi</b></label>
-			<div class='col-sm-4'>
-				<input type="text" id="target_utilitas" name="target_utilitas" class="form-control input-md moneyFormat" autocomplete="off" placeholder="Lokasi" >
-				
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label fw-bold">Target utilisasi</label>
+			<div class="col-sm-4">
+				<input type="text" id="target_utilitas" name="target_utilitas" class="form-control moneyFormat" autocomplete="off" placeholder="Lokasi">
 			</div>
 		</div>
 		<br>
 		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Perawatan</p>
-			<br><br>
+		<br><br>
 		<h5><b>Jadwal Perawatan</b></h5>
-		 <button onclick="addPerawatan('')" type="button" id=""  class="btn btn-primary">
+		<button onclick="addPerawatan('')" type="button" class="btn btn-primary mb-2">
 			<i class="fa fa-plus"></i> Perawatan
-        </button>
-		 <div id="form-kirim-sample" style="margin-top:20px;max-height:300px; overflow-x:auto; overflow-y:auto;">
-				<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
+		</button>
+		<div id="form-kirim-sample" style="margin-top:20px;max-height:300px; overflow-x:auto; overflow-y:auto;">
+			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
 					<tr>
 						<th style="position:sticky; top:0; background:#fff; z-index:3;">Tahun</th>
@@ -127,72 +118,69 @@
 					</tr>
 				</thead>
 				<tbody id="perawatan_list">
-					
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="3" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Total Biaya</td>
 						<td id="total_biaya" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
-							<input name="total_biaya_perawatan" value="" id="total_biaya_perawatan" class="form-control input total_biaya_perawatan moneyFormat" type="text" readonly>
+							<input name="total_biaya_perawatan" value="" id="total_biaya_perawatan" class="form-control total_biaya_perawatan moneyFormat" type="text" readonly>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
-		</div> 
+		</div>
 		<br>
 		<h5><b>Jadwal Rekalibrasi</b></h5>
-		 <button onclick="addKalibrasi('')" type="button" id=""  class="btn btn-primary">
+		<button onclick="addKalibrasi('')" type="button" class="btn btn-primary mb-2">
 			<i class="fa fa-plus"></i> Kalibrasi
-        </button>
+		</button>
 		<div id="form-kirim-sample" style="margin-top:20px;max-height:300px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
-				<tr>
-					<th style="position:sticky; top:0; background:#fff; z-index:3;">Tahun</th>
-					<th style="position:sticky; top:0; background:#fff; z-index:3;">Tanggal</th>
-					<th style="position:sticky; top:0; background:#fff; z-index:3;">Jenis Kalibrasi</th>
-					<th style="position:sticky; top:0; background:#fff; z-index:3;">Biaya</th>
-					<th style="position:sticky; top:0; background:#fff; z-index:3;">Action</th>
-				</tr>
+					<tr>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Tahun</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Tanggal</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Jenis Kalibrasi</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Biaya</th>
+						<th style="position:sticky; top:0; background:#fff; z-index:3;">Action</th>
+					</tr>
 				</thead>
 				<tbody id="kalibrasi_list">
-					
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="3" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Total Biaya</td>
-						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
-							<input name="total_biaya_kalibrasi" value="" id="total_biaya_kalibrasi" class="form-control input total_biaya_kalibrasi moneyFormat" type="text" readonly>
+						<td style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
+							<input name="total_biaya_kalibrasi" value="" id="total_biaya_kalibrasi" class="form-control total_biaya_kalibrasi moneyFormat" type="text" readonly>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
 		</div>
-		<div class='form-group row'>
-			<div class='col-sm-4'>
-				<label class='label-control'><h5><b>Disposal Value</b></h5></label>
+		<div class="row mb-3">
+			<div class="col-sm-4">
+				<label class="form-label"><h5><b>Disposal Value</b></h5></label>
 				<div class="input-group">
-					<input type="text" id="disposal_value_percent" class="form-control input-md " autocomplete="off" placeholder="Value %" style="max-width:80px;">
-					<span class="input-group-addon" style="min-width:40px;">%</span>
-					<input type="text" id="disposal_value" name="disposal_value" class="form-control input-md moneyFormat" autocomplete="off" placeholder="" readonly>
+					<input type="text" id="disposal_value_percent" class="form-control" autocomplete="off" placeholder="Value %" style="max-width:80px;">
+					<span class="input-group-text" style="min-width:40px;">%</span>
+					<input type="text" id="disposal_value" name="disposal_value" class="form-control moneyFormat" autocomplete="off" placeholder="" readonly>
 				</div>
 			</div>
-		</div>    
- 		<br>
+		</div>
+		<br>
 		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Cost Per Test</p>
-		<br> <br> 
-		<div class='form-group row'>
-			<div class='col-sm-4'>
+		<br><br>
+		<div class="row mb-3">
+			<div class="col-sm-4">
 				<div class="input-group">
-					<input type="text" id="cost_per_test" class="form-control input-md " autocomplete="off" placeholder="Value %" style="max-width:80px;">
+					<input type="text" id="cost_per_test" name="cost_per_test" class="form-control" autocomplete="off" placeholder="Value %" style="max-width:80px;">
 				</div>
 			</div>
 		</div>
 		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Consumable</p>
-		<br> <br> 
-		<br> <br> <br> 
+		<br><br><br><br>
 		<?php
-		echo form_button(array('type' => 'button', 'class' => 'btn btn-md btn-primary', 'value' => 'save', 'content' => 'Save', 'id' => 'simpan-bro', 'style' => 'width:100px; float:right;')) . ' ';
+		echo form_button(array('type' => 'button', 'class' => 'btn btn-primary', 'value' => 'save', 'content' => 'Save', 'id' => 'simpan-bro', 'style' => 'width:100px; float:right;')) . ' ';
 		?>
 	</div>
 </div>
@@ -207,17 +195,17 @@
 		width: 100% !important;
 	}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 	$(function() {
-		$('.chosen-select').select2();
+		$('.chosen-select').select2({
+			minimumResultsForSearch: 0 // always show search box
+		});
 		$('#nilai_asset').maskMoney();
 		$('#qty').maskMoney();
 
-		$('#tanggal').datepicker({
-			format: 'yyyy-mm-dd'
-			// minDate: 0
-		});
+	
 	});
 
 	$(document).on('keyup', '#nilai_asset', function() {
@@ -262,200 +250,177 @@
 		var tanggal = $('#tanggal').val();
 
 		if (nm_asset == '' || nm_asset == null) {
-			// $("#error").html("Nama asset masih kosong !!!");
-			// $('#myModal').modal("show");
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Nama asset masih kosong ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
 		if (category == '' || category == null || category == 0) {
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Kategori asset belum dipilih ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
-
 		if (lokasi_asset == '' || lokasi_asset == null || lokasi_asset == 0) {
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Lokasi asset belum diisi ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
-
 		if (outlet == '' || outlet == null || outlet == 0) {
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Outlet asset belum dipilih ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
-
-		// if (cost_center == '' || cost_center == null || cost_center == 0) {
-		// 	swal({
-		// 		title: "Error Message!",
-		// 		text: 'Cost Center belum dipilih ...',
-		// 		type: "warning"
-		// 	});
-
-		// 	$('#simpan-bro').prop('disabled', false);
-		// 	return false;
-		// }
-
 		if (depresiasi == '' || depresiasi == null || depresiasi == 0) {
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Jangka waktu asset belum dipilih ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
 		if (nilai_asset == '' || nilai_asset == null || nilai_asset == 0) {
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Nilai asset belum dipilih ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
 		if (qty == '' || qty == null || qty == 0) {
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Qty asset belum dipilih ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
 		if (tanggal == '' || tanggal == null || tanggal == 0) {
-			swal({
+			Swal.fire({
 				title: "Error Message!",
 				text: 'Tanggal asset belum dipilih ...',
-				type: "warning"
+				icon: "warning"
 			});
-
 			$('#simpan-bro').prop('disabled', false);
 			return false;
 		}
-		// swal({
-		// title	: "Error Message!",
-		// text	: 'STOP',
-		// type	: "warning"
-		// });
+		Swal.fire({
+			title: "Error Message!",
+			text: 'STOP',
+			icon: "warning"
+		});
 
 		// return false;
 
-		swal({
-				title: "Are you sure?",
-				text: "You will not be able to process again this data!",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonClass: "btn-danger",
-				confirmButtonText: "Yes, Process it!",
-				cancelButtonText: "No, cancel process!",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			},
-			function(isConfirm) {
-				if (isConfirm) {
-					setTimeout(function() {
-						$('.moneyFormat').each(function() {
-							// Get the current value
-							var value = $(this).val();
-							// Remove commas
-							value = value.replace(/,/g, '');
-							// Update the input field
-							$(this).val(value);
-						});	
-					}, 100);
-					// loading_spinner();
-					var formData = new FormData($('#form_proses_bro')[0]);
-					var baseurl = siteurl + 'asset/saved';
-					$.ajax({
-						url: baseurl,
-						type: "POST",
-						data: formData,
-						cache: false,
-						dataType: 'json',
-						processData: false,
-						contentType: false,
-						success: function(data) {
-							if (data.status == 1) {
-								swal({
-									title: "Save Success!",
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You will not be able to process again this data!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Yes, Process it!",
+			cancelButtonText: "No, cancel process!",
+			allowOutsideClick: false
+		}).then(function(result) {
+			if (result && result.isConfirmed) {
+				setTimeout(function() {
+					$('.moneyFormat').each(function() {
+						// Get the current value
+						var value = $(this).val();
+						// Remove commas
+						value = value.replace(/,/g, '');
+						// Update the input field
+						$(this).val(value);
+					});	
+				}, 100);
+				// loading_spinner();
+				var formData = new FormData($('#form_proses_bro')[0]);
+				var baseurl = siteurl + 'asset/saved';
+				$.ajax({
+					url: baseurl,
+					type: "POST",
+					data: formData,
+					cache: false,
+					dataType: 'json',
+					processData: false,
+					contentType: false,
+					success: function(data) {
+						if (data.status == 1) {
+							Swal.fire({
+								title: "Save Success!",
+								text: data.pesan,
+								icon: "success",
+								timer: 7000
+							});
+							window.location.href = siteurl + 'asset';
+						} else {
+							if (data.status == 2) {
+								Swal.fire({
+									title: "Save Failed!",
 									text: data.pesan,
-									type: "success",
+									icon: "warning",
 									timer: 7000
 								});
-								window.location.href = siteurl + 'asset';
+							} else if (data.status == 3) {
+								Swal.fire({
+									title: "Save Failed!",
+									text: data.pesan,
+									icon: "warning",
+									timer: 7000
+								});
 							} else {
-								if (data.status == 2) {
-									swal({
-										title: "Save Failed!",
-										text: data.pesan,
-										type: "warning",
-										timer: 7000
-									});
-								} else if (data.status == 3) {
-									swal({
-										title: "Save Failed!",
-										text: data.pesan,
-										type: "warning",
-										timer: 7000
-									});
-								} else {
-									swal({
-										title: "Save Failed!",
-										text: data.pesan,
-										type: "warning",
-										timer: 7000,
-										showCancelButton: false,
-										showConfirmButton: false,
-										allowOutsideClick: false
-									});
-								}
-								$('#simpan-bro').prop('disabled', false);
+								Swal.fire({
+									title: "Save Failed!",
+									text: data.pesan,
+									icon: "warning",
+									timer: 7000,
+									showCancelButton: false,
+									showConfirmButton: false,
+									allowOutsideClick: false
+								});
 							}
-						},
-						error: function() {
-							swal({
-								title: "Error Message !",
-								text: 'An Error Occured During Process. Please try again..',
-								type: "warning",
-								timer: 7000,
-								showCancelButton: false,
-								showConfirmButton: false,
-								allowOutsideClick: false
-							});
 							$('#simpan-bro').prop('disabled', false);
 						}
-					});
-				} else {
-					swal("Cancelled", "Data can be process again :)", "error");
-					$('#simpan-bro').prop('disabled', false);
-					return false;
-				}
-			});
+					},
+					error: function() {
+						Swal.fire({
+							title: "Error Message !",
+							text: 'An Error Occured During Process. Please try again..',
+							icon: "warning",
+							timer: 7000,
+							showCancelButton: false,
+							showConfirmButton: false,
+							allowOutsideClick: false
+						});
+						$('#simpan-bro').prop('disabled', false);
+					}
+				});
+			} else {
+				Swal.fire({
+					title: "Cancelled",
+					text: "Data can be process again :)",
+					icon: "error"
+				});
+				$('#simpan-bro').prop('disabled', false);
+				return false;
+			}
+		});
 	});
 	//target_utilitas
 	$(document).on('keyup change', '#utilitas_perhari, #utilitas_tahunan, #depresiasi', function() {
@@ -523,7 +488,7 @@
 				</td>
                 <td><input name="perawatan[${counter_perawatan}][cost]" value="" class="form-control input biaya_perawatan moneyFormat" type="text"></td>
                 <td>
-                    <button onclick="deletePerawatan(${counter_perawatan})" class="btn btn-danger"  type="button"><i class="fa fa-trash-o"></i></button>
+                    <button onclick="deletePerawatan(${counter_perawatan})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         `;
@@ -564,14 +529,14 @@
 						?>
 					</select>
 				<td>
-					<input name="kalibrasi${counter_kalibrasi}][date]" type="date" value="" class="form-control input">
+					<input name="kalibrasi[${counter_kalibrasi}][date]" type="date" value="" class="form-control input">
 				</td>
 				<td>
               		<input name="kalibrasi[${counter_kalibrasi}][calibration_type]" value="" class="form-control input" type="text">
 				</td>
                 <td><input name="kalibrasi[${counter_kalibrasi}][cost]" value="" class="form-control input biaya_kalibrasi moneyFormat" type="text"></td>
                 <td>
-                    <button onclick="deleteKalibrasi(${counter_kalibrasi})" class="btn btn-danger"  type="button"><i class="fa fa-trash-o"></i></button>
+                    <button onclick="deleteKalibrasi(${counter_kalibrasi})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         `;
