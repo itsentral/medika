@@ -2,11 +2,11 @@
 
 $qData	= "SELECT * FROM asset WHERE id='" . $this->uri->segment(3) . "'";
 $dataD	= $this->db->query($qData)->result_array();
-$list_dept = $this->db->get_where('ms_department', ['deleted_by' => null])->result_array();
+$list_dept = $this->Asset_model->getList('ms_department');
 $list_catg = $this->Asset_model->getList('asset_category');
 
-// $QUERY	 	= "SELECT * FROM ms_costcenter WHERE id_costcenter = '".$dataD[0]['cost_center']."' ORDER BY nama_costcenter ASC";
-// $costcenter	= $this->db->query($QUERY)->row();
+$QUERY	 	= "SELECT * FROM ms_costcenter WHERE id_costcenter = '".$dataD[0]['cost_center']."' ORDER BY nama_costcenter ASC";
+$costcenter	= $this->db->query($QUERY)->row();
 ?>
 
 <div class="box box-primary">
@@ -39,19 +39,20 @@ $list_catg = $this->Asset_model->getList('asset_category');
 		<div class='form-group row'>
 			<label class='label-control col-sm-2'><b>Outlet <span class='text-red'>*</span></b></label>
 			<div class='col-sm-4'>
-				<select name='outlet' id='outlet' class='form-control input-md chosen-select' disabled>
-					<option value='0'>Pilih Outlet</option>
+				<select name='lokasi_asset' id='lokasi_asset' class='form-control input-md' disabled>
 					<?php
 					foreach ($list_dept as $val => $valx) {
-						$selected	= ($valx['id'] == $dataD[0]['outlet'] )?'selected':'';
-						echo "<option value='" . $valx['id'] . "' " . $selected . ">" . strtoupper($valx['nama']) . "</option>";
+						$selx = ($dataD[0]['lokasi_asset'] == $valx['nm_dept']) ? 'selected' : '';
+						echo "<option value='" . $valx['nm_dept'] . "' " . $selx . ">" . strtoupper($valx['nm_dept']) . "</option>";
 					}
 					?>
 				</select>
 			</div>
-			<label  class='label-control col-sm-2'><b>Merk <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4' >
-				<input type="text" id="merk" name="merk" value="<?=$dataD[0]['merk']?>" class="form-control input-md" autocomplete="off" placeholder="Merk" readonly>
+			<label class='label-control col-sm-2'><b>Cost Center <span class='text-red'>*</span></b></label>
+			<div class='col-sm-4'>
+				<?php
+				echo form_input(array('id' => 'cost_center', 'name' => 'cost_center', 'class' => 'form-control input-md', 'autocomplete' => 'off', 'placeholder' => 'Nilai Asset', 'readonly' => 'readonly'), strtoupper( $costcenter ? $costcenter->nama_costcenter : '' ) );
+				?>
 			</div>
 		</div>
 		<div class='form-group row'>
@@ -69,12 +70,6 @@ $list_catg = $this->Asset_model->getList('asset_category');
 			</div>
 		</div>
 		<div class='form-group row'>
-			<label class='label-control col-sm-2'><b>Lokasi <span class='text-red'>*</span></b></label>
-			<div class='col-sm-4'>
-				<input type="text" id="qty" name="qty" class="hide" value="1" >
-				<input type="text" id="lokasi_asset" name="lokasi_asset" value="<?=$dataD[0]['lokasi_asset']?>" class="form-control input-md" autocomplete="off" placeholder="Lokasi" disabled>
-
-			</div> 
 			<label class='label-control col-sm-2'><b>Jangka Waktu <span class='text-red'>*</span></b></label>
 			<div class='col-sm-4'>
 				<select name='depresiasi' id='depresiasi' class='form-control input-md' disabled>

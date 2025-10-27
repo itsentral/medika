@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Asset_model extends BF_Model
+class Jadwal_maintenance_model extends BF_Model
 {
 
 	public function __construct()
@@ -251,26 +251,18 @@ class Asset_model extends BF_Model
 			$nestedData[]	= "<div align='center'>" . $nomor . "</div>";
 			$nestedData[]	= "<div align='left'>" . strtoupper(strtolower($row['nm_category'])) . "</div>";
 			$value = "Active";
-			$color = "bg-success";
+			$color = "bg-green";
 			if ($row['status'] == 'N') {
 				$value = "Not Active";
-				$color = "bg-danger";
+				$color = "bg-red";
 			}
-			$nestedData[] = "
-				<div class='text-center'>
-					<span class='badge $color'>$value</span>
-				</div>
-			";
+			$nestedData[]	= "<div align='center'><span class='badge " . $color . " '>" . $value . "</span></div>";
 
 			$last_create = (!empty($row['updated_by'])) ? $row['updated_by'] : $row['created_by'];
-			$nestedData[] = "
-				<div class='text-center'>" . htmlspecialchars(strtolower($last_create)) . "</div>
-			";
+			$nestedData[]	= "<div align='center'>" . strtolower($last_create) . "</div>";
 
 			$last_date = (!empty($row['updated_date'])) ? $row['updated_date'] : $row['created_date'];
-			$nestedData[] = "
-				<div class='text-center'>" . date('d-m-Y', strtotime($last_date)) . "</div>
-			";
+			$nestedData[]	= "<div align='center'>" . date('d-m-Y', strtotime($last_date)) . "</div>";
 
 			$detail		= "";
 			$edit		= "";
@@ -333,5 +325,89 @@ class Asset_model extends BF_Model
 
 		$data['query'] = $this->db->query($sql);
 		return $data;
+	}
+
+
+	var $column_order 	= array('', null); 
+	var $column_search 	= array('asset.nm_asset'); 
+	var $order 			= array('asset.id' => 'desc');
+
+	private function _get_datatables_query($status='')
+	{
+
+		$this->db->select('asset.kd_asset,asset.nm_asset, asset_maintenance.*');
+		$this->db->from('asset');
+		$this->db->join('asset_maintenance', 'asset.kd_asset = asset_maintenance.kd_asset', 'LEFT');
+		$this->db->where('asset.deleted', 'N');
+
+		// if($status != 'recal'){
+		// 	$this->db->where('schedule_rekalibrasi_kalibrator.actual_date = (SELECT MAX(actual_date) FROM schedule_rekalibrasi_kalibrator AS srk WHERE srk.calibrator_id = master_calibrators_new.id)', NULL, FALSE);
+		// }
+		// if($status == 'Valid'){
+		// 	$this->db->where("DATE_FORMAT(DATE_ADD(schedule_rekalibrasi_kalibrator.actual_date, INTERVAL master_calibrators_new.interval_rekalibrasi YEAR), '%Y-%m') > DATE_FORMAT(NOW(), '%Y-%m')", NULL, FALSE);
+		// }elseif($status == 'Warning'){
+		// 	$this->db->where("DATE_FORMAT(DATE_ADD(schedule_rekalibrasi_kalibrator.actual_date, INTERVAL master_calibrators_new.interval_rekalibrasi YEAR), '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')", NULL, FALSE);
+		// }elseif($status == 'Expired'){
+		// 	$this->db->where("DATE_FORMAT(DATE_ADD(schedule_rekalibrasi_kalibrator.actual_date, INTERVAL master_calibrators_new.interval_rekalibrasi YEAR), '%Y-%m') < DATE_FORMAT(NOW(), '%Y-%m')", NULL, FALSE);
+		// }elseif($status == 'recal'){
+		// 	$this->db->where('schedule_rekalibrasi_kalibrator.actual_date', null);
+
+		// }elseif($status == 'Consumable'){
+		// 	$this->db->where_in('master_calibrators_new.interval_rekalibrasi', [0,'-']);
+
+		// }
+		
+
+	
+		
+		$i = 0;
+
+		foreach ($this->column_search as $item)
+		{
+			if ($_POST['search']['value'])
+			{
+				if ($i === 0)
+				{
+					$this->db->group_start(); 
+					$this->db->like($item, $_POST['search']['value']);
+				} else {
+					$this->db->or_like($item, $_POST['search']['value']);
+				}
+
+				if (count($this->column_search) - 1 == $i) 
+					$this->db->group_end(); 
+			}
+			$i++;
+		}
+
+		if (isset($_POST['order']))
+		{
+			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+		} else if (isset($this->order)) {
+			$order = $this->order;
+			$this->db->order_by(key($order), $order[key($order)]);
+		}
+	}
+	function get_datatables($status='')
+	{
+		$this->_get_datatables_query($status);
+		if ($_POST['length'] != -1)
+			$this->db->limit($_POST['length'], $_POST['start']);
+		$query = $this->db->group_by('master_calibrators_new.id')->order_by('schedule_rekalibrasi_kalibrator.actual_date' ,'desc')->get();
+		return $query->result();
+	}
+
+	function count_filtered($status='')
+	{
+		$this->_get_datatables_query($status);
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
+	public function count_all($status='')
+	{
+		$this->db->select('*');
+		$this->db->from($this->table);
+		return $this->db->count_all_results();
 	}
 }
