@@ -523,7 +523,6 @@ class Asset extends Admin_Controller
 		$Arr_Kembali	= array();
 		$data			= $this->input->post();
 		$session 		= $this->session->userdata('app_session');
-		
 		// $helpx			= $data['helpa'];
 		$helpx			='Y';
 		if ($helpx == 'Y') {

@@ -364,23 +364,23 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		// $('#value').autoNumeric('init');
     });
 	
-	$(document).on('click', '#chk', function(){
-		if ($(this).is(':checked')) {
-			$("#nm_asset").attr("readonly", false);
-			$("#nilai_asset").attr("readonly", false); 
-			$("#qty").attr("readonly", false); 
-			$("#category").attr("disabled", false); 
-			$("#depresiasi").attr("disabled", false);
-			$('#helpa').val('Y');
-        }else{
-			$("#nm_asset").attr("readonly", true);
-			$("#nilai_asset").attr("readonly", true); 
-			$("#qty").attr("readonly", true);
-			$("#category").attr("disabled", true); 
-			$("#depresiasi").attr("disabled", true); 
-			$('#helpa').val('N');			
-		}
-	});
+	// $(document).on('click', '#chk', function(){
+	// 	if ($(this).is(':checked')) {
+	// 		$("#nm_asset").attr("readonly", false);
+	// 		$("#nilai_asset").attr("readonly", false); 
+	// 		$("#qty").attr("readonly", false); 
+	// 		$("#category").attr("disabled", false); 
+	// 		$("#depresiasi").attr("disabled", false);
+	// 		$('#helpa').val('Y');
+    //     }else{
+	// 		$("#nm_asset").attr("readonly", true);
+	// 		$("#nilai_asset").attr("readonly", true); 
+	// 		$("#qty").attr("readonly", true);
+	// 		$("#category").attr("disabled", true); 
+	// 		$("#depresiasi").attr("disabled", true); 
+	// 		$('#helpa').val('N');			
+	// 	}
+	// });
 	
 	$(document).on('keyup', '#nilai_asset', function(){
 		var nilai_asset = $('#nilai_asset').val();
@@ -806,10 +806,11 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 
 	
 	function getConsumable(id){
-		const list_consumable = <?= json_encode($list_consumable) ?>;
+		console.log(id)
+		const li_consumable = <?= json_encode($list_consumable) ?>;
 		let selectedId = $(`#consumable_accessories_id${id}`).val();
-		const result = list_consumable.find(item => item.id === selectedId);
-		console.log(result.unit_name);
+		const result = li_consumable.find(item => item.id === selectedId);
+		console.log(selectedId);
 
 		$('#consumable_package'+id).html(`${result.category}(${result.unit_name})`)
 		$('#consumable_unit'+id).html(`${result.unit_name}`)
@@ -818,7 +819,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 	}
 	<?php foreach($list_apd AS $val => $valx):?>
 			addConsumable('<?=$valx['accessories_id']?>','<?=$valx['type']?>','<?=$valx['utility']?>','<?=number_format($valx['qty'])?>','<?=number_format($valx['cost'])?>');		
-			getConsumable(<?=$val?> )
+			// getConsumable(<?=$val?> )
 	<?php endforeach ?>
 
 	$(document).on('keyup change', '.biaya_consumable', function() {
@@ -854,7 +855,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 		const ls_consumable = <?php echo json_encode($list_consumable); ?>;
 		let options = `<option value="">Pilih Apd</option>`;
 		// Generate options dynamically from list_consumable array
-		console.log(ls_consumable);
+		// console.log(ls_consumable);
 		ls_consumable.forEach(item => {
 			const selected = (item.id == accessories_id) ? "selected" : "";
 			options += `<option value="${item.id}" ${selected}>${item.stock_name}</option>`;
@@ -901,7 +902,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 		const list_apd = <?= json_encode($list_consumable) ?>;
 		let selectedId = $(`#apd_accessories_id${id}`).val();
 		const result = list_apd.find(item => item.id === selectedId);
-		console.log(result.unit_name);
+		// console.log(result.unit_name);
 
 		$('#apd_package'+id).html(`${result.category}(${result.unit_name})`)
 		$('#apd_unit'+id).html(`${result.unit_name}`)
@@ -911,7 +912,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 
 	<?php foreach($list_apd AS $val => $valx):?>
 			addApd('<?=$valx['accessories_id']?>','<?=$valx['type']?>','<?=$valx['utility']?>','<?=number_format($valx['qty'])?>','<?=number_format($valx['cost'])?>');		
-			getApd(<?=$val?> )
+			// getApd(<?=$val?> )
 	<?php endforeach ?>
 
 	$(document).on('keyup change', '.biaya_apd', function() {
