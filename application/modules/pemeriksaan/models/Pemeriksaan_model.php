@@ -39,6 +39,31 @@ class Pemeriksaan_model extends BF_Model
         return $get_kelompok_pemeriksaan;
     }
 
+    public function get_pemeriksaan($id)
+    {
+        $this->db->select('a.*');
+        $this->db->from('tr_pemeriksaan a');
+        $this->db->where('a.deleted_by', null);
+        $get_pemeriksaan = $this->db->get()->row();
+
+        return $get_pemeriksaan;
+    }
+
+    public function get_kelompok_pemeriksaan_where($where = null, $value = null)
+    {
+        $this->db->select('a.*');
+        $this->db->from('tr_kelompok_pemeriksaan a');
+        $this->db->where('a.deleted_by', '');
+
+        if (!empty($where)) {
+            $this->db->where($where, $value);
+        }
+
+        $get_data = $this->db->get()->result();
+
+        return $get_data;
+    }
+
     public function get_kelompok_based_kategori($id_kategori)
     {
         $this->db->select('a.*');

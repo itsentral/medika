@@ -83,6 +83,23 @@ class Pemeriksaan extends Admin_Controller
         $msg = '';
 
         if ($post['id'] !== '') {
+            $arr_update = [
+                'id_kategori' => $post['kategori'],
+                'nm_kategori' => $nm_kategori,
+                'id_kelompok_pemeriksaan' => $post['kelompok_pemeriksaan'],
+                'nm_kelompok_pemeriksaan' => $nm_kelompok,
+                'nm_pemeriksaan' => $post['pemeriksaan'],
+                'updated_by' => $this->auth->user_id(),
+                'updated_date' => date('Y-m-d H:i:s')
+            ];
+
+            $update_data = $this->db->update('tr_pemeriksaan', $arr_update, ['id' => $post['id']]);
+            if (!$update_data) {
+                $this->db->trans_rollback();
+
+                $valid = 0;
+                $msg = $this->db->error()['message'];
+            }
         } else {
             $arr_insert = [
                 'id_kategori' => $post['kategori'],
@@ -162,6 +179,27 @@ class Pemeriksaan extends Admin_Controller
         ];
 
         echo json_encode($response);
+    }
+
+    public function edit()
+    {
+        $id = $this->input->post('id');
+
+        $get_pemeriksaan = $this->Pemeriksaan_model->get_pemeriksaan($id);
+
+        $id_kategori  = (!empty($get_pemeriksaan)) ? $get_pemeriksaan->id_kategori : '';
+
+        $list_kategori = $this->Pemeriksaan_model->get_all_kategori();
+        $list_kelompok_pemeriksaan = $this->Pemeriksaan_model->get_kelompok_pemeriksaan_where('id_kategori', $id_kategori);
+
+        $data = [
+            'id' => $id,
+            'data_pemeriksaan' => $get_pemeriksaan,
+            'list_kategori' => $list_kategori,
+            'list_kelompok_pemeriksaan' => $list_kelompok_pemeriksaan
+        ];
+
+        $this->template->render('add_pemeriksaan', $data);
     }
 
     public function get_data_pemeriksaan()
