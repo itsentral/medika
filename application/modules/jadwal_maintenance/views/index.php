@@ -11,195 +11,156 @@ thead input {
 </style>
 <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables/dataTables.bootstrap.css'); ?>">
    
-<div class="box box-primary box-cs01">
-	
-	<div class="box-body">
-		<div style="width:50%;padding:10px">
-			<p>Pilih Status Rekalibrasi</p>
-			<select  type="text" name="" value="" id="status" class="form-control input-sm" >
-				<option value=''>Pilih</option>
-				<option>Consumable</option>
-				<option>Valid</option>
-				<option>Warning</option>
-				<option>Expired</option>
-				<option value="recal">On progress recal</option>
-			</select>
-		</div>
-		
-		<div class="table-responsive col-sm-12" style="padding-bottom:65px;">
-            <!-- <form action="#" id="selectFile" method="POST"> -->
-            <div style="overflow: auto; max-height: 70rem;">
-                <table  id="table-quotation"  class="table table-bordered table-striped" style="table-layout: auto; width: 100%;">
-					<thead  style="position: sticky; top: 0;background-color:#E9ECF9;color:#0A1A60;" >
-						<tr style="font-size: 13px;height: 50px;">
-							<th class="text-center" width="">No Identitas</th>
-							<th class="text-center" width="">Nama Kalibrator</th>
-							<th class="text-center" width="">January</th>
-							<th class="text-center" width="">February</th>
-							<th class="text-center" width="">March</th>
-							<th class="text-center" width="">April</th>
-							<th class="text-center" width="">May</th>
-							<th class="text-center" width="">June</th>
-							<th class="text-center" width="">July</th>
-							<th class="text-center" width="">August</th>
-							<th class="text-center" width="">September</th>
-							<th class="text-center" width="">October</th>
-							<th class="text-center" width="">November</th>
-							<th class="text-center" width="">December</th>
-							<th class="text-center" width="">Action</th>
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <div class="mb-3" style="width:50%;">
+      <label for="status" class="form-label fw-semibold">Pilih Status Rekalibrasi</label>
+      <select id="status" class="form-select">
+        <option value="">Pilih</option>
+        <option>Consumable</option>
+        <option>Valid</option>
+        <option>Warning</option>
+        <option>Expired</option>
+        <option value="recal">On progress recal</option>
+      </select>
+    </div>
 
-						</tr>
-					</thead>
-					<tbody id="" style="font-size: 12px;">
-					</tbody>
-				</table>
-			</div>
-            <!-- </form> -->
-		</div>
-		<br/>
-		<br/>
-	</div>
+    <div class="table-responsive pb-5">
+      <div style="overflow: auto; max-height: 70rem;">
+        <table id="table-quotation" class="table table-bordered align-middle">
+          <thead class="table-primary sticky-top" style="background-color:#E9ECF9;color:#0A1A60;">
+            <tr class="text-center" style="font-size: 13px; height: 50px;">
+              <th>No Identitas</th>
+              <th>Nama Kalibrator</th>
+              <th>January</th>
+              <th>February</th>
+              <th>March</th>
+              <th>April</th>
+              <th>May</th>
+              <th>June</th>
+              <th>July</th>
+              <th>August</th>
+              <th>September</th>
+              <th>October</th>
+              <th>November</th>
+              <th>December</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody style="font-size: 12px;"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="modal fade" id="FormModal" tabindex="-1" role="dialog" aria-labelledby="MyModal" data-backdrop="static">
-	<form action="#" method="POST" id="form-add" enctype="multipart/form-data">
-		<div class="modal-dialog" role="document" style="min-width:70% !important;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="">Tambah Jadwal</h5>
-					<button class="close" data-dismiss="modal" aria-label="close" id="btn-modal-close">
-						<span aria-hidden="true"><i class="fa fa-close"></i></span>
-					</button>
-				</div>
-				
-				<div class="modal-body" id="MyModalDetail">
-					<div class='row'>
-					
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Nama Kalibrator</label>
-								<select onchange="getTool()" type="text" name="calibrator_id" value="" id="calibrator_id" class="form-control input-sm" >
-									<option>Pilih Kalibrator</option>
-									<?php foreach($tool as $row): ?>
-										<option value="<?=$row->id?>"><?=$row->name?></option>
-									<?php endforeach ?>
-								</select>
-							
-							</div>
-						</div>	
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Ruang Lingkup</label>
-								<input type="text"  value="" id="ruang_lingkup" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">No. Identitas</label>
-								<input type="text"  value="" id="no_identitas" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>	
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Interval Kalibrasi</label>
-								<input type="text"  value="" id="interval_kalibrasi" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>	
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Tanggal Kalibrasi Terakhir</label>
-								<input type="date" name="tgl_kalibrasi" value="" id="tanggal_kalibrasi_terakhir" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>	
-					</div>
-					<button type="button" id="simpan" class="btn btn-primary" onclick="postAdd()">Simpan</button>
-
-				</div>
-			</div>
-		</div>
-	</form>
+<!-- Modal: Tambah Jadwal -->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="FormModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <form id="form-add" enctype="multipart/form-data">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-semibold" id="FormModalLabel">Tambah Jadwal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-modal-close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nama Kalibrator</label>
+              <select id="calibrator_id" name="calibrator_id" class="form-select" onchange="getTool()">
+                <option value="">Pilih Kalibrator</option>
+                <?php foreach($tool as $row): ?>
+                  <option value="<?= $row->id ?>"><?= $row->name ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Ruang Lingkup</label>
+              <input type="text" id="ruang_lingkup" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">No. Identitas</label>
+              <input type="text" id="no_identitas" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Interval Kalibrasi</label>
+              <input type="text" id="interval_kalibrasi" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tanggal Kalibrasi Terakhir</label>
+              <input type="date" id="tanggal_kalibrasi_terakhir" name="tgl_kalibrasi" class="form-control">
+            </div>
+          </div>
+          <div class="mt-4 text-end">
+            <button type="button" id="simpan" class="btn btn-primary" onclick="postAdd()">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 
-<div class="modal fade" id="Formdetail" tabindex="-1" role="dialog" aria-labelledby="MyModalDetail" data-backdrop="static">
-	<form action="#" method="POST" id="form-add" enctype="multipart/form-data">
-		<div class="modal-dialog" role="document" style="min-width:70% !important;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="">Detail</h5>
-					<button class="close" data-dismiss="modal" aria-label="close" id="btn-modal-close">
-						<span aria-hidden="true"><i class="fa fa-close"></i></span>
-					</button>
-				</div>
-				<div class="modal-body" id="MyModalDetail">
-					<div class='row'>
-						
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Ruang Lingkup</label>
-								<input type="text" readonly  value="" id="dimensi_name" class="form-control input-sm" fdprocessedid="z25r8f">
-							
-							</div>
-						</div>	
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">No. Identitas</label>
-								<input type="text" readonly  value="" id="code" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Nama Kalibrator</label>
-								<input type="text" readonly  value="" id="name" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>	
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Interval Kalibrasi</label>
-								<input type="text" readonly  value="" id="interval_rekalibrasi" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>	
-						
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label class="control-label">Tanggal Kalibrasi Terakhir</label>
-								<input type="text" readonly  value="" id="actual_date" class="form-control input-sm" fdprocessedid="z25r8f">
-							</div>
-						</div>	
-						
-					</div>
-					<p>Data Vendor</p>
-					<table id="" class="table table-bordered table-striped" width="100%">
-						<thead class="" style="background-color:#E9ECF9;color:#0A1A60;">
-							<tr style="font-size: 13px;height: 50px;">
-								<th class="text-center" width="">Nama Vendor</th>
-								<th class="text-center" width="">Alamat Vendor</th>
-								<th class="text-center" width="">Harga Kalibrasi</th>
-								<th class="text-center" width="">Status</th>
-							</tr>
-						</thead>
-						<tbody id="" style="font-size: 12px;">
-							<tr>
-								<td>
-									<input type="text" readonly  value="" id="vendor_name" class="form-control input-sm" fdprocessedid="z25r8f">
-								</td>
-								<td>
-									<textarea type="text" readonly  value="" id="address" class="form-control input-sm" fdprocessedid="z25r8f">
-									</textarea>
-								</td>
-								<td>
-									<input type="text" readonly  value="0" id="" class="form-control input-sm" fdprocessedid="z25r8f">
-								</td>
-								<td>
-									<input type="text" readonly  value="" id="" class="form-control input-sm" fdprocessedid="z25r8f">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</form>
+<!-- Modal: Detail -->
+<div class="modal fade" id="Formdetail" tabindex="-1" aria-labelledby="FormdetailLabel" aria-hidden="true" data-bs-backdrop="static">
+  <form id="form-detail" enctype="multipart/form-data">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-semibold" id="FormdetailLabel">Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-modal-close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Ruang Lingkup</label>
+              <input type="text" id="dimensi_name" class="form-control" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">No. Identitas</label>
+              <input type="text" id="code" class="form-control" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Nama Kalibrator</label>
+              <input type="text" id="name" class="form-control" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Interval Kalibrasi</label>
+              <input type="text" id="interval_rekalibrasi" class="form-control" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tanggal Kalibrasi Terakhir</label>
+              <input type="text" id="actual_date" class="form-control" readonly>
+            </div>
+          </div>
+
+          <h6 class="mt-4 fw-semibold">Data Vendor</h6>
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead style="background-color:#E9ECF9;color:#0A1A60;">
+                <tr class="text-center" style="font-size: 13px; height: 50px;">
+                  <th>Nama Vendor</th>
+                  <th>Alamat Vendor</th>
+                  <th>Harga Kalibrasi</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody style="font-size: 12px;">
+                <tr>
+                  <td><input type="text" id="vendor_name" class="form-control" readonly></td>
+                  <td><textarea id="address" class="form-control" rows="2" readonly></textarea></td>
+                  <td><input type="text" value="0" class="form-control" readonly></td>
+                  <td><input type="text" class="form-control" readonly></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
+
 
 
 <style>
@@ -319,20 +280,15 @@ thead input {
 </style>
 
 
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
-<link rel="stylesheet" href="<?php echo base_url("assets/fileUpload/fileUpload.css")?>">
-<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-<!-- <script src="<?php echo base_url("assets/fileUpload/fileUpload.js")?>"></script> -->
+<script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/dataTables.bootstrap.min.js');?>"></script>
+
 <script>
 var table;
 var save_method;
-$("#status").chosen({
-  "disable_search": true
-});
+// $("#status").chosen({
+//   "disable_search": true
+// });
 
 $(document).ready(function() {
 	let data = {'status':$('#status').val()}
@@ -340,6 +296,7 @@ $(document).ready(function() {
 		processing		: true,
 		serverSide		: true,
 		paging			: true, 
+		responsive: false,
 		order			: [],
 		//autoWidth		: false,
 		lengthMenu		: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
@@ -353,7 +310,7 @@ $(document).ready(function() {
 		//pagingType: "simple", //"simple, simple_numbers, full"
 
 		ajax			: {
-							"url"	: "<?php echo site_url('Schedule_rekalibrasi_kalibrator/list_kalibrator/')?>",
+							"url"	: "<?php echo site_url('jadwal_maintenance/list_kalibrator')?>",
 							"type"	: "POST",
 							"data": function ( d ) {
 								return  $.extend(d, data);

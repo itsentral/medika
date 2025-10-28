@@ -521,7 +521,7 @@ class Asset extends Admin_Controller
 			$nmCategory		= $this->Asset_model->getWhere('asset_category', 'id', $data['category']);
 
 			$category		= $data['category'];
-			$kd_asset		= substr($data['kd_asset'], 0, 18);
+			$kd_asset		= $data['kd_asset'];
 			// echo $kd_asset."<br>";
 
 			$KdCategory		= sprintf('%02s', $category);
@@ -546,7 +546,7 @@ class Asset extends Admin_Controller
 			for ($no = 1; $no <= $data['qty']; $no++) {
 				$Nomor	= sprintf('%02s', $no);
 				$lopp++;
-				$detailData[$lopp]['kd_asset'] 		= $kode_assets . $Nomor;
+				// $detailData[$lopp]['kd_asset'] 		= $kd_asset;
 				$detailData[$lopp]['nm_asset'] 		= $data['nm_asset'];
 				$detailData[$lopp]['category'] 		= $data['category'];
 				$detailData[$lopp]['nm_category'] 	= strtoupper($nmCategory[0]['nm_category']);
@@ -554,6 +554,15 @@ class Asset extends Admin_Controller
 				$detailData[$lopp]['qty'] 			= $data['qty'];
 				$detailData[$lopp]['asset_ke'] 		= $no;
 				$detailData[$lopp]['depresiasi'] 	= $data['depresiasi'];
+				$detailData[$lopp]['utilitas_perhari'] 	= str_replace(',', '',$data['utilitas_perhari']);
+				$detailData[$lopp]['utilitas_tahunan'] 	= str_replace(',', '',$data['utilitas_tahunan']);
+				$detailData[$lopp]['target_utilitas'] 	= str_replace(',', '',$data['target_utilitas']);
+				$detailData[$lopp]['total_biaya_perawatan'] 	= str_replace(',', '',$data['total_biaya_perawatan']);
+				$detailData[$lopp]['total_biaya_kalibrasi'] 	= str_replace(',', '',$data['total_biaya_kalibrasi']);
+				$detailData[$lopp]['total_biaya_consumable'] 	= str_replace(',', '',$data['total_biaya_consumable']);
+				$detailData[$lopp]['cost_per_test'] 	= str_replace(',', '',$data['cost_per_test']);
+				$detailData[$lopp]['disposal_value'] 	= str_replace(',', '',$data['disposal_value']);
+				$detailData[$lopp]['total_biaya_apd'] 		= str_replace(',', '', $data['total_biaya_apd']);
 				$detailData[$lopp]['value'] 		= str_replace(',', '', $data['value']);
 				$detailData[$lopp]['kdcab'] 		= $session['kdcab'];
 				$detailData[$lopp]['outlet'] 	= $data['outlet'];
@@ -563,6 +572,63 @@ class Asset extends Admin_Controller
 				$detailData[$lopp]['created_date'] 	= date('Y-m-d h:i:s');
 			}
 			// print_r($detailData);
+			$asset_maintenance = array();
+			foreach ($data['perawatan'] as $item) {
+				$asset_maintenance[] = array(
+					'kd_asset' => $kd_asset,
+					'year' => $item['year'],
+					'date' => $item['date'],
+					'maintenance_type' => $item['maintenance_type'],
+					'cost' => str_replace(',', '',$item['cost'])
+				);
+			}
+
+			$asset_calibration = array();
+			foreach ($data['kalibrasi'] as $item) {
+				$asset_calibration[] = array(
+					'kd_asset' => $kd_asset,
+					'year' => $item['year'],
+					'date' => $item['date'],
+					'calibration_type' => $item['calibration_type'],
+					'cost' => str_replace(',', '',$item['cost'])
+				);
+			}
+			
+			$asset_accessories = array();
+			foreach ($data['consumable'] as $item) {
+				$asset_accessories[] = array(
+					'kd_asset' => $kd_asset,
+					'accessories_id' => $item['accessories_id'],
+					'utility' => $item['utility'],
+					// 'package' => $item['package'],
+					'qty' => $item['qty'],
+					'type' => 'consumable',
+					'cost' => str_replace(',', '',$item['cost'])
+				);
+			}
+
+			$asset_accessories_apd = array();
+			foreach ($data['apd'] as $item) {
+				$asset_accessories_apd[] = array(
+					'kd_asset' => $kd_asset,
+					'accessories_id' => $item['accessories_id'],
+					'utility' => $item['utility'],
+					// 'package' => $item['package'],
+					'qty' => $item['qty'],
+					'type' =>'apd',
+					'cost' => str_replace(',', '',$item['cost'])
+				);
+			}
+
+			$asset_parameter = array();
+			foreach ($data['parameter'] as $item) {
+				$asset_parameter[] = array(
+					'kd_asset' => $kd_asset,
+					'parameter_id' => $item['parameter_id'],
+					'abbreviation' => $item['abbreviation'],
+					'tube' => $item['tube']
+				);
+			}
 
 			$Data_Del	= array(
 				'deleted' 		=> "Y",
@@ -585,13 +651,34 @@ class Asset extends Admin_Controller
 		// exit;
 
 		$this->db->trans_start();
-		if ($helpx == 'Y') {
-			$this->db->where('kd_asset LIKE ', $kd_asset . '%');
-			$this->db->update('asset', $Data_Del);
 
-			$this->db->insert_batch('asset', $detailData);
+		if ($helpx == 'Y') {
+		// $this->db->where('kd_asset LIKE ', $kd_asset . '%');
+		// $this->db->update('asset', $Data_Del);
+
+		$this->db->where('kd_asset', $kd_asset); 
+		$this->db->delete('asset_maintenance');
+
+		$this->db->where('kd_asset', $kd_asset ); 
+		$this->db->delete('asset_calibration');
+
+		$this->db->where('kd_asset', $kd_asset); 
+		$this->db->delete('asset_accessories');
+
+		$this->db->where('kd_asset ', $kd_asset ); 
+		$this->db->delete('asset_parameter');
+		
+		// return var_dump($kd_asset);
+
+		$this->db->insert_batch('asset_maintenance', $asset_maintenance);
+		$this->db->insert_batch('asset_calibration', $asset_calibration);
+		$this->db->insert_batch('asset_accessories', $asset_accessories);
+		$this->db->insert_batch('asset_accessories', $asset_accessories_apd);
+		$this->db->insert_batch('asset_parameter', $asset_parameter);
+		$this->db->where('id', $data['id'])->update('asset', $detailData[1]);
+		// $this->db->insert_batch('asset', $detailData);
 		} elseif ($helpx == 'N') {
-			$this->db->where('id', $idx)->update('asset', $Data_Update);
+			$this->db->where('id', $idx)->update('asset', $Data_Update[1]);
 		}
 		$this->db->trans_complete();
 
