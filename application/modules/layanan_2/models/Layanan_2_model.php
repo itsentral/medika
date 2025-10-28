@@ -202,7 +202,7 @@ class Layanan_2_model extends BF_Model
 		$sql = "SELECT a.*, b.nama_kategori,c.stock_name,d.nm_asset
 	         FROM rs_parameter a 
              JOIN rs_kategorilab b ON a.id_kategori  = b.id_kategori
-             JOIN accessories c ON a.tabung  = c.id
+             JOIN accessories c ON a.tabung  = c.id 
              JOIN asset d ON a.mesin  = d.id
 			   WHERE 1=1 AND a.kdcab=$cab
                AND (
