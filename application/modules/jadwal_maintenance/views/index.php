@@ -1,8 +1,8 @@
 <?php
-    $ENABLE_ADD = has_permission('Assets.Add');
-    $ENABLE_MANAGE = has_permission('Assets.Manage');
-    $ENABLE_VIEW = has_permission('Assets.View');
-    $ENABLE_DELETE = has_permission('Assets.Delete');
+    $ENABLE_ADD = has_permission('Jadwal_maintenance.Add');
+    $ENABLE_MANAGE = has_permission('Jadwal_maintenance.Manage');
+    $ENABLE_VIEW = has_permission('Jadwal_maintenance.View');
+    $ENABLE_DELETE = has_permission('Jadwal_maintenance.Delete');
 ?>
 <style type="text/css">
 thead input {
@@ -327,12 +327,7 @@ $(document).ready(function() {
 							{
 								text:      '<i class="fa fa-refresh fa-lg"></i> &nbsp;<b>Reload</b>',
 								className: "Btntable reload-table",
-							},
-
-                            {
-                                text:      '<i class="fa fa-plus fa-lg"></i> &nbsp;<b>Tambah</b>',
-                                className: "Btntable add" ,
-                            }
+							}
 							,
 
                             {

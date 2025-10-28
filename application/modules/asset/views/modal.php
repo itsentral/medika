@@ -568,7 +568,10 @@
 		
 	});
 
-	 let counter_perawatan=0;
+
+	if (typeof counter_perawatan === 'undefined') {
+		var counter_perawatan = 0;
+	}
 	
 	function addPerawatan(){
         // console.log('add sampling');
@@ -628,7 +631,10 @@
 	}
 
 
-    let counter_kalibrasi=0;
+
+	if (typeof counter_kalibrasi === 'undefined') {
+		var counter_kalibrasi = 0;
+	}
 	function addKalibrasi(){
         // console.log('add sampling');
 		const newInputHtml = `
@@ -688,7 +694,9 @@
 	}
 
 	//addConsumable
-	let counter_consumable=0;
+	if (typeof counter_consumable === 'undefined') {
+		var counter_consumable = 0;
+	}
 	function addConsumable(){
 
 		const newInputHtml = `
@@ -762,7 +770,9 @@
 
 
 	//addApd
-	let counter_apd=0;
+	if (typeof counter_apd === 'undefined') {
+		var counter_apd = 0;
+	}
 	function addApd(){
 
 		const newInputHtml = `
@@ -836,7 +846,9 @@
 
 
 	//addParameter
-	let counter_parameter=0;
+	if (typeof counter_parameter === 'undefined') {
+		var counter_parameter = 0;
+	}
 	function addParameter(){
         // console.log('add sampling');
 		const newInputHtml = `

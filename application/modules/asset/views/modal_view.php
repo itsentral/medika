@@ -614,7 +614,6 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 				</td>
 				<td>
 					
-				
 				</td>
 			</tr>
 		`;
@@ -685,7 +684,7 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 						<input name="kalibrasi[${counter_kalibrasi}][cost]" value="${cost}" class="form-control input biaya_kalibrasi moneyFormat" type="text">
 					</td>
 					<td>
-						
+					
 					
 					</td>
 				</tr>
@@ -734,12 +733,22 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', cost = '') {
 	let options = `<option value="0">Pilih Consumable</option>`;
 	const ls_consumable = <?php echo json_encode($list_consumable); ?>;
-
+	
 	// Build option list from JS array
 	ls_consumable.forEach(item => {
 		const selected = (item.id == accessories_id) ? "selected" : "";
 		options += `<option value="${item.id}" ${selected}>${item.stock_name.toUpperCase()}</option>`;
 	});
+
+	let pack='';
+	let pcs='';
+	if(accessories_id){
+		const list_apd = <?= json_encode($list_consumable) ?>;
+		let selectedId = accessories_id;
+		const result = list_apd.find(item => item.id === selectedId)
+		pack=`${result.category}(${result.unit_name})`;
+		pcs = `${result.unit_name}`;
+	}
 
 	const newInputHtml = `
 		<tr id="consumable${counter_consumable}">
@@ -759,12 +768,16 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 					   type="text" value="${utility}" 
 					   class="form-control input">
 			</td>
-			<td id="consumable_package${counter_consumable}"></td>
+			<td id="consumable_package${counter_consumable}">
+				${pack}
+			</td>
 			<td>
 				<input name="consumable[${counter_consumable}][qty]" 
 					   value="${qty}" class="form-control input" type="text">
 			</td>
-			<td id="consumable_unit${counter_consumable}"></td>
+			<td id="consumable_unit${counter_consumable}">
+				${pcs}
+			</td>
 			<td>
 				<input name="consumable[${counter_consumable}][cost]" 
 					   value="${cost}" 
@@ -847,6 +860,17 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 			const selected = (item.id == accessories_id) ? "selected" : "";
 			options += `<option value="${item.id}" ${selected}>${item.stock_name}</option>`;
 		});
+
+		let pack='';
+		let pcs='';
+		if(accessories_id){
+			const list_apd = <?= json_encode($list_consumable) ?>;
+			let selectedId = accessories_id;
+			const result = list_apd.find(item => item.id === selectedId)
+			pack=`${result.category}(${result.unit_name})`;
+		    pcs = `${result.unit_name}`;
+		}
+		
 		
 		const newInputHtml = `
 			<tr id="apd${counter_apd}">
@@ -859,9 +883,13 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 					<input name="apd[${counter_apd}][type]" type="text" value="${type}" class="form-control input d-none">
 					<input name="apd[${counter_apd}][utility]" type="text" value="${utility}" class="form-control input">
 				</td>
-				<td id="apd_package${counter_apd}"></td>
+				<td id="apd_package${counter_apd}">
+					${pack}
+				</td>
 				<td><input name="apd[${counter_apd}][qty]" value="${qty}" class="form-control input" type="text"></td>
-				<td id="apd_unit${counter_apd}"></td>
+				<td id="apd_unit${counter_apd}">
+					${pcs}
+				</td>
 				<td><input name="apd[${counter_apd}][cost]" value="${cost}" class="form-control input biaya_apd moneyFormat" type="text"></td>
 				<td>
 				
@@ -879,7 +907,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 				dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
 			});
 		});
-
+		
 		counter_apd++;
 	}
 
@@ -965,6 +993,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 				</td>
 				<td>
 					
+				
 				</td>
 			</tr>
 		`;

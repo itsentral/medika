@@ -7,10 +7,10 @@ class Jadwal_maintenance_model extends BF_Model
 	{
 		parent::__construct();
 
-		$this->ENABLE_ADD     = has_permission('Assets.Add');
-		$this->ENABLE_MANAGE  = has_permission('Assets.Manage');
-		$this->ENABLE_VIEW    = has_permission('Assets.View');
-		$this->ENABLE_DELETE  = has_permission('Assets.Delete');
+		$this->ENABLE_ADD     = has_permission('Jadwal_maintenance.Add');
+		$this->ENABLE_MANAGE  = has_permission('Jadwal_maintenance.Manage');
+		$this->ENABLE_VIEW    = has_permission('Jadwal_maintenance.View');
+		$this->ENABLE_DELETE  = has_permission('Jadwal_maintenance.Delete');
 	}
 
 	public function getList($table)
@@ -336,9 +336,10 @@ class Jadwal_maintenance_model extends BF_Model
 	private function _get_datatables_query($status='')
 	{
 
-		$this->db->select('asset.id,asset.kd_asset,asset.nm_asset, asset_maintenance.date');
+		$this->db->select('asset.id, asset.kd_asset, asset.nm_asset, am.date, am.actual_date');
 		$this->db->from('asset');
-		$this->db->join('asset_maintenance', 'asset.kd_asset = asset_maintenance.kd_asset', 'LEFT');
+		$this->db->join('(SELECT kd_asset, MIN(date) as min_date FROM asset_maintenance GROUP BY kd_asset) as min_am', 'asset.kd_asset = min_am.kd_asset', 'LEFT');
+		$this->db->join('asset_maintenance as am', 'asset.kd_asset = am.kd_asset AND am.date = min_am.min_date', 'LEFT');
 		$this->db->where('asset.deleted', 'N');
 
 		// if($status != 'recal'){
@@ -394,7 +395,7 @@ class Jadwal_maintenance_model extends BF_Model
 		$this->_get_datatables_query($status);
 		if ($_POST['length'] != -1)
 			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->group_by('asset.id')->order_by('asset_maintenance.date' ,'desc')->get();
+		$query = $this->db->group_by('asset.id')->order_by('am.date' ,'desc')->get();
 		return $query->result();
 	}
 

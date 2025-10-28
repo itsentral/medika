@@ -5,10 +5,10 @@
 class Jadwal_maintenance extends Admin_Controller
 {
 
-	protected $viewPermission = 'Assets.View';
-	protected $addPermission = 'Assets.Add';
-	protected $managePermission = 'Assets.Manage';
-	protected $deletePermission = 'Assets.Delete';
+	protected $viewPermission = 'Jadwal_maintenance.View';
+	protected $addPermission = 'Jadwal_maintenance.Add';
+	protected $managePermission = 'Jadwal_maintenance.Manage';
+	protected $deletePermission = 'Jadwal_maintenance.Delete';
 
 	public function __construct()
 	{
@@ -80,7 +80,7 @@ class Jadwal_maintenance extends Admin_Controller
 						}elseif(date('Y-m', strtotime($item->date . '')) < date('Y-m')){
 							$bg_plan = "red"; 
 						}	
-						if(date('Y', strtotime($item->date . ' year')) <= date('Y')){
+						if(date('Y', strtotime($item->actual_date . ' year')) <= date('Y')){
 							$bg_actual = "gray"; 
 						}
 
@@ -89,10 +89,10 @@ class Jadwal_maintenance extends Admin_Controller
 							$bg_actual = "red"; 
 						}
 						$plan_date = (date('Y', strtotime($item->date . ' year'))<= date('Y')) ? $item->date :$item->date;
-						$actual_date = (date('Y', strtotime($item->date . ' year'))<= date('Y')) ? "" : $item->date;
+						$actual_date = (date('Y', strtotime($item->date . ' year'))<= date('Y')) ? "" : $item->actual_date;
 						if($status == 'recal'){
 							$plan_date = $item->date;
-							$actual_date = $item->date;
+							$actual_date = $item->actual_date;
 						}
 						
 						$template= '<div style="background:'.$bg_plan.';color:white;border-radius: 25px;width:100px">Plan : <br>'.$plan_date.' </div> 
