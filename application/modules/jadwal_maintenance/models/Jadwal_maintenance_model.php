@@ -328,6 +328,7 @@ class Jadwal_maintenance_model extends BF_Model
 	}
 
 
+	var $table 	= 'asset';
 	var $column_order 	= array('', null); 
 	var $column_search 	= array('asset.nm_asset'); 
 	var $order 			= array('asset.id' => 'desc');
@@ -335,7 +336,7 @@ class Jadwal_maintenance_model extends BF_Model
 	private function _get_datatables_query($status='')
 	{
 
-		$this->db->select('asset.kd_asset,asset.nm_asset, asset_maintenance.*');
+		$this->db->select('asset.id,asset.kd_asset,asset.nm_asset, asset_maintenance.date');
 		$this->db->from('asset');
 		$this->db->join('asset_maintenance', 'asset.kd_asset = asset_maintenance.kd_asset', 'LEFT');
 		$this->db->where('asset.deleted', 'N');
@@ -393,7 +394,7 @@ class Jadwal_maintenance_model extends BF_Model
 		$this->_get_datatables_query($status);
 		if ($_POST['length'] != -1)
 			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->group_by('master_calibrators_new.id')->order_by('schedule_rekalibrasi_kalibrator.actual_date' ,'desc')->get();
+		$query = $this->db->group_by('asset.id')->order_by('asset_maintenance.date' ,'desc')->get();
 		return $query->result();
 	}
 

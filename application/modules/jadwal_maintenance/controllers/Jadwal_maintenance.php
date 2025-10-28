@@ -19,6 +19,9 @@ class Jadwal_maintenance extends Admin_Controller
 			'Asset/Asset_model'
 		));
 
+		$this->load->model(array(
+			'Jadwal_maintenance/Jadwal_maintenance_model'
+		));
 		date_default_timezone_set('Asia/Bangkok');
 		$this->template->page_icon('fa fa-table');
 	}
@@ -27,6 +30,8 @@ class Jadwal_maintenance extends Admin_Controller
 	{
 		$this->auth->restrict($this->viewPermission);
 		$this->template->title('List Assets');
+			$this->template->set_theme('medika');
+		$this->template->set_layout('index');
 		$cabang		= $this->db->query("SELECT * FROM cabang WHERE sts_aktif = 'aktif'")->result_array();
 		$dataArr = array(
 			'cabang' => $cabang,
@@ -56,27 +61,26 @@ class Jadwal_maintenance extends Admin_Controller
 				$row = array();
 
 				$controller			= ucfirst(strtolower($this->uri->segment(1)));
-				$Arr_Akses			= getAcccesmenu($controller);
-				$row[] = $item->code;
-				$row[] = $item->name;
-				$tgl = (int)date('m', strtotime($item->actual_date));
+				$row[] = $item->kd_asset;
+				$row[] = $item->nm_asset;
+				$tgl = (int)date('m', strtotime($item->date));
 				$schre=$this->db->select('*')
-				->from('schedule_rekalibrasi_kalibrator')
-				->where('calibrator_id',$item->id)
-				->where('actual_date', null)
+				->from('asset_maintenance')
+				->where('kd_asset',$item->kd_asset)
+				->where('date !=', null)
 				->get()
 				->row();
 				for ($x = 1; $x <= 12; $x++) {
 					if($tgl == $x){
 						$bg_plan = "green";
 						$bg_actual = "green";
-						$interval = $item->interval_rekalibrasi;
-						if(date('Y-m', strtotime($item->actual_date . ' +'.$interval.' year')) == date('Y-m')){
+						$interval = $item->date;
+						if(date('Y-m', strtotime($item->date . 'year')) == date('Y-m')){
 							$bg_plan = "#DBCC23"; 
-						}elseif(date('Y-m', strtotime($item->actual_date . ' +'.$interval.' year')) < date('Y-m')){
+						}elseif(date('Y-m', strtotime($item->date . '')) < date('Y-m')){
 							$bg_plan = "red"; 
 						}	
-						if(date('Y', strtotime($item->actual_date . ' +'.$interval.' year')) <= date('Y')){
+						if(date('Y', strtotime($item->date . ' year')) <= date('Y')){
 							$bg_actual = "gray"; 
 						}
 
@@ -84,20 +88,20 @@ class Jadwal_maintenance extends Admin_Controller
 							$bg_plan = "#76b5c5"; 
 							$bg_actual = "red"; 
 						}
-						$plan_date = (date('Y', strtotime($item->actual_date . ' +'.$interval.' year'))<= date('Y')) ? $item->actual_date :$item->plan_date;
-						$actual_date = (date('Y', strtotime($item->actual_date . ' +'.$interval.' year'))<= date('Y')) ? "" : $item->actual_date;
+						$plan_date = (date('Y', strtotime($item->date . ' year'))<= date('Y')) ? $item->date :$item->date;
+						$actual_date = (date('Y', strtotime($item->date . ' year'))<= date('Y')) ? "" : $item->date;
 						if($status == 'recal'){
-							$plan_date = $item->plan_date;
-							$actual_date = $item->actual_date;
+							$plan_date = $item->date;
+							$actual_date = $item->date;
 						}
 						
-						$template= '<div style="background:'.$bg_plan.';color:white;border-radius: 25px;width:100px">Plan :'.$plan_date.' </div> 
-							  	  <div style="background:'.$bg_actual.';color:white;border-radius: 25px;margin-top:10px">Actual :'.$actual_date.' </div>
+						$template= '<div style="background:'.$bg_plan.';color:white;border-radius: 25px;width:100px">Plan : <br>'.$plan_date.' </div> 
+							  	  <div style="background:'.$bg_actual.';color:white;border-radius: 25px;margin-top:10px">Actual : <br>'.$actual_date.' </div>
 								';
-						if($interval == 0 || $interval == '-'){
-							$template= '<div style="background:purple;color:white;border-radius: 25px;width:100px">Consumable </div> 
-								';
-						}
+						// if($interval == 0 || $interval == '-'){
+						// 	$template= '<div style="background:purple;color:white;border-radius: 25px;width:100px">Consumable </div> 
+						// 		';
+						// }
 					
 						$row[] = $template;
 
@@ -110,12 +114,12 @@ class Jadwal_maintenance extends Admin_Controller
 				}
 				if($schre){
 					$row[] = '
-						<button  onclick="detail_sch(`'.$item->schre_id.'`)" class="btn btn-sm btn-primary " style="border-radius:25%;margin-top:2px;"><i class="fa fa-eye"></i></button>
+						<button  onclick="detail_sch(`'.$item->id.'`)" class="btn btn-sm btn-primary " style="border-radius:25%;margin-top:2px;"><i class="fa fa-eye"></i></button>
 				';
 				}else{
 					$row[] = '
-						<button  onclick="detail_sch(`'.$item->schre_id.'`)" class="btn btn-sm btn-primary " style="border-radius:25%;margin-top:2px;"><i class="fa fa-eye"></i></button>
-						&nbsp;&nbsp;<a href="'.site_url("schedule_rekalibrasi_kalibrator/quotation_rekalibrasi/").enkripsi_url($item->id).'/'.$item->schre_id.'" class="btn btn-sm btn-success" title="Proses Quotation" style="border-radius:25%;margin-top:2px;"><i class="fa fa-pencil"></i></a>
+						<button  onclick="detail_sch(`'.$item->id.'`)" class="btn btn-sm btn-primary " style="border-radius:25%;margin-top:2px;"><i class="fa fa-eye"></i></button>
+						&nbsp;&nbsp;<a href="'.site_url("schedule_rekalibrasi_kalibrator/quotation_rekalibrasi/").$item->id.'/'.$item->id.'" class="btn btn-sm btn-success" title="Proses Quotation" style="border-radius:25%;margin-top:2px;"><i class="fa fa-pencil"></i></a>
 					';
 				}
                
@@ -123,13 +127,14 @@ class Jadwal_maintenance extends Admin_Controller
 				$data[] = $row;
 			}
 
+
 			$output = array(
 				"draw" => $_POST['draw'],
 				"recordsTotal" => $this->Jadwal_maintenance_model->count_all($status),
 				"recordsFiltered" => $this->Jadwal_maintenance_model->count_filtered($status),
 				"data" => $data,
 			);
-			
+
 			echo json_encode($output);	
 	}
 

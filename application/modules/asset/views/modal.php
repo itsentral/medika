@@ -683,7 +683,7 @@
 	}
 
 	function deleteKalibrasi(key=''){
-		$(`#perawatan${key}`).remove();
+		$(`#kalibrasi${key}`).remove();
 		updateTotalBiayaKalibrasi();
 	}
 
