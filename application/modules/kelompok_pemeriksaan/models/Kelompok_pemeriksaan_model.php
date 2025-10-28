@@ -12,10 +12,10 @@ class Kelompok_pemeriksaan_model extends BF_Model
     {
         parent::__construct();
 
-        $this->ENABLE_ADD     = has_permission('Consumable.Add');
-        $this->ENABLE_MANAGE  = has_permission('Consumable.Manage');
-        $this->ENABLE_VIEW    = has_permission('Consumable.View');
-        $this->ENABLE_DELETE  = has_permission('Consumable.Delete');
+        $this->ENABLE_ADD     = has_permission('Kelompok_Pemeriksaan.Add');
+        $this->ENABLE_MANAGE  = has_permission('Kelompok_Pemeriksaan.Manage');
+        $this->ENABLE_VIEW    = has_permission('Kelompok_Pemeriksaan.View');
+        $this->ENABLE_DELETE  = has_permission('Kelompok_Pemeriksaan.Delete');
     }
 
     public function get_all_kategori()
@@ -75,12 +75,12 @@ class Kelompok_pemeriksaan_model extends BF_Model
             $no++;
 
             $btn_delete = '';
-            if (has_permission($this->ENABLE_DELETE)) {
+            if ($this->ENABLE_DELETE) {
                 $btn_delete = '<button type="button" class="btn btn-sm btn-danger del" data-id="' . $item->id . '" title="Delete Kelompok Pemeriksaan"><i class="fa fa-trash"></i> </button>';
             }
 
             $btn_edit = '';
-            if (has_permission($this->ENABLE_MANAGE)) {
+            if ($this->ENABLE_MANAGE) {
                 $btn_edit = '<button type="button" class="btn btn-sm btn-warning edit" data-id="' . $item->id . '" title="Edit Kelompok Pemeriksaan"><i class="fa fa-edit"></i></button>';
             }
 
