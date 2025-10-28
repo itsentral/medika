@@ -24,9 +24,9 @@ thead input {
 <div class="card card-blue">
     <!-- /.card-header -->
     <div class="card-body">
-        <font size="2">
+       
             <div id="data_custommer">
-                <form id="data_form">
+               <form id="data_form" method="post" enctype="multipart/form-data">
                     <div class="card card-blue">
 
                         <legend>
@@ -40,7 +40,7 @@ thead input {
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">No Rekam Medis</label>
+                                        <label for="no_rm">No Rekam Medis</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-sm" id="no_rm" name="no_rm"
@@ -49,7 +49,7 @@ thead input {
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Nama Pasien</label>
+                                        <label for="nama">Nama Pasien</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-sm" id="nama" name="nama" 
@@ -59,7 +59,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Titel</label>
+                                        <label for="titel">Titel</label>
                                     </div>
                                     <div class="col-md-6">
                                         <select class="form-control input-sm" id="titel" name="titel"
@@ -75,7 +75,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Jenis Kelamin</label>
+                                        <label for="jenis_kelamin">Jenis Kelamin</label>
                                     </div>
                                     <div class="col-md-6">
                                         <select class="form-control input-sm" id="jenis_kelamin" name="jenis_kelamin"
@@ -88,7 +88,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Tanggal Lahir</label>
+                                        <label for="tgl_lahir">Tanggal Lahir</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-sm" id="tgl_lahir" name="tgl_lahir"
@@ -98,7 +98,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Agama</label>
+                                        <label for="agama">Agama</label>
                                     </div>
                                     <div class="col-md-6">
                                         <select class="form-control input-sm" id="agama" name="agama"
@@ -115,7 +115,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Provinsi</label>
+                                        <label for="provinsi">Provinsi</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" id="provinsi" name="provinsi" class="form-control input-sm "
@@ -125,7 +125,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Kabupaten/Kota</label>
+                                        <label for="kota">Kabupaten/Kota</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" id="kota" name="kota" class="form-control input-sm "
@@ -136,7 +136,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Kecamatan</label>
+                                        <label for="kecamatan">Kecamatan</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" id="kecamatan" name="kecamatan"
@@ -149,7 +149,7 @@ thead input {
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Kelurahan</label>
+                                        <label for="kelurahan">Kelurahan</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" id="kelurahan" name="kelurahan"
@@ -161,7 +161,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Alamat Lengkap</label>
+                                        <label for="alamat">Alamat Lengkap</label>
                                     </div>
                                     <div class="col-md-6">
                                         <textarea type="text" class="form-control input-sm" id="alamat" name="alamat"
@@ -171,7 +171,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">No Telp Pasien</label>
+                                        <label for="telp_pasien">No Telp Pasien</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-sm" id="telp_pasien"
@@ -182,7 +182,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Penanggung Jawab</label>
+                                        <label for="pj">Penanggung Jawab</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-sm" id="pj" name="pj"
@@ -193,7 +193,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">No Telp PJ</label>
+                                        <label for="telp_pj">No Telp PJ</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-sm" id="telp_pj" name="telp_pj"
@@ -204,7 +204,7 @@ thead input {
 
                                 <div class="form-group row" hidden>
                                     <div class="col-md-4">
-                                        <label for="">Cara Daftar</label>
+                                        <label for="daftar">Cara Daftar</label>
                                     </div>
                                     <div class="col-md-6">
                                         <select class="form-control input-sm select2" id="daftar" name="daftar">
@@ -216,7 +216,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Rujukan</label>
+                                        <label for="rujukan">Rujukan</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control input-sm" id="rujukan" name="rujukan"
@@ -226,7 +226,7 @@ thead input {
 
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Departemen</label>
+                                        <label for="departemen">Departemen</label>
                                     </div>
                                     <div class="col-md-6">
                                         <select id="departemen" name="departemen" class="form-control input-sm select2"
@@ -242,7 +242,7 @@ thead input {
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <label for="">Dokter</label>
+                                        <label for="dokter">Dokter</label>
                                     </div>
                                     <div class="col-md-6">
                                         <select id="dokter" name="dokter" class="form-control input-sm select2" readonly
@@ -268,7 +268,7 @@ thead input {
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Penjamin</label>
+                                            <label for="penjamin">Penjamin</label>
                                         </div>
                                         <div class="col-md-6">
                                             <select id="penjamin" name="penjamin" class="form-control input-sm select2"
@@ -286,7 +286,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Nama Jaminan</label>
+                                            <label for="nama_jaminan">Nama Jaminan</label>
                                         </div>
                                         <div class="col-md-6">
                                             <select id="nama_jaminan" name="nama_jaminan"
@@ -297,7 +297,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">No Surat/SEP/SJP</label>
+                                            <label for="no_sep">No Surat/SEP/SJP</label>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control input-sm" id="no_sep" name="no_sep"
@@ -307,7 +307,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Asal PPK/Faskes</label>
+                                            <label for="faskes">Asal PPK/Faskes</label>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control input-sm" id="faskes" name="faskes"
@@ -317,7 +317,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">NIK</label>
+                                            <label for="nik">NIK</label>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control input-sm" id="nik" name="nik"
@@ -328,7 +328,7 @@ thead input {
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Wilayah/Cabang</label>
+                                            <label for="wilayah">Wilayah/Cabang</label>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control input-sm" id="wilayah" name="wilayah"
@@ -338,7 +338,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Nama Karyawan</label>
+                                            <label for="karyawan">Nama Karyawan</label>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control input-sm" id="karyawan"
@@ -348,7 +348,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Bagian</label>
+                                            <label for="bagian">Bagian</label>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control input-sm" id="bagian" name="bagian"
@@ -358,7 +358,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Yang Berobat</label>
+                                            <label for="berobat">Yang Berobat</label>
                                         </div>
                                         <div class="col-md-6">
                                             <select class="form-control input-sm select2" id="berobat" name="berobat">
@@ -373,7 +373,7 @@ thead input {
 
                                     <div class="form-group row">
                                         <div class="col-md-4">
-                                            <label for="">Plafon</label>
+                                            <label for="plafon">Plafon</label>
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control input-sm" id="plafon" name="plafon"
@@ -406,17 +406,17 @@ thead input {
                                     </div>
                                 </div>
                             </div>
-                            <center>
+                           
                                 <button type="button" class="btn btn-success btn-sm" name="simpan-com" id="simpan-com"><i
                                         class="fa fa-save"></i>Simpan</button>
                                 <button type="reset" class="btn btn-danger btn-sm"><i class="fa fa-close"></i>
                                     Cancel</button>
                                 <a class="btn btn-warning btn-sm" href="<?= base_url('pendaftaran') ?>" title="Back"> <i
                                         class="fa fa-reply">&nbsp;</i>Back</a>
-                            </center>
+                            
                 </form>
             </div>
-        </font>
+       
     </div>
     <!-- /.card-body -->
 </div>
@@ -435,68 +435,64 @@ thead input {
 </script>
 
 <script type="text/javascript">
-$('#simpan-com').click(function(e) {
+$('#simpan-com').click(function (e) {
     e.preventDefault();
+
     swal({
-        title: "Are you sure?",
-        text: "You will not be able to process again this data!",
+        title: "Apakah Anda yakin?",
+        text: "Data akan disimpan ke sistem.",
         icon: "warning",
-        buttons: {
-            cancel: {
-                text: "No, cancel process!",
-                value: null,
-                visible: true,
-                className: "btn-danger",
-                closeModal: true,
-            },
-            confirm: {
-                text: "Yes, Process it!",
-                value: true,
-                visible: true,
-                className: "btn-success",
-                closeModal: true
-            }
-        },
+        buttons: ["Batal", "Ya, Simpan!"],
         dangerMode: true,
     }).then((isConfirm) => {
-        if (isConfirm) {
-            var formData = new FormData($('#data_form')[0]);
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ': ' + pair[1]);
-            }
+        if (!isConfirm) return;
 
-            $.ajax({
-                url: siteurl + "pendaftaran/savePendaftaranLab_Lama",
-                type: "POST",
-                data: formData,
-                dataType: 'json',
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    if (data.status == 1) {
-                        swal({
-                            title: "Save Success!",
-                            text: data.pesan,
-                            icon: "success",
-                            button: false,
-                            timer: 3000
-                        });
-                        setTimeout(function() {
-                            window.location.href = base_url + active_controller;
-                        }, 3000);
-                    } else {
-                        swal("Save Failed!", data.pesan, "warning");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                    swal("Error!", "An error occurred during process. Please try again.", "error");
-                }
-            });
-        } else {
-            swal("Cancelled", "Data can be processed again :)", "error");
+        // Pastikan form ada
+        var form = $('#data_form')[0];
+        if (!form) {
+            swal("Error!", "Form tidak ditemukan di halaman.", "error");
+            return;
         }
+
+        // Ambil isi form
+        var formData = new FormData(form);
+
+        // Debug: lihat isi FormData di console
+        console.log("=== ISI FORM DATA ===");
+        for (var [key, value] of formData.entries()) {
+            console.log(key + ": " + value);
+        }
+
+        // Kirim via AJAX
+        $.ajax({
+            url: siteurl + 'pendaftaran/savePendaftaranLab_Lama',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                if (data.status == 1) {
+                    swal({
+                        title: "Berhasil!",
+                        text: data.pesan,
+                        icon: "success",
+                        timer: 2500,
+                        button: false
+                    });
+                    setTimeout(function () {
+                        window.location.href = base_url + active_controller;
+                    }, 2500);
+                } else {
+                    swal("Gagal!", data.pesan, "warning");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", xhr.responseText);
+                swal("Error!", "Terjadi kesalahan koneksi atau server.", "error");
+            }
+        });
     });
 });
 
