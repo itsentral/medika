@@ -153,9 +153,8 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Perawatan</p>
 		<br><br>
 		<h5><b>Jadwal Perawatan</b></h5>
-		<button onclick="addPerawatan('')" type="button" class="btn btn-primary mb-2">
-			<i class="fa fa-plus"></i> Perawatan
-		</button>
+		
+		
 		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
@@ -183,9 +182,8 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		</div>
 		<br>
 		<h5><b>Jadwal Rekalibrasi</b></h5>
-		<button onclick="addKalibrasi('')" type="button" class="btn btn-primary mb-2">
-			<i class="fa fa-plus"></i> Kalibrasi
-		</button>
+	
+		
 		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
@@ -236,9 +234,8 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		<br><br>
 		<label class="form-label"><h5><b>Consumable</b></h5></label>
 		<br><br>
-		<button onclick="addConsumable('')" type="button" class="btn btn-primary mb-2">
-			<i class="fa fa-plus"></i> Consumable
-		</button>
+	
+		
 		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
@@ -278,9 +275,8 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		<br>
 		<label class="form-label"><h5><b>Apd</b></h5></label>
 		<br><br>
-		<button onclick="addApd('')" type="button" class="btn btn-primary mb-2">
-			<i class="fa fa-plus"></i> Apd
-		</button>
+		
+		
 		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
@@ -319,9 +315,8 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		<br>
 		<p style='display:inline-block;background:#e6f7ff;color:#034f84;padding:8px 12px;border-radius:6px;font-weight:700;margin:0; font-size:16px;'>Parameter</p>
 		<br><br>
-		<button onclick="addParameter('')" type="button" class="btn btn-primary mb-2">
-			<i class="fa fa-plus"></i> Parameter
-		</button>
+	
+		
 		<div id="" style="margin-top:20px;max-height:350px; overflow-x:auto; overflow-y:auto;">
 			<table class="table table-bordered table-striped" style="min-width:100%; border-collapse:collapse;">
 				<thead>
@@ -338,11 +333,7 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 			</table>
 		</div>
 		<br><br><br><br>
-			<div class="d-flex justify-content-end">
-				<?php
-					echo form_button(array('type'=>'button','class'=>'btn btn-primary','value'=>'save','content'=>'Save','id'=>'simpan-bro','style'=>'width:100px;')).' ';
-				?>
-			</div>
+			
 	</div>
 </div>
 <style>
@@ -364,23 +355,23 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		// $('#value').autoNumeric('init');
     });
 	
-	$(document).on('click', '#chk', function(){
-		if ($(this).is(':checked')) {
-			$("#nm_asset").attr("readonly", false);
-			$("#nilai_asset").attr("readonly", false); 
-			$("#qty").attr("readonly", false); 
-			$("#category").attr("disabled", false); 
-			$("#depresiasi").attr("disabled", false);
-			$('#helpa').val('Y');
-        }else{
-			$("#nm_asset").attr("readonly", true);
-			$("#nilai_asset").attr("readonly", true); 
-			$("#qty").attr("readonly", true);
-			$("#category").attr("disabled", true); 
-			$("#depresiasi").attr("disabled", true); 
-			$('#helpa').val('N');			
-		}
-	});
+	// $(document).on('click', '#chk', function(){
+	// 	if ($(this).is(':checked')) {
+	// 		$("#nm_asset").attr("readonly", false);
+	// 		$("#nilai_asset").attr("readonly", false); 
+	// 		$("#qty").attr("readonly", false); 
+	// 		$("#category").attr("disabled", false); 
+	// 		$("#depresiasi").attr("disabled", false);
+	// 		$('#helpa').val('Y');
+    //     }else{
+	// 		$("#nm_asset").attr("readonly", true);
+	// 		$("#nilai_asset").attr("readonly", true); 
+	// 		$("#qty").attr("readonly", true);
+	// 		$("#category").attr("disabled", true); 
+	// 		$("#depresiasi").attr("disabled", true); 
+	// 		$('#helpa').val('N');			
+	// 	}
+	// });
 	
 	$(document).on('keyup', '#nilai_asset', function(){
 		var nilai_asset = $('#nilai_asset').val();
@@ -622,9 +613,8 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 					<input name="perawatan[${counter_perawatan}][cost]" value="${cost}" class="form-control input biaya_perawatan moneyFormat" type="text">
 				</td>
 				<td>
-					<button onclick="deletePerawatan(${counter_perawatan})" class="btn btn-danger" type="button">
-						<i class="fa fa-trash"></i>
-					</button>
+					
+				
 				</td>
 			</tr>
 		`;
@@ -695,9 +685,8 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 						<input name="kalibrasi[${counter_kalibrasi}][cost]" value="${cost}" class="form-control input biaya_kalibrasi moneyFormat" type="text">
 					</td>
 					<td>
-						<button onclick="deleteKalibrasi(${counter_kalibrasi})" class="btn btn-danger" type="button">
-							<i class="fa fa-trash"></i>
-						</button>
+						
+					
 					</td>
 				</tr>
 			`;
@@ -783,10 +772,8 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 					   type="text">
 			</td>
 			<td>
-				<button onclick="deleteConsumable(${counter_consumable})" 
-						class="btn btn-danger" type="button">
-					<i class="fa fa-trash"></i>
-				</button>
+			
+			
 			</td>
 		</tr>
 	`;
@@ -806,17 +793,18 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 
 	
 	function getConsumable(id){
-		const list_consumable = <?= json_encode($list_consumable) ?>;
+		console.log(id)
+		const li_consumable = <?= json_encode($list_consumable) ?>;
 		let selectedId = $(`#consumable_accessories_id${id}`).val();
-		const result = list_consumable.find(item => item.id === selectedId);
-		console.log(result.unit_name);
+		const result = li_consumable.find(item => item.id === selectedId);
+		console.log(selectedId);
 
 		$('#consumable_package'+id).html(`${result.category}(${result.unit_name})`)
 		$('#consumable_unit'+id).html(`${result.unit_name}`)
 		
 		
 	}
-	<?php foreach($list_apd AS $val => $valx):?>
+	<?php foreach($list_consumable_selected AS $val => $valx):?>
 			addConsumable('<?=$valx['accessories_id']?>','<?=$valx['type']?>','<?=$valx['utility']?>','<?=number_format($valx['qty'])?>','<?=number_format($valx['cost'])?>');		
 			// getConsumable(<?=$val?> )
 	<?php endforeach ?>
@@ -854,7 +842,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 		const ls_consumable = <?php echo json_encode($list_consumable); ?>;
 		let options = `<option value="">Pilih Apd</option>`;
 		// Generate options dynamically from list_consumable array
-		console.log(ls_consumable);
+		// console.log(ls_consumable);
 		ls_consumable.forEach(item => {
 			const selected = (item.id == accessories_id) ? "selected" : "";
 			options += `<option value="${item.id}" ${selected}>${item.stock_name}</option>`;
@@ -876,9 +864,8 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 				<td id="apd_unit${counter_apd}"></td>
 				<td><input name="apd[${counter_apd}][cost]" value="${cost}" class="form-control input biaya_apd moneyFormat" type="text"></td>
 				<td>
-					<button onclick="deleteApd(${counter_apd})" class="btn btn-danger" type="button">
-						<i class="fa fa-trash"></i>
-					</button>
+				
+				
 				</td>
 			</tr>
 		`;
@@ -901,7 +888,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 		const list_apd = <?= json_encode($list_consumable) ?>;
 		let selectedId = $(`#apd_accessories_id${id}`).val();
 		const result = list_apd.find(item => item.id === selectedId);
-		console.log(result.unit_name);
+		// console.log(result.unit_name);
 
 		$('#apd_package'+id).html(`${result.category}(${result.unit_name})`)
 		$('#apd_unit'+id).html(`${result.unit_name}`)
@@ -977,11 +964,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 					</select>
 				</td>
 				<td>
-					<button onclick="deleteParameter(${counter_parameter})" 
-							class="btn btn-danger" 
-							type="button">
-						<i class="fa fa-trash"></i>
-					</button>
+					
 				</td>
 			</tr>
 		`;
@@ -1009,6 +992,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
        $(`#parameter${key}`).remove();
 	}
 
+	
 	$('input, select, textarea').each(function() {
 		if (this.tagName.toLowerCase() === 'input' && this.type !== 'hidden') {
 			$(this).prop('readonly', true);

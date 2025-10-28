@@ -817,7 +817,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 		
 		
 	}
-	<?php foreach($list_apd AS $val => $valx):?>
+	<?php foreach($list_consumable_selected AS $val => $valx):?>
 			addConsumable('<?=$valx['accessories_id']?>','<?=$valx['type']?>','<?=$valx['utility']?>','<?=number_format($valx['qty'])?>','<?=number_format($valx['cost'])?>');		
 			// getConsumable(<?=$val?> )
 	<?php endforeach ?>
