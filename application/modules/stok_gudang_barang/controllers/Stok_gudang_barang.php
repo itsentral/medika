@@ -22,6 +22,8 @@ class Stok_gudang_barang extends Admin_Controller
     date_default_timezone_set('Asia/Bangkok');
 
     require_once FCPATH . 'vendor/autoload.php';
+
+    $this->template->set_theme('medika');
   }
 
   //==========================================================================================================

@@ -93,9 +93,10 @@ class Menus extends Admin_Controller {
       $parent_id      = $this->input->post('parent_id');
       $permission_id  = $this->input->post('permission_id');
       if ($type != "edit") {
-        $query_id = $this->db->query("SHOW TABLE STATUS LIKE 'permissions' ");
+        $query_id = $this->db->query("select max(id_permission) as id from permissions");
         $row_id = $query_id->row();
-        $id_permissions = $row_id->Auto_increment;
+       
+        $id_permissions = $row_id->id +1;
         $permission_nm = str_replace(" ","_",$title).".View";
 
         $data_perm[0] = array(
