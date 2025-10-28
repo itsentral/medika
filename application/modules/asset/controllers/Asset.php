@@ -83,6 +83,15 @@ class Asset extends Admin_Controller
 			->get()
 			->result_array(),
 
+			'list_tabung' => $this->db
+			->select('accessories.*, accessories_category.nm_category,ms_satuan.category, ms_satuan.nama AS unit_name')
+			->from('accessories')
+			->join('accessories_category', 'accessories.id_category = accessories_category.id', 'left')
+			->join('ms_satuan', 'accessories.id_unit = ms_satuan.id', 'left')
+			->where('accessories_category.nm_category','Tabung')
+			->get()
+			->result_array(),
+
 			'outlet' => $this->db->get_where('cabang', ['deleted_by' => 0])->result_array(),
 			'list_param' => $this->db->get_where('rs_parameter', ['deleted_by' => NULL])->result_array(),
 			'list_catg' => $this->Asset_model->getList('asset_category'),
