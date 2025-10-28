@@ -415,7 +415,7 @@ thead input {
                                         class="fa fa-reply">&nbsp;</i>Back</a>
                             </center>
                 </form>
-
+            </div>
         </font>
     </div>
     <!-- /.card-body -->
