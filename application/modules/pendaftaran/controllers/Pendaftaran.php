@@ -1530,6 +1530,10 @@ public function Update_Tr_Lab(){
 	public function savePendaftaranLab_Lama(){
 		$this->auth->restrict($this->addPermission);
 		$post = $this->input->post();
+
+		print_r($post);
+		exit;
+
 		$birthdate = $this->input->post('tgl_lahir');
 		$tgl_lhr = date("Y-m-d", strtotime($birthdate));
 		$tgl_daftar = date("Y-m-d");
@@ -1678,6 +1682,88 @@ public function Update_Tr_Lab(){
     $data['barcode'] = base64_encode($barcode);
 
     $this->load->view('cetak_barcode', $data);
+}
+function FormPo()
+	{
+		$id = $_GET['id'];
+		$id_suplier = $_GET['id_suplier'];
+		$no = 0;
+		$listpo = $this->db->query("SELECT 
+										a.*
+									FROM 
+										rs_kategorilab a
+									")->result();
+
+		echo "
+	<div class='form-group row' id='po_" . $id . "'>
+		<input type='hidden' id='pancingan_" . $id . "' value='1'>
+		<div class='col-md-4'>
+				<select id='dt_nopo_" . $id . "' name='dt[" . $id . "][nopo]' class='form-control input-md chosen-select check_ros' onchange='return getKategori(" . $id . ")' required>
+						<option value=''>--Pilih Kategori--</option>";
+		foreach ($listpo as $listpo) {
+			
+				echo "<option value='$listpo->id_kategori' >$listpo->nama_kategori</option>";
+		
+		}
+		echo "</select>
+
+		</div>
+		<div class='col-md-4'>
+		
+		<select id='dt_layanan_" . $id . "' name='dt2[" . $id . "][layanan]' class='form-control input-md chosen-select' onchange='return getParameter(" . $id . ")' required>
+						<option value=''>--Pilih Pemeriksaan--</option>";
+		echo "</select>
+		
+		</div>
+		<div class='col-md-4'>
+			<button type='button' class='btn btn-sm btn-danger delete_header' title='Hapus Data' data-role='qtip' data-nomor='" . $id . "' onClick='return HapusItem(" . $id . ")'><i class='fa fa-close'></i>Delete</button>
+		</div>
+		<br>
+		<div class='form-group row' >
+			<div class='col-md-4' id='data_request_" . $id . "'>
+			</div>
+		</div>
+	</div>";
+	}
+
+function GantiTombol()
+	{
+		$id = $_GET['id'] + 1;
+		echo "<button type='button' class='btn btn-sm btn-success' title='Ambil' id='tbh_ata' onClick='return addPO(" . $id . ");'><i class='fa fa-plus'></i>Add</button>
+		";
+	}
+
+
+function get_layanan(){
+        $kategori = $_GET['kategori'];
+		$id       = $_GET['id'];
+        $datkategori = $this->Pendaftaran_model->pilih_kategori($kategori)->result();
+         // print_r($dept, $hari);
+         // exit();
+        echo "<select id='dt_layanan_" . $id . "' name='dt2[" . $id . "][layanan]' class='form-control input-md chosen-select' onchange='return getParameter(" . $id . ")' required>
+						<option value=''>--Pilih Pemeriksaan--</option>";
+                foreach ($datkategori as $key => $st) :
+				      echo "<option value='$st->id_kategori' set_select('model', $st->id_kategori, isset($data->id_kategori) && $data->id_kategori == $st->id_kategori)>$st->id_kategori
+                    </option>";
+                endforeach;
+        echo "</select>";
+}
+
+function get_parameter(){
+        $kategori1 = $_GET['kategori'];
+		$kategori2 = $_GET['kategori2'];
+		$id       = $_GET['id'];
+        $datkategori = $this->Pendaftaran_model->pilih_parameter($kategori1,$kategori2)->result();
+         // print_r($dept, $hari);
+         // exit();
+                 echo "<div class='form-group row'>"; 
+                foreach ($datkategori as $key => $st) :
+				        echo "<div class='col-md-4' id='data_request_" . $id . "'>";
+					    echo "<input type='checkbox' id='parameter_" . $id . "'  name='dt2[" . $id . "][parameter]' value='$st->id_parameter'> $st->nama_parameter
+					       </div>";
+                endforeach;
+                 echo " </div>";
+
 }
 
 	

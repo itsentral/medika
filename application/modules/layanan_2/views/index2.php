@@ -4,68 +4,63 @@
     $ENABLE_VIEW    = has_permission('Pendaftaran.View');
     $ENABLE_DELETE  = has_permission('Pendaftaran.Delete');
 ?>
-<style type="text/css">
-thead input {
-	width: 100%;
-}
-</style>
-<div id='alert_edit' class="alert alert-success alert-dismissable" style="padding: 15px; display: none;"></div>
-<link rel="stylesheet" href="<?= base_url('assets/plugins/datatables/dataTables.bootstrap.css')?>">
 
-<div class="box">
-	<div class="box-header">
-			<?php if($ENABLE_ADD) : ?>
-				 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success add" data-bs-toggle="modal" data-bs-target="#dialog-popup"><i class="fa fa-plus">&nbsp;</i>Add
-                </button>
-        
+
+<div class="card">
+    <div class="card-header">
+        <?php if($ENABLE_ADD) : ?>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success add" data-bs-toggle="modal" data-bs-target="#dialog-popup"><i
+                class="fa fa-plus">&nbsp;</i>Add
+        </button>
+
         <?php endif; ?>
 
-       
-	</div>
-	<!-- /.box-header -->
-	<div class="box-body">
-		<table id="example1" class="table table-bordered table-striped">
-		<thead>
-		<tr>
-			<th width="5">#</th>
-			<th>Kode Parameter</th>
-			<th>Nama Kategori</th>	
-            <th>Nama Parameter</th>
-            <th>Tabung</th>	
-            <th>Mesin</th>	
-			<?php if($ENABLE_MANAGE) : ?>
-			<th width="13%">Action</th>
-			<?php endif; ?>
-		</tr>
-		</thead>
-		<tbody>
-		</tbody>
-		</table>
-	</div>
-	</div>
-	<!-- /.box-body -->
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="5">#</th>
+                    <th>Kode Parameter</th>
+                    <th>Nama Parameter</th>
+                    <th>Nama Kategori</th>
+                    <th>Tabung</th>
+                    <th>Mesin</th>
+                    <?php if($ENABLE_MANAGE) : ?>
+                    <th width="13%">Action</th>
+                    <?php endif; ?>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- /.card-body -->
 </div>
 
 
 
 <!-- Modal -->
 <div class="modal fade" id="dialog-popup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="head_title"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="ModalView">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="simpan-com">Save</button>
-      </div>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="head_title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="ModalView">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="simpan-com">Save</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- awal untuk modal dialog
@@ -89,242 +84,220 @@ thead input {
 
 <!-- page script -->
 <script type="text/javascript">
-    $(document).ready(function() {
-	 $("#search").focus();	 
-	    var no_so = '';
-		var customer = '';
-		DataTables(no_so, customer);
-	});
+$(document).ready(function() {
+    $("#search").focus();
+    var no_so = '';
+    var customer = '';
+    DataTables(no_so, customer);
+});
 
-	$(document).on('click', '.edit', function(e){
-		var id = $(this).data('id_layanan2');
-		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Layanan</b>");
-		$.ajax({
-			type:'POST',
-			url:siteurl+'layanan_2/editLayanan/'+id,
-			success:function(data){
-				$("#dialog-popup").modal();
-				$("#ModalView").html(data);
-				
-			}
-		})
-	});
-	
-	$(document).on('click', '.view', function(){
-		var id = $(this).data('id_layanan2');
-		// alert(id);
-		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Layanan</b>");
-		$.ajax({
-			type:'POST',
-			url:siteurl+'layanan_2/viewLayanan/'+id,
-			data:{'id':id},
-			success:function(data){
-				$("#dialog-popup").modal();
-				$("#ModalView").html(data);
-				
-			}
-		})
-	});
-	$(document).on('click', '.add', function(){
-		$("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Layanan</b>");
-		$.ajax({
-			type:'POST',
-			url:siteurl+'layanan_2/addLayanan',
-			success:function(data){
-				$("#dialog-popup").modal();
-				$("#ModalView").html(data);
-				
-			}
-		})
-	});
+$(document).on('click', '.edit', function(e) {
+    var id = $(this).data('id_layanan2');
+    $("#head_title").html("<i class='fa fa-list-alt'></i><b>Edit Layanan</b>");
+    $.ajax({
+        type: 'POST',
+        url: siteurl + 'layanan_2/editLayanan/' + id,
+        success: function(data) {
+            $("#dialog-popup").modal();
+            $("#ModalView").html(data);
 
-  $('#simpan-com').click(function(e){
+        }
+    })
+});
+
+$(document).on('click', '.view', function() {
+    var id = $(this).data('id_layanan2');
+    // alert(id);
+    $("#head_title").html("<i class='fa fa-list-alt'></i><b>Detail Layanan</b>");
+    $.ajax({
+        type: 'POST',
+        url: siteurl + 'layanan_2/viewLayanan/' + id,
+        data: {
+            'id': id
+        },
+        success: function(data) {
+            $("#dialog-popup").modal();
+            $("#ModalView").html(data);
+
+        }
+    })
+});
+$(document).on('click', '.add', function() {
+    $("#head_title").html("<i class='fa fa-list-alt'></i><b>Tambah Layanan</b>");
+    $.ajax({
+        type: 'POST',
+        url: siteurl + 'layanan_2/addLayanan',
+        success: function(data) {
+            $("#dialog-popup").modal();
+            $("#ModalView").html(data);
+
+        }
+    })
+});
+
+$('#simpan-com').click(function(e) {
     e.preventDefault();
 
     swal({
-        title: "Are you sure?",
-        text: "You will not be able to process again this data!",
-        icon: "warning",
-        buttons: {
-            cancel: {
-                text: "No, cancel process!",
-                value: null,
-                visible: true,
-                className: "btn-danger",
-                closeModal: true,
-            },
-            confirm: {
-                text: "Yes, Process it!",
-                value: true,
-                visible: true,
-                className: "btn-success",
-                closeModal: true
-            }
-        },
-        dangerMode: true,
-    })
-    .then((isConfirm) => {
-        if (isConfirm) {
-            var formData = new FormData($('#data-form')[0]);
-            var baseurl = siteurl + 'layanan_2/saveNewlayanan';
-
-            $.ajax({
-                url: baseurl,
-                type: "POST",
-                data: formData,
-                dataType: 'json',
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    if (data.status == 1) {
-                        swal({
-                            title: "Save Success!",
-                            text: data.pesan,
-                            icon: "success",
-                            button: false,
-                            timer: 3000
-                        });
-                        setTimeout(function(){
-                            window.location.href = base_url + active_controller;
-                        }, 3000);
-                    } else {
-                        swal("Save Failed!", data.pesan, "warning");
-                    }
+            title: "Are you sure?",
+            text: "You will not be able to process again this data!",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "No, cancel process!",
+                    value: null,
+                    visible: true,
+                    className: "btn-danger",
+                    closeModal: true,
                 },
-                error: function() {
-                    swal("Error!", "An error occurred during process. Please try again.", "error");
+                confirm: {
+                    text: "Yes, Process it!",
+                    value: true,
+                    visible: true,
+                    className: "btn-success",
+                    closeModal: true
                 }
-            });
-        } else {
-            swal("Cancelled", "Data can be processed again :)", "error");
-        }
-    });
+            },
+            dangerMode: true,
+        })
+        .then((isConfirm) => {
+            if (isConfirm) {
+                var formData = new FormData($('#data-form')[0]);
+                var baseurl = siteurl + 'layanan_2/saveNewlayanan';
+
+                $.ajax({
+                    url: baseurl,
+                    type: "POST",
+                    data: formData,
+                    dataType: 'json',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        if (data.status == 1) {
+                            swal({
+                                title: "Save Success!",
+                                text: data.pesan,
+                                icon: "success",
+                                button: false,
+                                timer: 3000
+                            });
+                            setTimeout(function() {
+                                window.location.href = base_url + active_controller;
+                            }, 3000);
+                        } else {
+                            swal("Save Failed!", data.pesan, "warning");
+                        }
+                    },
+                    error: function() {
+                        swal("Error!", "An error occurred during process. Please try again.",
+                            "error");
+                    }
+                });
+            } else {
+                swal("Cancelled", "Data can be processed again :)", "error");
+            }
+        });
 });
 
 
-	
-	
-	// DELETE DATA
-	$(document).on('click', '.delete', function(e){
-		e.preventDefault()
-		var id = $(this).data('id_layanan2');
-		// alert(id);
-		swal({
-		  title: "Anda Yakin?",
-		  text: "Data Layanan akan di hapus.",
-		  type: "warning",
-		  showCancelButton: true,
-		  confirmButtonClass: "btn-info",
-		  confirmButtonText: "Ya, Hapus!",
-		  cancelButtonText: "Batal",
-		  closeOnConfirm: false
-		},
-		function(){
-		  $.ajax({
-			  type:'POST',
-			  url:siteurl+'layanan_2/deleteLayanan',
-			  dataType : "json",
-			  data:{'id':id},
-			  success:function(result){
-				  if(result.status == '1'){
-					 swal({
-						  title: "Sukses",
-						  text : "Data Layanan berhasil dihapus.",
-						  type : "success"
-						},
-						function (){
-							window.location.reload(true);
-						})
-				  } else {
-					swal({
-					  title : "Error",
-					  text  : "Data error. Gagal hapus data",
-					  type  : "error"
-					})
-					
-				  }
-			  },
-			  error : function(){
-				swal({
-					  title : "Error",
-					  text  : "Data error. Gagal request Ajax",
-					  type  : "error"
-					})
-			  }
-		  })
-		});
-		
-	})
+
+
+// DELETE DATA
+$(document).on('click', '.delete', function(e) {
+    e.preventDefault()
+    var id = $(this).data('id_layanan2');
+    // alert(id);
+    swal({
+            title: "Anda Yakin?",
+            text: "Data Layanan akan di hapus.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-info",
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Batal",
+            closeOnConfirm: false
+        },
+        function() {
+            $.ajax({
+                type: 'POST',
+                url: siteurl + 'layanan_2/deleteLayanan',
+                dataType: "json",
+                data: {
+                    'id': id
+                },
+                success: function(result) {
+                    if (result.status == '1') {
+                        swal({
+                                title: "Sukses",
+                                text: "Data Layanan berhasil dihapus.",
+                                type: "success"
+                            },
+                            function() {
+                                window.location.reload(true);
+                            })
+                    } else {
+                        swal({
+                            title: "Error",
+                            text: "Data error. Gagal hapus data",
+                            type: "error"
+                        })
+
+                    }
+                },
+                error: function() {
+                    swal({
+                        title: "Error",
+                        text: "Data error. Gagal request Ajax",
+                        type: "error"
+                    })
+                }
+            })
+        });
+
+})
 
 
 
-	function PreviewPdf(id)
-	{
-		param=id;
-		tujuan = 'customer/print_request/'+param;
+function PreviewPdf(id) {
+    param = id;
+    tujuan = 'customer/print_request/' + param;
 
-	   	$(".modal-body").html('<iframe src="'+tujuan+'" frameborder="no" width="570" height="400"></iframe>');
-	}
+    $(".modal-body").html('<iframe src="' + tujuan + '" frameborder="no" width="570" height="400"></iframe>');
+}
 
-	function PreviewRekap()
-	{
-		tujuan = 'customer/rekap_pdf';
-	   	$(".modal-body").html('<iframe src="'+tujuan+'" frameborder="no" width="100%" height="400"></iframe>');
-	}
-	
-	
-	function DataTables(no_so=null, customer=null){
-		var dataTable = $('#example1').DataTable({
-			"serverSide": true,
-			"stateSave" : true,
-			"bAutoWidth": true,
-			"destroy": true,
-			"processing": true,
-			"responsive": true,
-			"fixedHeader": {
-				"header": true,
-				"footer": true
-			},
-			"oLanguage": {
-				"sSearch": "<b>Search : </b>",
-				"sLengthMenu": "_MENU_ &nbsp;&nbsp;<b>Records Per Page</b>&nbsp;&nbsp;",
-				"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
-				"sInfoFiltered": "(filtered from _MAX_ total entries)",
-				"sZeroRecords": "No matching records found",
-				"sEmptyTable": "No data available in table",
-				"sLoadingRecords": "Please wait - loading...",
-				"oPaginate": {
-					"sPrevious": "Prev",
-					"sNext": "Next"
-				}
-			},
-			"aaSorting": [[ 1, "desc" ]],
-			"columnDefs": [ {
-				"targets": 'no-sort',
-				"orderable": false,
-			}],
-			"sPaginationType": "simple_numbers",
-			"iDisplayLength": 10,
-			"aLengthMenu": [[1, 10, 20, 50, 100, 150], [1, 10, 20, 50, 100, 150]],
-			"ajax":{
-				url : base_url + active_controller+'server_side_inv',
-				type: "post",
-				data: function(d){
-					d.no_so = no_so,
-					d.customer = customer
-				},
-				cache: false,
-				error: function(){
-					$(".my-grid-error").html("");
-					$("#my-grid").append('<tbody class="my-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-					$("#my-grid_processing").css("display","none");
-				}
-			}
-		});
-        
-	}
+function PreviewRekap() {
+    tujuan = 'customer/rekap_pdf';
+    $(".modal-body").html('<iframe src="' + tujuan + '" frameborder="no" width="100%" height="400"></iframe>');
+}
 
-    
-	
+
+function DataTables(no_so = null, customer = null) {
+    var dataTable = $('#example1').DataTable({
+        lengthChange: true,
+        "serverSide": true,
+        "layout": {
+            topStart: 'pageLength',
+            topEnd: 'search'
+        },
+
+        "ajax": {
+            url: base_url + active_controller + 'server_side_inv',
+            type: "post",
+            data: function(d) {
+                d.no_so = no_so,
+                    d.customer = customer
+            },
+            cache: false,
+            error: function() {
+                $(".my-grid-error").html("");
+                $("#my-grid").append(
+                    '<tbody class="my-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>'
+                );
+                $("#my-grid_processing").css("display", "none");
+            }
+        }
+    });
+
+}
 </script>

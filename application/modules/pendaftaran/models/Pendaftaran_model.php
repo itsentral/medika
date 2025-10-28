@@ -332,7 +332,7 @@ class Pendaftaran_model extends BF_Model
 		$month=date("m");
 		$day=date("d");
 
-        $cek = date('y').$kode_bln;
+       // $cek = date('y').$kode_bln;
         $query = "SELECT MAX(RIGHT(id_transaksi,4)) as max_id from rs_hdtransaksirj WHERE id_transaksi LIKE '%$today%'";
         $q = $this->db->query($query);
 		$r = $q->row();
@@ -370,7 +370,7 @@ class Pendaftaran_model extends BF_Model
 		$month=date("m");
 		$day=date("d");
 
-        $cek = date('y').$kode_bln;
+        //$cek = date('y').$kode_bln;
         $query = "SELECT MAX(RIGHT(noreg,4)) as max_id from rs_hdtransaksirj WHERE noreg LIKE '%$today%'";
         $q = $this->db->query($query);
 		$r = $q->row();
@@ -405,7 +405,7 @@ class Pendaftaran_model extends BF_Model
 		$month=date("m");
 		$day=date("d");
 
-        $cek = date('y').$kode_bln;
+        //$cek = date('y').$kode_bln;
         $query = "SELECT MAX(RIGHT(id_transaksi,4)) as max_id from rs_hdtransaksiri WHERE id_transaksi LIKE '%$today%'";
         $q = $this->db->query($query);
 		$r = $q->row();
@@ -443,7 +443,7 @@ class Pendaftaran_model extends BF_Model
 		$month=date("m");
 		$day=date("d");
 
-        $cek = date('y').$kode_bln;
+        //$cek = date('y').$kode_bln;
         $query = "SELECT MAX(RIGHT(noreg,4)) as max_id from rs_hdtransaksiri WHERE noreg LIKE '%$today%'";
         $q = $this->db->query($query);
 		$r = $q->row();
@@ -1050,7 +1050,26 @@ class Pendaftaran_model extends BF_Model
 		$data['query'] = $this->db->query($sql);
 		return $data;
 	}
-	
+
+	function pilih_kategori($id)
+    {
+        $query="SELECT
+                rs_kategorilab.id_kategori
+                FROM
+                rs_kategorilab
+				where rs_kategorilab.id_kategori ='$id'";
+        return $this->db->query($query);
+    }
+	function pilih_parameter($kategori1,$kategori2)
+    {
+        $query="SELECT
+                rs_parameter.id_parameter,
+				rs_parameter.nama_parameter
+                FROM
+                rs_parameter
+				where rs_parameter.id_kategori ='$kategori2'";
+        return $this->db->query($query);
+	}
 	
 	
 	
