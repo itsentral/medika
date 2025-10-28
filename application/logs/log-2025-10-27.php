@@ -1997,7 +1997,11 @@ ERROR - 2025-10-27 22:33:25 --> $config['composer_autoload'] is set to TRUE but 
 ERROR - 2025-10-27 22:33:27 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
 ERROR - 2025-10-27 22:33:28 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
 <<<<<<< HEAD
+<<<<<<< HEAD
 ERROR - 2025-10-27 22:33:31 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
 =======
 ERROR - 2025-10-27 22:33:31 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
 >>>>>>> dev_alief
+=======
+ERROR - 2025-10-27 22:33:31 --> $config['composer_autoload'] is set to TRUE but /var/www/html/application/vendor/autoload.php was not found.
+>>>>>>> dev_sam

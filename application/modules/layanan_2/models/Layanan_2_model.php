@@ -161,8 +161,6 @@ class Layanan_2_model extends BF_Model
 			$nestedData[]	= "<div align='left'>" . $row['id_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_parameter'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nama_kategori'] . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['tabung'] . "</div>";
-			$nestedData[]	= "<div align='left'>" . $row['mesin'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['stock_name'] . "</div>";
 			$nestedData[]	= "<div align='left'>" . $row['nm_asset'] . "</div>";
 			$priX	= "";
@@ -217,7 +215,7 @@ class Layanan_2_model extends BF_Model
 		$data['totalData'] = $this->db->query($sql)->num_rows();
 		$data['totalFiltered'] = $this->db->query($sql)->num_rows();
 		$columns_order_by = array(
-			0 => 'nomor',
+			0 => 'id_kategori',
 			1 => 'nama_parameter',
 			2 => 'mesin'
 		);
