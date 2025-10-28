@@ -119,7 +119,13 @@ $ENABLE_DELETE  = has_permission('Pendaftaran.Delete');
 <!-- page script -->
 <script type="text/javascript">
 	$(document).ready(function() {
-		let table = new DataTable('#example1');
+		let table = new DataTable('#example1', {
+			lengthChange: true,
+			layout: {
+				topStart: 'pageLength',
+				topEnd: 'search',
+			}
+		});
 
 		// #myInput is a <input type="text"> element
 		$('#search').on('keyup', function() {
