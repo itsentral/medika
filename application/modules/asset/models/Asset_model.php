@@ -7,10 +7,10 @@ class Asset_model extends BF_Model
 	{
 		parent::__construct();
 
-		$this->ENABLE_ADD     = has_permission('Assets.Add');
-		$this->ENABLE_MANAGE  = has_permission('Assets.Manage');
-		$this->ENABLE_VIEW    = has_permission('Assets.View');
-		$this->ENABLE_DELETE  = has_permission('Assets.Delete');
+		$this->ENABLE_ADD     = has_permission('Asset.Add');
+		$this->ENABLE_MANAGE  = has_permission('Asset.Manage');
+		$this->ENABLE_VIEW    = has_permission('Asset.View');
+		$this->ENABLE_DELETE  = has_permission('Asset.Delete');
 	}
 
 	public function getList($table)
