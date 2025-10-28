@@ -8,6 +8,16 @@ $list_catg = $this->Asset_model->getList('asset_category');
 $QUERY	 	= "SELECT * FROM ms_costcenter WHERE id_dept='".$dataD[0]['lokasi_asset']."' AND deleted = '0' ORDER BY nama_costcenter ASC";
 $costcenter	= $this->db->query($QUERY)->result_array();
 
+
+$list_tabung = $this->db
+->select('accessories.*, accessories_category.nm_category,ms_satuan.category, ms_satuan.nama AS unit_name')
+->from('accessories')
+->join('accessories_category', 'accessories.id_category = accessories_category.id', 'left')
+->join('ms_satuan', 'accessories.id_unit = ms_satuan.id', 'left')
+->where('accessories_category.nm_category','Tabung')
+->get()
+->result_array();
+
 $list_consumable = $this->db
 ->select('accessories.*, accessories_category.nm_category,ms_satuan.category, ms_satuan.nama AS unit_name')
 ->from('accessories')
@@ -298,7 +308,7 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 					<tr>
 						<td colspan="5" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold; text-align:right;">Cost APD Per Sampel</td>
 						<td id="cost_apd_per_sampel" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
-							<?=number_format($dataD[0]['total_biaya_apd']/$dataD[0]['target_utilitas'])?>
+							<?=number_format($dataD[0]['total_biaya_apd']/$dataD[0]['utilitas_perhari'])?>
 						</td>
 						<td id="" style="position:sticky; bottom:0; background:#fff; z-index:3; font-weight:bold;">
 						</td>
@@ -354,23 +364,23 @@ $asset_parameter = $this->db->get_where('asset_parameter', ['kd_asset' => $dataD
 		// $('#value').autoNumeric('init');
     });
 	
-	$(document).on('click', '#chk', function(){
-		if ($(this).is(':checked')) {
-			$("#nm_asset").attr("readonly", false);
-			$("#nilai_asset").attr("readonly", false); 
-			$("#qty").attr("readonly", false); 
-			$("#category").attr("disabled", false); 
-			$("#depresiasi").attr("disabled", false);
-			$('#helpa').val('Y');
-        }else{
-			$("#nm_asset").attr("readonly", true);
-			$("#nilai_asset").attr("readonly", true); 
-			$("#qty").attr("readonly", true);
-			$("#category").attr("disabled", true); 
-			$("#depresiasi").attr("disabled", true); 
-			$('#helpa').val('N');			
-		}
-	});
+	// $(document).on('click', '#chk', function(){
+	// 	if ($(this).is(':checked')) {
+	// 		$("#nm_asset").attr("readonly", false);
+	// 		$("#nilai_asset").attr("readonly", false); 
+	// 		$("#qty").attr("readonly", false); 
+	// 		$("#category").attr("disabled", false); 
+	// 		$("#depresiasi").attr("disabled", false);
+	// 		$('#helpa').val('Y');
+    //     }else{
+	// 		$("#nm_asset").attr("readonly", true);
+	// 		$("#nilai_asset").attr("readonly", true); 
+	// 		$("#qty").attr("readonly", true);
+	// 		$("#category").attr("disabled", true); 
+	// 		$("#depresiasi").attr("disabled", true); 
+	// 		$('#helpa').val('N');			
+	// 	}
+	// });
 	
 	$(document).on('keyup', '#nilai_asset', function(){
 		var nilai_asset = $('#nilai_asset').val();
@@ -796,10 +806,11 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 
 	
 	function getConsumable(id){
-		const list_consumable = <?= json_encode($list_consumable) ?>;
+		console.log(id)
+		const li_consumable = <?= json_encode($list_consumable) ?>;
 		let selectedId = $(`#consumable_accessories_id${id}`).val();
-		const result = list_consumable.find(item => item.id === selectedId);
-		console.log(result.unit_name);
+		const result = li_consumable.find(item => item.id === selectedId);
+		console.log(selectedId);
 
 		$('#consumable_package'+id).html(`${result.category}(${result.unit_name})`)
 		$('#consumable_unit'+id).html(`${result.unit_name}`)
@@ -808,7 +819,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 	}
 	<?php foreach($list_apd AS $val => $valx):?>
 			addConsumable('<?=$valx['accessories_id']?>','<?=$valx['type']?>','<?=$valx['utility']?>','<?=number_format($valx['qty'])?>','<?=number_format($valx['cost'])?>');		
-			getConsumable(<?=$val?> )
+			// getConsumable(<?=$val?> )
 	<?php endforeach ?>
 
 	$(document).on('keyup change', '.biaya_consumable', function() {
@@ -844,7 +855,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 		const ls_consumable = <?php echo json_encode($list_consumable); ?>;
 		let options = `<option value="">Pilih Apd</option>`;
 		// Generate options dynamically from list_consumable array
-		console.log(ls_consumable);
+		// console.log(ls_consumable);
 		ls_consumable.forEach(item => {
 			const selected = (item.id == accessories_id) ? "selected" : "";
 			options += `<option value="${item.id}" ${selected}>${item.stock_name}</option>`;
@@ -891,7 +902,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 		const list_apd = <?= json_encode($list_consumable) ?>;
 		let selectedId = $(`#apd_accessories_id${id}`).val();
 		const result = list_apd.find(item => item.id === selectedId);
-		console.log(result.unit_name);
+		// console.log(result.unit_name);
 
 		$('#apd_package'+id).html(`${result.category}(${result.unit_name})`)
 		$('#apd_unit'+id).html(`${result.unit_name}`)
@@ -901,7 +912,7 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 
 	<?php foreach($list_apd AS $val => $valx):?>
 			addApd('<?=$valx['accessories_id']?>','<?=$valx['type']?>','<?=$valx['utility']?>','<?=number_format($valx['qty'])?>','<?=number_format($valx['cost'])?>');		
-			getApd(<?=$val?> )
+			// getApd(<?=$val?> )
 	<?php endforeach ?>
 
 	$(document).on('keyup change', '.biaya_apd', function() {
@@ -933,11 +944,17 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 	}
 	function addParameter(parameter_id = '', abbreviation = '', tube = '') {
 		const list_param = <?= json_encode($list_param); ?>;
+		const list_tabung = <?= json_encode($list_tabung); ?>;
 		let options = `<option value="0">Pilih Parameter</option>`;
 		// Generate options dynamically from list_param array
 		list_param.forEach(item => {
 			const selected = (item.id_parameter == parameter_id) ? "selected" : "";
-			options += `<option value="${item.id_parameter}" ${selected}>${item.nama_parameter.toUpperCase()}</option>`;
+			options += `<option value="${item.id_parameter}" ${selected}>${item.nama_parameter}</option>`;
+		});
+		let options2 = `<option value="0">Pilih Tabung</option>`;
+		list_tabung.forEach(item => {
+			const selected = (item.id == tube) ? "selected" : "";
+			options2 += `<option value="${item.id}" ${selected}>${item.stock_name}</option>`;
 		});
 
 		const newInputHtml = `
@@ -955,10 +972,10 @@ function addConsumable(accessories_id = 0, type = '', utility = '', qty = '', co
 						class="form-control input">
 				</td>
 				<td>
-					<input name="parameter[${counter_parameter}][tube]" 
-						value="${tube}" 
-						class="form-control input" 
-						type="text">
+					<select name="parameter[${counter_parameter}][tube]" 
+							class="form-select select2">
+						${options2}
+					</select>
 				</td>
 				<td>
 					<button onclick="deleteParameter(${counter_parameter})" 

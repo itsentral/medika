@@ -1,8 +1,8 @@
 <?php
-    $ENABLE_ADD = has_permission('Assets.Add');
-    $ENABLE_MANAGE = has_permission('Assets.Manage');
-    $ENABLE_VIEW = has_permission('Assets.View');
-    $ENABLE_DELETE = has_permission('Assets.Delete');
+    $ENABLE_ADD = has_permission('Asset.Add');
+    $ENABLE_MANAGE = has_permission('Asset.Manage');
+    $ENABLE_VIEW = has_permission('Asset.View');
+    $ENABLE_DELETE = has_permission('Asset.Delete');
 ?>
 <style type="text/css">
 thead input {

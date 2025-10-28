@@ -632,7 +632,7 @@
 	function addKalibrasi(){
         // console.log('add sampling');
 		const newInputHtml = `
-			<tr id="perawatan${counter_kalibrasi}">
+			<tr id="kalibrasi${counter_kalibrasi}">
 				<td>
 					<select name="kalibrasi[${counter_kalibrasi}][year]" class="form-control input">
 						<?php
@@ -823,9 +823,9 @@
 			let num = parseFloat(val) || 0;
 			total += num;
 		});
-		let target_utilitas = $('#target_utilitas').val().replace(/,/g, '');
+		let utilitas_perhari = $('#utilitas_perhari').val().replace(/,/g, '');
 		$('#total_biaya_apd').val(total.toLocaleString('en-US'));
-		$('#cost_apd_per_sampel').text((total/target_utilitas).toLocaleString('en-US'));
+		$('#cost_apd_per_sampel').text((total/utilitas_perhari).toLocaleString('en-US'));
 
 	}
 
@@ -855,7 +855,15 @@
 					<input name="parameter[${counter_parameter}][abbreviation]" type="text" value="" class="form-control input">
 				</td>
 				<td>
-					<input name="parameter[${counter_parameter}][tube]" value="" class="form-control input" type="text">
+					<select name="parameter[${counter_parameter}][tube]" class="form-select select2">
+						<option value="0">Pilih Parameter</option>
+						<?php
+						foreach ($list_tabung as $val => $valx) {
+							$selected = "";
+							echo "<option value='" . $valx['id'] . "' " . $selected . ">" . $valx['stock_name'] . "</option>";
+						}
+						?>
+					</select>
 				</td>
 				<td>
 					<button onclick="deleteParameter(${counter_parameter})" class="btn btn-danger"  type="button"><i class="fa fa-trash"></i></button>
@@ -863,11 +871,12 @@
 			</tr>
 		`;
 		$('#parameter_list').append(newInputHtml);
-		// initialize select2 on the newly added select
-		// $(`#consumable${counter_consumable} .select2`).select2({
-		// 	minimumResultsForSearch: 0,
-		// 	width: '100%'
-		// });
+		$('#parameter_list tr:last select').each(function() {
+			$(this).select2({
+				width: '100%',
+				dropdownParent: $(this).closest('.modal').length ? $(this).closest('.modal') : $(this).parent()
+			});
+		});
 		counter_parameter++;
 	}
 
