@@ -28,6 +28,8 @@ class Consumable_category extends Admin_Controller
 
     $this->id_user  = $this->auth->user_id();
     $this->datetime = date('Y-m-d H:i:s');
+
+    $this->template->set_theme('medika');
   }
 
   public function index()

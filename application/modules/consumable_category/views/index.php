@@ -95,9 +95,8 @@ $ENABLE_DELETE  = has_permission('Category_Stok.Delete');
 				type: 'POST',
 				url: siteurl + active_controller + '/add/' + id,
 				success: function(data) {
-					$("#dialog-popup").modal();
+					$("#dialog-popup").modal('show');
 					$("#ModalView").html(data);
-
 				}
 			})
 		});
@@ -108,7 +107,7 @@ $ENABLE_DELETE  = has_permission('Category_Stok.Delete');
 				type: 'POST',
 				url: siteurl + active_controller + '/add/',
 				success: function(data) {
-					$("#dialog-popup").modal();
+					$("#dialog-popup").modal('show');
 					$("#ModalView").html(data);
 
 				}
@@ -121,16 +120,16 @@ $ENABLE_DELETE  = has_permission('Category_Stok.Delete');
 			// alert(data);
 
 			swal({
-					title: "Anda Yakin?",
-					text: "Data akan diproses!",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonClass: "btn-info",
-					confirmButtonText: "Yes",
-					cancelButtonText: "No",
-					closeOnConfirm: false
-				},
-				function() {
+				title: "Anda Yakin?",
+				text: "Data akan diproses!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonClass: "btn-info",
+				confirmButtonText: "Yes",
+				cancelButtonText: "Yes",
+				closeOnConfirm: false
+			}).then((next) => {
+				if (next) {
 					$.ajax({
 						type: 'POST',
 						url: siteurl + active_controller + 'add',
@@ -163,7 +162,8 @@ $ENABLE_DELETE  = has_permission('Category_Stok.Delete');
 							})
 						}
 					})
-				});
+				}
+			});
 
 		})
 
@@ -174,16 +174,16 @@ $ENABLE_DELETE  = has_permission('Category_Stok.Delete');
 			var id = $(this).data('id');
 			// alert(id);
 			swal({
-					title: "Anda Yakin?",
-					text: "Data akan di hapus!",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonClass: "btn-info",
-					confirmButtonText: "Yes",
-					cancelButtonText: "No",
-					closeOnConfirm: false
-				},
-				function() {
+				title: "Anda Yakin?",
+				text: "Data akan di hapus!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonClass: "btn-info",
+				confirmButtonText: "Yes",
+				cancelButtonText: "Yes",
+				closeOnConfirm: false
+			}).then((next) => {
+				if (next) {
 					$.ajax({
 						type: 'POST',
 						url: siteurl + active_controller + '/delete',
@@ -194,13 +194,12 @@ $ENABLE_DELETE  = has_permission('Category_Stok.Delete');
 						success: function(data) {
 							if (data.status == '1') {
 								swal({
-										title: "Sukses",
-										text: data.pesan,
-										type: "success"
-									},
-									function() {
-										window.location.reload(true);
-									})
+									title: "Sukses",
+									text: data.pesan,
+									type: "success"
+								}).then((lanjut) => {
+									window.location.reload(true);
+								})
 							} else {
 								swal({
 									title: "Error",
@@ -218,7 +217,8 @@ $ENABLE_DELETE  = has_permission('Category_Stok.Delete');
 							})
 						}
 					})
-				});
+				}
+			});
 
 		})
 

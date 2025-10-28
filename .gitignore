@@ -1,4 +1,3 @@
-application/config/database.php
 application/logs/*
 */config/development
 */logs/log-*.php

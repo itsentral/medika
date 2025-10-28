@@ -68,7 +68,6 @@ class Menu_generator
 						->order_by("t1.order", "ASC")
 						->get()
 						->result();
-
 					//Jump to end_for point
 					if (count($submenu) == 0) {
 						if ($link != "#") {
