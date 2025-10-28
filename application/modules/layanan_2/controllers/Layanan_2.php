@@ -27,6 +27,7 @@ class Layanan_2 extends Admin_Controller
         $this->load->model(array('Layanan_2/Layanan_2_model',
                                  'Aktifitas/aktifitas_model',
                                 ));
+		
         $this->template->title('Manage Data Supplier');
         $this->template->page_icon('fa fa-building-o');
 
