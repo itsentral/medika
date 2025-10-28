@@ -105,8 +105,8 @@ class Uji_spesimen_model extends BF_Model
       ];
 
       $buttons = [
-        "<button type='button' data-id='" . $row['id'] . "' class='btn btn-success btn-icon' title='Uji'><i class='fa fa-microscope'></i></button>",
-        "<button type='button' data-id='" . $row['id'] . "' class='btn btn-info btn-icon' title='Lihat'><i class='fa fa-eye'></i></button>",
+        "<button type='button' data-id='" . $row['id'] . "' class='btn btn-success btn-icon' data-bs-toggle='modal' data-bs-target='#staticBackdrop' title='Uji'><i class='fa fa-microscope'></i></button>",
+        "<button type='button' data-id='" . $row['id'] . "' class='btn btn-info btn-icon' data-bs-toggle='modal' data-bs-target='#staticBackdrop' title='Lihat'><i class='fa fa-eye'></i></button>",
       ];
 
       $nestedData   = array();
@@ -115,7 +115,7 @@ class Uji_spesimen_model extends BF_Model
       $nestedData[]  = date('d F Y', strtotime($row['tgl_lahir']));
       $nestedData[]  = $row['revisi'];
       $nestedData[]  = $status[$row['status']];
-      $nestedData[]  = implode(" ",$buttons);
+      $nestedData[]  = implode(" ", $buttons);
 
       $data[] = $nestedData;
       $urut1++;
