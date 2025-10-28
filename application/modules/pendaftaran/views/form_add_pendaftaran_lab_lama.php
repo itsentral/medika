@@ -407,7 +407,7 @@ thead input {
                                 </div>
                             </div>
                             <center>
-                                <button type="submit" class="btn btn-success btn-sm" name="save" id="save"><i
+                                <button type="button" class="btn btn-success btn-sm" name="simpan-com" id="simpan-com"><i
                                         class="fa fa-save"></i>Simpan</button>
                                 <button type="reset" class="btn btn-danger btn-sm"><i class="fa fa-close"></i>
                                     Cancel</button>
@@ -427,48 +427,16 @@ thead input {
 <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js')?>"></script>
 <script src="<?= base_url('assets/plugins/datatables/dataTables.bootstrap.min.js')?>"></script>
 
-<!-- page script -->
+<!-- sebelum script utama -->
 <script type="text/javascript">
-$(function() {
-    $('.select2').select2();
-});
+    var siteurl = "<?= site_url(); ?>";
+    var base_url = "<?= base_url(); ?>";
+    var active_controller = "pendaftaran";
+</script>
 
-//TAMBAH PEMERIKSAAN
-
-function addPO(id) {
-    var id_suplier = $("#id_suplier").val();
-    $.ajax({
-        type: "GET",
-        url: siteurl + 'pendaftaran/FormPo',
-        data: "id_suplier=" + id_suplier + "&id=" + id,
-        success: function(html) {
-            $("#Form_Po").append(html);
-            $(".bilangan-desimal").maskMoney();
-            $(".chosen-select").select2({
-                width: '100%'
-            });
-        }
-    });
-    $.ajax({
-        type: "GET",
-        url: siteurl + 'pendaftaran/GantiTombol',
-        data: "&id=" + id,
-        success: function(html) {
-            $("#fortombol").html(html);
-        }
-    });
-}
-
-function HapusItem(id) {
-
-    $('#Form_Po #po_' + id).remove();
-
-}
-// ADD CUSTOMER 
-$(document).on('submit', '#data_form', function(e) {
+<script type="text/javascript">
+$('#simpan-com').click(function(e) {
     e.preventDefault();
-    var data = $('#data_form').serialize();
-
     swal({
         title: "Are you sure?",
         text: "You will not be able to process again this data!",
@@ -492,34 +460,38 @@ $(document).on('submit', '#data_form', function(e) {
         dangerMode: true,
     }).then((isConfirm) => {
         if (isConfirm) {
+            var formData = new FormData($('#data_form')[0]);
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+
             $.ajax({
-                type: 'POST',
-                url: siteurl + 'pendaftaran/savePendaftaranRj_Lama',
-                dataType: "json",
-                data: data,
-                success: function(result) {
-                    if (result.status == '1') {
+                url: siteurl + "pendaftaran/savePendaftaranLab_Lama",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.status == 1) {
                         swal({
-                            title: "Sukses",
-                            text: "Data berhasil disimpan.",
-                            icon: "success"
-                        }).then(() => {
-                            window.location.href = siteurl + 'pendaftaran/list_pasienlab';
+                            title: "Save Success!",
+                            text: data.pesan,
+                            icon: "success",
+                            button: false,
+                            timer: 3000
                         });
+                        setTimeout(function() {
+                            window.location.href = base_url + active_controller;
+                        }, 3000);
                     } else {
-                        swal({
-                            title: "Error",
-                            text: "Data error. Gagal insert data",
-                            icon: "error"
-                        });
+                        swal("Save Failed!", data.pesan, "warning");
                     }
                 },
-                error: function() {
-                    swal({
-                        title: "Error",
-                        text: "Data error. Gagal request Ajax",
-                        icon: "error"
-                    });
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    swal("Error!", "An error occurred during process. Please try again.", "error");
                 }
             });
         } else {
@@ -527,6 +499,41 @@ $(document).on('submit', '#data_form', function(e) {
         }
     });
 });
+
+
+$(function() {
+    $('.select2').select2();
+});
+
+//TAMBAH PEMERIKSAAN
+
+function addPO(id) {
+    var id_suplier = $("#id_suplier").val();
+    $.ajax({
+        type: "GET",
+        url: siteurl + 'pendaftaran/FormPo',
+        data: "id_suplier=" + id_suplier + "&id=" + id,
+        success: function(html) {
+            $("#Form_Po").append(html);           
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: siteurl + 'pendaftaran/GantiTombol',
+        data: "&id=" + id,
+        success: function(html) {
+            $("#fortombol").html(html);
+        }
+    });
+}
+
+function HapusItem(id) {
+
+    $('#Form_Po #po_' + id).remove();
+
+}
+// ADD CUSTOMER 
+
 
 
 /*$("#tgl_lahir").datepicker({
