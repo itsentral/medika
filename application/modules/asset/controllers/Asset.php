@@ -5,10 +5,10 @@
 class Asset extends Admin_Controller
 {
 
-	protected $viewPermission = 'Assets.View';
-	protected $addPermission = 'Assets.Add';
-	protected $managePermission = 'Assets.Manage';
-	protected $deletePermission = 'Assets.Delete';
+	protected $viewPermission = 'Asset.View';
+	protected $addPermission = 'Asset.Add';
+	protected $managePermission = 'Asset.Manage';
+	protected $deletePermission = 'Asset.Delete';
 
 	public function __construct()
 	{

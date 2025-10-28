@@ -385,13 +385,16 @@
             "processing": true,
             "autoWidth": true,
             "responsive": true,
-            "pageLength": 100,
-            "lengthChange": false,
             "layout": {
-                "topStart": null,
-                "topEnd": null, // No elements at top-end
+                "topStart": {
+                    "features": [],
+                    "className": 'ms-2' // tambahkan class di sini
+                },
+                "topEnd": {
+                    "features": [],
+                    "className": 'ms-2' // tambahkan class di sini
+                }, // No elements at top-end
                 "bottomStart": {
-                    // rowClass: 'd-flex justify-content-start', // untuk wrapper row
                     "features": ['info'],
                     "className": 'ms-2' // tambahkan class di sini
                 },
@@ -420,6 +423,7 @@
                 "error": "Terjadi kesalahan saat memuat data",
             },
             "lengthMenu": [10, 25, 50, 100, 200, 300, 500],
+            "pageLength": 100,
             "order": [
                 [0, "asc"]
             ], // Sort by the first column (Name)
@@ -429,6 +433,9 @@
             }, {
                 "targets": 'text-center',
                 "className": "text-center"
+            }, {
+                "targets": 'text-end',
+                "className": "text-end"
             }],
         });
     </script>
