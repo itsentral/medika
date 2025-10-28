@@ -43,3 +43,15 @@
 .card.hover:hover {
   transform: scale(1.05);
 }
+
+.btn.btn-lg {
+border-width: 4px;
+}
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
+border-width: 4px;
+border-color: rgb(255, 255, 255);
+}

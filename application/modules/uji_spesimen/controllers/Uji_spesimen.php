@@ -1,42 +1,36 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Approval_po extends Admin_Controller
+class Uji_spesimen extends Admin_Controller
 {
   //Permission
-  protected $viewPermission   = 'Approval_PO.View';
-  protected $addPermission    = 'Approval_PO.Add';
-  protected $managePermission = 'Approval_PO.Manage';
-  protected $deletePermission = 'Approval_PO.Delete';
-
-  protected $hris;
+  protected $viewPermission   = 'Uji_spesimen.View';
+  protected $addPermission    = 'Uji_spesimen.Add';
+  protected $managePermission = 'Uji_spesimen.Manage';
+  protected $deletePermission = 'Uji_spesimen.Delete';
 
   public function __construct()
   {
     parent::__construct();
-
-    $this->load->model(array('Approval_po/Approval_po_model', 'Purchase_order/Pr_model'));
+    $this->template->set_theme('medika');
+    $this->template->set_layout('index');
+    $this->load->model(array('Uji_spesimen/Uji_spesimen_model'));
     date_default_timezone_set('Asia/Bangkok');
-
-    // $this->id_user  = $this->auth->user_id();
-    // $this->datetime = date('Y-m-d H:i:s');
-
-    $this->hris = $this->load->database('hris', true);
   }
 
   public function index()
   {
-    $this->auth->restrict($this->viewPermission);
-    $session  = $this->session->userdata('app_session');
 
-    history("View index approval pr material");
-    $this->template->title('Approval PO');
+    $this->auth->restrict($this->viewPermission);
+    $alat = $this->db->get_where('rs_alat', ['status' => '1'])->result();
+    $this->template->set(['alat' => $alat]);
+    $this->template->title('Uji Spesimen');
     $this->template->render('index');
   }
 
-  public function data_side_approval_pr_material()
+  public function getData()
   {
-    $this->Approval_po_model->data_side_approval_pr_material();
+    $this->Uji_spesimen_model->getDataUji();
   }
 
   public function approval_planning($so_number = null)
