@@ -6,13 +6,13 @@ $ENABLE_DELETE  = has_permission('Uji_spesimen.Delete');
 ?>
 
 <div class="card bg-transparent shadow-none">
-		<div class="card-body">
+	<div class="card-body">
 		<h5 class="card-title text-center fw-extrabold fs-2"><?= $template['title']; ?></h5>
 		<div class="d-flex justify-content-center gap-3 flex-wrap mb-5 mt-5">
-			<a href="#" data-id="" id="all" class="btn btn-lg text-white bg-warning-gradient fw-extrabold p-4 fs-4 flex-grow-1 active">ALL
+			<a href="#" data-id="" id="all" class="btn btn-lg text-white bg-warning-gradient fw-extrabold p-4 fs-4 flex-grow-1 active btn-uji">ALL
 			</a>
 			<?php if ($alat) foreach ($alat as $key => $v) : ?>
-				<button type="button" data-id="<?= $v->id; ?>" id="<?= $v->id; ?>" class="position-relative btn btn-lg text-white bg-primary-gradient fw-extrabold p-4 fs-4 flex-grow-1"><?= $v->nama; ?>
+				<button type="button" data-id="<?= $v->id; ?>" id="<?= $v->id; ?>" class="position-relative btn btn-lg text-white bg-primary-gradient fw-extrabold p-4 fs-4 flex-grow-1 btn-uji"><?= $v->nama; ?>
 					<!-- <span class="badge badge-danger position-absolute mt-3 ms-2">4</span> -->
 				</button>
 			<?php endforeach; ?>

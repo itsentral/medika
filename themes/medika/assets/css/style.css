@@ -44,14 +44,14 @@
   transform: scale(1.05);
 }
 
-.btn.btn-lg {
+.btn.btn-lg.btn-uji {
 border-width: 4px;
 }
-.btn-check:checked+.btn,
-.btn.active,
-.btn.show,
-.btn:first-child:active,
-:not(.btn-check)+.btn:active {
+.btn-check:checked+.btn.btn-uji,
+.btn.active.btn-uji,
+.btn.show.btn-uji,
+.btn.btn-uji:first-child:active,
+:not(.btn-check)+.btn.btn-uji:active {
 border-width: 4px;
 border-color: rgb(255, 255, 255);
 }
