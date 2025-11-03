@@ -104,10 +104,13 @@ class Uji_spesimen_model extends BF_Model
         3 => "<div class='badge badge-success'>Selesai Uji</div>",
       ];
 
-      $buttons = [
-        "<button type='button' data-id='" . $row['id'] . "' class='btn btn-success btn-icon' data-bs-toggle='modal' data-bs-target='#staticBackdrop' title='Uji'><i class='fa fa-microscope'></i></button>",
-        "<button type='button' data-id='" . $row['id'] . "' class='btn btn-info btn-icon' data-bs-toggle='modal' data-bs-target='#staticBackdrop' title='Lihat'><i class='fa fa-eye'></i></button>",
-      ];
+      $button = '';
+      $button .= " <button type='button' data-id='" . $row['id'] . "' class='btn btn-info btn-icon' data-bs-toggle='modal' data-bs-target='#staticBackdrop' title='Lihat'><i class='fa fa-eye'></i></button>";
+      if ($row['status'] != 3) {
+        $button = "<button type='button' data-id='" . $row['id'] . "' class='btn btn-success btn-icon' data-bs-toggle='modal' data-bs-target='#staticBackdrop' title='Uji'><i class='fa fa-microscope'></i></button>";
+      }
+
+
 
       $nestedData   = array();
       $nestedData[]  = $nomor;
@@ -115,7 +118,7 @@ class Uji_spesimen_model extends BF_Model
       $nestedData[]  = date('d F Y', strtotime($row['tgl_lahir']));
       $nestedData[]  = $row['revisi'];
       $nestedData[]  = $status[$row['status']];
-      $nestedData[]  = implode(" ", $buttons);
+      $nestedData[]  = $button;
 
       $data[] = $nestedData;
       $urut1++;

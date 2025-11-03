@@ -5,47 +5,43 @@ $ENABLE_VIEW    = has_permission('Uji_spesimen.View');
 $ENABLE_DELETE  = has_permission('Uji_spesimen.Delete');
 ?>
 
-<div class="card bg-transparent shadow-none">
-	<div class="card-body">
-		<h5 class="card-title text-center fw-extrabold fs-2"><?= $template['title']; ?></h5>
-		<div class="d-flex justify-content-center gap-3 flex-wrap mb-5 mt-5">
-			<a href="#" data-id="" id="all" class="btn btn-lg text-white bg-warning-gradient fw-extrabold p-4 fs-4 flex-grow-1 active btn-uji">ALL
-			</a>
-			<?php if ($alat) foreach ($alat as $key => $v) : ?>
-				<button type="button" data-id="<?= $v->id; ?>" id="<?= $v->id; ?>" class="position-relative btn btn-lg text-white bg-primary-gradient fw-extrabold p-4 fs-4 flex-grow-1 btn-uji"><?= $v->nama; ?>
-					<!-- <span class="badge badge-danger position-absolute mt-3 ms-2">4</span> -->
-				</button>
-			<?php endforeach; ?>
-		</div>
+<h5 class="h3 text-center fw-extrabold fs-2 mt-2"><?= $template['title']; ?></h5>
+<div class="d-flex justify-content-center gap-3 flex-wrap mb-5 mt-5">
+	<a href="#" data-id="" id="all" class="btn btn-lg text-white bg-warning-gradient fw-extrabold p-4 fs-4 flex-grow-1 active btn-uji">ALL
+	</a>
+	<?php if ($alat) foreach ($alat as $key => $v) : ?>
+		<button type="button" data-id="<?= $v->id; ?>" id="<?= $v->id; ?>" class="position-relative btn btn-lg text-white bg-primary-gradient fw-extrabold p-4 fs-4 flex-grow-1 btn-uji"><?= $v->nm_category; ?>
+			<!-- <span class="badge badge-danger position-absolute mt-3 ms-2">4</span> -->
+		</button>
+	<?php endforeach; ?>
+</div>
 
-		<div class="card">
-			<div class="card-header">
-				<div class="d-flex justify-content-between align-items-center flex-column flex-md-row">
-					<h3 class="title-list text-primary text-primary-emphasis fw-extrabold">~</h3>
-					<div class="">
-						<div class="input-group mb-3">
-							<span class="input-group-text" id="input1"><i class="fa fa-search" aria-hidden="true"></i></span>
-							<input type="text" id="search" class="form-control" placeholder="Cari" aria-label="Search" />
-						</div>
-					</div>
+<div class="card">
+	<div class="card-header">
+		<div class="d-flex justify-content-between align-items-center flex-column flex-md-row">
+			<h3 class="title-list text-primary text-primary-emphasis fw-extrabold">~</h3>
+			<div class="">
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="input1"><i class="fa fa-search" aria-hidden="true"></i></span>
+					<input type="text" id="search" class="form-control" placeholder="Cari" aria-label="Search" />
 				</div>
 			</div>
-			<div class="card-body p-0">
-				<div class="table-wrapper">
-					<table class="table table-striped display" id="table-uji">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Nama Lengkap</th>
-								<th>Tgl. Lahir</th>
-								<th class="text-center">Revisi</th>
-								<th class="text-center">Status</th>
-								<th class="text-center">Opsi</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
+		</div>
+	</div>
+	<div class="card-body p-0">
+		<div class="table-wrapper">
+			<table class="table table-striped display" id="table-uji">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nama Lengkap</th>
+						<th>Tgl. Lahir</th>
+						<th class="text-center">Revisi</th>
+						<th class="text-center">Status</th>
+						<th class="text-center">Opsi</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 	</div>
 </div>
